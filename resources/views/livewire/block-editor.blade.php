@@ -3,7 +3,7 @@
         <div class="bg-white w-full h-12 flex items-center justify-between px-4 flex-shrink-0">
             <h1 class="text-lg font-medium">{{$title}}</h1>
             <div class="flex gap-x-2">
-                <x-site-core::form.button style="secondary" @click="sidebarOpen = true">
+                <x-site-core::form.button style="secondary" class="md:hidden" @click="$wire.currentlyEditingBlock ? $wire.unsetActiveBlock() : true; sidebarOpen = true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                 </x-site-core::form.button>
                 <x-site-core::form.button style="primary">
@@ -33,13 +33,13 @@
     </div>
     <div class="absolute inset-0 bg-black/20 md:hidden" x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"></div>
     <div class="bg-neutral-50 transition-all w-80 max-w-[85%] h-full flex-shrink-0 border-l-2 border-neutral-100 flex-col flex absolute right-0 md:static"
-         x-show="{{ empty($activeBlock) ? 'sidebarOpen' : 'true' }}"
+         x-show="sidebarOpen"
          x-transition:enter-start="transform translate-x-full"
         x-transition:enter-end="transform translate-x-0"
         x-transition:leave-start="transform translate-x-0"
         x-transition:leave-end="transform translate-x-full"
     >
-        @if(empty($activeBlock))
+        @if(!$currentlyEditingBlock)
             <div class="bg-white flex box-content flex-col">
                 <h1 class="w-full px-4 text-lg font-medium h-12 flex items-center">{{__('site-core::blocks.available_blocks')}}</h1>
                 <div class="border-b-2 border-neutral-100"></div>
@@ -75,13 +75,11 @@
                 @endphp
 
                 @foreach($attributes as $key => $attribute)
-                    @isset($activeBlock->$key)
                     <div class="w-full px-3 py-2">
                         <h2 class="text-lg font-medium">{{$attribute['title']}}</h2>
                         @isset($attribute['description'])<h3 class="text-sm text-neutral-500">{{$attribute['description']}}</h3>@endisset
-                        <x-site-core::form.input class="w-full mt-1" type="text" placeholder="{{Str::ucfirst($attribute['type'])}}" @input.debounce="$wire.updateAttribute('{{$key}}',$event.target.value)"></x-site-core::form.input>
+                        <x-site-core::form.input class="w-full mt-1" type="text" placeholder="{{Str::ucfirst($attribute['type'])}}" wire:model.blur="activeBlock.{{$key}}"></x-site-core::form.input>
                     </div>
-                    @endisset
                 @endforeach
             </section>
             <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">

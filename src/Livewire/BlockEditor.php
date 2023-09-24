@@ -14,6 +14,8 @@ class BlockEditor extends Component
 
     public $title = '';
 
+    public $currentlyEditingBlock = false;
+
     public Collection $blocks;
 
     public ?Block $activeBlock;
@@ -33,15 +35,16 @@ class BlockEditor extends Component
         ]);
     }
 
-    public function updateAttribute($name, $value) {
-        $this->activeBlock->$name = $value;
-        $this->blocks = $this->blocks->map(function($block) use ($name, $value) {
-            if($block->uuid === $this->activeBlock->uuid) {
-                $block = $this->activeBlock;
-            }
-            return $block;
-        });
-        $this->dispatch('$refresh');
+    public function updated($name, $value) {
+        if(Str::startsWith($name, 'activeBlock')) {
+            $this->blocks = $this->blocks->map(function($block) use ($name, $value) {
+                if($block->uuid === $this->activeBlock->uuid) {
+                    $block = $this->activeBlock;
+                }
+                return $block;
+            });
+            $this->dispatch('$refresh');
+        }
     }
 
     public function addBlock(string $blockName) {
@@ -55,10 +58,14 @@ class BlockEditor extends Component
 
     public function setActiveBlock(string $uuid) {
         $this->activeBlock = $this->blocks->firstWhere('uuid', $uuid);
+        $this->currentlyEditingBlock = true;
     }
 
     public function unsetActiveBlock() {
-        unset($this->activeBlock);
+        // setting the active block to a new instance of Block to prevent Livewire from throwing an error and crashing
+        // hence also the introduction of the helper boolean
+        $this->activeBlock = new Block();
+        $this->currentlyEditingBlock = false;
     }
 
     public function removeBlock(string $uuid) {
