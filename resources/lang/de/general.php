@@ -4,4 +4,7 @@
 
 return [
     'add' => 'Hinzufügen',
+    'back' => 'Zurück',
+    'save' => 'Speichern',
+    'delete' => 'Löschen',
 ];

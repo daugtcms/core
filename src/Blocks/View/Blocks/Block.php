@@ -5,10 +5,13 @@ namespace Felixbeer\SiteCore\Blocks\View\Blocks;
 use Closure;
 use Felixbeer\SiteCore\Blocks\Attributes\Image;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Block extends Component
 {
+
+    public string $uuid;
 
     public static array $metadata = [
         'name' => 'Example Block',
@@ -20,17 +23,21 @@ class Block extends Component
 
     public static function getMetadata(): array
     {
-        return self::$metadata;
+        return get_called_class()::$metadata;
     }
 
-    public static function getAttributes(string $attributeName): array
+    public function getAttributeValues(): array
     {
-        return self::$metadata['attributes'][$attributeName];
+        $attributes = [];
+        foreach (get_called_class()::getMetadata()['attributes'] as $attributeName => $attribute) {
+            $attributes[$attributeName] = $this->$attributeName;
+        }
+        return $attributes;
     }
 
     public function __construct()
     {
-        //
+        $this->uuid = Str::uuid();
     }
 
     /**

@@ -8,13 +8,13 @@ $classes .=
 'text-white bg-primary-600 hover:bg-primary-500 active:bg-primary-900 focus:border-primary-900 ring-primary-300';
 break;
 case 'secondary':
-$classes .= 'text-white bg-gray-800 hover:bg-gray-700 active:bg-gray-900 focus:border-gray-900 ring-gray-300';
+$classes .= 'text-white bg-neutral-800 hover:bg-neutral-700 active:bg-neutral-900 focus:border-neutral-900 ring-neutral-300';
 break;
 case 'danger':
-$classes .= 'text-white bg-red-600 hover:bg-red-500 active:bg-red-900 focus:border-red-900 ring-red-300';
+$classes .= 'text-white bg-danger-600 hover:bg-danger-500 active:bg-danger-900 focus:border-danger-900 ring-danger-300';
 break;
 case 'success':
-$classes .= 'text-white bg-green-600 hover:bg-green-500 active:bg-green-900 focus:border-green-900 ring-green-300';
+$classes .= 'text-white bg-success-600 hover:bg-success-500 active:bg-success-900 focus:border-success-900 ring-success-300';
 break;
 }
 @endphp

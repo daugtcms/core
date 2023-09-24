@@ -2,10 +2,6 @@
 
 namespace Felixbeer\SiteCore\Blocks\View\Blocks;
 
-use Closure;
-use Felixbeer\SiteCore\Blocks\Attributes\Image;
-use Illuminate\Contracts\View\View;
-
 class Header extends Block
 {
     public static array $metadata = [
@@ -15,31 +11,27 @@ class Header extends Block
         'attributes' => [
             'title' => [
                 'type' => 'string',
-                'default' => 'Title'
+                'title' => 'Title',
+                'description' => 'The top text',
             ],
             'subtitle' => [
                 'type' => 'string',
-                'default' => 'Subtitle'
+                'title' => 'Subtitle',
+                'description' => 'The bottom text'
             ],
             'backgroundImage' => [
                 'type' => 'image',
-                'default' => ''
+                'title' => 'Background Image'
             ]
         ]
     ];
 
-    public static function getMetadata(): array
-    {
-        return self::$metadata;
-    }
-
     public function __construct(
         public string $title = '',
         public string $subtitle = '',
-        #[Image]
         public string $backgroundImage = '',
     )
     {
-        //
+        parent::__construct();
     }
 }
