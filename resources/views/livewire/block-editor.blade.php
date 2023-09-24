@@ -1,18 +1,26 @@
-<div class="bg-white flex h-full w-full">
+<div class="bg-white flex h-full w-full overflow-hidden relative" x-data="blockEditor" x-on:resize.window="sidebarOpen = true">
     <div class="bg-neutral-50 flex-grow flex flex-col">
         <div class="bg-white w-full h-12 flex items-center justify-between px-4 flex-shrink-0">
             <h1 class="text-lg font-medium">{{$title}}</h1>
-            <x-site-core::form.button style="primary">{{__('site-core::general.save')}}</x-site-core::form.button>
+            <div class="flex gap-x-2">
+                <x-site-core::form.button style="secondary" @click="sidebarOpen = true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                </x-site-core::form.button>
+                <x-site-core::form.button style="primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 md:hidden lucide lucide-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    <span class="hidden md:block">{{__('site-core::general.save')}}</span>
+                </x-site-core::form.button>
+            </div>
         </div>
         <div class="border-b-2 border-neutral-100"></div>
-        <div class="aspect-w-16 aspect-h-9 overflow-y-auto flex-grow">
+        <div class="overflow-y-auto flex-grow">
             @foreach($this->getBlocks() as $block)
                 @php
                     $attributes = new Illuminate\View\ComponentAttributeBag($block->getAttributeValues());
                 @endphp
                 <div class="block_{{$block->uuid}} group relative" wire:key={{ $block->uuid }} >
                     <x-dynamic-component :component="$block->getMetadata()['viewName']" {{$attributes}}></x-dynamic-component>
-                    <div class="absolute inset-0 bg-black/10 transition-opacity cursor-pointer @if(empty($activeBlock) || $activeBlock->uuid !== $block->uuid) opacity-0 group-hover:opacity-100 @endif" wire:click="setActiveBlock('{{$block->uuid}}')">
+                    <div class="absolute inset-0 bg-black/10 transition-opacity cursor-pointer @if(empty($activeBlock) || $activeBlock->uuid !== $block->uuid) opacity-0 group-hover:opacity-100 @endif" wire:click="setActiveBlock('{{$block->uuid}}')" @click="sidebarOpen = true">
                         <div class="absolute top-2 right-2 transition-opacity">
                             <button class="rounded-full bg-white border-2 border-neutral-200 flex items-center justify-center p-1.5 h-9 w-9 hover:bg-neutral-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg>
@@ -23,7 +31,14 @@
             @endforeach
         </div>
     </div>
-    <div class="bg-neutral-50 w-80 flex-shrink-0 border-l-2 border-neutral-100 flex flex-col">
+    <div class="absolute inset-0 bg-black/20 md:hidden" x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"></div>
+    <div class="bg-neutral-50 transition-all w-80 max-w-[85%] h-full flex-shrink-0 border-l-2 border-neutral-100 flex-col flex absolute right-0 md:static"
+         x-show="{{ empty($activeBlock) ? 'sidebarOpen' : 'true' }}"
+         x-transition:enter-start="transform translate-x-full"
+        x-transition:enter-end="transform translate-x-0"
+        x-transition:leave-start="transform translate-x-0"
+        x-transition:leave-end="transform translate-x-full"
+    >
         @if(empty($activeBlock))
             <div class="bg-white flex box-content flex-col">
                 <h1 class="w-full px-4 text-lg font-medium h-12 flex items-center">{{__('site-core::blocks.available_blocks')}}</h1>
@@ -59,13 +74,14 @@
                     $attributes = $activeBlock->getMetadata()['attributes'];
                 @endphp
 
-
                 @foreach($attributes as $key => $attribute)
+                    @isset($activeBlock->$key)
                     <div class="w-full px-3 py-2">
                         <h2 class="text-lg font-medium">{{$attribute['title']}}</h2>
                         @isset($attribute['description'])<h3 class="text-sm text-neutral-500">{{$attribute['description']}}</h3>@endisset
-                        <x-site-core::form.input class="w-full mt-1" type="text" placeholder="{{Str::ucfirst($attribute['type'])}}" wire:model.blur="activeBlock.{{$key}}"></x-site-core::form.input>
+                        <x-site-core::form.input class="w-full mt-1" type="text" placeholder="{{Str::ucfirst($attribute['type'])}}" @input.debounce="$wire.updateAttribute('{{$key}}',$event.target.value)"></x-site-core::form.input>
                     </div>
+                    @endisset
                 @endforeach
             </section>
             <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">

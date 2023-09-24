@@ -33,16 +33,15 @@ class BlockEditor extends Component
         ]);
     }
 
-    public function updated($name, $value) {
-        if(Str::startsWith($name, 'activeBlock')) {
-            $this->blocks = $this->blocks->map(function($block) use ($name, $value) {
-                if($block->uuid === $this->activeBlock->uuid) {
-                    $block = $this->activeBlock;
-                }
-                return $block;
-            });
-            $this->dispatch('$refresh');
-        }
+    public function updateAttribute($name, $value) {
+        $this->activeBlock->$name = $value;
+        $this->blocks = $this->blocks->map(function($block) use ($name, $value) {
+            if($block->uuid === $this->activeBlock->uuid) {
+                $block = $this->activeBlock;
+            }
+            return $block;
+        });
+        $this->dispatch('$refresh');
     }
 
     public function addBlock(string $blockName) {
@@ -59,7 +58,7 @@ class BlockEditor extends Component
     }
 
     public function unsetActiveBlock() {
-        $this->activeBlock = null;
+        unset($this->activeBlock);
     }
 
     public function removeBlock(string $uuid) {
