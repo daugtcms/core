@@ -5,6 +5,7 @@ namespace Felixbeer\SiteCore;
 use Felixbeer\SiteCore\Blocks\BlockSynth;
 use Felixbeer\SiteCore\Blocks\View\Blocks\Header;
 use Felixbeer\SiteCore\Livewire\BlockEditor;
+use Felixbeer\SiteCore\Livewire\NavigationEditor;
 use Felixbeer\SiteCore\View\Components\Tiptap;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -15,7 +16,6 @@ class SiteCoreServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application services.
      */
-
     public function boot()
     {
         /*
@@ -23,7 +23,7 @@ class SiteCoreServiceProvider extends ServiceProvider
          */
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'site-core');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'site-core');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         Blade::component('tiptap', TipTap::class);
@@ -31,7 +31,7 @@ class SiteCoreServiceProvider extends ServiceProvider
 
         Livewire::propertySynthesizer(BlockSynth::class);
         Livewire::component('site-core::block-editor', BlockEditor::class);
-
+        Livewire::component('site-core::navigation-editor', NavigationEditor::class);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
