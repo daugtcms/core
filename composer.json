@@ -1,53 +1,58 @@
 {
-    "name": "felixbeer/site-core",
-    "description": "",
-    "keywords": [
-        "felixbeer",
-        "site-core"
-    ],
-    "homepage": "https://github.com/felixbeer/site-core",
-    "license": "MIT",
-    "type": "library",
-    "authors": [
-        {
-            "name": "Felix Beer",
-            "email": "mail@felix.beer",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^8.1",
-        "illuminate/support": "^10.10",
-        "livewire/livewire": "^3.0"
-    },
-    "require-dev": {
-        "laravel/pint": "^1.13"
-    },
-    "autoload": {
-        "psr-4": {
-            "Felixbeer\\SiteCore\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Felixbeer\\SiteCore\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Felixbeer\\SiteCore\\SiteCoreServiceProvider"
-            ],
-            "aliases": {
-                "SiteCore": "Felixbeer\\SiteCore\\SiteCoreFacade"
-            }
-        }
+  "name": "felixbeer/site-core",
+  "description": "",
+  "keywords": [
+    "felixbeer",
+    "site-core"
+  ],
+  "homepage": "https://github.com/felixbeer/site-core",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Felix Beer",
+      "email": "mail@felix.beer",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": "^8.1",
+    "blade-ui-kit/blade-icons": "^1.5",
+    "illuminate/support": "^10.10",
+    "laravel/horizon": "^5.21",
+    "league/flysystem-aws-s3-v3": "^3.0",
+    "livewire/livewire": "^3.0",
+    "wire-elements/modal": "^2.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.13"
+  },
+  "autoload": {
+    "psr-4": {
+      "Felixbeer\\SiteCore\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Felixbeer\\SiteCore\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Felixbeer\\SiteCore\\SiteCoreServiceProvider",
+        "Felixbeer\\SiteCore\\SiteCoreBladeServiceProvider"
+      ],
+      "aliases": {
+        "SiteCore": "Felixbeer\\SiteCore\\SiteCoreFacade"
+      }
+    }
+  }
 }

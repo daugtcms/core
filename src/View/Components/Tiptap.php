@@ -5,8 +5,6 @@ namespace Felixbeer\SiteCore\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use function Felixbeer\SiteCore\Blocks\View\Components\view;
-use function Felixbeer\SiteCore\View\Components;
 
 class Tiptap extends Component
 {
