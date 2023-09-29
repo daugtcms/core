@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Models;
+namespace Felixbeer\SiteCore\Navigation;
 
 use Illuminate\Database\Eloquent\Model;
 

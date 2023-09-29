@@ -4,7 +4,7 @@
         <div class="bg-white w-full h-12 flex items-center justify-between px-4 flex-shrink-0">
             <h1 class="text-lg font-medium">{{$title}}</h1>
             <div class="flex gap-x-2">
-                <x-site-core::form.button style="secondary" class="md:hidden"
+                <x-site-core::core.button style="secondary" class="md:hidden"
                                           @click="$wire.currentlyEditingBlock ? $wire.unsetActiveBlock() : true; sidebarOpen = true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -12,8 +12,8 @@
                         <path d="M5 12h14"/>
                         <path d="M12 5v14"/>
                     </svg>
-                </x-site-core::form.button>
-                <x-site-core::form.button style="primary">
+                </x-site-core::core.button>
+                <x-site-core::core.button style="primary">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="h-5 w-5 md:hidden lucide lucide-save">
@@ -22,7 +22,7 @@
                         <polyline points="7 3 7 8 15 8"/>
                     </svg>
                     <span class="hidden md:block">{{__('site-core::general.save')}}</span>
-                </x-site-core::form.button>
+                </x-site-core::core.button>
             </div>
         </div>
         <div class="border-b-2 border-neutral-100"></div>
@@ -126,7 +126,7 @@
                 @endforeach
             </section>
             <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">
-                <x-site-core::form.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
+                <x-site-core::core.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
                                           onclick="confirm('{{__('site-core::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -137,7 +137,7 @@
                         <line x1="10" x2="10" y1="11" y2="17"/>
                         <line x1="14" x2="14" y1="11" y2="17"/>
                     </svg>
-                    {{__('site-core::general.delete')}}</x-site-core::form.button>
+                    {{__('site-core::general.delete')}}</x-site-core::core.button>
             </div>
         @endif
     </div>

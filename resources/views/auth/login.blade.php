@@ -54,9 +54,9 @@
                     </a>
                 @endif
 
-                <x-site-core::form.button class="ml-3">
+                <x-site-core::core.button class="ml-3">
                     {{ __('Log in') }}
-                </x-site-core::form.button>
+                </x-site-core::core.button>
             </div>
         </form>
     </x-site-core::auth.auth-card>

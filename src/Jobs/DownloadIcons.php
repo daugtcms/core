@@ -24,7 +24,7 @@ class DownloadIcons implements ShouldQueue
     public function handle()
     {
         $this->icons->each(function ($icon) {
-            Storage::put($icon, Storage::disk('sitecore-media')->get($icon));
+            Storage::disk('public')->put($icon, Storage::disk('sitecore-media')->get($icon));
         });
     }
 }

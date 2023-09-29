@@ -20,15 +20,15 @@
 @endphp
 
 @if(isset($href))
-    <a {{ $attributes->merge(['href' => $href, 'class' => 'inline-flex items-center justify-center px-2 py-1.5 border
-    border-transparent rounded-md font-semibold text-xs uppercase tracking-widest focus:outline-none focus:ring
-    disabled:opacity-25 transition ease-in-out duration-150 ' . $classes]) }}>
+    <a {{ $attributes->merge(['href' => $href, 'class' => 'inline-flex items-center justify-center px-2.5 py-1.5
+    border border-transparent rounded-md font-medium tracking-wide focus:outline-none focus:ring
+    disabled:opacity-25 transition ease-in-out duration-150 gap-x-1 ' . $classes]) }}>
         {{ $slot }}
     </a>
 @else
-    <button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center justify-center px-2 py-1.5
-    border border-transparent rounded-md font-medium text-sm tracking-wide focus:outline-none focus:ring
-    disabled:opacity-25 transition ease-in-out duration-150 ' . $classes]) }}>
+    <button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center justify-center px-2.5 py-1.5
+    border border-transparent rounded-md font-medium tracking-wide focus:outline-none focus:ring
+    disabled:opacity-25 transition ease-in-out duration-150 gap-x-1 ' . $classes]) }}>
         {{ $slot }}
     </button>
 @endif

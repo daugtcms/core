@@ -7,4 +7,8 @@ return [
     'back' => 'Zurück',
     'save' => 'Speichern',
     'delete' => 'Löschen',
+
+    'title' => 'Titel',
+    'name' => 'Name',
+    'description' => 'Beschreibung',
 ];

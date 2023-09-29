@@ -27,7 +27,7 @@ class SyncIcons extends Command
      */
     public function handle()
     {
-        $icons = collect(Storage::disk('sitecore-media')->allFiles('icons/default'));
+        $icons = collect(Storage::disk('sitecore-media')->files('icons/default'));
         $icons->chunk(100)->each(function ($icons) {
             DownloadIcons::dispatch($icons);
         });

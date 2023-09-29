@@ -77,9 +77,9 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-site-core::form.button class="ml-4">
+                <x-site-core::core.button class="ml-4">
                     {{ __('Register') }}
-                </x-site-core::form.button>
+                </x-site-core::core.button>
             </div>
         </form>
     </x-site-core::auth.auth-card>

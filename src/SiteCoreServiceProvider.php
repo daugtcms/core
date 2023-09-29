@@ -104,11 +104,5 @@ class SiteCoreServiceProvider extends ServiceProvider
 
         $this->app->register(HorizonServiceProvider::class);
         $this->app->register(HorizonApplicationServiceProvider::class);
-
-        /*$this->app->config['blade-icons.sets.default'] = [
-            'path' => 'icons/default',
-            'disk' => 'sitecore-media',
-            'prefix' => 'icon',
-        ];*/
     }
 }

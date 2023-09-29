@@ -17,6 +17,9 @@ class SiteCoreBladeServiceProvider extends ServiceProvider
         Blade::component('tiptap', TipTap::class);
         Blade::component('site-core::blocks.header', Header::class);
         Blade::component('site-core::modal', 'components.modal.index');
+        Blade::directive('svg', function ($expression) {
+            return "<?php echo svg($expression); ?>";
+        });
     }
 
     /**
