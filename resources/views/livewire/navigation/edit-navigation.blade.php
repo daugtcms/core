@@ -1,5 +1,5 @@
 <form class="p-3" wire:submit="save">
-    <x-site-core::modal.header>{{__('site-core::navigation.create_navigation_menu')}}</x-site-core::modal.header>
+    <x-site-core::modal.header>{{__('site-core::navigation.manage_navigation_menu')}}</x-site-core::modal.header>
     <div class="flex flex-col gap-y-2">
         <div>
             <x-site-core::form.label for="name">{{__('site-core::general.name')}}</x-site-core::form.label>

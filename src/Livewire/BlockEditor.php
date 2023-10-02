@@ -7,11 +7,11 @@ use Felixbeer\SiteCore\Blocks\View\Blocks\Header;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class BlockEditor extends Component
 {
-
     public $title = '';
 
     public $currentlyEditingBlock = false;
@@ -25,23 +25,26 @@ class BlockEditor extends Component
         $this->blocks = collect([new Header()]);
     }
 
+    #[Layout('site-core::components.layouts.app')]
     public function render()
     {
         if (empty($this->title)) {
             $this->title = Lang::get('site-core::blocks.title');
         }
+
         return view('site-core::livewire.block-editor', [
-            'availableBlocks' => config('site-core.available_blocks')
+            'availableBlocks' => config('site-core.available_blocks'),
         ]);
     }
 
     public function updated($name, $value)
     {
         if (Str::startsWith($name, 'activeBlock')) {
-            $this->blocks = $this->blocks->map(function ($block) use ($name, $value) {
+            $this->blocks = $this->blocks->map(function ($block) {
                 if ($block->uuid === $this->activeBlock->uuid) {
                     $block = $this->activeBlock;
                 }
+
                 return $block;
             });
             $this->dispatch('$refresh');
@@ -51,6 +54,7 @@ class BlockEditor extends Component
     public function addBlock(string $blockName)
     {
         $this->blocks->add(new $blockName());
+
         return $this->blocks;
     }
 

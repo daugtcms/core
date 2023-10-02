@@ -4,7 +4,10 @@
     $classes = '';
     switch ($style ?? 'secondary') {
     case 'secondary':
-    $classes .= 'text-neutral-600 bg-transparent hover:bg-neutral-300 active:bg-neutral-200 focus:border-neutral-200 ring-neutral-300';
+    $classes .= 'text-neutral-600 bg-transparent hover:bg-neutral-200 active:bg-neutral-100 focus:border-neutral-200 ring-neutral-300';
+    break;
+    case 'danger':
+    $classes .= 'text-danger-600 bg-transparent hover:bg-danger-200 active:bg-danger-100 focus:border-danger-200 ring-danger-300';
     break;
     }
 @endphp

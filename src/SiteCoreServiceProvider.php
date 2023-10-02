@@ -5,8 +5,9 @@ namespace Felixbeer\SiteCore;
 use Felixbeer\SiteCore\Blocks\BlockSynth;
 use Felixbeer\SiteCore\Commands\SyncIcons;
 use Felixbeer\SiteCore\Livewire\BlockEditor;
-use Felixbeer\SiteCore\Livewire\Navigation\CreateNavigation;
+use Felixbeer\SiteCore\Livewire\Navigation\EditNavigation;
 use Felixbeer\SiteCore\Livewire\NavigationEditor;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider;
@@ -30,7 +31,9 @@ class SiteCoreServiceProvider extends ServiceProvider
         Livewire::propertySynthesizer(BlockSynth::class);
         Livewire::component('site-core::block-editor', BlockEditor::class);
         Livewire::component('site-core::navigation-editor', NavigationEditor::class);
-        Livewire::component('site-core::navigation.create-navigation', CreateNavigation::class);
+        Livewire::component('site-core::navigation.edit-navigation', EditNavigation::class);
+
+        Model::unguard();
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

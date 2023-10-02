@@ -1,12 +1,15 @@
 <?php
 
-namespace Felixbeer\SiteCore\Navigation;
+namespace Felixbeer\SiteCore\Navigation\Models;
 
+use Felixbeer\SiteCore\Core\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 
 class Navigation extends Model
 {
-    protected $fillable = [
+    use HasTranslations;
+
+    public $translatable = [
         'name',
         'description',
     ];

@@ -21,6 +21,8 @@
     "laravel/horizon": "^5.21",
     "league/flysystem-aws-s3-v3": "^3.0",
     "livewire/livewire": "^3.0",
+    "spatie/laravel-data": "^3.9",
+    "spatie/laravel-translatable": "^6.5",
     "wire-elements/modal": "^2.0"
   },
   "require-dev": {
