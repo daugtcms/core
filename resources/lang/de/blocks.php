@@ -6,5 +6,9 @@ return [
     'title' => 'Block Editor',
     'available_blocks' => 'Verfügbare Blöcke',
     'editing_block' => 'Bearbeite Block',
-    'delete_block_confirmation' => 'Möchtest du diesen Block wirklich löschen?'
+    'delete_block_confirmation' => 'Möchtest du diesen Block wirklich löschen?',
+    'delete_template_confirmation' => 'Möchten Sie dieses Template wirklich löschen?',
+    'template_editor' => 'Template Editor',
+    'manage_template' => 'Template verwalten',
+    'attributes' => 'Attribute',
 ];

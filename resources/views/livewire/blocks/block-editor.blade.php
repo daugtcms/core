@@ -27,35 +27,37 @@
         </div>
         <div class="border-b-2 border-neutral-100"></div>
         <div class="overflow-y-auto flex-grow">
-            @foreach($this->getBlocks() as $block)
-                @php
-                    $attributes = new Illuminate\View\ComponentAttributeBag($block->getAttributeValues());
-                @endphp
-                <div class="block_{{$block->uuid}} group relative" wire:key={{ $block->uuid }} >
-                    <x-dynamic-component
-                            :component="$block->getMetadata()['viewName']" {{$attributes}}></x-dynamic-component>
-                    <div class="absolute inset-0 bg-black/10 transition-opacity cursor-pointer @if(empty($activeBlock) || $activeBlock->uuid !== $block->uuid) opacity-0 group-hover:opacity-100 @endif"
-                         wire:click="setActiveBlock('{{$block->uuid}}')" @click="sidebarOpen = true">
-                        <div class="absolute top-2 right-2 transition-opacity">
-                            <button class="rounded-full bg-white border-2 border-neutral-200 flex items-center justify-center p-1.5 h-9 w-9 hover:bg-neutral-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-sliders-horizontal">
-                                    <line x1="21" x2="14" y1="4" y2="4"/>
-                                    <line x1="10" x2="3" y1="4" y2="4"/>
-                                    <line x1="21" x2="12" y1="12" y2="12"/>
-                                    <line x1="8" x2="3" y1="12" y2="12"/>
-                                    <line x1="21" x2="16" y1="20" y2="20"/>
-                                    <line x1="12" x2="3" y1="20" y2="20"/>
-                                    <line x1="14" x2="14" y1="2" y2="6"/>
-                                    <line x1="8" x2="8" y1="10" y2="14"/>
-                                    <line x1="16" x2="16" y1="18" y2="22"/>
-                                </svg>
-                            </button>
+            <x-site-core::templates.homepage>
+                @foreach($this->getBlocks() as $block)
+                    @php
+                        $attributes = new Illuminate\View\ComponentAttributeBag($block->getAttributeValues());
+                    @endphp
+                    <div class="block_{{$block->uuid}} group relative isolate" wire:key={{ $block->uuid }} >
+                        <x-dynamic-component
+                                :component="$block->getMetadata()['viewName']" {{$attributes}}></x-dynamic-component>
+                        <div class="absolute inset-0 bg-black/10 transition-opacity cursor-pointer @if(empty($activeBlock) || $activeBlock->uuid !== $block->uuid) opacity-0 group-hover:opacity-100 @endif"
+                             wire:click="setActiveBlock('{{$block->uuid}}')" @click="sidebarOpen = true">
+                            <div class="absolute top-2 right-2 transition-opacity">
+                                <button class="rounded-full bg-white border-2 border-neutral-200 flex items-center justify-center p-1.5 h-9 w-9 hover:bg-neutral-50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="lucide lucide-sliders-horizontal">
+                                        <line x1="21" x2="14" y1="4" y2="4"/>
+                                        <line x1="10" x2="3" y1="4" y2="4"/>
+                                        <line x1="21" x2="12" y1="12" y2="12"/>
+                                        <line x1="8" x2="3" y1="12" y2="12"/>
+                                        <line x1="21" x2="16" y1="20" y2="20"/>
+                                        <line x1="12" x2="3" y1="20" y2="20"/>
+                                        <line x1="14" x2="14" y1="2" y2="6"/>
+                                        <line x1="8" x2="8" y1="10" y2="14"/>
+                                        <line x1="16" x2="16" y1="18" y2="22"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </x-site-core::templates.homepage>
         </div>
     </div>
     <div class="absolute inset-0 bg-black/20 md:hidden" x-show="sidebarOpen" x-transition.opacity
@@ -114,15 +116,8 @@
                 @endphp
 
                 @foreach($attributes as $key => $attribute)
-                    <div class="w-full px-3 py-2">
-                        <h2 class="text-lg font-medium">{{$attribute['title']}}</h2>
-                        @isset($attribute['description'])
-                            <h3 class="text-sm text-neutral-500">{{$attribute['description']}}</h3>
-                        @endisset
-                        <x-site-core::form.input class="w-full mt-1" type="text"
-                                                 placeholder="{{Str::ucfirst($attribute['type'])}}"
-                                                 wire:model.blur="activeBlock.{{$key}}"></x-site-core::form.input>
-                    </div>
+                    <x-site-core::blocks.attribute-input :key="$key"
+                                                         :attribute="$attribute"></x-site-core::blocks.attribute-input>
                 @endforeach
             </section>
             <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">

@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire;
+namespace Felixbeer\SiteCore\Livewire\Navigation;
 
 use Felixbeer\SiteCore\Navigation\Data\NavigationItemData;
 use Felixbeer\SiteCore\Navigation\Models\Navigation;
@@ -48,7 +48,7 @@ class NavigationEditor extends Component
             });
         }
 
-        return view('site-core::livewire.navigation-editor', [
+        return view('site-core::livewire.navigation.navigation-editor', [
             'navigations' => $navigations,
         ]);
     }

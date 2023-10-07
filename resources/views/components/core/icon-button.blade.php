@@ -20,7 +20,7 @@
             @svg($icon)
         </a>
     @else
-        <button {{ $attributes->merge(['type' => 'submit', 'class' => 'inline-flex items-center justify-center p-1 w-8 h-8
+        <button {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center justify-center p-1 w-8 h-8
     border border-transparent rounded-md focus:outline-none focus:ring
     disabled:opacity-25 transition ease-in-out duration-150 gap-x-1 ' . $classes]) }}>
             @svg($icon)

@@ -9,6 +9,7 @@
 
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @googlefonts
 
 </head>
 <body class="w-full h-full">

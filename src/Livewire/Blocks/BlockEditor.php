@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire;
+namespace Felixbeer\SiteCore\Livewire\Blocks;
 
 use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
 use Felixbeer\SiteCore\Blocks\View\Blocks\Header;
@@ -32,7 +32,7 @@ class BlockEditor extends Component
             $this->title = Lang::get('site-core::blocks.title');
         }
 
-        return view('site-core::livewire.block-editor', [
+        return view('site-core::livewire.blocks.block-editor', [
             'availableBlocks' => config('site-core.available_blocks'),
         ]);
     }

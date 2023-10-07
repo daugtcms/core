@@ -3,14 +3,12 @@
 namespace Felixbeer\SiteCore\Blocks\View\Blocks;
 
 use Closure;
-use Felixbeer\SiteCore\Blocks\Attributes\Image;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Block extends Component
 {
-
     public string $uuid;
 
     public static array $metadata = [
@@ -18,7 +16,7 @@ class Block extends Component
         'description' => 'A basic example of what a block looks like',
         'viewName' => 'site-core::blocks.block',
         'attributes' => [
-        ]
+        ],
     ];
 
     public static function getMetadata(): array
@@ -32,6 +30,7 @@ class Block extends Component
         foreach (get_called_class()::getMetadata()['attributes'] as $attributeName => $attribute) {
             $attributes[$attributeName] = $this->$attributeName;
         }
+
         return $attributes;
     }
 

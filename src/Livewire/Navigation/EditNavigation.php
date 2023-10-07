@@ -2,7 +2,6 @@
 
 namespace Felixbeer\SiteCore\Livewire\Navigation;
 
-use Felixbeer\SiteCore\Livewire\NavigationEditor;
 use Felixbeer\SiteCore\Navigation\Models\Navigation;
 use Livewire\Attributes\Rule;
 use LivewireUI\Modal\ModalComponent;

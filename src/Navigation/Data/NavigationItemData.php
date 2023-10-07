@@ -12,13 +12,12 @@ class NavigationItemData extends Data implements Wireable
 
     public function __construct(
         public string $uuid = '',
-        public int    $order = 0,
+        public int $order = 0,
         public string $name = '',
         public string $description = '',
         public string $url = '',
         public string $icon = '',
         public string $target = '_self',
-    )
-    {
+    ) {
     }
 }

@@ -10,11 +10,13 @@ return [
     'edit' => 'Bearbeiten',
     'add_element' => 'Element hinzufügen',
 
+    'id' => 'ID',
     'title' => 'Titel',
     'name' => 'Name',
     'description' => 'Beschreibung',
     'url' => 'URL',
     'icon' => 'Symbol',
+    'viewName' => 'View Name',
 
     'no_value_available' => 'Kein Wert vorhanden',
     'search_items' => 'Suche Elemente...',
