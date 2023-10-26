@@ -19,7 +19,7 @@
             @break
         @case('navigation')
             @php
-                \Sitebrew\Navigation\Models\Navigation::all()->each(function(\Sitebrew\Navigation\Models\Navigation $navigation) use (&$navigations){
+                \Sitebrew\Models\Navigation\Navigation::all()->each(function(\Sitebrew\Models\Navigation\Navigation $navigation) use (&$navigations){
                     $navigations[] = [
                         'value' => $navigation->id,
                         'title' => $navigation->name

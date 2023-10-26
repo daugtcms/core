@@ -2,7 +2,7 @@
 
 namespace Sitebrew\Livewire\Blocks;
 
-use Sitebrew\Blocks\Models\Template;
+use Sitebrew\Models\Blocks\Template;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 

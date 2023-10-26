@@ -1,21 +1,21 @@
 <div>
     <x-sitebrew::layouts.dashboard-bar>
-        <x-sitebrew::core.tabs>
+        <x-sitebrew::tabs.tabs>
             @foreach($navigations as $navigation)
-                <x-sitebrew::core.tabs.item
+                <x-sitebrew::tabs.item
                         wire:click="setCurrentNavigation({{$navigation->id}})"
                         :active="$navigation->id === $currentNavigation->id"
                 >
                     {{$navigation->name}}
-                </x-sitebrew::core.tabs.item>
+                </x-sitebrew::tabs.item>
             @endforeach
-        </x-sitebrew::core.tabs>
-        <x-sitebrew::core.button
+        </x-sitebrew::tabs.tabs>
+        <x-sitebrew::form.button
                 wire:click="$dispatch('openModal', { component: 'sitebrew::navigation.edit-navigation' })"
                 class="flex-shrink-0 ml-2">
             {{__('sitebrew::general.add')}}
             @svg('plus', 'w-5 h-5')
-        </x-sitebrew::core.button>
+        </x-sitebrew::form.button>
     </x-sitebrew::layouts.dashboard-bar>
     @if($currentNavigation)
         <div class="text-neutral-700 block flex-col overflow-y-auto p-2 max-w-3xl mx-auto">
@@ -27,13 +27,13 @@
                     <span class="text-neutral-500 italic">{{__('sitebrew::general.no_value_available')}}</span>
                 @endempty
                 <div class="flex gap-x-2 justify-end">
-                    <x-sitebrew::core.button
+                    <x-sitebrew::form.button
                             wire:click="$dispatch('openModal', { component: 'sitebrew::navigation.edit-navigation', arguments: { navigation: {{$currentNavigation->id}} } })"
-                    >@svg('pencil', 'w-5 h-5'){{__('sitebrew::general.edit')}}</x-sitebrew::core.button>
-                    <x-sitebrew::core.button
+                    >@svg('pencil', 'w-5 h-5'){{__('sitebrew::general.edit')}}</x-sitebrew::form.button>
+                    <x-sitebrew::form.button
                             style="danger"
                             wire:click="deleteNavigation({{$currentNavigation->id}})"
-                            onclick="confirm('{{__('sitebrew::navigation.delete_navigation_confirmation')}}') || event.stopImmediatePropagation()">@svg('trash-2', 'w-5 h-5'){{__('sitebrew::general.delete')}}</x-sitebrew::core.button>
+                            onclick="confirm('{{__('sitebrew::navigation.delete_navigation_confirmation')}}') || event.stopImmediatePropagation()">@svg('trash-2', 'w-5 h-5'){{__('sitebrew::general.delete')}}</x-sitebrew::form.button>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
                          wire:sortable.item="{{ $item->uuid }}" wire:key="task-{{ $item->uuid }}">
                         <div class="flex justify-between min-w-0 w-full">
                             <div class="inline-flex items-center gap-x-1 font-medium flex-grow min-w-0">
-                                <x-sitebrew::core.icon-button icon="grip-vertical"
+                                <x-sitebrew::form.icon-button icon="grip-vertical"
                                                                wire:sortable.handle/>
                                 <span class="truncate inline-flex items-center gap-x-2">
                                     @if(!empty($item->icon))
@@ -62,9 +62,9 @@
                                 </span>
                             </div>
                             <div class="flex-shrink-0 inline-flex gap-x-1">
-                                <x-sitebrew::core.icon-button icon="pencil"
+                                <x-sitebrew::form.icon-button icon="pencil"
                                                                wire:click="setCurrentItem('{{$item->uuid}}')"/>
-                                <x-sitebrew::core.icon-button icon="trash-2" style="danger"
+                                <x-sitebrew::form.icon-button icon="trash-2" style="danger"
                                                                wire:click="removeItem('{{$item->uuid}}')"/>
                             </div>
                         </div>
@@ -111,16 +111,16 @@
                 @endforeach
             </ul>
             <div class="flex flex-col">
-                <x-sitebrew::core.button class="w-72 mt-3" style="light" wire:click="addItem()" x-data
+                <x-sitebrew::form.button class="w-72 mt-3" style="light" wire:click="addItem()" x-data
                                           x-mousetrap.n="$wire.addItem()"
                                           :disabled="!$errors->isEmpty()">
                     @svg('plus')
                     {{__('sitebrew::general.add_element')}}
-                </x-sitebrew::core.button>
-                <x-sitebrew::core.button class="w-72 mt-3" style="secondary" wire:click="saveItems()"
+                </x-sitebrew::form.button>
+                <x-sitebrew::form.button class="w-72 mt-3" style="secondary" wire:click="saveItems()"
                                           :disabled="!$errors->isEmpty()">
                     {{__('sitebrew::general.save')}}
-                </x-sitebrew::core.button>
+                </x-sitebrew::form.button>
             </div>
 
         </div>

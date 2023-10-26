@@ -2,8 +2,8 @@
 
 namespace Sitebrew\Livewire\Blocks;
 
-use Sitebrew\Blocks\Models\Template;
-use Sitebrew\Blocks\View\Blocks\Block;
+use Sitebrew\Models\Blocks\Template;
+use Sitebrew\View\Blocks\Block;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
 use LivewireUI\Modal\ModalComponent;

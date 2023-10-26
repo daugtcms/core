@@ -35,6 +35,6 @@
 
     </div>
     <x-sitebrew::modal.footer class="justify-end">
-        <x-sitebrew::core.button style="primary">{{__('sitebrew::general.save')}}</x-sitebrew::core.button>
+        <x-sitebrew::form.button style="primary">{{__('sitebrew::general.save')}}</x-sitebrew::form.button>
     </x-sitebrew::modal.footer>
 </form>

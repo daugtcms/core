@@ -2,9 +2,9 @@
 
 namespace Sitebrew\Livewire\Pages;
 
-use Sitebrew\Core\Table\Column;
-use Sitebrew\Livewire\Core\Table\Table;
-use Sitebrew\Pages\Models\Page;
+use Sitebrew\Livewire\Table\Table;
+use Sitebrew\Livewire\Table\Column;
+use Sitebrew\Models\Pages\Page;
 use Illuminate\Database\Eloquent\Builder;
 
 class PagesTable extends Table

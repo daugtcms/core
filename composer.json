@@ -17,7 +17,7 @@
   ],
   "require": {
     "php": "^8.1",
-    "illuminate/support": "^10.10",
+    "laravel/laravel": "^10.2",
     "laravel/horizon": "^5.21",
     "league/flysystem-aws-s3-v3": "^3.0",
     "livewire/livewire": "^3.0",
@@ -29,6 +29,7 @@
     "wire-elements/modal": "^2.0"
   },
   "require-dev": {
+    "barryvdh/laravel-ide-helper": "^2.13",
     "laravel/pint": "^1.13"
   },
   "autoload": {

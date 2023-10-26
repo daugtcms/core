@@ -6,8 +6,8 @@
             <p class="text-secondary-500 text-lg font-semibold">{{$title ?: 'Lorem ipsum'}}</p>
             <h2 class="text-xl font-semibold text-secondary-800">{{$subtitle ?: 'Anim nostrud proident fugiat quis'}}</h2>
             <p class="text-neutral-600">{{$text ?: 'Et labore velit Lorem reprehenderit reprehenderit reprehenderit fugiat est ea amet nostrud magna minim. Ullamco ex exercitation irure amet irure occaecat ullamco.'}}</p>
-            <x-sitebrew::core.button style="secondary" :href="$link" class="mt-2"
-                                      target="_blank">{{$linkText}} @svg('arrow-right', 'h-5 w-5')</x-sitebrew::core.button>
+            <x-sitebrew::form.button style="secondary" :href="$link" class="mt-2"
+                                      target="_blank">{{$linkText}} @svg('arrow-right', 'h-5 w-5')</x-sitebrew::form.button>
         </div>
     </div>
 </div>

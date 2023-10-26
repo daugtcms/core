@@ -2,7 +2,7 @@
 
 namespace Sitebrew\Livewire\Navigation;
 
-use Sitebrew\Navigation\Models\Navigation;
+use Sitebrew\Models\Navigation\Navigation;
 use Livewire\Attributes\Rule;
 use LivewireUI\Modal\ModalComponent;
 

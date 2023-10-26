@@ -3,19 +3,19 @@
     <div class="bg-neutral-50 flex-grow flex flex-col">
         <div class="bg-white w-full h-12 flex items-center justify-between pl-2 pr-4 flex-shrink-0">
             <div class="flex items-center gap-x-1.5">
-                <x-sitebrew::core.icon-button icon="chevron-left"
-                                               wire:click="$dispatch('save-blocks')"></x-sitebrew::core.icon-button>
+                <x-sitebrew::form.icon-button icon="chevron-left"
+                                               wire:click="$dispatch('save-blocks')"></x-sitebrew::form.icon-button>
                 <h1 class="text-lg font-medium">{{$title}}</h1>
             </div>
             <div class="flex gap-x-2">
-                <x-sitebrew::core.icon-button icon="plus"
+                <x-sitebrew::form.icon-button icon="plus"
                                                @click="sidebarOpen = true"
-                                               wire:click="setSidebarState('{{\Sitebrew\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
-                ></x-sitebrew::core.icon-button>
-                <x-sitebrew::core.icon-button icon="save" style="primary"
+                                               wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
+                ></x-sitebrew::form.icon-button>
+                <x-sitebrew::form.icon-button icon="save" style="primary"
                                                wire:click="save()"
                                                x-tooltip.bottom="{{__('sitebrew::general.save')}}"
-                ></x-sitebrew::core.icon-button>
+                ></x-sitebrew::form.icon-button>
             </div>
         </div>
         <div class="border-b-2 border-neutral-100"></div>
@@ -34,11 +34,11 @@
          x-transition:leave-end="transform translate-x-full"
     >
         @switch($sidebarState)
-            @case(\Sitebrew\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS)
+            @case(\Sitebrew\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <x-sitebrew::core.icon-button icon="chevron-left"
-                                                       wire:click="setSidebarState('{{\Sitebrew\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-sitebrew::core.icon-button>
+                        <x-sitebrew::form.icon-button icon="chevron-left"
+                                                       wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-sitebrew::form.icon-button>
                         <p>{{__('sitebrew::blocks.available_blocks')}}</p>
                     </div>
                 </div>
@@ -76,11 +76,11 @@
                     })
                 </script>
                 @break
-            @case(\Sitebrew\Blocks\BlockEditorSidebar::BLOCK)
+            @case(\Sitebrew\Enums\Blocks\BlockEditorSidebar::BLOCK)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <x-sitebrew::core.icon-button icon="chevron-left"
-                                                       wire:click="unsetActiveBlock()"></x-sitebrew::core.icon-button>
+                        <x-sitebrew::form.icon-button icon="chevron-left"
+                                                       wire:click="unsetActiveBlock()"></x-sitebrew::form.icon-button>
                         <p>{{__('sitebrew::blocks.editing_block')}}</p>
                     </div>
                 </div>
@@ -98,13 +98,13 @@
                     @endforeach
                 </section>
                 <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">
-                    <x-sitebrew::core.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
+                    <x-sitebrew::form.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
                                               onclick="confirm('{{__('sitebrew::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
                         @svg('trash-2', 'w-5 h-5 mr-1')
-                        {{__('sitebrew::general.delete')}}</x-sitebrew::core.button>
+                        {{__('sitebrew::general.delete')}}</x-sitebrew::form.button>
                 </div>
                 @break
-            @case(\Sitebrew\Blocks\BlockEditorSidebar::TEMPLATE)
+            @case(\Sitebrew\Enums\Blocks\BlockEditorSidebar::TEMPLATE)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-3 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
                         <p>{{__('sitebrew::blocks.manage_template')}}</p>

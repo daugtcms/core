@@ -2,19 +2,19 @@
 
 namespace Sitebrew\Livewire\Blocks;
 
-use Sitebrew\Blocks\BlockEditorSidebar;
-use Sitebrew\Blocks\BlocksRenderer;
-use Sitebrew\Blocks\BlockSynth;
-use Sitebrew\Blocks\Data\BlockData;
-use Sitebrew\Blocks\Data\BlockEditorData;
-use Sitebrew\Blocks\Data\TemplateData;
-use Sitebrew\Blocks\Models\Template;
-use Sitebrew\Blocks\View\Blocks\Block;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Sitebrew\Data\Blocks\BlockData;
+use Sitebrew\Data\Blocks\BlockEditorData;
+use Sitebrew\Data\Blocks\TemplateData;
+use Sitebrew\Enums\Blocks\BlockEditorSidebar;
+use Sitebrew\Models\Blocks\Template;
+use Sitebrew\View\Blocks\Block;
+use Sitebrew\View\Blocks\Misc\BlockSynth;
+use Sitebrew\View\Blocks\Misc\BlocksRenderer;
 
 class BlockEditor extends Component
 {
@@ -38,7 +38,6 @@ class BlockEditor extends Component
 
     public function mount(array $data = null, $templates = null)
     {
-
         if (empty($this->templates)) {
             $this->templates = Template::all();
         }
@@ -58,7 +57,6 @@ class BlockEditor extends Component
             $this->template = $this->templates[0];
             $templateAttributes = $this->template->data;
         }
-
         $this->templateBlock = new (config('sitebrew.available_templates')[$this->template->view_name])(...$templateAttributes);
 
         if (isset($data['blocks'])) {

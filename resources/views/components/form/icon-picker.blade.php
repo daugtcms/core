@@ -26,9 +26,9 @@
                     <p x-text="selectedIcon"
                        class="leading-tight truncate"></p>
                 </div>
-                <x-sitebrew::core.icon-button icon="x" class="mr-0.5"
+                <x-sitebrew::form.icon-button icon="x" class="mr-0.5"
                                                @click="selectedIcon = ''; $event.stopImmediatePropagation()">
-                </x-sitebrew::core.icon-button>
+                </x-sitebrew::form.icon-button>
             </div>
         </template>
         <template x-if="!selectedIcon">

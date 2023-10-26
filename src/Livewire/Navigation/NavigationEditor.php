@@ -2,12 +2,12 @@
 
 namespace Sitebrew\Livewire\Navigation;
 
-use Sitebrew\Navigation\Data\NavigationItemData;
-use Sitebrew\Navigation\Models\Navigation;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Sitebrew\Data\Navigation\NavigationItemData;
+use Sitebrew\Models\Navigation\Navigation;
 
 class NavigationEditor extends Component
 {

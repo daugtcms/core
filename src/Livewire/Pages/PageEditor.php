@@ -2,7 +2,7 @@
 
 namespace Sitebrew\Livewire\Pages;
 
-use Sitebrew\Pages\Models\Page;
+use Sitebrew\Models\Pages\Page;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;

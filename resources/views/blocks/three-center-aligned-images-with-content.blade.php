@@ -40,8 +40,8 @@
                         {{$text ?: 'Aliqua deserunt laborum excepteur nostrud magna et tempor in esse consequat deserunt aliqua. Id in ullamco in exercitation.'}}
                     </p>
 
-                    <x-sitebrew::core.button style="primary">Über
-                        mich @svg('arrow-right', 'w-5 h-5')</x-sitebrew::core.button>
+                    <x-sitebrew::form.button style="primary">Über
+                        mich @svg('arrow-right', 'w-5 h-5')</x-sitebrew::form.button>
                 </div>
                 <!-- End Title -->
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Sitebrew\Navigation\Models\Navigation;
+use Sitebrew\Models\Navigation\Navigation;
 
 if (! function_exists('svg')) {
     function svg(string $path, $class = '', array $attributes = []): string

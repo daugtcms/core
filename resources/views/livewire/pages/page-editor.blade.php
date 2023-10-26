@@ -2,8 +2,8 @@
     <x-sitebrew::layouts.dashboard-bar>
         <h1 class="text-lg font-medium text-neutral-800">{{__('sitebrew::page.editing_page')}}</h1>
         <div class="inline-flex">
-            <x-sitebrew::core.button style="primary"
-                                      wire:click="save">{{__('sitebrew::general.save')}}</x-sitebrew::core.button>
+            <x-sitebrew::form.button style="primary"
+                                      wire:click="save">{{__('sitebrew::general.save')}}</x-sitebrew::form.button>
         </div>
     </x-sitebrew::layouts.dashboard-bar>
     <div class="max-w-7xl px-3 mx-auto gap-y-2 flex flex-col mt-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -19,10 +19,10 @@
         </div>
         <div class="col-span-3">
             <x-sitebrew::form.label>{{__('sitebrew::general.content')}}</x-sitebrew::form.label>
-            <x-sitebrew::core.button
+            <x-sitebrew::form.button
                     class="w-full"
                     wire:click="openBlockEditor()"
-                    style="light">{{__('sitebrew::blocks.open_block_editor')}}</x-sitebrew::core.button>
+                    style="light">{{__('sitebrew::blocks.open_block_editor')}}</x-sitebrew::form.button>
         </div>
     </div>
     @if($showBlockEditor)

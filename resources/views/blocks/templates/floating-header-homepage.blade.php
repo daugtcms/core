@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="flex items-center">
-                <x-sitebrew::core.button style="secondary">Login</x-sitebrew::core.button>
+                <x-sitebrew::form.button style="secondary">Login</x-sitebrew::form.button>
             </div>
             <!-- Settings Dropdown -->
             {{--<div class="flex items-center space-x-3">

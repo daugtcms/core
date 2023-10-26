@@ -23,7 +23,7 @@
                     <div class="flex items-center shrink-0">
                         <a>
                             <div class="h-10">
-                                <x-sitebrew::core.sitebrew-logo
+                                <x-sitebrew::sitebrew-logo
                                         class="block w-full h-full drop-shadow-md"/>
                             </div>
                         </a>

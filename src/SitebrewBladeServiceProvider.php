@@ -2,8 +2,8 @@
 
 namespace Sitebrew;
 
-use Sitebrew\Blocks\BlocksRenderer;
-use Sitebrew\Blocks\BlockSynth;
+use Sitebrew\View\Blocks\Misc\BlocksRenderer;
+use Sitebrew\View\Blocks\Misc\BlockSynth;
 use Sitebrew\Livewire\Blocks\BlockEditor;
 use Sitebrew\Livewire\Blocks\EditTemplate;
 use Sitebrew\Livewire\Blocks\TemplateEditor;
@@ -23,7 +23,7 @@ class SitebrewBladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::component('tiptap', TipTap::class);
+        Blade::component('tiptap', Tiptap::class);
         //Blade::component('sitebrew::blocks.header', Header::class);
         //Blade::component('sitebrew::templates.floating-homepage', FloatingHomepage::class);
         Blade::component('sitebrew::modal', 'components.modal.index');
@@ -32,8 +32,8 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         });
         Blade::component('sitebrew::blocks-renderer', BlocksRenderer::class);
 
-        Blade::componentNamespace('Sitebrew\\Blocks\\View\\Blocks\\', 'Blocks');
-        Blade::componentNamespace('Sitebrew\\Blocks\\View\\Templates\\', 'Templates');
+        Blade::componentNamespace('Sitebrew\\View\\Blocks\\', 'Blocks');
+        Blade::componentNamespace('Sitebrew\\View\\Blocks\\Templates\\', 'Templates');
         Blade::componentNamespace('App\\Blocks\\', 'Blocks');
         Blade::componentNamespace('App\\Templates\\', 'Templates');
 

@@ -5,9 +5,7 @@
  */
 return [
     'available_blocks' => [
-        'header' => \Sitebrew\Blocks\View\Blocks\Header::class,
     ],
     'available_templates' => [
-        'floating-homepage' => \Sitebrew\Blocks\View\Blocks\Templates\FloatingHomepage::class,
     ],
 ];
