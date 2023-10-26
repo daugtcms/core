@@ -1,5 +1,5 @@
 <div>
-    <div class="w-full bg-neutral-50 flex justify-between p-2 border-b-2 border-neutral-200">
+    <x-site-core::layouts.dashboard-bar>
         <x-site-core::core.tabs>
             @foreach($navigations as $navigation)
                 <x-site-core::core.tabs.item
@@ -16,7 +16,7 @@
             {{__('site-core::general.add')}}
             @svg('plus', 'w-5 h-5')
         </x-site-core::core.button>
-    </div>
+    </x-site-core::layouts.dashboard-bar>
     @if($currentNavigation)
         <div class="text-neutral-700 block flex-col overflow-y-auto p-2 max-w-3xl mx-auto">
 
@@ -34,7 +34,6 @@
                             style="danger"
                             wire:click="deleteNavigation({{$currentNavigation->id}})"
                             onclick="confirm('{{__('site-core::navigation.delete_navigation_confirmation')}}') || event.stopImmediatePropagation()">@svg('trash-2', 'w-5 h-5'){{__('site-core::general.delete')}}</x-site-core::core.button>
-
                 </div>
             </div>
 
@@ -112,7 +111,7 @@
                 @endforeach
             </ul>
             <div class="flex flex-col">
-                <x-site-core::core.button class="w-72 mt-3" style="secondary-light" wire:click="addItem()" x-data
+                <x-site-core::core.button class="w-72 mt-3" style="light" wire:click="addItem()" x-data
                                           x-mousetrap.n="$wire.addItem()"
                                           :disabled="!$errors->isEmpty()">
                     @svg('plus')

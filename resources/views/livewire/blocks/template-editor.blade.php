@@ -1,13 +1,14 @@
 <div>
-    <div class="w-full bg-neutral-50 flex justify-between items-center py-2 px-3 border-b-2 border-neutral-200">
+    <x-site-core::layouts.dashboard-bar>
         <h1 class="text-lg font-medium text-neutral-800">{{__('site-core::blocks.template_editor')}}</h1>
+
         <x-site-core::core.button
                 wire:click="$dispatch('openModal', { component: 'site-core::blocks.edit-template' })"
                 class="flex-shrink-0 ml-2">
             {{__('site-core::general.add')}}
             @svg('plus', 'w-5 h-5')
         </x-site-core::core.button>
-    </div>
+    </x-site-core::layouts.dashboard-bar>
     <div class="max-w-3xl mx-auto p-3">
         <ul role="list" class="divide-y divide-gray-100">
             @foreach($templates as $template)
@@ -21,7 +22,7 @@
                         </div>
                     </div>
                     <div class="flex flex-none items-center gap-x-2 w-full sm:w-auto mt-1">
-                        <x-site-core::core.button style="secondary-light" class="flex-grow"
+                        <x-site-core::core.button style="light" class="flex-grow"
                                                   wire:click="$dispatch('openModal', { component: 'site-core::blocks.edit-template', arguments: { template: {{$template->id}} } })">
                             {{__('site-core::general.edit')}}
                             @svg('pencil', 'w-4 h-4')

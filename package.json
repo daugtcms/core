@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "devDependencies": {
+    "alpinejs": "^3.13.1",
     "@alpinejs/focus": "^3.13.0",
     "@alpinejs/intersect": "^3.13.0",
     "@awcodes/alpine-floating-ui": "^3.5.0",

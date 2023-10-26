@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Felixbeer\SiteCore\Navigation\Models\Navigation;
+
 if (! function_exists('svg')) {
     function svg(string $path, $class = '', array $attributes = []): string
     {
@@ -48,5 +50,12 @@ if (! function_exists('collection_compare')) {
         }
 
         return true;
+    }
+}
+
+if (! function_exists('get_navigation_items')) {
+    function get_navigation_items($navigationId)
+    {
+        return Navigation::findOrFail($navigationId)->items;
     }
 }

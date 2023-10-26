@@ -1,13 +1,231 @@
-import {Alpine} from '../../vendor/livewire/livewire/dist/livewire.esm'
-import { Editor } from '@tiptap/core'
-import StarterKit from '@tiptap/starter-kit'
+window.blockeditor = (config) => {
+    return {
+        iframe: null,
+        
+        insert: false,
 
-document.addEventListener('alpine:init', () => {
-    Alpine.data('blockEditor', (content) => {
-        return {
-            sidebarOpen: true,
-            init() {
-            },
-        }
-    })
-})
+        mobile: false,
+
+        sidebarOpen: true,
+
+        lastTopPos: 0,
+
+        cursorPos: 0,
+
+        currentDragItem: null,
+
+        insertBeforeClasses: ['after:opacity-100', 'after:top-0', 'after:h-[5px]'],
+
+        insertAfterClasses: ['after:opacity-100', 'after:bottom-0', 'after:h-[5px]'],
+
+        init() {
+            Object.keys(config).forEach((index) => {
+                this[index] = config[index];
+            });
+
+            this.iframe = document.getElementById("frame");
+
+            // document.addEventListener('keydown', (e) => this.undo(e, this));
+            // document.addEventListener('keydown', (e) => this.redo(e, this));
+
+            this.initListeners()
+
+            this.iframe.addEventListener("load", () => {
+                this.initListeners()
+
+                // this.iframe.contentWindow.scrollTo(0, this.lastTopPos)
+            })
+        },
+
+        initListeners() {
+            let root = this.iframe.contentWindow.document;
+
+            // root.addEventListener('keydown', (e) => this.undo(e, this));
+            // root.addEventListener('keydown', (e) => this.redo(e, this));
+
+            root.querySelectorAll('[drop-placeholder]').forEach(el => {
+                /*el.addEventListener('dragover', e => e.preventDefault())
+
+                el.addEventListener('dragenter', e => {
+                    e.preventDefault()
+
+                    e.target.classList.add('bg-neutral-200/50', 'animate-pulse');
+                })
+
+                el.addEventListener('dragleave', e => {
+                    e.preventDefault()
+
+                    e.target.classList.remove('bg-neutral-200/50', 'animate-pulse');
+                })
+
+                el.addEventListener('drop', e => {
+                    e.preventDefault
+
+                    if (!e.target.closest('[drop-placeholder]')) {
+                        return;
+                    }
+
+                    let insertingEl = document.querySelector('[inserting]')
+
+                    if (insertingEl != null) {
+                        this.component().call('insertBlock', insertingEl.dataset.block, 0)
+
+                        insertingEl.removeAttribute('inserting')
+
+                        insertingEl = false;
+
+                        return
+                    }
+                })*/
+            })
+
+            root.querySelectorAll('[drag-item]').forEach(el => {
+                el.addEventListener('click', e => {
+                    this.sidebarOpen = true;
+                    Livewire.dispatch('blockSelected', {
+                        uuid: e.target.closest('[drag-item]').dataset.block
+                    });
+                }, false)
+
+                el.addEventListener('dragstart', e => {
+                    e.target.setAttribute('dragging', true)
+                    this.currentDragItem = el
+                })
+
+                el.addEventListener('dragover', e => {
+                    e.preventDefault()
+
+                    let dragitem = e.target.closest('[drag-item]')
+
+                    if (this.currentDragItem === dragitem) {
+                        return;
+                    }
+
+                    let placement = this.beforeOrAfterEl(e, dragitem)
+                    let isPreviousSibling = this.currentDragItem != null ? this.currentDragItem.previousElementSibling : false;
+                    let isNextSibling = this.currentDragItem != null ? this.currentDragItem.nextElementSibling : false;
+
+                    if (dragitem !== isNextSibling && placement === 'before') {
+                        dragitem.classList.remove(...this.insertAfterClasses);
+                        dragitem.classList.add(...this.insertBeforeClasses);
+
+                    } else if (dragitem !== isPreviousSibling && placement === 'after') {
+                        dragitem.classList.remove(...this.insertBeforeClasses);
+                        dragitem.classList.add(...this.insertAfterClasses);
+
+                    } else {
+                        dragitem.classList.remove(...this.insertBeforeClasses, ...this.insertAfterClasses);
+                    }
+                })
+
+                el.addEventListener('dragend', e => {
+                    e.target.removeAttribute('dragging')
+                    this.currentDragItem = null
+                })
+
+                el.addEventListener('dragenter', e => {
+                    if (e.target.hasAttribute('drag-item')) {
+                        e.target.setAttribute('is-target', true)
+                    }
+                })
+
+                el.addEventListener('dragleave', e => {
+                    e.preventDefault
+
+                    if (e.target.hasAttribute('is-target')) {
+                        e.target.classList.remove(...this.insertAfterClasses, ...this.insertBeforeClasses);
+                    }
+                })
+
+                el.addEventListener('drop', e => {
+                    e.preventDefault
+
+                    let draggingEl = root.querySelector('[dragging]')
+                    let insertingEl = document.querySelector('[inserting]')
+
+                    if (!e.target.closest('[drag-item]')) {
+                        return;
+                    }
+
+                    if (e.target.hasAttribute('drag-item')) {
+                        e.target.classList.remove(...this.insertAfterClasses, ...this.insertBeforeClasses);
+                    }
+
+                    this.lastTopPos = root.documentElement.scrollTop
+
+                    let placement = this.beforeOrAfterEl(e, e.target.closest('[drag-item]'))
+
+                    if (insertingEl != null) {
+                        this.component().call('insertBlock', insertingEl.dataset.block, e.target.closest('[drag-item]').dataset.block, placement)
+
+                        insertingEl.removeAttribute('inserting')
+
+                        insertingEl = false;
+
+                        return;
+                    }
+
+                    if (placement === 'after') {
+                        e.target.closest('[drag-item]').after(draggingEl)
+                    } else {
+                        e.target.closest('[drag-item]').before(draggingEl)
+                    }
+
+                    let orderIds = Array.from(root.querySelectorAll('[drag-item]'))
+                        .map(itemEl => itemEl.dataset.block)
+
+                    this.component().call('reorder', orderIds)
+                })
+            })
+        },
+
+        isBefore(container, target, current) {
+            let targetFound = false;
+            let currentFound = false;
+            let before = false;
+
+            container.querySelectorAll('[drag-item]').forEach(el => {
+                if (before) {
+                    return;
+                }
+
+                targetFound = targetFound ? true : el == target;
+                currentFound = currentFound ? true : el == current;
+
+                if (targetFound === false && currentFound === true) {
+                    before = true;
+                    return;
+                }
+            })
+
+            return before;
+        },
+
+        beforeOrAfterEl(e, el) {
+            let bounding = el.getBoundingClientRect()
+
+            let upperHalfStart = bounding.y;
+            let upperHalfEnd = upperHalfStart + (bounding.height / 2);
+
+            let bottomHalfStart = upperHalfEnd;
+            let bottomHalfEnd = bottomHalfStart + (bounding.height / 2)
+
+            let isTopHalf = e.clientY >= upperHalfStart && e.clientY <= upperHalfEnd
+            let isBottomHalf = e.clientY >= bottomHalfStart && e.clientY <= bottomHalfEnd
+
+            if (isTopHalf) {
+                return 'before'
+            } else if (isBottomHalf) {
+                return 'after'
+            }
+
+            return false
+        },
+
+        component() {
+            return Livewire.find(
+                frame.closest('[wire\\:id]').getAttribute('wire:id')
+            );
+        },
+    }
+}

@@ -15,6 +15,7 @@ return [
     'name' => 'Name',
     'description' => 'Beschreibung',
     'url' => 'URL',
+    'content' => 'Inhalt',
     'icon' => 'Symbol',
     'viewName' => 'View Name',
 

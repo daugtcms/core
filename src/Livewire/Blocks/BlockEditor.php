@@ -2,30 +2,81 @@
 
 namespace Felixbeer\SiteCore\Livewire\Blocks;
 
+use Felixbeer\SiteCore\Blocks\BlockEditorSidebar;
+use Felixbeer\SiteCore\Blocks\BlocksRenderer;
+use Felixbeer\SiteCore\Blocks\BlockSynth;
+use Felixbeer\SiteCore\Blocks\Data\BlockData;
+use Felixbeer\SiteCore\Blocks\Data\BlockEditorData;
+use Felixbeer\SiteCore\Blocks\Data\TemplateData;
+use Felixbeer\SiteCore\Blocks\Models\Template;
 use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
-use Felixbeer\SiteCore\Blocks\View\Blocks\Header;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class BlockEditor extends Component
 {
+    public $listeners = [
+        'blockSelected' => 'setActiveBlock',
+    ];
+
     public $title = '';
 
-    public $currentlyEditingBlock = false;
+    public BlockEditorSidebar $sidebarState = BlockEditorSidebar::TEMPLATE;
 
     public Collection $blocks;
 
     public ?Block $activeBlock;
 
-    public function mount()
+    public Collection $templates;
+
+    public Template $template;
+
+    public Block $templateBlock;
+
+    public function mount(array $data = null, $templates = null)
     {
-        $this->blocks = collect([new Header()]);
+
+        if (empty($this->templates)) {
+            $this->templates = Template::all();
+        }
+
+        $this->template = $this->templates[0];
+
+        $this->restoreState($data);
     }
 
-    #[Layout('site-core::components.layouts.app')]
+    public function restoreState(array $data)
+    {
+        if (isset($data['template'])) {
+            $templateData = TemplateData::from($data['template']);
+            $this->template = Template::findOrFail($templateData->template);
+            $templateAttributes = Arr::collapse([$this->template->data, $templateData->attributes]);
+        } else {
+            $this->template = $this->templates[0];
+            $templateAttributes = $this->template->data;
+        }
+
+        $this->templateBlock = new (config('site-core.available_templates')[$this->template->view_name])(...$templateAttributes);
+
+        if (isset($data['blocks'])) {
+            $this->blocks = collect($data['blocks'])->map(function ($block) {
+                $blockClass = $block['block'];
+                $blockAttributes = $block['attributes'];
+
+                data_forget($blockAttributes, 'uuid');
+                $newBlock = new $blockClass(...$blockAttributes);
+                $newBlock->uuid = $block['attributes']['uuid'];
+
+                return $newBlock;
+            });
+        } else {
+            $this->blocks = collect([]);
+        }
+    }
+
     public function render()
     {
         if (empty($this->title)) {
@@ -34,7 +85,38 @@ class BlockEditor extends Component
 
         return view('site-core::livewire.blocks.block-editor', [
             'availableBlocks' => config('site-core.available_blocks'),
+            'viewContent' => BlocksRenderer::fromTemplate($this->templateBlock, $this->blocks)->render(),
         ]);
+    }
+
+    public function save()
+    {
+        $attributes = [];
+
+        BlockSynth::getAvailableBlockProperties($this->templateBlock)->map(function ($property) use (&$attributes) {
+            $propertyName = $property->getName();
+            $propertyValue = $this->templateBlock->$propertyName;
+            if ($propertyName != 'uuid' && $propertyValue != $this->template->data[$propertyName]) {
+                $attributes[$propertyName] = $propertyValue;
+            }
+        });
+
+        $template = new TemplateData($this->template->id, $attributes);
+
+        $blocks = BlockData::collection([]);
+        $this->blocks->map(function ($block) use (&$blocks) {
+            $attributes = [];
+
+            BlockSynth::getAvailableBlockProperties($block)->map(function ($property) use ($block, &$attributes) {
+                $propertyName = $property->getName();
+                $propertyValue = $block->$propertyName;
+                $attributes[$propertyName] = $propertyValue;
+            });
+
+            $blocks[] = new BlockData(get_class($block), $attributes);
+        })->values();
+
+        $this->dispatch('save-blocks', (new BlockEditorData($template, $blocks))->toArray());
     }
 
     public function updated($name, $value)
@@ -47,7 +129,6 @@ class BlockEditor extends Component
 
                 return $block;
             });
-            $this->dispatch('$refresh');
         }
     }
 
@@ -66,7 +147,7 @@ class BlockEditor extends Component
     public function setActiveBlock(string $uuid)
     {
         $this->activeBlock = $this->blocks->firstWhere('uuid', $uuid);
-        $this->currentlyEditingBlock = true;
+        $this->sidebarState = BlockEditorSidebar::BLOCK;
     }
 
     public function removeBlock(string $uuid)
@@ -82,6 +163,22 @@ class BlockEditor extends Component
         // setting the active block to a new instance of Block to prevent Livewire from throwing an error and crashing
         // hence also the introduction of the helper boolean
         $this->activeBlock = new Block();
-        $this->currentlyEditingBlock = false;
+        $this->sidebarState = BlockEditorSidebar::TEMPLATE;
+    }
+
+    public function setSidebarState(string $state)
+    {
+        $state = BlockEditorSidebar::from($state);
+        if ($state != BlockEditorSidebar::BLOCK) {
+            $this->unsetActiveBlock(false);
+        }
+        $this->sidebarState = $state;
+    }
+
+    public function reorder($list)
+    {
+        $this->blocks = collect($list)->map(function ($uuid) {
+            return $this->blocks->firstWhere('uuid', $uuid);
+        });
     }
 }

@@ -6,10 +6,16 @@
     @endisset
     @switch($attribute['type']->value)
         @case('text')
+        @case('number')
         @case('image')
             <x-site-core::form.input class="w-full mt-1" type="text"
                                      placeholder="{{Str::ucfirst($attribute['type']->value)}}" {{ $attributes }}>
             </x-site-core::form.input>
+            @break
+        @case('boolean')
+            <div class="pt-1 -mb-2">
+                <x-site-core::form.checkbox {{$attributes}}>{{$attribute['title']}}</x-site-core::form.checkbox>
+            </div>
             @break
         @case('navigation')
             @php

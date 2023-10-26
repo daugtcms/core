@@ -2,12 +2,13 @@
 
 namespace Felixbeer\SiteCore\Blocks;
 
-use Livewire\Mechanisms\HandleComponents\Synthesizers\Synth;
 use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
+use Livewire\Mechanisms\HandleComponents\Synthesizers\Synth;
 
 class BlockSynth extends Synth
 {
     public static $ignoredProperties = ['attributes', 'componentName'];
+
     public static $key = 'block';
 
     public static function match($target)
@@ -19,7 +20,7 @@ class BlockSynth extends Synth
     {
         $properties = self::getAvailableBlockProperties($target);
 
-        $mapped =  $properties->mapWithKeys(function ($property) use ($target) {
+        $mapped = $properties->mapWithKeys(function ($property) use ($target) {
             $key = $property->getName();
             $value = $target->{$key};
 
@@ -33,6 +34,16 @@ class BlockSynth extends Synth
         $mapped->put('block', get_class($target));
 
         return [$mapped->toArray(), []];
+    }
+
+    public static function getAvailableBlockProperties($target)
+    {
+        $reflect = new \ReflectionClass($target);
+        $properties = collect($reflect->getProperties());
+
+        return $properties->filter(function ($property) {
+            return $property->isPublic() && ! $property->isStatic() && ! in_array($property->getName(), self::$ignoredProperties);
+        });
     }
 
     public function hydrate($value)
@@ -53,14 +64,6 @@ class BlockSynth extends Synth
         });
 
         return $instance;
-    }
-
-    public static function getAvailableBlockProperties($target) {
-        $reflect = new \ReflectionClass($target);
-        $properties = collect($reflect->getProperties());
-        return $properties->filter(function ($property) {
-            return $property->isPublic() && !$property->isStatic() && !in_array($property->getName(), self::$ignoredProperties);
-        });
     }
 
     public function get(&$target, $key)

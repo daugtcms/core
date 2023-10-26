@@ -11,4 +11,5 @@ return [
     'template_editor' => 'Template Editor',
     'manage_template' => 'Template verwalten',
     'attributes' => 'Attribute',
+    'open_block_editor' => 'Block Editor öffnen',
 ];

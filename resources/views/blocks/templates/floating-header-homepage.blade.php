@@ -1,19 +1,52 @@
-<nav x-data="{ open: false }" class="border-b border-neutral-100 bg-primary-700">
+@if(!$transparentNavigation)
+    <div class="h-20"></div>
+@else
+    <div class="fixed h-24 w-full top-0 bg-gradient-to-b from-black/40 to-transparent transition-opacity duration-500 z-10"
+         x-data="{ showShadow: true }"
+         :class="{
+            'opacity-100': showShadow,
+            'opacity-0': !showShadow,
+        }"
+         @scroll.window="showShadow = window.scrollY < 20"
+    ></div>
+@endif
+
+
+<nav x-data="{ open: false, showBackground: {{$transparentNavigation ? 'false' : 'true'}} }"
+     class="pt-3 fixed w-full top-0 z-50 px-3"
+     @if($transparentNavigation)
+         @scroll.window="showBackground = window.scrollY > 20"
+        @endif>
     <!-- Primary Navigation Menu -->
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+    <div class=""
+         :class="{
+            'px-4 mx-auto container rounded-lg transition-color duration-300': true,
+            'bg-primary-700 shadow-primary-700/30  shadow-lg': showBackground,
+        }">
+        <div class="flex justify-between h-full">
+            <div class="flex items-center">
                 <!-- Logo -->
-                <div class="flex items-center shrink-0">
+                <div class="flex items-center shrink-0 h-16 py-3">
                     <a href="#_"
-                       class="flex items-center mb-5 font-medium text-gray-900 lg:w-auto lg:items-center lg:justify-center md:mb-0">
+                       class="h-full">
                         <img src="{{ $logo ?: 'https://media.felix.beer/temp/hilde-logo.svg'}}" alt="logo"
-                             class="h-10 mr-3 sm:h-12">
+                             class="h-full mr-3">
                     </a>
                 </div>
 
+                <div class="border-l-2 border-white/50 h-10 mx-2"></div>
+
                 <!-- Navigation Links -->
-                <div class="hidden space-x-3 md:-my-px md:ml-5 md:flex">
+                <div class="hidden h-full md:inline-flex">
+                    @foreach(get_navigation_items((int)$mainNavigation) as $item)
+                        <a href="{{$item->url}}"
+                           target="{{$item->target}}"
+                           class="group text-white flex items-center h-full box-border border-b-[3px] border-transparent hover:border-primary-300 text-lg font-medium px-1">
+                            <div class="rounded-md group-hover:bg-white/10 -mb-1 px-2.5 py-1">
+                                {{$item->name}}
+                            </div>
+                        </a>
+                    @endforeach
                     {{--<x-nav-link :href="route('welcome')"
                                 :active="str_contains(request()->route()->getName(),'welcome')">
                         {{ __('Home') }}
@@ -38,7 +71,9 @@
                     @endadmin--}}
                 </div>
             </div>
-
+            <div class="flex items-center">
+                <x-site-core::core.button style="secondary">Login</x-site-core::core.button>
+            </div>
             <!-- Settings Dropdown -->
             {{--<div class="flex items-center space-x-3">
                 @auth
@@ -189,4 +224,4 @@
         </div>
     </div>--}}
 </nav>
-{{$slot}}
+{!! $slot !!}

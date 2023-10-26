@@ -7,14 +7,15 @@ export default defineConfig({
             output: {
                 entryFileNames: `assets/[name].js`,
                 chunkFileNames: `assets/[name].js`,
-                assetFileNames: `assets/[name].[ext]`
+                assetFileNames: `assets/[name].[ext]`,
+                manualChunks: {}
             }
         },
-        minify: true
+        minify: false
     },
     plugins: [
         laravel({
-            input: ['resources/js/app.js'],
+            input: ['resources/js/app.js', 'resources/js/stripped.js'],
             refresh: true,
         }),
     ],
