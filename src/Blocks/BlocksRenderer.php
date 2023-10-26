@@ -1,10 +1,10 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks;
+namespace Sitebrew\Blocks;
 
-use Felixbeer\SiteCore\Blocks\Data\TemplateData;
-use Felixbeer\SiteCore\Blocks\Models\Template;
-use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
+use Sitebrew\Blocks\Data\TemplateData;
+use Sitebrew\Blocks\Models\Template;
+use Sitebrew\Blocks\View\Blocks\Block;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -39,7 +39,7 @@ class BlocksRenderer extends Component
             //$templateAttributes = $this->template->data;
         }
 
-        $this->templateBlock = new (config('site-core.available_templates')[$template->view_name])(...$templateAttributes);
+        $this->templateBlock = new (config('sitebrew.available_templates')[$template->view_name])(...$templateAttributes);
         if (isset($data['blocks'])) {
             $this->blocks = collect($data['blocks'])->map(function ($block) {
                 $blockClass = $block['block'];
@@ -73,7 +73,7 @@ class BlocksRenderer extends Component
             $slot = Blade::render($block::getMetadata()['viewName'], $block->getAttributeValues());
 
             if ($this->context === 'editor') {
-                return Blade::render("<x-site-core::blocks.block-item uuid=\"$block->uuid\">$slot</x-site-core::blocks.block-item>");
+                return Blade::render("<x-sitebrew::blocks.block-item uuid=\"$block->uuid\">$slot</x-sitebrew::blocks.block-item>");
             } else {
                 return $slot;
             }
@@ -83,13 +83,13 @@ class BlocksRenderer extends Component
         if (! $blocks->isEmpty()) {
             $content = $blocks->implode("\n");
             if ($this->context === 'editor') {
-                $content = Blade::render("<x-site-core::blocks.block-list>$content</x-site-core::blocks.block-list>");
+                $content = Blade::render("<x-sitebrew::blocks.block-list>$content</x-sitebrew::blocks.block-list>");
             }
         }
 
         $slot = Blade::render($this->templateBlock::getMetadata()['viewName'], $this->templateBlock->getAttributeValues() + ['slot' => $content]);
         if ($this->context === 'editor') {
-            return Blade::render("<x-site-core::layouts.base>$slot</x-site-core::layouts.base>");
+            return Blade::render("<x-sitebrew::layouts.base>$slot</x-sitebrew::layouts.base>");
         } else {
             return $slot;
         }

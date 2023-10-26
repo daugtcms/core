@@ -1,15 +1,15 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\View\Blocks;
+namespace Sitebrew\Blocks\View\Blocks;
 
-use Felixbeer\SiteCore\Blocks\AttributeType;
+use Sitebrew\Blocks\AttributeType;
 
 class ThreeCenterAlignedImagesWithContent extends Block
 {
     public static array $metadata = [
         'name' => 'Three Center Aligned Images With Content',
         'description' => 'Images on the left growing from small to large with text on the right',
-        'viewName' => 'site-core::blocks.three-center-aligned-images-with-content',
+        'viewName' => 'sitebrew::blocks.three-center-aligned-images-with-content',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

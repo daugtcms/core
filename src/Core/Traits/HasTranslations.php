@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Core\Traits;
+namespace Sitebrew\Core\Traits;
 
 use Spatie\Translatable\HasTranslations as BaseHasTranslations;
 

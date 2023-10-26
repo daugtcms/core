@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Auth\Controllers;
+namespace Sitebrew\Auth\Controllers;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\SiteCoreRouteServiceProvider;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Http\Request;
 
 class EmailVerificationPromptController extends Controller
@@ -16,7 +16,7 @@ class EmailVerificationPromptController extends Controller
     public function __invoke(Request $request)
     {
         return $request->user()->hasVerifiedEmail()
-            ? redirect()->intended(SiteCoreRouteServiceProvider::HOME)
-            : view('site-core::auth.verify-email');
+            ? redirect()->intended(SitebrewRouteServiceProvider::HOME)
+            : view('sitebrew::auth.verify-email');
     }
 }

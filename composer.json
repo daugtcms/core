@@ -1,11 +1,11 @@
 {
-  "name": "felixbeer/site-core",
+  "name": "felixbeer/sitebrew",
   "description": "",
   "keywords": [
     "felixbeer",
-    "site-core"
+    "sitebrew"
   ],
-  "homepage": "https://github.com/felixbeer/site-core",
+  "homepage": "https://github.com/felixbeer/sitebrew",
   "license": "MIT",
   "type": "library",
   "authors": [
@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Felixbeer\\SiteCore\\": "src"
+      "Sitebrew\\": "src"
     },
     "files": [
       "src/helpers.php"
@@ -41,7 +41,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Felixbeer\\SiteCore\\Tests\\": "tests"
+      "Sitebrew\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -54,11 +54,11 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Felixbeer\\SiteCore\\SiteCoreServiceProvider",
-        "Felixbeer\\SiteCore\\SiteCoreBladeServiceProvider"
+        "Sitebrew\\SitebrewServiceProvider",
+        "Sitebrew\\SitebrewBladeServiceProvider"
       ],
       "aliases": {
-        "SiteCore": "Felixbeer\\SiteCore\\SiteCoreFacade"
+        "Sitebrew": "Sitebrew\\SitebrewFacade"
       }
     }
   }

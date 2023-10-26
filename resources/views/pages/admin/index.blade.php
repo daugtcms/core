@@ -1,5 +1,5 @@
-<x-site-core::layouts.app>
+<x-sitebrew::layouts.app>
     <div class="mx-auto max-w-7xl sm:px-4 ">
-        <livewire:site-core::pages.pages-table></livewire:site-core::pages.pages-table>
+        <livewire:sitebrew::pages.pages-table></livewire:sitebrew::pages.pages-table>
     </div>
-</x-site-core::layouts.app>
+</x-sitebrew::layouts.app>

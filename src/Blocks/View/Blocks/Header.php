@@ -1,15 +1,15 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\View\Blocks;
+namespace Sitebrew\Blocks\View\Blocks;
 
-use Felixbeer\SiteCore\Blocks\AttributeType;
+use Sitebrew\Blocks\AttributeType;
 
 class Header extends Block
 {
     public static array $metadata = [
         'name' => 'Header',
         'description' => 'A simple header block',
-        'viewName' => 'site-core::blocks.header',
+        'viewName' => 'sitebrew::blocks.header',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

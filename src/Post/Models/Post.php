@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Post\Models;
+namespace Sitebrew\Post\Models;
 
-use Felixbeer\SiteCore\Core\Models\User;
+use Sitebrew\Core\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Plank\Mediable\Mediable;
 use Spatie\Sluggable\HasSlug;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\Models;
+namespace Sitebrew\Blocks\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

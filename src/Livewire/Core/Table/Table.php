@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire\Core\Table;
+namespace Sitebrew\Livewire\Core\Table;
 
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
@@ -20,6 +20,6 @@ abstract class Table extends Component
 
     public function render()
     {
-        return view('site-core::livewire.core.table.table');
+        return view('sitebrew::livewire.core.table.table');
     }
 }

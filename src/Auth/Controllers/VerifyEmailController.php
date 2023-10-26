@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Auth\Controllers;
+namespace Sitebrew\Auth\Controllers;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\SiteCoreRouteServiceProvider;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -17,13 +17,13 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(SiteCoreRouteServiceProvider::HOME.'?verified=1');
+            return redirect()->intended(SitebrewRouteServiceProvider::HOME.'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(SiteCoreRouteServiceProvider::HOME.'?verified=1');
+        return redirect()->intended(SitebrewRouteServiceProvider::HOME.'?verified=1');
     }
 }

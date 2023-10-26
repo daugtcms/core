@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\View\Blocks;
+namespace Sitebrew\Blocks\View\Blocks;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -14,7 +14,7 @@ class Block extends Component
     public static array $metadata = [
         'name' => 'Example Block',
         'description' => 'A basic example of what a block looks like',
-        'viewName' => 'site-core::blocks.block',
+        'viewName' => 'sitebrew::blocks.block',
         'attributes' => [
         ],
     ];

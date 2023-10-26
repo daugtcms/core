@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire\Navigation;
+namespace Sitebrew\Livewire\Navigation;
 
-use Felixbeer\SiteCore\Navigation\Data\NavigationItemData;
-use Felixbeer\SiteCore\Navigation\Models\Navigation;
+use Sitebrew\Navigation\Data\NavigationItemData;
+use Sitebrew\Navigation\Models\Navigation;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
@@ -37,7 +37,7 @@ class NavigationEditor extends Component
         $this->validate();
     }
 
-    #[Layout('site-core::components.layouts.app')]
+    #[Layout('sitebrew::components.layouts.app')]
     public function render()
     {
         $navigations = Navigation::all();
@@ -48,7 +48,7 @@ class NavigationEditor extends Component
             });
         }
 
-        return view('site-core::livewire.navigation.navigation-editor', [
+        return view('sitebrew::livewire.navigation.navigation-editor', [
             'navigations' => $navigations,
         ]);
     }

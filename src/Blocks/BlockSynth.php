@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks;
+namespace Sitebrew\Blocks;
 
-use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
+use Sitebrew\Blocks\View\Blocks\Block;
 use Livewire\Mechanisms\HandleComponents\Synthesizers\Synth;
 
 class BlockSynth extends Synth

@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire\Blocks;
+namespace Sitebrew\Livewire\Blocks;
 
-use Felixbeer\SiteCore\Blocks\Models\Template;
-use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
+use Sitebrew\Blocks\Models\Template;
+use Sitebrew\Blocks\View\Blocks\Block;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
 use LivewireUI\Modal\ModalComponent;
@@ -39,7 +39,7 @@ class EditTemplate extends ModalComponent
 
     private function updateViewName()
     {
-        $view_name = config('site-core.available_templates')[$this->view_name];
+        $view_name = config('sitebrew.available_templates')[$this->view_name];
         $this->templateBlock = new $view_name();
     }
 
@@ -77,7 +77,7 @@ class EditTemplate extends ModalComponent
     public function render()
     {
 
-        return view('site-core::livewire.blocks.edit-template', [
+        return view('sitebrew::livewire.blocks.edit-template', [
 
         ]);
     }

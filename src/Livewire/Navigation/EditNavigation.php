@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire\Navigation;
+namespace Sitebrew\Livewire\Navigation;
 
-use Felixbeer\SiteCore\Navigation\Models\Navigation;
+use Sitebrew\Navigation\Models\Navigation;
 use Livewire\Attributes\Rule;
 use LivewireUI\Modal\ModalComponent;
 
@@ -48,7 +48,7 @@ class EditNavigation extends ModalComponent
     public function render()
     {
 
-        return view('site-core::livewire.navigation.edit-navigation', [
+        return view('sitebrew::livewire.navigation.edit-navigation', [
 
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks;
+namespace Sitebrew\Blocks;
 
 enum BlockEditorSidebar: string
 {

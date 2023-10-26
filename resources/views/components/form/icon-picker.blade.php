@@ -26,13 +26,13 @@
                     <p x-text="selectedIcon"
                        class="leading-tight truncate"></p>
                 </div>
-                <x-site-core::core.icon-button icon="x" class="mr-0.5"
+                <x-sitebrew::core.icon-button icon="x" class="mr-0.5"
                                                @click="selectedIcon = ''; $event.stopImmediatePropagation()">
-                </x-site-core::core.icon-button>
+                </x-sitebrew::core.icon-button>
             </div>
         </template>
         <template x-if="!selectedIcon">
-            <p class="text-neutral-500 italic truncate py-1.5">{{__('site-core::general.no_icon_selected')}}</p>
+            <p class="text-neutral-500 italic truncate py-1.5">{{__('sitebrew::general.no_icon_selected')}}</p>
         </template>
     </button>
     <div x-ref="panel" class="absolute bg-white border-neutral-200 border shadow-md rounded-md h-128 w-full"
@@ -48,8 +48,8 @@
          }"
     >
         <div class="p-2">
-            <x-site-core::form.input @input="filterItems()" x-ref="input"
-                                     placeholder="{{__('site-core::general.search_items')}}"></x-site-core::form.input>
+            <x-sitebrew::form.input @input="filterItems()" x-ref="input"
+                                     placeholder="{{__('sitebrew::general.search_items')}}"></x-sitebrew::form.input>
         </div>
         <div class="flex flex-col h-64 overflow-y-auto divide-y-2 divide-neutral-100 text-neutral-800">
             <template x-for="icon in filteredIcons">

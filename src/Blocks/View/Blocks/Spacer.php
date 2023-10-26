@@ -1,15 +1,15 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\View\Blocks;
+namespace Sitebrew\Blocks\View\Blocks;
 
-use Felixbeer\SiteCore\Blocks\AttributeType;
+use Sitebrew\Blocks\AttributeType;
 
 class Spacer extends Block
 {
     public static array $metadata = [
         'name' => 'Spacer',
         'description' => 'Add space between blocks',
-        'viewName' => 'site-core::blocks.spacer',
+        'viewName' => 'sitebrew::blocks.spacer',
         'attributes' => [
             'height' => [
                 'type' => AttributeType::NUMBER,

@@ -1,3 +1,3 @@
-<x-site-core::layouts.base :title="$page->title">
-    <x-site-core::blocks-renderer :data="$page->blocks"></x-site-core::blocks-renderer>
-</x-site-core::layouts.base>
+<x-sitebrew::layouts.base :title="$page->title">
+    <x-sitebrew::blocks-renderer :data="$page->blocks"></x-sitebrew::blocks-renderer>
+</x-sitebrew::layouts.base>

@@ -1,13 +1,13 @@
 <?php
 
-namespace Felixbeer\SiteCore\Pages\Controllers\Admin;
+namespace Sitebrew\Pages\Controllers\Admin;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
+use Sitebrew\Core\Controllers\Controller;
 
 class ShowPagesController extends Controller
 {
     public function __invoke()
     {
-        return view('site-core::pages.admin.index');
+        return view('sitebrew::pages.admin.index');
     }
 }

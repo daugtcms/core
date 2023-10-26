@@ -1,6 +1,6 @@
 <?php
 
-use Felixbeer\SiteCore\Post\Models\Post;
+use Sitebrew\Post\Models\Post;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

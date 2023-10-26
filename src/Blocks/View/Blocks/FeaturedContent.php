@@ -1,15 +1,15 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\View\Blocks;
+namespace Sitebrew\Blocks\View\Blocks;
 
-use Felixbeer\SiteCore\Blocks\AttributeType;
+use Sitebrew\Blocks\AttributeType;
 
 class FeaturedContent extends Block
 {
     public static array $metadata = [
         'name' => 'Featured Content',
         'description' => 'A card with images, text and an action button',
-        'viewName' => 'site-core::blocks.featured-content',
+        'viewName' => 'sitebrew::blocks.featured-content',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

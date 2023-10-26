@@ -23,7 +23,7 @@
                     <div class="flex items-center shrink-0">
                         <a>
                             <div class="h-10">
-                                <x-site-core::core.sitecore-logo
+                                <x-sitebrew::core.sitebrew-logo
                                         class="block w-full h-full drop-shadow-md"/>
                             </div>
                         </a>
@@ -177,4 +177,3 @@
 
 @livewireScriptConfig
 </body>
-

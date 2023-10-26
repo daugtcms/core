@@ -1,10 +1,10 @@
 <?php
 
-namespace Felixbeer\SiteCore\Auth\Controllers;
+namespace Sitebrew\Auth\Controllers;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\Core\Models\User;
-use Felixbeer\SiteCore\SiteCoreRouteServiceProvider;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\Core\Models\User;
+use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(SiteCoreRouteServiceProvider::HOME);
+        return redirect(SitebrewRouteServiceProvider::HOME);
     }
 
     /**
@@ -52,6 +52,6 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('site-core::auth.register');
+        return view('sitebrew::auth.register');
     }
 }

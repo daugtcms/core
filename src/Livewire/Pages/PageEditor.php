@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire\Pages;
+namespace Sitebrew\Livewire\Pages;
 
-use Felixbeer\SiteCore\Pages\Models\Page;
+use Sitebrew\Pages\Models\Page;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
@@ -33,10 +33,10 @@ class PageEditor extends Component
         $this->blocks = $this->page->blocks ?? [];
     }
 
-    #[Layout('site-core::components.layouts.app')]
+    #[Layout('sitebrew::components.layouts.app')]
     public function render()
     {
-        return view('site-core::livewire.pages.page-editor');
+        return view('sitebrew::livewire.pages.page-editor');
     }
 
     #[On('save-blocks')]
@@ -63,6 +63,6 @@ class PageEditor extends Component
         $this->page->blocks = $this->blocks;
         $this->page->save();
 
-        $this->redirect(route('site-core.admin.pages.index'));
+        $this->redirect(route('sitebrew.admin.pages.index'));
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Pages\Controllers\Admin;
+namespace Sitebrew\Pages\Controllers\Admin;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\Pages\Models\Page;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\Pages\Models\Page;
 
 class DeletePageController extends Controller
 {

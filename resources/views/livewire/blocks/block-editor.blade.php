@@ -3,19 +3,19 @@
     <div class="bg-neutral-50 flex-grow flex flex-col">
         <div class="bg-white w-full h-12 flex items-center justify-between pl-2 pr-4 flex-shrink-0">
             <div class="flex items-center gap-x-1.5">
-                <x-site-core::core.icon-button icon="chevron-left"
-                                               wire:click="$dispatch('save-blocks')"></x-site-core::core.icon-button>
+                <x-sitebrew::core.icon-button icon="chevron-left"
+                                               wire:click="$dispatch('save-blocks')"></x-sitebrew::core.icon-button>
                 <h1 class="text-lg font-medium">{{$title}}</h1>
             </div>
             <div class="flex gap-x-2">
-                <x-site-core::core.icon-button icon="plus"
+                <x-sitebrew::core.icon-button icon="plus"
                                                @click="sidebarOpen = true"
-                                               wire:click="setSidebarState('{{\Felixbeer\SiteCore\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
-                ></x-site-core::core.icon-button>
-                <x-site-core::core.icon-button icon="save" style="primary"
+                                               wire:click="setSidebarState('{{\Sitebrew\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
+                ></x-sitebrew::core.icon-button>
+                <x-sitebrew::core.icon-button icon="save" style="primary"
                                                wire:click="save()"
-                                               x-tooltip.bottom="{{__('site-core::general.save')}}"
-                ></x-site-core::core.icon-button>
+                                               x-tooltip.bottom="{{__('sitebrew::general.save')}}"
+                ></x-sitebrew::core.icon-button>
             </div>
         </div>
         <div class="border-b-2 border-neutral-100"></div>
@@ -34,12 +34,12 @@
          x-transition:leave-end="transform translate-x-full"
     >
         @switch($sidebarState)
-            @case(\Felixbeer\SiteCore\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS)
+            @case(\Sitebrew\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <x-site-core::core.icon-button icon="chevron-left"
-                                                       wire:click="setSidebarState('{{\Felixbeer\SiteCore\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-site-core::core.icon-button>
-                        <p>{{__('site-core::blocks.available_blocks')}}</p>
+                        <x-sitebrew::core.icon-button icon="chevron-left"
+                                                       wire:click="setSidebarState('{{\Sitebrew\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-sitebrew::core.icon-button>
+                        <p>{{__('sitebrew::blocks.available_blocks')}}</p>
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                             <div class="absolute w-full h-full bg-black/30 inset-0 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <p class="text-white font-semibold inline-flex items-center gap-x-1">
                                     @svg('plus')
-                                    {{__('site-core::general.add')}}
+                                    {{__('sitebrew::general.add')}}
                                 </p>
                             </div>
                         </div>
@@ -76,12 +76,12 @@
                     })
                 </script>
                 @break
-            @case(\Felixbeer\SiteCore\Blocks\BlockEditorSidebar::BLOCK)
+            @case(\Sitebrew\Blocks\BlockEditorSidebar::BLOCK)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <x-site-core::core.icon-button icon="chevron-left"
-                                                       wire:click="unsetActiveBlock()"></x-site-core::core.icon-button>
-                        <p>{{__('site-core::blocks.editing_block')}}</p>
+                        <x-sitebrew::core.icon-button icon="chevron-left"
+                                                       wire:click="unsetActiveBlock()"></x-sitebrew::core.icon-button>
+                        <p>{{__('sitebrew::blocks.editing_block')}}</p>
                     </div>
                 </div>
                 <section id="active-block"
@@ -91,34 +91,34 @@
                     @endphp
 
                     @foreach($attributes as $key => $attribute)
-                        <x-site-core::blocks.attribute-input :key="$key"
+                        <x-sitebrew::blocks.attribute-input :key="$key"
                                                              wire:key="{{$activeBlock->uuid . $key}}"
                                                              :attribute="$attribute"
-                                                             wire:model.live.debounce.250ms="activeBlock.{{$key}}"></x-site-core::blocks.attribute-input>
+                                                             wire:model.live.debounce.250ms="activeBlock.{{$key}}"></x-sitebrew::blocks.attribute-input>
                     @endforeach
                 </section>
                 <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">
-                    <x-site-core::core.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
-                                              onclick="confirm('{{__('site-core::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
+                    <x-sitebrew::core.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
+                                              onclick="confirm('{{__('sitebrew::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
                         @svg('trash-2', 'w-5 h-5 mr-1')
-                        {{__('site-core::general.delete')}}</x-site-core::core.button>
+                        {{__('sitebrew::general.delete')}}</x-sitebrew::core.button>
                 </div>
                 @break
-            @case(\Felixbeer\SiteCore\Blocks\BlockEditorSidebar::TEMPLATE)
+            @case(\Sitebrew\Blocks\BlockEditorSidebar::TEMPLATE)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-3 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <p>{{__('site-core::blocks.manage_template')}}</p>
+                        <p>{{__('sitebrew::blocks.manage_template')}}</p>
                     </div>
                 </div>
                 <section id="active-block"
                          class="flex flex-col gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0">
 
                     @foreach($templateBlock->getMetadata()['attributes'] as $key => $attribute)
-                        <x-site-core::blocks.attribute-input :key="$key"
+                        <x-sitebrew::blocks.attribute-input :key="$key"
                                                              wire:key="{{$template->id . $key}}"
                                                              :attribute="$attribute"
                                                              placeholder="{{$template->data[$key]}}"
-                                                             wire:model.live="templateBlock.{{$key}}"></x-site-core::blocks.attribute-input>
+                                                             wire:model.live="templateBlock.{{$key}}"></x-sitebrew::blocks.attribute-input>
                     @endforeach
                 </section>
                 @break

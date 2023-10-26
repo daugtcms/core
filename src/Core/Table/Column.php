@@ -1,10 +1,10 @@
 <?php
 
-namespace Felixbeer\SiteCore\Core\Table;
+namespace Sitebrew\Core\Table;
 
 class Column
 {
-    public string $component = 'site-core::core.table.column';
+    public string $component = 'sitebrew::core.table.column';
 
     public string $key;
 

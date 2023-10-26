@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Navigation\Models;
+namespace Sitebrew\Navigation\Models;
 
-use Felixbeer\SiteCore\Core\Traits\HasTranslations;
+use Sitebrew\Core\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 
 class NavigationItem extends Model

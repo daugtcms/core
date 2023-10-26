@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Pages\Controllers;
+namespace Sitebrew\Pages\Controllers;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\Pages\Models\Page;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\Pages\Models\Page;
 
 class ShowPageController extends Controller
 {
@@ -11,6 +11,6 @@ class ShowPageController extends Controller
     {
         $page = Page::findBySlug($slug);
 
-        return view('site-core::pages.index', compact('page'));
+        return view('sitebrew::pages.index', compact('page'));
     }
 }

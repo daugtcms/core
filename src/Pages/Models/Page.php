@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Pages\Models;
+namespace Sitebrew\Pages\Models;
 
-use Felixbeer\SiteCore\Core\Traits\HasTranslations;
+use Sitebrew\Core\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;

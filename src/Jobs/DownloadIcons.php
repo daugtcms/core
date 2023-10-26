@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Jobs;
+namespace Sitebrew\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -24,7 +24,7 @@ class DownloadIcons implements ShouldQueue
     public function handle()
     {
         $this->icons->each(function ($icon) {
-            Storage::disk('public')->put($icon, Storage::disk('sitecore-media')->get($icon));
+            Storage::disk('public')->put($icon, Storage::disk('sitebrew-media')->get($icon));
         });
     }
 }

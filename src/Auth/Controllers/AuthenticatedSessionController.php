@@ -1,10 +1,10 @@
 <?php
 
-namespace Felixbeer\SiteCore\Auth\Controllers;
+namespace Sitebrew\Auth\Controllers;
 
-use Felixbeer\SiteCore\Auth\Requests\LoginRequest;
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\SiteCoreRouteServiceProvider;
+use Sitebrew\Auth\Requests\LoginRequest;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('site-core::auth.login');
+        return view('sitebrew::auth.login');
     }
 
     /**
@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(SiteCoreRouteServiceProvider::HOME);
+        return redirect()->intended(SitebrewRouteServiceProvider::HOME);
     }
 
     /**

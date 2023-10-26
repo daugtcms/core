@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Core\Controllers;
+namespace Sitebrew\Core\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

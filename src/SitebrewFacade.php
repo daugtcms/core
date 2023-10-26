@@ -1,13 +1,13 @@
 <?php
 
-namespace Felixbeer\SiteCore;
+namespace Sitebrew;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Felixbeer\SiteCore\Skeleton\SkeletonClass
+ * @see \Sitebrew\Skeleton\SkeletonClass
  */
-class SiteCoreFacade extends Facade
+class SitebrewFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class SiteCoreFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'site-core';
+        return 'sitebrew';
     }
 }

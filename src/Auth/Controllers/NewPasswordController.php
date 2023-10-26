@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Auth\Controllers;
+namespace Sitebrew\Auth\Controllers;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
+use Sitebrew\Core\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +19,7 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request)
     {
-        return view('site-core::auth.reset-password', ['request' => $request]);
+        return view('sitebrew::auth.reset-password', ['request' => $request]);
     }
 
     /**

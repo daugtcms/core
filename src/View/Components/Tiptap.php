@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\View\Components;
+namespace Sitebrew\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -21,6 +21,6 @@ class Tiptap extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('site-core::components.tiptap');
+        return view('sitebrew::components.tiptap');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire\Blocks;
+namespace Sitebrew\Livewire\Blocks;
 
-use Felixbeer\SiteCore\Blocks\Models\Template;
+use Sitebrew\Blocks\Models\Template;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -10,10 +10,10 @@ class TemplateEditor extends Component
 {
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    #[Layout('site-core::components.layouts.app')]
+    #[Layout('sitebrew::components.layouts.app')]
     public function render()
     {
-        return view('site-core::livewire.blocks.template-editor', [
+        return view('sitebrew::livewire.blocks.template-editor', [
             'templates' => Template::all(),
         ]);
     }

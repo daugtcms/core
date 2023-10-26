@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Auth\Controllers;
+namespace Sitebrew\Auth\Controllers;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\SiteCoreRouteServiceProvider;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -17,7 +17,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function show()
     {
-        return view('site-core::auth.confirm-password');
+        return view('sitebrew::auth.confirm-password');
     }
 
     /**
@@ -38,6 +38,6 @@ class ConfirmablePasswordController extends Controller
 
         $request->session()->put('auth.password_confirmed_at', time());
 
-        return redirect()->intended(SiteCoreRouteServiceProvider::HOME);
+        return redirect()->intended(SitebrewRouteServiceProvider::HOME);
     }
 }

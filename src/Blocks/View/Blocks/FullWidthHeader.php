@@ -1,15 +1,15 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\View\Blocks;
+namespace Sitebrew\Blocks\View\Blocks;
 
-use Felixbeer\SiteCore\Blocks\AttributeType;
+use Sitebrew\Blocks\AttributeType;
 
 class FullWidthHeader extends Block
 {
     public static array $metadata = [
         'name' => 'Full Width Header',
         'description' => 'A header block that spans across the entire width of the page',
-        'viewName' => 'site-core::blocks.full-width-header',
+        'viewName' => 'sitebrew::blocks.full-width-header',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

@@ -8,18 +8,18 @@
         @case('text')
         @case('number')
         @case('image')
-            <x-site-core::form.input class="w-full mt-1" type="text"
+            <x-sitebrew::form.input class="w-full mt-1" type="text"
                                      placeholder="{{Str::ucfirst($attribute['type']->value)}}" {{ $attributes }}>
-            </x-site-core::form.input>
+            </x-sitebrew::form.input>
             @break
         @case('boolean')
             <div class="pt-1 -mb-2">
-                <x-site-core::form.checkbox {{$attributes}}>{{$attribute['title']}}</x-site-core::form.checkbox>
+                <x-sitebrew::form.checkbox {{$attributes}}>{{$attribute['title']}}</x-sitebrew::form.checkbox>
             </div>
             @break
         @case('navigation')
             @php
-                \Felixbeer\SiteCore\Navigation\Models\Navigation::all()->each(function(\Felixbeer\SiteCore\Navigation\Models\Navigation $navigation) use (&$navigations){
+                \Sitebrew\Navigation\Models\Navigation::all()->each(function(\Sitebrew\Navigation\Models\Navigation $navigation) use (&$navigations){
                     $navigations[] = [
                         'value' => $navigation->id,
                         'title' => $navigation->name
@@ -27,7 +27,7 @@
                 });
                 $navigations = collect($navigations)->toJson()
             @endphp
-            <x-site-core::form.select :options="$navigations" {{ $attributes }}></x-site-core::form.select>
+            <x-sitebrew::form.select :options="$navigations" {{ $attributes }}></x-sitebrew::form.select>
             @break
     @endswitch
 </div>

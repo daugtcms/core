@@ -1,13 +1,13 @@
 <?php
 
-use Felixbeer\SiteCore\Auth\Controllers\AuthenticatedSessionController;
-use Felixbeer\SiteCore\Auth\Controllers\ConfirmablePasswordController;
-use Felixbeer\SiteCore\Auth\Controllers\EmailVerificationNotificationController;
-use Felixbeer\SiteCore\Auth\Controllers\EmailVerificationPromptController;
-use Felixbeer\SiteCore\Auth\Controllers\NewPasswordController;
-use Felixbeer\SiteCore\Auth\Controllers\PasswordResetLinkController;
-use Felixbeer\SiteCore\Auth\Controllers\RegisteredUserController;
-use Felixbeer\SiteCore\Auth\Controllers\VerifyEmailController;
+use Sitebrew\Auth\Controllers\AuthenticatedSessionController;
+use Sitebrew\Auth\Controllers\ConfirmablePasswordController;
+use Sitebrew\Auth\Controllers\EmailVerificationNotificationController;
+use Sitebrew\Auth\Controllers\EmailVerificationPromptController;
+use Sitebrew\Auth\Controllers\NewPasswordController;
+use Sitebrew\Auth\Controllers\PasswordResetLinkController;
+use Sitebrew\Auth\Controllers\RegisteredUserController;
+use Sitebrew\Auth\Controllers\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['web']], function () {

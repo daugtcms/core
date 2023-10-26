@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore;
+namespace Sitebrew;
 
-class SiteCore
+class Sitebrew
 {
     // Build your next great package.
 }

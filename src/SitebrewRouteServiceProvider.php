@@ -1,10 +1,10 @@
 <?php
 
-namespace Felixbeer\SiteCore;
+namespace Sitebrew;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class SiteCoreRouteServiceProvider extends ServiceProvider
+class SitebrewRouteServiceProvider extends ServiceProvider
 {
     /**
      * The path to the "home" route for your application.

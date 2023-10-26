@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Navigation\Data;
+namespace Sitebrew\Navigation\Data;
 
 use Livewire\Wireable;
 use Spatie\LaravelData\Concerns\WireableData;

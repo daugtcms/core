@@ -1,14 +1,14 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\View\Templates;
+namespace Sitebrew\Blocks\View\Templates;
 
-use Felixbeer\SiteCore\Blocks\AttributeType;
-use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
+use Sitebrew\Blocks\AttributeType;
+use Sitebrew\Blocks\View\Blocks\Block;
 
 class FloatingHeaderHomepage extends Block
 {
     public static array $metadata = [
-        'viewName' => 'site-core::blocks.templates.floating-header-homepage',
+        'viewName' => 'sitebrew::blocks.templates.floating-header-homepage',
         'attributes' => [
             'transparentNavigation' => [
                 'type' => AttributeType::BOOLEAN,

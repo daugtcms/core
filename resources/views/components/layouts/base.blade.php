@@ -8,7 +8,7 @@
     <title>{{ $title ?? 'Pages Title' }}</title>
 
     @vite(['resources/css/app.css'])
-    <script type="module" src="{{ ('/vendor/site-core/build/assets/stripped.js') }}"></script>
+    <script type="module" src="{{ ('/vendor/sitebrew/build/assets/stripped.js') }}"></script>
     @googlefonts
 
 </head>

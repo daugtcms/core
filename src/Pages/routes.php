@@ -1,9 +1,9 @@
 <?php
 
-use Felixbeer\SiteCore\Livewire\Pages\PageEditor;
-use Felixbeer\SiteCore\Pages\Controllers\Admin\DeletePageController;
-use Felixbeer\SiteCore\Pages\Controllers\Admin\ShowPagesController;
-use Felixbeer\SiteCore\Pages\Controllers\ShowPageController;
+use Sitebrew\Livewire\Pages\PageEditor;
+use Sitebrew\Pages\Controllers\Admin\DeletePageController;
+use Sitebrew\Pages\Controllers\Admin\ShowPagesController;
+use Sitebrew\Pages\Controllers\ShowPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['web'], 'prefix' => 'admin/pages', 'as' => 'admin.pages.'], function () {

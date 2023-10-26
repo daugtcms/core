@@ -1,9 +1,9 @@
 <?php
 
-namespace Felixbeer\SiteCore\Auth\Controllers;
+namespace Sitebrew\Auth\Controllers;
 
-use Felixbeer\SiteCore\Core\Controllers\Controller;
-use Felixbeer\SiteCore\SiteCoreRouteServiceProvider;
+use Sitebrew\Core\Controllers\Controller;
+use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Http\Request;
 
 class EmailVerificationNotificationController extends Controller
@@ -16,7 +16,7 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(SiteCoreRouteServiceProvider::HOME);
+            return redirect()->intended(SitebrewRouteServiceProvider::HOME);
         }
 
         $request->user()->sendEmailVerificationNotification();

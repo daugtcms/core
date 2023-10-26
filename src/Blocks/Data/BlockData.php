@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Blocks\Data;
+namespace Sitebrew\Blocks\Data;
 
 use Spatie\LaravelData\Data;
 

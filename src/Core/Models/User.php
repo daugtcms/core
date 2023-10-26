@@ -1,6 +1,6 @@
 <?php
 
-namespace Felixbeer\SiteCore\Core\Models;
+namespace Sitebrew\Core\Models;
 
 // use App\Injectable\StripeClient;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

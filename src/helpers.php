@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Felixbeer\SiteCore\Navigation\Models\Navigation;
+use Sitebrew\Navigation\Models\Navigation;
 
 if (! function_exists('svg')) {
     function svg(string $path, $class = '', array $attributes = []): string

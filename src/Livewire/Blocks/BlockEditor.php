@@ -1,15 +1,15 @@
 <?php
 
-namespace Felixbeer\SiteCore\Livewire\Blocks;
+namespace Sitebrew\Livewire\Blocks;
 
-use Felixbeer\SiteCore\Blocks\BlockEditorSidebar;
-use Felixbeer\SiteCore\Blocks\BlocksRenderer;
-use Felixbeer\SiteCore\Blocks\BlockSynth;
-use Felixbeer\SiteCore\Blocks\Data\BlockData;
-use Felixbeer\SiteCore\Blocks\Data\BlockEditorData;
-use Felixbeer\SiteCore\Blocks\Data\TemplateData;
-use Felixbeer\SiteCore\Blocks\Models\Template;
-use Felixbeer\SiteCore\Blocks\View\Blocks\Block;
+use Sitebrew\Blocks\BlockEditorSidebar;
+use Sitebrew\Blocks\BlocksRenderer;
+use Sitebrew\Blocks\BlockSynth;
+use Sitebrew\Blocks\Data\BlockData;
+use Sitebrew\Blocks\Data\BlockEditorData;
+use Sitebrew\Blocks\Data\TemplateData;
+use Sitebrew\Blocks\Models\Template;
+use Sitebrew\Blocks\View\Blocks\Block;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
@@ -59,7 +59,7 @@ class BlockEditor extends Component
             $templateAttributes = $this->template->data;
         }
 
-        $this->templateBlock = new (config('site-core.available_templates')[$this->template->view_name])(...$templateAttributes);
+        $this->templateBlock = new (config('sitebrew.available_templates')[$this->template->view_name])(...$templateAttributes);
 
         if (isset($data['blocks'])) {
             $this->blocks = collect($data['blocks'])->map(function ($block) {
@@ -80,11 +80,11 @@ class BlockEditor extends Component
     public function render()
     {
         if (empty($this->title)) {
-            $this->title = Lang::get('site-core::blocks.title');
+            $this->title = Lang::get('sitebrew::blocks.title');
         }
 
-        return view('site-core::livewire.blocks.block-editor', [
-            'availableBlocks' => config('site-core.available_blocks'),
+        return view('sitebrew::livewire.blocks.block-editor', [
+            'availableBlocks' => config('sitebrew.available_blocks'),
             'viewContent' => BlocksRenderer::fromTemplate($this->templateBlock, $this->blocks)->render(),
         ]);
     }

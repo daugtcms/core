@@ -5,9 +5,9 @@
  */
 return [
     'available_blocks' => [
-        'header' => \Felixbeer\SiteCore\Blocks\View\Blocks\Header::class,
+        'header' => \Sitebrew\Blocks\View\Blocks\Header::class,
     ],
     'available_templates' => [
-        'floating-homepage' => \Felixbeer\SiteCore\Blocks\View\Blocks\Templates\FloatingHomepage::class,
+        'floating-homepage' => \Sitebrew\Blocks\View\Blocks\Templates\FloatingHomepage::class,
     ],
 ];

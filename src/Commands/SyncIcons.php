@@ -1,8 +1,8 @@
 <?php
 
-namespace Felixbeer\SiteCore\Commands;
+namespace Sitebrew\Commands;
 
-use Felixbeer\SiteCore\Jobs\DownloadIcons;
+use Sitebrew\Jobs\DownloadIcons;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +13,7 @@ class SyncIcons extends Command
      *
      * @var string
      */
-    protected $signature = 'site-core:sync-icons';
+    protected $signature = 'sitebrew:sync-icons';
 
     /**
      * The console command description.
@@ -27,7 +27,7 @@ class SyncIcons extends Command
      */
     public function handle()
     {
-        $icons = collect(Storage::disk('sitecore-media')->files('icons/default'));
+        $icons = collect(Storage::disk('sitebrew-media')->files('icons/default'));
         $icons->chunk(100)->each(function ($icons) {
             DownloadIcons::dispatch($icons);
         });
