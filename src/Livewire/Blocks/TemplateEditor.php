@@ -10,7 +10,7 @@ class TemplateEditor extends Component
 {
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    #[Layout('sitebrew::components.layouts.app')]
+    #[Layout('sitebrew::components.layouts.admin')]
     public function render()
     {
         return view('sitebrew::livewire.blocks.template-editor', [

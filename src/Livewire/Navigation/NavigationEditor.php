@@ -37,7 +37,7 @@ class NavigationEditor extends Component
         $this->validate();
     }
 
-    #[Layout('sitebrew::components.layouts.app')]
+    #[Layout('sitebrew::components.layouts.admin')]
     public function render()
     {
         $navigations = Navigation::all();

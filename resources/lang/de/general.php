@@ -22,4 +22,14 @@ return [
     'no_value_available' => 'Kein Wert vorhanden',
     'search_items' => 'Suche Elemente...',
     'no_icon_selected' => 'Kein Symbol ausgewählt',
+    'more_to_come' => 'Weitere Funktionen folgen...',
+
+    'dashboard' => 'Dashboard',
+    'media' => 'Medien',
+    'media.description' => 'Verwaltung aller Medien im Systen. Hier können Sie neue Medien hochladen und bestehende bearbeiten.',
+    'structure' => 'Struktur',
+    'structure.description' => 'Verwaltung der Seitenstruktur. Hier können Sie Navigationen, Templates und Layouts bearbeiten.',
+    'content.description' => 'Verwaltung aller Inhalte im System. Hier können Sie neue Inhalte erstellen und bestehende bearbeiten.',
+    'navigation' => 'Navigation',
+    'templates' => 'Templates'
 ];

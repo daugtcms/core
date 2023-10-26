@@ -8,6 +8,6 @@ class ShowPagesController extends Controller
 {
     public function __invoke()
     {
-        return view('sitebrew::pages.admin.index');
+        return view('sitebrew::admin.pages.index');
     }
 }
