@@ -6,6 +6,7 @@ use Aws\S3\S3Client;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Image;
 use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
@@ -22,6 +23,7 @@ use Laravel\Horizon\HorizonApplicationServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider;
 use Sitebrew\Extensions\CloudflareR2Adapter;
 use Sitebrew\Helpers\Media\MediaHelper;
+use Sitebrew\Middleware\CanAccessAdmin;
 
 class SitebrewServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,11 @@ class SitebrewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // TODO: structure this into different service providers
+        Gate::after(function ($user, $ability) {
+            return $user->hasRole('Admin');
+        });
+
         /*
          * Optional methods to load your package assets
          */
@@ -140,6 +147,8 @@ class SitebrewServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/mediable.php', 'mediable');
 
         $this->mergeConfigFrom(__DIR__.'/../config/wire-elements-modal.php', 'wire-elements-modal');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/permission.php', 'permission');
 
         // Register the main class to use with the facade
         $this->app->singleton('sitebrew', function () {

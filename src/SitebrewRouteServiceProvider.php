@@ -13,7 +13,7 @@ class SitebrewRouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/';
+    public const HOME = '/access';
 
     /**
      * The controller namespace for the application.

@@ -6,6 +6,7 @@ namespace Sitebrew\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 /*use Laravel\Sanctum\HasApiTokens;
 use Plank\Mediable\Mediable;
@@ -14,7 +15,7 @@ use Spatie\Sluggable\SlugOptions;*/
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     //HasApiTokens, HasFactory, HasSlug, Mediable,
     /**

@@ -8,7 +8,7 @@ use Sitebrew\Livewire\Navigation\NavigationEditor;
 Route::group(['middleware' => ['web']], function () {
     Route::get('/admin', function () {
         return view('sitebrew::admin.index');
-    })->name('admin.index');
+    })->name('admin.index')->middleware('can:access admin panel');
 
     require __DIR__.'/Routes/auth.php';
     require __DIR__.'/Routes/blocks.php';
