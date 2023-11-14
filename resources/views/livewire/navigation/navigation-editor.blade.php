@@ -117,7 +117,7 @@
                     @svg('plus')
                     {{__('sitebrew::general.add_element')}}
                 </x-sitebrew::form.button>
-                <x-sitebrew::form.button class="w-72 mt-3" style="secondary" wire:click="saveItems()"
+                <x-sitebrew::form.button class="w-72 mt-3" style="primary" wire:click="saveItems()"
                                           :disabled="!$errors->isEmpty()">
                     {{__('sitebrew::general.save')}}
                 </x-sitebrew::form.button>

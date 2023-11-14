@@ -1,38 +1,30 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <div class="h-20 w-20 bg-primary-500 rounded-lg py-2 px-1 shadow">
-                    <x-application-logo class="block w-full h-full drop-shadow-md text-white fill-current "/>
-                </div>
-            </a>
-        </x-slot>
+<x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::AUTH->value">
+    <h2 class="text-2xl text-neutral-700 font-semibold">{{__('sitebrew::auth.forgot_password')}}</h2>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
+    <x-sitebrew::form.label class="mb-2 text-sm text-neutral-500">
+        {{ __('sitebrew::auth.forgot_password.text') }}
+    </x-sitebrew::form.label>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+    <!-- Session Status -->
+    <x-sitebrew::auth.auth-session-status class="mb-4" :status="session('status')"/>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <!-- Validation Errors -->
+    <x-sitebrew::auth.auth-validation-errors class="mb-4" :errors="$errors"/>
 
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-sitebrew::form.label for="email" :value="__('sitebrew::auth.email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-sitebrew::form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
+                <x-sitebrew::form.button>
+                    {{ __('sitebrew::auth.forgot_password.submit') }}
+                </x-sitebrew::form.button>
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+</x-sitebrew::template-renderer>

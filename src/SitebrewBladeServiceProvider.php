@@ -2,6 +2,10 @@
 
 namespace Sitebrew;
 
+use Sitebrew\Data\Media\MediaPickerData;
+use Sitebrew\Livewire\Media\MediaManager;
+use Sitebrew\Livewire\Media\MediaPicker;
+use Sitebrew\Livewire\Media\MediaUploader;
 use Sitebrew\View\Blocks\Misc\BlocksRenderer;
 use Sitebrew\View\Blocks\Misc\BlockSynth;
 use Sitebrew\Livewire\Blocks\BlockEditor;
@@ -11,6 +15,7 @@ use Sitebrew\Livewire\Navigation\EditNavigation;
 use Sitebrew\Livewire\Navigation\NavigationEditor;
 use Sitebrew\Livewire\Pages\PageEditor;
 use Sitebrew\Livewire\Pages\PagesTable;
+use Sitebrew\View\Blocks\Misc\TemplateRenderer;
 use Sitebrew\View\Components\Tiptap;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -31,6 +36,7 @@ class SitebrewBladeServiceProvider extends ServiceProvider
             return "<?php echo svg($expression); ?>";
         });
         Blade::component('sitebrew::blocks-renderer', BlocksRenderer::class);
+        Blade::component('sitebrew::template-renderer', TemplateRenderer::class);
 
         Blade::componentNamespace('Sitebrew\\View\\Blocks\\', 'Blocks');
         Blade::componentNamespace('Sitebrew\\View\\Blocks\\Templates\\', 'Templates');
@@ -45,7 +51,9 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Livewire::component('sitebrew::navigation.edit-navigation', EditNavigation::class);
         Livewire::component('sitebrew::pages.page-editor', PageEditor::class);
         Livewire::component('sitebrew::pages.pages-table', PagesTable::class);
-
+        Livewire::component('sitebrew::media.media-manager', MediaManager::class);
+        Livewire::component('sitebrew::media.media-uploader', MediaUploader::class);
+        Livewire::component('sitebrew::media.media-picker', MediaPicker::class);
     }
 
     /**

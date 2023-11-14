@@ -48,6 +48,9 @@ class BlockSynth extends Synth
 
     public function hydrate($value)
     {
+        /*if(!isset($value['block'])) {
+            return $value;
+        }*/
         $instance = new $value['block']();
 
         $properties = self::getAvailableBlockProperties($instance);
@@ -56,9 +59,9 @@ class BlockSynth extends Synth
             $key = $property->getName();
             $value = $value[$key];
 
-            if (is_array($value)) {
+            /*if (is_array($value)) {
                 $value = $this->hydrate($value);
-            }
+            }*/
 
             $instance->{$key} = $value;
         });

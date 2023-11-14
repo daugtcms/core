@@ -3,7 +3,7 @@
 namespace Sitebrew\Controllers\Pages;
 
 use Sitebrew\Controllers\Controller;
-use Sitebrew\Pages\Models\Page;
+use Sitebrew\Models\Pages\Page;
 
 class ShowPageController extends Controller
 {

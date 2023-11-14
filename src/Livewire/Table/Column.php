@@ -4,7 +4,7 @@ namespace Sitebrew\Livewire\Table;
 
 class Column
 {
-    public string $component = 'sitebrew::core.table.column';
+    public string $component = 'sitebrew::table.column';
 
     public string $key;
 

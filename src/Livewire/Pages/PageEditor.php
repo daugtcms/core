@@ -33,7 +33,7 @@ class PageEditor extends Component
         $this->blocks = $this->page->blocks ?? [];
     }
 
-    #[Layout('sitebrew::components.layouts.app')]
+    #[Layout('sitebrew::components.layouts.admin')]
     public function render()
     {
         return view('sitebrew::livewire.pages.page-editor');
@@ -63,6 +63,6 @@ class PageEditor extends Component
         $this->page->blocks = $this->blocks;
         $this->page->save();
 
-        $this->redirect(route('sitebrew.admin.pages.index'));
+        $this->redirect(route('admin.content.index'));
     }
 }

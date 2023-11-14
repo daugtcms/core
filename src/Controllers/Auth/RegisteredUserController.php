@@ -3,7 +3,7 @@
 namespace Sitebrew\Controllers\Auth;
 
 use Sitebrew\Controllers\Controller;
-use Sitebrew\Core\Models\User;
+use Sitebrew\Models\User;
 use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;

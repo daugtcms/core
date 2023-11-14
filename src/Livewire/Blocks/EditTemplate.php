@@ -18,6 +18,9 @@ class EditTemplate extends ModalComponent
     #[Rule('required')]
     public $view_name = '';
 
+    #[Rule('required')]
+    public $usage = '';
+
     public $data;
 
     public ?Block $templateBlock;
@@ -29,6 +32,7 @@ class EditTemplate extends ModalComponent
             $this->name = $template->name;
             $this->view_name = $template->view_name;
             $this->data = $template->data;
+            $this->usage = $template->usage;
 
             if ($this->view_name) {
                 $this->updateViewName();
@@ -60,18 +64,28 @@ class EditTemplate extends ModalComponent
 
         if (isset($this->template)) {
             $this->template->update(
-                $this->only(['name', 'view_name', 'data'])
+                $this->only(['name', 'view_name', 'data', 'usage'])
             );
             $this->template->save();
         } else {
             Template::create(
-                $this->only(['name', 'view_name', 'data'])
+                $this->only(['name', 'view_name', 'data', 'usage'])
             );
         }
 
         $this->closeModalWithEvents([
             TemplateEditor::class => 'refreshComponent',
         ]);
+    }
+
+    public static function closeModalOnClickAway(): bool
+    {
+        return false;
+    }
+
+    public static function closeModalOnEscape(): bool
+    {
+        return false;
     }
 
     public function render()

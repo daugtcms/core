@@ -8,7 +8,11 @@
     <title>{{ $title ?? 'Pages Title' }}</title>
 
     @vite(['resources/css/app.css'])
-    <script type="module" src="{{ ('/vendor/sitebrew/build/assets/stripped.js') }}"></script>
+
+    {{ Vite::useHotFile('vendor/sitebrew/sitebrew.hot')
+        ->useBuildDirectory("vendor/sitebrew")
+        ->withEntryPoints(['resources/js/stripped.js']) }}
+
     @googlefonts
 
 </head>

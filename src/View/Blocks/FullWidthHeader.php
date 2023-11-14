@@ -36,8 +36,8 @@ class FullWidthHeader extends Block
     public function __construct(
         public string $title = '',
         public string $subtitle = '',
-        public string $personImage = '',
-        public string $backgroundImage = '',
+        public array $personImage = [],
+        public array $backgroundImage = [],
     ) {
         parent::__construct();
     }

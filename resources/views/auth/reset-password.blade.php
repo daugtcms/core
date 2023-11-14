@@ -1,15 +1,9 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <div class="h-20 w-20 bg-primary-500 rounded-lg py-2 px-1 shadow">
-                    <x-application-logo class="block w-full h-full drop-shadow-md text-white fill-current "/>
-                </div>
-            </a>
-        </x-slot>
+<x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::AUTH->value">
+    <h2 class="text-2xl text-neutral-700 font-semibold mb-2">{{__('sitebrew::auth.reset_password')}}</h2>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors"/>
+
+    <!-- Validation Errors -->
+    <x-sitebrew::auth.auth-validation-errors class="mb-4" :errors="$errors"/>
 
         <form method="POST" action="{{ route('password.update') }}">
             @csrf
@@ -19,32 +13,31 @@
 
             <!-- Email Address -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-sitebrew::form.label for="email" :value="__('sitebrew::auth.email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                <x-sitebrew::form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-sitebrew::form.label for="password" :value="__('sitebrew::auth.password')" />
 
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+                <x-sitebrew::form.input id="password" class="block mt-1 w-full" type="password" name="password" required />
             </div>
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-sitebrew::form.label for="password_confirmation" :value="__('sitebrew::auth.confirm_password')" />
 
-                <x-input id="password_confirmation" class="block mt-1 w-full"
+                <x-sitebrew::form.input id="password_confirmation" class="block mt-1 w-full"
                                     type="password"
                                     name="password_confirmation" required />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
+                <x-sitebrew::form.button>
+                    {{ __('sitebrew::auth.reset_password') }}
+                </x-sitebrew::form.button>
             </div>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+</x-sitebrew::template-renderer>

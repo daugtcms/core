@@ -1,41 +1,32 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <div class="h-20 w-20 bg-primary-500 rounded-lg py-2 px-1 shadow">
-                    <x-application-logo class="block w-full h-full drop-shadow-md text-white fill-current "/>
-                </div>
-            </a>
-        </x-slot>
+<x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::AUTH->value">
+    <h2 class="text-2xl text-neutral-700 font-semibold">{{__('sitebrew::verify-email')}}</h2>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <x-sitebrew::form.label class="mb-2 text-sm text-neutral-500">{{ __('sitebrew::auth.verify_email.text') }}
+    </x-sitebrew::form.label>
+
+    @if (session('status') == 'verification-link-sent')
+        <div class="mb-4 font-medium text-sm text-green-600">
+            {{ __('sitebrew::auth.verify_email.link_sent') }}
         </div>
+    @endif
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+    <div class="mt-4 flex items-center justify-between">
+        <form method="POST" action="{{ route('verification.send') }}">
+            @csrf
+
+            <div>
+                <x-sitebrew::form.button>
+                    {{ __('sitebrew::auth.verify_email.resend') }}
+                </x-sitebrew::form.button>
             </div>
-        @endif
+        </form>
 
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
 
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
-                </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
-        </div>
-    </x-auth-card>
-</x-guest-layout>
+            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+                {{ __('sitebrew::auth.logout') }}
+            </button>
+        </form>
+    </div>
+</x-sitebrew::template-renderer>

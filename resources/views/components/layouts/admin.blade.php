@@ -8,7 +8,13 @@
     <title>{{ $title ?? 'Pages Title' }}</title>
 
     @livewireStyles
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{--<link rel="stylesheet" href="/vendor/sitebrew/build/assets/app.css">
+    <script type="module" src="/vendor/sitebrew/build/assets/app.js"></script>--}}
+
+    {{ Vite::useHotFile('vendor/sitebrew/sitebrew.hot')
+        ->useBuildDirectory("vendor/sitebrew")
+        ->withEntryPoints(['resources/css/app.css', 'resources/js/app.js']) }}
     @googlefonts
 
 </head>
@@ -27,7 +33,6 @@
         }
 
         $navigationItems = [];
-
         switch ($path){
             case AdminPath::ADMIN->value:
                 $title = __('sitebrew::general.admin');
@@ -70,13 +75,13 @@
                                     $cases = AdminPath::cases();
                                     $cases = collect($cases)->filter(fn($case) => $case->value != $path)->toArray();
                                     @endphp
-                                    @foreach($cases as $path)
-                                        <a class="flex items-center h-full gap-x-2.5 hover:bg-neutral-100 pl-1.5 pr-2.5 py-1.5 cursor-pointer" href="{{$path == AdminPath::ADMIN ? route("admin.index") : route("admin.$path->value.index")}}">
-                                            <div class="p-2 rounded-lg text-primary-50 h-10 w-10" style="color: {{AdminPathColor::getColor($path)}}; background-color: {{AdminPathColor::getColor($path)}}22">
-                                                @svg(AdminPathColor::getIcon($path), 'h-full flex-shrink-0 drop-shadow-md')
+                                    @foreach($cases as $casePath)
+                                        <a class="flex items-center h-full gap-x-2.5 hover:bg-neutral-100 pl-1.5 pr-2.5 py-1.5 cursor-pointer" href="{{$casePath == AdminPath::ADMIN ? route("admin.index") : route("admin.$casePath->value.index")}}">
+                                            <div class="p-2 rounded-lg text-primary-50 h-10 w-10" style="color: {{AdminPathColor::getColor($casePath)}}; background-color: {{AdminPathColor::getColor($casePath)}}22">
+                                                @svg(AdminPathColor::getIcon($casePath), 'h-full flex-shrink-0 drop-shadow-md')
                                             </div>
 
-                                            <p class="text-base font-medium text-neutral-700 pt-0.5">@if($path == AdminPath::ADMIN) Home @else {{ __('sitebrew::general.' . $path->value) }} @endif</p>
+                                            <p class="text-base font-medium text-neutral-700 pt-0.5">@if($casePath == AdminPath::ADMIN) Home @else {{ __('sitebrew::general.' . $casePath->value) }} @endif</p>
                                         </a>
                                     @endforeach
 
@@ -136,7 +141,6 @@
                         </x-slot>
                     </x-dropdown>
                 </div>--}}
-
                 @if($path == Sitebrew\Enums\Admin\AdminPath::ADMIN->value)
                 <p class="my-auto text-neutral-500">v0.0.1</p>
                 @endif

@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Sitebrew\Data\Blocks\BlockData;
 use Sitebrew\Data\Blocks\BlockEditorData;
@@ -172,7 +173,6 @@ class BlockEditor extends Component
         }
         $this->sidebarState = $state;
     }
-
     public function reorder($list)
     {
         $this->blocks = collect($list)->map(function ($uuid) {

@@ -42,7 +42,7 @@ class FeaturedContent extends Block
         public string $title = '',
         public string $subtitle = '',
         public string $text = '',
-        public string $featuredImage = '',
+        public array $featuredImage = [],
         public string $link = '',
         public string $linkText = ''
     ) {

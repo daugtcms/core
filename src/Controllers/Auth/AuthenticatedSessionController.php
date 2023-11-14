@@ -2,8 +2,8 @@
 
 namespace Sitebrew\Controllers\Auth;
 
-use Sitebrew\Auth\Requests\LoginRequest;
 use Sitebrew\Controllers\Controller;
+use Sitebrew\Requests\Auth\LoginRequest;
 use Sitebrew\SitebrewRouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

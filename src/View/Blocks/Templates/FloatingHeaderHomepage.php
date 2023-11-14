@@ -2,6 +2,7 @@
 
 namespace Sitebrew\View\Blocks\Templates;
 
+use Sitebrew\Data\Media\MediaPickerData;
 use Sitebrew\View\Blocks\Block as SitebrewBlock;
 use Sitebrew\Enums\Blocks\AttributeType;
 
@@ -29,7 +30,7 @@ class FloatingHeaderHomepage extends SitebrewBlock
     public function __construct(
         public bool $transparentNavigation = false,
         public int $mainNavigation = 0,
-        public string $logo = '',
+        public array $logo = [],
     ) {
         parent::__construct();
     }

@@ -14,7 +14,6 @@
                 ></x-sitebrew::form.icon-button>
                 <x-sitebrew::form.icon-button icon="save" style="primary"
                                                wire:click="save()"
-                                               x-tooltip.bottom="{{__('sitebrew::general.save')}}"
                 ></x-sitebrew::form.icon-button>
             </div>
         </div>
@@ -115,10 +114,9 @@
 
                     @foreach($templateBlock->getMetadata()['attributes'] as $key => $attribute)
                         <x-sitebrew::blocks.attribute-input :key="$key"
-                                                             wire:key="{{$template->id . $key}}"
-                                                             :attribute="$attribute"
-                                                             placeholder="{{$template->data[$key]}}"
-                                                             wire:model.live="templateBlock.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                                                            wire:key="{{$template->id . $key}}"
+                                                            :attribute="$attribute"
+                                                            wire:model.live="templateBlock.{{$key}}"></x-sitebrew::blocks.attribute-input>
                     @endforeach
                 </section>
                 @break

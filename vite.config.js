@@ -3,19 +3,21 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     build: {
-        rollupOptions: {
+        /*rollupOptions: {
             output: {
-                entryFileNames: `assets/[name].js`,
-                chunkFileNames: `assets/[name].js`,
-                assetFileNames: `assets/[name].[ext]`,
+                entryFileNames: `[name].js`,
+                chunkFileNames: `[name].js`,
+                assetFileNames: `[name].[ext]`,
                 manualChunks: {}
             }
-        },
+        },*/
         minify: false
     },
     plugins: [
         laravel({
-            input: ['resources/js/app.js', 'resources/js/stripped.js'],
+            hotFile: 'public/vendor/sitebrew/sitebrew.hot',
+            buildDirectory: 'vendor/sitebrew',
+            input: ['resources/js/app.js', 'resources/js/stripped.js', 'resources/css/app.css'],
             refresh: true,
         }),
     ],

@@ -8,6 +8,7 @@ return [
     'save' => 'Speichern',
     'delete' => 'Löschen',
     'edit' => 'Bearbeiten',
+    'confirm' => 'Bestätigen',
     'add_element' => 'Element hinzufügen',
 
     'id' => 'ID',
@@ -18,6 +19,7 @@ return [
     'content' => 'Inhalt',
     'icon' => 'Symbol',
     'viewName' => 'View Name',
+    'usage' => 'Verwendung',
 
     'no_value_available' => 'Kein Wert vorhanden',
     'search_items' => 'Suche Elemente...',

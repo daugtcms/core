@@ -1,38 +1,30 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <div class="h-20 w-20 bg-primary-500 rounded-lg py-2 px-1 shadow">
-                    <x-application-logo class="block w-full h-full drop-shadow-md text-white fill-current "/>
-                </div>
-            </a>
-        </x-slot>
+<x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::AUTH->value">
+    <h2 class="text-2xl text-neutral-700 font-semibold">{{__('sitebrew::auth.confirm_password')}}</h2>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+    <x-sitebrew::form.label class="mb-2 text-sm text-neutral-500">
+        {{ __('sitebrew::auth.confirm_password.text') }}
+    </x-sitebrew::form.label>
+
+    <!-- Validation Errors -->
+    <x-sitebrew::auth.auth-validation-errors class="mb-4" :errors="$errors"/>
+
+    <form method="POST" action="{{ route('password.confirm') }}">
+        @csrf
+
+        <!-- Password -->
+        <div>
+            <x-sitebrew::form.label for="password" :value="__('sitebrew::auth.password')" />
+
+            <x-sitebrew::form.input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="current-password" />
         </div>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.confirm') }}">
-            @csrf
-
-            <!-- Password -->
-            <div>
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <div class="flex justify-end mt-4">
-                <x-button>
-                    {{ __('Confirm') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        <div class="flex justify-end mt-4">
+            <x-sitebrew::form.button>
+                {{ __('sitebrew::general.confirm') }}
+            </x-sitebrew::form.button>
+        </div>
+    </form>
+</x-sitebrew::template-renderer>

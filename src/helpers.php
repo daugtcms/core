@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Sitebrew\Data\Media\MediaPickerData;
+use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Models\Navigation\Navigation;
 
 if (! function_exists('svg')) {
@@ -57,5 +59,16 @@ if (! function_exists('get_navigation_items')) {
     function get_navigation_items($navigationId)
     {
         return Navigation::findOrFail($navigationId)->items;
+    }
+}
+
+if (!function_exists('get_single_media')) {
+    function get_single_media($mediaArray)
+    {
+        if(!is_array($mediaArray) || !count($mediaArray)) {
+            return null;
+        }
+        $data = MediaPickerData::from($mediaArray[0]);
+        return MediaHelper::getMediaById($data->id, $data->variant);
     }
 }

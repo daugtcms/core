@@ -5,6 +5,15 @@ import Focus from "@alpinejs/focus";
 import AlpineFloatingUI from "@awcodes/alpine-floating-ui";
 import Intersect from "@alpinejs/intersect";
 
+import * as FilePond from 'filepond';
+import {registerPlugin} from "filepond";
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import de_de from 'filepond/locale/de-de';
+
+registerPlugin(FilePondPluginImagePreview);
+FilePond.setOptions(de_de);
+window.FilePond = FilePond;
+
 import './tiptap';
 import './block-editor'
 import './tooltip'

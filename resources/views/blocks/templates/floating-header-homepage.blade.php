@@ -29,7 +29,7 @@
                 <div class="flex items-center shrink-0 h-16 py-3">
                     <a href="#_"
                        class="h-full">
-                        <img src="{{ $logo ?: 'https://media.felix.beer/temp/hilde-logo.svg'}}" alt="logo"
+                        <img src="{{ get_single_media($logo) ?: 'https://media.felix.beer/temp/hilde-logo.svg'}}" alt="logo"
                              class="h-full mr-3">
                     </a>
                 </div>
