@@ -29,14 +29,14 @@ class ContentTable extends Table
         return $query;
     }
 
-    public function addElement(): void
+    public function add(): void
     {
         $this->dispatch('modal.open', 'sitebrew::block-editor', [
             'data' => [],
         ]);
     }
 
-    public function editElement($id): void
+    public function edit($id): void
     {
         $this->dispatch('modal.open', 'sitebrew::block-editor', [
             'data' => Content::findOrFail($id)->blocks,
@@ -47,13 +47,13 @@ class ContentTable extends Table
     public function columns(): array
     {
         return [
-            Column::make('id', '')->component('sitebrew::table.edit-content'),
-            Column::make('title', 'Titel'),
-            Column::make('type', 'Type'),
-            Column::make('user', 'Author')->component('sitebrew::table.user'),
+            Column::make('id', '')->component('sitebrew::table.edit'),
+            Column::make('title', __('sitebrew::general.title')),
+            Column::make('type', __('sitebrew::general.type')),
+            Column::make('user', __('sitebrew::general.author'))->component('sitebrew::table.user'),
             // Column::make('slug', 'URL'),
-            Column::make('updated_at', 'Updated At')->component('sitebrew::table.human-diff'),
-            Column::make('created_at', 'Created At')->component('sitebrew::table.human-diff'),
+            Column::make('updated_at', __('sitebrew::general.updated_at'))->component('sitebrew::table.human-diff'),
+            Column::make('created_at', __('sitebrew::general.created_at'))->component('sitebrew::table.human-diff'),
             Column::make('id', '')->component('sitebrew::table.delete'),
         ];
     }

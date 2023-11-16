@@ -13,6 +13,7 @@ class AdminPathColor
             AdminPath::MEDIA->value => '#10b981',
             AdminPath::STRUCTURE->value => '#6366f1',
             AdminPath::CONTENT->value => '#3b82f6',
+            AdminPath::USERS->value => '#ef4444',
         ];
 
         return $colors[$path->value];
@@ -25,6 +26,7 @@ class AdminPathColor
             AdminPath::MEDIA->value => 'image',
             AdminPath::STRUCTURE->value => 'layout-panel-top',
             AdminPath::CONTENT->value => 'text',
+            AdminPath::USERS->value => 'user',
         ];
 
         return $colors[$path->value];

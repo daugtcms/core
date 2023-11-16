@@ -6,6 +6,8 @@ use Sitebrew\Data\Media\MediaPickerData;
 use Sitebrew\Livewire\Media\MediaManager;
 use Sitebrew\Livewire\Media\MediaPicker;
 use Sitebrew\Livewire\Media\MediaUploader;
+use Sitebrew\Livewire\Users\EditUser;
+use Sitebrew\Livewire\Users\UserTable;
 use Sitebrew\View\Blocks\Misc\BlocksRenderer;
 use Sitebrew\View\Blocks\Misc\BlockSynth;
 use Sitebrew\Livewire\Blocks\BlockEditor;
@@ -54,6 +56,8 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Livewire::component('sitebrew::media.media-manager', MediaManager::class);
         Livewire::component('sitebrew::media.media-uploader', MediaUploader::class);
         Livewire::component('sitebrew::media.media-picker', MediaPicker::class);
+        Livewire::component('sitebrew::users.user-table', UserTable::class);
+        Livewire::component('sitebrew::users.edit-user', EditUser::class);
     }
 
     /**

@@ -8,9 +8,13 @@ use Livewire\Component;
 
 abstract class Table extends Component
 {
+    public bool $allowCreate = true;
+
     abstract public function columns(): array;
 
-    abstract public function addElement(): void;
+    abstract public function add(): void;
+
+    abstract public function edit($id): void;
 
     public function data()
     {

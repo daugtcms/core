@@ -22,7 +22,7 @@
                     <div
                         @class([
                             'ring-2 !ring-primary-500 ring-offset-2 !bg-primary-50' => $isSelected,
-                            'group aspect-[10/7] block w-full overflow-hidden rounded-lg bg-white border-neutral-200 border-2 focus-within:ring-2 focus-within:ring-neutral-200 focus-within:ring-offset-2 focus-within:ring-offset-neutral-100'
+                            'group aspect-[10/7] block w-full overflow-hidden rounded-lg bg-neutral-50 border-neutral-200 border-2 focus-within:ring-2 focus-within:ring-neutral-200 focus-within:ring-offset-2 focus-within:ring-offset-neutral-100'
                         ])>
                         <img src="{{MediaHelper::getMedia($file, 'thumbnail')}}"
                              alt=""

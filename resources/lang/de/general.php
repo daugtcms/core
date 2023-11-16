@@ -21,6 +21,11 @@ return [
     'icon' => 'Symbol',
     'viewName' => 'View Name',
     'usage' => 'Verwendung',
+    'created_at' => 'Erstellt',
+    'updated_at' => 'Geändert',
+    'type' => 'Typ',
+    'author' => 'Autor',
+    'username' => 'Benutzername',
 
     'no_value_available' => 'Kein Wert vorhanden',
     'search_items' => 'Suche Elemente...',
@@ -33,6 +38,8 @@ return [
     'structure' => 'Struktur',
     'structure.description' => 'Verwaltung der Seitenstruktur. Hier können Sie Navigationen, Templates und Layouts bearbeiten.',
     'content.description' => 'Verwaltung aller Inhalte im System. Hier können Sie neue Inhalte erstellen und bestehende bearbeiten.',
+    'users' => 'Benutzer',
+    'users.description' => 'Verwaltung aller Benutzer im System. Hier können Sie Benutzer löschen und bestehende bearbeiten.',
     'navigation' => 'Navigation',
     'templates' => 'Templates'
 ];

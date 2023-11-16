@@ -11,4 +11,6 @@ enum AdminPath: string
     case MEDIA = 'media';
 
     case STRUCTURE = 'structure';
+
+    case USERS = 'users';
 }
