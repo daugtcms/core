@@ -4,7 +4,7 @@
     <x-sitebrew::layouts.dashboard-bar>
         <div class="inline-flex items-center gap-x-2" x-data @if($isPicker) x-mousetrap.esc="$wire.closeModal()" @endif>
             @if($isPicker)<x-sitebrew::form.icon-button icon="chevron-left" class="-ml-2" wire:click="closeModal()"></x-sitebrew::form.icon-button>@endif
-            <h1 class="text-lg font-medium text-neutral-800">Media Manager</h1>
+            <h1 class="text-lg font-medium text-neutral-800">{{__('sitebrew::media.all_media')}}</h1>
         </div>
         <x-sitebrew::form.button
                 wire:click="$dispatch('modal.open', { component: 'sitebrew::media.media-uploader' })"

@@ -17,4 +17,6 @@ return [
         'presentation' => 'Präsentation',
         'other' => 'Andere'
     ],
+    'all_media' => 'Alle Medien',
+    'delete_media_confirmation' => 'Möchten Sie diese Medien-Datei wirklich löschen?',
 ];

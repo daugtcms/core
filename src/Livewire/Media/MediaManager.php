@@ -90,6 +90,10 @@ class MediaManager extends Modal
 
                 $this->selectedMedia->push($element);
             }
+        } else {
+            $this->dispatch('modal.open', 'sitebrew::media.edit-media', [
+                'media' => $id
+            ]);
         }
     }
 
