@@ -10,6 +10,9 @@ import {registerPlugin} from "filepond";
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import de_de from 'filepond/locale/de-de';
 
+import '/vendor/wire-elements/pro/resources/js/overlay-component.js'
+
+
 registerPlugin(FilePondPluginImagePreview);
 FilePond.setOptions(de_de);
 window.FilePond = FilePond;

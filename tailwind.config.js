@@ -7,8 +7,8 @@ export default {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
-    "./vendor/wire-elements/modal/resources/views/*.blade.php",
-    "./vendor/wire-elements/modal/src/ModalComponent.php"
+    './vendor/wire-elements/pro/config/wire-elements-pro.php',
+    './vendor/wire-elements/pro/**/*.blade.php',
   ],
   theme: {
     extend: {

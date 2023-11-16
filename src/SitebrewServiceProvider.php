@@ -23,7 +23,7 @@ use Laravel\Horizon\HorizonApplicationServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider;
 use Sitebrew\Extensions\CloudflareR2Adapter;
 use Sitebrew\Helpers\Media\MediaHelper;
-use Sitebrew\Middleware\CanAccessAdmin;
+use WireElements\Pro\Components\Modal\ModalServiceProvider;
 
 class SitebrewServiceProvider extends ServiceProvider
 {
@@ -108,9 +108,9 @@ class SitebrewServiceProvider extends ServiceProvider
             ], 'horizon-assets');
 
             // Publish wire-elements-modal views
-            $this->publishes([
+            /*$this->publishes([
                 __DIR__.'/../resources/views/vendor/wire-elements-modal' => base_path('resources/views/vendor/wire-elements-modal'),
-            ], 'sitebrew-views');
+            ], 'sitebrew-views');*/
 
             // Publishing the views.
             /*$this->publishes([
@@ -146,7 +146,7 @@ class SitebrewServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/mediable.php', 'mediable');
 
-        $this->mergeConfigFrom(__DIR__.'/../config/wire-elements-modal.php', 'wire-elements-modal');
+        $this->mergeConfigFrom(__DIR__.'/../config/wire-elements-pro.php', 'wire-elements-pro');
 
         $this->mergeConfigFrom(__DIR__.'/../config/permission.php', 'permission');
 
@@ -172,5 +172,7 @@ class SitebrewServiceProvider extends ServiceProvider
 
         $this->app->register(HorizonServiceProvider::class);
         $this->app->register(HorizonApplicationServiceProvider::class);
+
+        $this->app->register(ModalServiceProvider::class);
     }
 }

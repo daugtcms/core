@@ -1,17 +1,17 @@
 <?php
 
-namespace Sitebrew\Livewire\Pages;
+namespace Sitebrew\Livewire\Content;
 
-use Sitebrew\Models\Pages\Page;
+use Sitebrew\Models\Content\Content;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
-class PageEditor extends Component
+class ContentEditor extends Component
 {
-    public Page $page;
+    public Content $page;
 
     #[Rule(['required'])]
     public string $title = '';
@@ -24,9 +24,9 @@ class PageEditor extends Component
     #[Url(history: true)]
     public bool $showBlockEditor = false;
 
-    public function mount(Page $page = null)
+    public function mount(Content $page = null)
     {
-        $this->page = $page ?? new Page();
+        $this->page = $page ?? new Content();
 
         $this->title = $this->page->title;
         $this->description = $this->page->description;

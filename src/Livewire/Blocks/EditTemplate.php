@@ -6,11 +6,11 @@ use Sitebrew\Models\Blocks\Template;
 use Sitebrew\View\Blocks\Block;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
-use LivewireUI\Modal\ModalComponent;
+use WireElements\Pro\Components\Modal\Modal;
 
-class EditTemplate extends ModalComponent
+class EditTemplate extends Modal
 {
-    public Template $template;
+    public int|Template $template;
 
     #[Rule('required')]
     public $name = '';
@@ -25,7 +25,7 @@ class EditTemplate extends ModalComponent
 
     public ?Block $templateBlock;
 
-    public function mount($template = null)
+    public function mount(Template $template = null)
     {
         if ($template) {
             $this->template = $template;
@@ -73,19 +73,18 @@ class EditTemplate extends ModalComponent
             );
         }
 
-        $this->closeModalWithEvents([
-            TemplateEditor::class => 'refreshComponent',
-        ]);
+        $this->close(
+            andDispatch: [
+                TemplateEditor::class => 'refreshComponent',
+            ]);
     }
 
-    public static function closeModalOnClickAway(): bool
+    public static function behavior(): array
     {
-        return false;
-    }
-
-    public static function closeModalOnEscape(): bool
-    {
-        return false;
+        return [
+            'close-on-backdrop-click' => false,
+            'close-on-escape' => false,
+        ];
     }
 
     public function render()

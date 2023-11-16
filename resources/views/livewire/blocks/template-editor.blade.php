@@ -3,7 +3,7 @@
         <h1 class="text-lg font-medium text-neutral-800">{{__('sitebrew::blocks.template_editor')}}</h1>
 
         <x-sitebrew::form.button
-                wire:click="$dispatch('openModal', { component: 'sitebrew::blocks.edit-template' })"
+                wire:click="$dispatch('modal.open', { component: 'sitebrew::blocks.edit-template' })"
                 class="flex-shrink-0 ml-2">
             {{__('sitebrew::general.add')}}
             @svg('plus', 'w-5 h-5')
@@ -23,7 +23,7 @@
                     </div>
                     <div class="flex flex-none items-center gap-x-2 w-full sm:w-auto mt-1">
                         <x-sitebrew::form.button style="light" class="flex-grow"
-                                                  wire:click="$dispatch('openModal', { component: 'sitebrew::blocks.edit-template', arguments: { template: {{$template->id}} } })">
+                                                  wire:click="$dispatch('modal.open', { component: 'sitebrew::blocks.edit-template', arguments: { template: {{$template->id}} } })">
                             {{__('sitebrew::general.edit')}}
                             @svg('pencil', 'w-4 h-4')
                         </x-sitebrew::form.button>

@@ -4,11 +4,11 @@ namespace Sitebrew\Livewire\Navigation;
 
 use Sitebrew\Models\Navigation\Navigation;
 use Livewire\Attributes\Rule;
-use LivewireUI\Modal\ModalComponent;
+use WireElements\Pro\Components\Modal\Modal;
 
-class EditNavigation extends ModalComponent
+class EditNavigation extends Modal
 {
-    public Navigation $navigation;
+    public int|Navigation $navigation;
 
     #[Rule('required')]
     public $name = '';
@@ -16,7 +16,7 @@ class EditNavigation extends ModalComponent
     #[Rule('nullable')]
     public $description = '';
 
-    public function mount($navigation = null)
+    public function mount(Navigation $navigation = null)
     {
         if ($navigation) {
             $this->navigation = $navigation;
@@ -40,7 +40,7 @@ class EditNavigation extends ModalComponent
             );
         }
 
-        $this->closeModalWithEvents([
+        $this->close(andDispatch: [
             NavigationEditor::class => 'refreshComponent',
         ]);
     }

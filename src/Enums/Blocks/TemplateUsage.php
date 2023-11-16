@@ -4,7 +4,7 @@ namespace Sitebrew\Enums\Blocks;
 
 enum TemplateUsage: string
 {
-    case PAGES = 'pages';
+    case PAGES = 'contents';
 
     case AUTH = 'auth';
 }

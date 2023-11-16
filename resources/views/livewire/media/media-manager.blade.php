@@ -2,12 +2,12 @@
         'rounded-md overflow-hidden' => $isPicker
 ])>
     <x-sitebrew::layouts.dashboard-bar>
-        <div class="inline-flex items-center gap-x-2" x-data @if($isPicker) x-mousetrap.esc="$wire.close()" @endif>
-            @if($isPicker)<x-sitebrew::form.icon-button icon="chevron-left" class="-ml-2" wire:click="close()"></x-sitebrew::form.icon-button>@endif
+        <div class="inline-flex items-center gap-x-2" x-data @if($isPicker) x-mousetrap.esc="$wire.closeModal()" @endif>
+            @if($isPicker)<x-sitebrew::form.icon-button icon="chevron-left" class="-ml-2" wire:click="closeModal()"></x-sitebrew::form.icon-button>@endif
             <h1 class="text-lg font-medium text-neutral-800">Media Manager</h1>
         </div>
         <x-sitebrew::form.button
-                wire:click="$dispatch('openModal', { component: 'sitebrew::media.media-uploader' })"
+                wire:click="$dispatch('modal.open', { component: 'sitebrew::media.media-uploader' })"
                 class="flex-shrink-0 ml-2">
             {{__('sitebrew::media.upload')}}
             @svg('plus', 'w-5 h-5')

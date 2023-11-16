@@ -1,3 +1,4 @@
+@import "../../vendor/wire-elements/pro/resources/css/tailwind/overlay-component.css";
 @import 'tailwind.css';
 @import 'filepond/dist/filepond.min.css';
 @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';

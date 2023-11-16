@@ -51,6 +51,24 @@
                     ]
                 ];
                 break;
+            case AdminPath::CONTENT->value:
+                $title = __('sitebrew::general.content');
+
+                $navigationItems = collect();
+
+                // add all content types to navigation
+                $navigationItems = (collect(config('sitebrew.content_types'))->map(function($contentType, $key){
+                    return [
+                        'name' => $contentType,
+                        'url' => route('admin.content.index', ['type' => $key]),
+                    ];
+                }));
+
+                $navigationItems->prepend([
+                    'name' => __('sitebrew::general.all'),
+                    'url' => route('admin.content.index'),
+                ]);
+                // add another navigation item for all content types
         }
 
     @endphp
@@ -61,45 +79,58 @@
                 <div class="flex">
                     <!-- Logo -->
                     <div class="flex items-center shrink-0">
-                            <div class="flex items-center h-full py-1.5" x-data>
-                                <button class="flex items-center h-full gap-x-2.5 hover:bg-neutral-100 pl-1.5 pr-2.5 rounded-md cursor-pointer" @click="$refs.panel.toggle">
-                                    <div class="p-2 rounded-lg text-primary-50 h-10 w-10" style="background-color: {{AdminPathColor::getColor(AdminPath::from($path))}}">
-                                        @svg('sitebrew', 'h-full flex-shrink-0 drop-shadow-md')
-                                    </div>
+                        <div class="flex items-center h-full py-1.5" x-data>
+                            <button class="flex items-center h-full gap-x-2.5 hover:bg-neutral-100 pl-1.5 pr-2.5 rounded-md cursor-pointer"
+                                    @click="$refs.panel.toggle">
+                                <div class="p-2 rounded-lg text-primary-50 h-10 w-10"
+                                     style="background-color: {{AdminPathColor::getColor(AdminPath::from($path))}}">
+                                    @svg('sitebrew', 'h-full flex-shrink-0 drop-shadow-md')
+                                </div>
 
-                                    <p class="text-lg font-semibold text-neutral-700 pt-0.5">@if($path == AdminPath::ADMIN->value) Sitebrew @else {{ __('sitebrew::general.' . $path) }} @endif</p>
-                                </button>
+                                <p class="text-lg font-semibold text-neutral-700 pt-0.5">@if($path == AdminPath::ADMIN->value)
+                                        Sitebrew
+                                    @else
+                                        {{ __('sitebrew::general.' . $path) }}
+                                    @endif</p>
+                            </button>
 
-                                <div x-ref="panel" x-float.placement.bottom-start.offset.trap.hide x-cloak class="absolute bg-white rounded-md shadow-md overflow-hidden divide-y divide-neutral-200 border-neutral-200 border z-10">
-                                    @php
+                            <div x-ref="panel" x-float.placement.bottom-start.offset.trap.hide x-cloak
+                                 class="absolute bg-white rounded-md shadow-md overflow-hidden divide-y divide-neutral-200 border-neutral-200 border z-10">
+                                @php
                                     $cases = AdminPath::cases();
                                     $cases = collect($cases)->filter(fn($case) => $case->value != $path)->toArray();
-                                    @endphp
-                                    @foreach($cases as $casePath)
-                                        <a class="flex items-center h-full gap-x-2.5 hover:bg-neutral-100 pl-1.5 pr-2.5 py-1.5 cursor-pointer" href="{{$casePath == AdminPath::ADMIN ? route("admin.index") : route("admin.$casePath->value.index")}}">
-                                            <div class="p-2 rounded-lg text-primary-50 h-10 w-10" style="color: {{AdminPathColor::getColor($casePath)}}; background-color: {{AdminPathColor::getColor($casePath)}}22">
-                                                @svg(AdminPathColor::getIcon($casePath), 'h-full flex-shrink-0 drop-shadow-md')
-                                            </div>
+                                @endphp
+                                @foreach($cases as $casePath)
+                                    <a class="flex items-center h-full gap-x-2.5 hover:bg-neutral-100 pl-1.5 pr-2.5 py-1.5 cursor-pointer"
+                                       href="{{$casePath == AdminPath::ADMIN ? route("admin.index") : route("admin.$casePath->value.index")}}">
+                                        <div class="p-2 rounded-lg text-primary-50 h-10 w-10"
+                                             style="color: {{AdminPathColor::getColor($casePath)}}; background-color: {{AdminPathColor::getColor($casePath)}}22">
+                                            @svg(AdminPathColor::getIcon($casePath), 'h-full flex-shrink-0 drop-shadow-md')
+                                        </div>
 
-                                            <p class="text-base font-medium text-neutral-700 pt-0.5">@if($casePath == AdminPath::ADMIN) Home @else {{ __('sitebrew::general.' . $casePath->value) }} @endif</p>
-                                        </a>
-                                    @endforeach
+                                        <p class="text-base font-medium text-neutral-700 pt-0.5">@if($casePath == AdminPath::ADMIN)
+                                                Home
+                                            @else
+                                                {{ __('sitebrew::general.' . $casePath->value) }}
+                                            @endif</p>
+                                    </a>
+                                @endforeach
 
-                                </div>
                             </div>
+                        </div>
                     </div>
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-6 sm:-my-px sm:ml-4 sm:flex">
                         {{--  :active="request()->routeIs('feed.community')" :href="route('feed.community', 'all')" --}}
                         @foreach($navigationItems as $item)
-                        <a href="{{ $item['url'] }}"
-                            @class([
-                                'inline-flex items-center px-1 pt-1 border-b-2 border-primary-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-primary-700 transition duration-150 ease-in-out' => $item['url'] == request()->url(),
-                                'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out' => $item['url'] != request()->url(),
-                            ])>
-                            {{ $item['name'] }}
-                        </a>
+                            <a href="{{ $item['url'] }}"
+                                    @class([
+                                        'inline-flex items-center px-1 pt-1 border-b-2 border-primary-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-primary-700 transition duration-150 ease-in-out' => $item['url'] == request()->fullUrl(),
+                                        'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out' => $item['url'] != request()->fullUrl(),
+                                    ])>
+                                {{ $item['name'] }}
+                            </a>
                         @endforeach
                     </div>
                 </div>
@@ -142,7 +173,7 @@
                     </x-dropdown>
                 </div>--}}
                 @if($path == Sitebrew\Enums\Admin\AdminPath::ADMIN->value)
-                <p class="my-auto text-neutral-500">v0.0.1</p>
+                    <p class="my-auto text-neutral-500">v0.0.1</p>
                 @endif
 
                 <!-- Hamburger -->
@@ -218,8 +249,8 @@
     </div>
 </div>
 
-{{-- modalwidth comment for tailwind purge, used widths: sm:max-w-sm sm:max-w-md sm:max-w-lg sm:max-w-xl sm:max-w-2xl sm:max-w-3xl sm:max-w-4xl sm:max-w-5xl sm:max-w-6xl sm:max-w-7xl --}}
-@livewire('wire-elements-modal')
+@livewire('modal-pro')
 
 @livewireScriptConfig
+
 </body>

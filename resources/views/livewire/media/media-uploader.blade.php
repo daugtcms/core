@@ -20,7 +20,7 @@
     /*this.addEventListener('pondReset', e => {
         pond.removeFiles();
     });*/">
-    <x-sitebrew::modal.header close="close()">
+    <x-sitebrew::modal.header close="closeModal()">
             {{ __('sitebrew::media.upload_files') }}
     </x-sitebrew::modal.header>
     <input x-ref="input" type="file" multiple>

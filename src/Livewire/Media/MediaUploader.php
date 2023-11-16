@@ -6,10 +6,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Rule;
 use Livewire\WithFileUploads;
-use LivewireUI\Modal\ModalComponent;
 use Sitebrew\Jobs\Media\SaveUploadedFile;
+use WireElements\Pro\Components\Modal\Modal;
 
-class MediaUploader extends ModalComponent
+class MediaUploader extends Modal
 {
     use WithFileUploads;
 
@@ -33,8 +33,9 @@ class MediaUploader extends ModalComponent
         }
     }
 
-    public function close() {
-        $this->closeModalWithEvents([
+    public function closeModal() {
+        $this->close(
+            andDispatch: [
             MediaManager::class => 'refreshComponent'
         ]);
     }
@@ -48,13 +49,18 @@ class MediaUploader extends ModalComponent
     public function save() {
     }
 
-    public static function closeModalOnClickAway(): bool
+    public static function behavior(): array
     {
-        return false;
+        return [
+            'close-on-backdrop-click' => false,
+            'close-on-escape' => false,
+        ];
     }
 
-    public static function closeModalOnEscape(): bool
+    public static function attributes(): array
     {
-        return false;
+        return [
+            'size' => 'md'
+        ];
     }
 }

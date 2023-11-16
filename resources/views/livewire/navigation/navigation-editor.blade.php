@@ -11,7 +11,7 @@
             @endforeach
         </x-sitebrew::tabs.tabs>
         <x-sitebrew::form.button
-                wire:click="$dispatch('openModal', { component: 'sitebrew::navigation.edit-navigation' })"
+                wire:click="$dispatch('modal.open', { component: 'sitebrew::navigation.edit-navigation' })"
                 class="flex-shrink-0 ml-2">
             {{__('sitebrew::general.add')}}
             @svg('plus', 'w-5 h-5')
@@ -28,7 +28,7 @@
                 @endempty
                 <div class="flex gap-x-2 justify-end">
                     <x-sitebrew::form.button
-                            wire:click="$dispatch('openModal', { component: 'sitebrew::navigation.edit-navigation', arguments: { navigation: {{$currentNavigation->id}} } })"
+                            wire:click="$dispatch('modal.open', { component: 'sitebrew::navigation.edit-navigation', arguments: { navigation: {{$currentNavigation->id}} } })"
                     >@svg('pencil', 'w-5 h-5'){{__('sitebrew::general.edit')}}</x-sitebrew::form.button>
                     <x-sitebrew::form.button
                             style="danger"

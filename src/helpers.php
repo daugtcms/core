@@ -68,7 +68,8 @@ if (!function_exists('get_single_media')) {
         if(!is_array($mediaArray) || !count($mediaArray)) {
             return null;
         }
-        $data = MediaPickerData::from($mediaArray[0]);
+
+        $data = MediaPickerData::from(reset($mediaArray));
         return MediaHelper::getMediaById($data->id, $data->variant);
     }
 }

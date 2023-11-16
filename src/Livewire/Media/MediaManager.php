@@ -5,11 +5,11 @@ namespace Sitebrew\Livewire\Media;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
-use LivewireUI\Modal\ModalComponent;
 use Plank\Mediable\Media;
 use Sitebrew\Data\Media\MediaPickerData;
+use WireElements\Pro\Components\Modal\Modal;
 
-class MediaManager extends ModalComponent
+class MediaManager extends Modal
 {
     use WithPagination;
 
@@ -19,6 +19,8 @@ class MediaManager extends ModalComponent
     public string $id;
 
     public Collection $selectedMedia;
+
+    public array $selectedMediaArray = [];
 
     /*#[Rule([
         'currentItem' => ['nullable'],
@@ -35,7 +37,13 @@ class MediaManager extends ModalComponent
 
     public function mount()
     {
-        if(!isset($this->selectedMedia)) {
+        $this->selectedMedia = collect($this->selectedMediaArray);
+        $this->selectedMedia = $this->selectedMedia->map(function ($item) {
+            return MediaPickerData::from($item);
+        });
+        unset($this->selectedMediaArray);
+
+        if (!isset($this->selectedMedia)) {
             $this->selectedMedia = collect();
         }
     }
@@ -49,31 +57,32 @@ class MediaManager extends ModalComponent
         ]);
     }
 
-    public static function closeModalOnClickAway(): bool
+    public static function behavior(): array
     {
-        return false;
+        return [
+            'close-on-backdrop-click' => false,
+            'close-on-escape' => false,
+        ];
     }
 
-    public static function modalMaxWidth(): string
+    public static function attributes(): array
     {
-        return '6xl';
+        return [
+            'size' => '6xl'
+        ];
     }
 
-    public static function closeModalOnEscape(): bool
+    public function selectFile($id, $variant = 'optimized')
     {
-        return false;
-    }
-
-    public function selectFile($id, $variant = 'optimized') {
-        if($this->isPicker) {
-            if($this->selectedMedia->contains('id', $id)) {
-                $this->selectedMedia = $this->selectedMedia->reject(function($item) use ($id) {
+        if ($this->isPicker) {
+            if ($this->selectedMedia->contains('id', $id)) {
+                $this->selectedMedia = $this->selectedMedia->reject(function ($item) use ($id) {
                     return $item->id == $id;
-                });
+                })->values();
             } else {
                 $media = Media::findOrFail($id);
 
-                if($media->hasVariant($variant)) {
+                if ($media->hasVariant($variant)) {
                     $element = new MediaPickerData($id, $variant);
                 } else {
                     $element = new MediaPickerData($id);
@@ -84,9 +93,11 @@ class MediaManager extends ModalComponent
         }
     }
 
-    public function close() {
-        $this->closeModalWithEvents([
-            MediaPicker::class => ['mediaSelected', [$this->selectedMedia, $this->id]],
-        ]);
+    public function closeModal()
+    {
+        $this->close(
+            andDispatch: [
+                'mediaSelected' => [$this->selectedMedia, $this->id]
+            ]);
     }
 }

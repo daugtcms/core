@@ -1,25 +1,24 @@
 <?php
 
-namespace Sitebrew\Models\Pages;
+namespace Sitebrew\Models\Content;
 
 use Illuminate\Database\Eloquent\Model;
+use Sitebrew\Models\User;
 use Sitebrew\Traits\HasTranslations;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Page extends Model
+class Content extends Model
 {
     use HasTranslatableSlug, HasTranslations;
 
     public $translatable = [
         'title',
-        'description',
         'slug',
     ];
 
     protected $casts = [
         'blocks' => 'array',
-        'meta' => 'array',
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -27,5 +26,10 @@ class Page extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

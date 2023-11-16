@@ -10,6 +10,7 @@ return [
     'edit' => 'Bearbeiten',
     'confirm' => 'Bestätigen',
     'add_element' => 'Element hinzufügen',
+    'all' => 'Alle',
 
     'id' => 'ID',
     'title' => 'Titel',

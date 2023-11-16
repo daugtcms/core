@@ -13,6 +13,6 @@ Route::group(['middleware' => ['web']], function () {
     require __DIR__.'/Routes/auth.php';
     require __DIR__.'/Routes/blocks.php';
     require __DIR__.'/Routes/navigation.php';
-    require __DIR__.'/Routes/pages.php';
+    require __DIR__ . '/Routes/content.php';
     require __DIR__.'/Routes/media.php';
 });

@@ -6,8 +6,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Layout;
-use Livewire\Component;
 use Sitebrew\Data\Blocks\BlockData;
 use Sitebrew\Data\Blocks\BlockEditorData;
 use Sitebrew\Data\Blocks\TemplateData;
@@ -16,8 +14,9 @@ use Sitebrew\Models\Blocks\Template;
 use Sitebrew\View\Blocks\Block;
 use Sitebrew\View\Blocks\Misc\BlockSynth;
 use Sitebrew\View\Blocks\Misc\BlocksRenderer;
+use WireElements\Pro\Components\Modal\Modal;
 
-class BlockEditor extends Component
+class BlockEditor extends Modal
 {
     public $listeners = [
         'blockSelected' => 'setActiveBlock',
@@ -36,6 +35,8 @@ class BlockEditor extends Component
     public Template $template;
 
     public Block $templateBlock;
+
+    public $id = 0;
 
     public function mount(array $data = null, $templates = null)
     {
@@ -115,7 +116,12 @@ class BlockEditor extends Component
             $blocks[] = new BlockData(get_class($block), $attributes);
         })->values();
 
-        $this->dispatch('save-blocks', (new BlockEditorData($template, $blocks))->toArray());
+        // $this->dispatch('save-blocks', (new BlockEditorData($template, $blocks))->toArray());
+        $this->close(
+            andDispatch: [
+            'saveBlocks' => [(new BlockEditorData($template, $blocks))->toArray(), $this->id]
+        ]
+        );
     }
 
     public function updated($name, $value)
@@ -178,5 +184,14 @@ class BlockEditor extends Component
         $this->blocks = collect($list)->map(function ($uuid) {
             return $this->blocks->firstWhere('uuid', $uuid);
         });
+    }
+
+    public static function attributes(): array
+    {
+        return [
+            // Set the modal size to 2xl, you can choose between:
+            // xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, fullscreen
+            'size' => 'fullscreen',
+        ];
     }
 }

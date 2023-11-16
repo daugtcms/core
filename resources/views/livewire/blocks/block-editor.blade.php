@@ -3,8 +3,8 @@
     <div class="bg-neutral-50 flex-grow flex flex-col">
         <div class="bg-white w-full h-12 flex items-center justify-between pl-2 pr-4 flex-shrink-0">
             <div class="flex items-center gap-x-1.5">
-                <x-sitebrew::form.icon-button icon="chevron-left"
-                                               wire:click="$dispatch('save-blocks')"></x-sitebrew::form.icon-button>
+                <x-sitebrew::form.icon-button icon="x"
+                                               wire:click="$dispatch('modal.close')"></x-sitebrew::form.icon-button>
                 <h1 class="text-lg font-medium">{{$title}}</h1>
             </div>
             <div class="flex gap-x-2">

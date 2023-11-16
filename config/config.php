@@ -8,4 +8,9 @@ return [
     ],
     'available_templates' => [
     ],
+    'content_types' => [
+        'post' => 'Beitrag',
+        'page' => 'Seite',
+        'blog' => 'Blog',
+    ],
 ];

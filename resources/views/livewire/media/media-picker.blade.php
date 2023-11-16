@@ -1,7 +1,7 @@
 <div class="bg-neutral-200/50 border-neutral-200 border-2 shadow-sm rounded-md">
     <div class="p-2">
     <x-sitebrew::form.button
-            wire:click="$dispatch('openModal', { component: 'sitebrew::media.media-manager', arguments: { isPicker: true, id: '{{$id}}' } })"
+            wire:click="$dispatch('modal.open', { component: 'sitebrew::media.media-manager', arguments: { isPicker: true, id: '{{$id}}', selectedMediaArray: {{collect($selectedMedia)}} } })"
             type="button"                    {{--TODO: add back input paramter selectedMedia: {{collect($selectedMedia)}} when https://github.com/wire-elements/modal/issues/384 is resolved  --}}
             style="light"
             class="w-full shadow-md/50 bg-white">
