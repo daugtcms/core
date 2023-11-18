@@ -2,7 +2,10 @@
 
 namespace Sitebrew;
 
-use Sitebrew\Data\Media\MediaPickerData;
+use Sitebrew\Livewire\Content\CourseSectionsTable;
+use Sitebrew\Livewire\Content\CoursesTable;
+use Sitebrew\Livewire\Content\EditCourse;
+use Sitebrew\Livewire\Content\EditCourseSection;
 use Sitebrew\Livewire\Media\EditMedia;
 use Sitebrew\Livewire\Media\MediaManager;
 use Sitebrew\Livewire\Media\MediaPicker;
@@ -60,6 +63,10 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Livewire::component('sitebrew::media.edit-media', EditMedia::class);
         Livewire::component('sitebrew::users.user-table', UserTable::class);
         Livewire::component('sitebrew::users.edit-user', EditUser::class);
+        Livewire::component('sitebrew::content.courses-table', CoursesTable::class);
+        Livewire::component('sitebrew::content.edit-course', EditCourse::class);
+        Livewire::component('sitebrew::content.course-sections-table', CourseSectionsTable::class);
+        Livewire::component('sitebrew::content.edit-course-section', EditCourseSection::class);
     }
 
     /**

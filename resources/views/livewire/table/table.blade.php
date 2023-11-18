@@ -1,10 +1,11 @@
-<div class="mx-auto max-w-7xl sm:px-4 py-4">
+<div class="@if($fullWidth) w-full @else mx-auto max-w-7xl sm:px-4 py-4 @endif">
+    @if($allowCreate)
     <div class="w-full flex justify-between items-center py-2.5">
         <x-sitebrew::form.input class="opacity-0 pointer-events-none h-[34px] max-w-xs" placeholder="{{__('sitebrew::general.search_items')}}"> </x-sitebrew::form.input>
-        @if($allowCreate)
-            <x-sitebrew::form.button style="light" wire:click="add()" class="flex-shrink-0 h-full">@svg('plus', 'w-4 h-4'){{__('sitebrew::general.add_element')}}</x-sitebrew::form.button>
-        @endif
+            <x-sitebrew::form.button type="button" style="light" wire:click="add()" class="flex-shrink-0 h-full">@svg('plus', 'w-4 h-4'){{__('sitebrew::general.add_element')}}</x-sitebrew::form.button>
     </div>
+    @endif
+
     <div class="relative overflow-x-auto sm:rounded-lg">
         <table class="w-full text-sm text-left text-neutral-700">
             <thead class="text-xs text-gray-700 uppercase bg-neutral-100 sticky top-0">
@@ -18,9 +19,9 @@
                 @endforeach
             </tr>
             </thead>
-            <tbody class="divide-y-2 divide-neutral-100">
+            <tbody class="divide-y-2 divide-neutral-100" @if($sortable) wire:sortable="updateSortOrder" wire:sortable.options="{ animation: 100 }" @endif>
             @foreach($this->data() as $row)
-                <tr class="bg-neutral-50/50 hover:bg-neutral-50">
+                <tr class="bg-neutral-50/50 hover:bg-neutral-50" @if($sortable) wire:sortable.item="{{ $row['id'] }}" wire:key="task-{{ $row['id'] }}" @endif>
                     @foreach($this->columns() as $column)
                         <td>
                             <div class="py-2 px-3 flex items-center cursor-pointer">

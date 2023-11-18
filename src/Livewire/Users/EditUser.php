@@ -35,7 +35,10 @@ class EditUser extends Modal
     {
         $this->validate();
 
-        if (isset($this->user)) {
+        if (isset($this->user->id)) {
+            if($this->user->email != $this->email) {
+                $this->user->email_verified_at = null;
+            }
             $this->user->update(
                 $this->only(['name', 'email', 'full_name'])
             );

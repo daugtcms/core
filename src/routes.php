@@ -16,4 +16,5 @@ Route::group(['middleware' => ['web']], function () {
     require __DIR__ . '/Routes/content.php';
     require __DIR__.'/Routes/media.php';
     require __DIR__.'/Routes/users.php';
+    require __DIR__.'/Routes/shop.php';
 });

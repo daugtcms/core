@@ -62,7 +62,7 @@ class EditTemplate extends Modal
     {
         $this->validate();
 
-        if (isset($this->template)) {
+        if (isset($this->template->id)) {
             $this->template->update(
                 $this->only(['name', 'view_name', 'data', 'usage'])
             );

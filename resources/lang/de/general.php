@@ -26,6 +26,8 @@ return [
     'type' => 'Typ',
     'author' => 'Autor',
     'username' => 'Benutzername',
+    'starts_at' => 'Startet am',
+    'ends_at' => 'Endet am',
 
     'no_value_available' => 'Kein Wert vorhanden',
     'search_items' => 'Suche Elemente...',
@@ -40,6 +42,9 @@ return [
     'content.description' => 'Verwaltung aller Inhalte im System. Hier können Sie neue Inhalte erstellen und bestehende bearbeiten.',
     'users' => 'Benutzer',
     'users.description' => 'Verwaltung aller Benutzer im System. Hier können Sie Benutzer löschen und bestehende bearbeiten.',
+    'shop' => 'Shop',
+    'shop.description' => 'Verwaltung aller Produkte im System. Hier können Sie neue Produkte erstellen und bestehende bearbeiten.',
     'navigation' => 'Navigation',
-    'templates' => 'Templates'
+    'templates' => 'Templates',
+    'courses' => 'Kurse',
 ];

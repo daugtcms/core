@@ -29,7 +29,7 @@ class EditNavigation extends Modal
     {
         $this->validate();
 
-        if (isset($this->navigation)) {
+        if (isset($this->navigation->id)) {
             $this->navigation->update(
                 $this->only(['name', 'description'])
             );

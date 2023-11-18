@@ -46,8 +46,11 @@
                     ],
                     [
                         'name' => __('sitebrew::general.templates'),
-                        'icon' => 'layout',
                         'url' => route('admin.structure.templates'),
+                    ],
+                    [
+                            'name' => __('sitebrew::general.courses'),
+                            'url' => route('admin.structure.courses.index'),
                     ]
                 ];
                 break;

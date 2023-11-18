@@ -22,6 +22,7 @@
     "league/flysystem-aws-s3-v3": "^3.0",
     "livewire/livewire": "^3.0",
     "plank/laravel-mediable": "^5.9",
+    "spatie/eloquent-sortable": "^4.0",
     "spatie/laravel-data": "^3.9",
     "spatie/laravel-google-fonts": "^1.2",
     "spatie/laravel-permission": "^6.1",

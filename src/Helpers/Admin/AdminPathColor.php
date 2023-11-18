@@ -14,6 +14,7 @@ class AdminPathColor
             AdminPath::STRUCTURE->value => '#6366f1',
             AdminPath::CONTENT->value => '#3b82f6',
             AdminPath::USERS->value => '#ef4444',
+            AdminPath::SHOP->value => '#f97316',
         ];
 
         return $colors[$path->value];
@@ -27,6 +28,7 @@ class AdminPathColor
             AdminPath::STRUCTURE->value => 'layout-panel-top',
             AdminPath::CONTENT->value => 'text',
             AdminPath::USERS->value => 'user',
+            AdminPath::SHOP->value => 'shopping-cart',
         ];
 
         return $colors[$path->value];

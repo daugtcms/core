@@ -1,6 +1,5 @@
 <?php
 
-use Sitebrew\Controllers\Pages\ShowPageController;
 use Illuminate\Support\Facades\Route;
 use Sitebrew\Livewire\Users\UserTable;
 
