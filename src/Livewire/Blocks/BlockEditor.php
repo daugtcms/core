@@ -63,7 +63,7 @@ class BlockEditor extends Modal
 
         if (isset($data['blocks'])) {
             $this->blocks = collect($data['blocks'])->map(function ($block) {
-                $blockClass = $block['block'];
+                $blockClass = config('sitebrew.available_blocks')[$block['block']];
                 $blockAttributes = $block['attributes'];
 
                 data_forget($blockAttributes, 'uuid');
@@ -113,7 +113,9 @@ class BlockEditor extends Modal
                 $attributes[$propertyName] = $propertyValue;
             });
 
-            $blocks[] = new BlockData(get_class($block), $attributes);
+            // get index of available_blocks
+            $blockName = array_search(get_class($block), config('sitebrew.available_blocks'));
+            $blocks[] = new BlockData($blockName, $attributes);
         })->values();
 
         // $this->dispatch('save-blocks', (new BlockEditorData($template, $blocks))->toArray());

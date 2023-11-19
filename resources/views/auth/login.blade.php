@@ -33,7 +33,7 @@
 
         <!-- Remember Me -->
         <div class="block mt-4">
-            <x-sitebrew::form.checkbox name="remember_me">{{ __('sitebrew::auth.remember_me') }}</x-sitebrew::form.checkbox>
+            <x-sitebrew::form.checkbox name="remember">{{ __('sitebrew::auth.remember_me') }}</x-sitebrew::form.checkbox>
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -8,6 +8,7 @@
   "devDependencies": {
     "@alpinejs/focus": "^3.13.0",
     "@alpinejs/intersect": "^3.13.0",
+    "@alpinejs/mask": "^3.13.2",
     "@awcodes/alpine-floating-ui": "^3.5.0",
     "@danharrin/alpine-mousetrap": "^0.1.5",
     "@nextapps-be/livewire-sortablejs": "^0.3.1",

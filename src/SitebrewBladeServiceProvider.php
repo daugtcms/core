@@ -10,6 +10,9 @@ use Sitebrew\Livewire\Media\EditMedia;
 use Sitebrew\Livewire\Media\MediaManager;
 use Sitebrew\Livewire\Media\MediaPicker;
 use Sitebrew\Livewire\Media\MediaUploader;
+use Sitebrew\Livewire\Shop\EditProduct;
+use Sitebrew\Livewire\Shop\ProductTable;
+use Sitebrew\Livewire\Table\SelectTableItems;
 use Sitebrew\Livewire\Users\EditUser;
 use Sitebrew\Livewire\Users\UserTable;
 use Sitebrew\View\Blocks\Misc\BlocksRenderer;
@@ -67,6 +70,9 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Livewire::component('sitebrew::content.edit-course', EditCourse::class);
         Livewire::component('sitebrew::content.course-sections-table', CourseSectionsTable::class);
         Livewire::component('sitebrew::content.edit-course-section', EditCourseSection::class);
+        Livewire::component('sitebrew::shop.product-table', ProductTable::class);
+        Livewire::component('sitebrew::shop.edit-product', EditProduct::class);
+        Livewire::component('sitebrew::table.select-table-items', SelectTableItems::class);
     }
 
     /**

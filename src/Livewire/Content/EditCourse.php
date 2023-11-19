@@ -2,6 +2,7 @@
 
 namespace Sitebrew\Livewire\Content;
 
+use Carbon\Carbon;
 use Livewire\Features\SupportAttributes\AttributeCollection;
 use Sitebrew\Livewire\Navigation\NavigationEditor;
 use Sitebrew\Models\Content\Course;
@@ -27,8 +28,10 @@ class EditCourse extends Modal
     {
         if ($course) {
             $this->name = $course->name;
-            $this->starts_at = $course->starts_at;
-            $this->ends_at = $course->ends_at;
+                $this->starts_at = $course->starts_at ? $course->starts_at->format('Y-m-d') : $course->starts_at;
+            if($course->ends_at) {
+                $this->ends_at = $course->ends_at ? $course->ends_at->format('Y-m-d') : $course->ends_at;
+            }
             $this->course = $course;
         }
     }
@@ -37,9 +40,11 @@ class EditCourse extends Modal
     {
         $this->validate();
         if (isset($this->course->id)) {
-            $this->course->update(
-                $this->only(['name', 'starts_at', 'ends_at'])
-            );
+            $this->course->update([
+                'name' => $this->name,
+                'starts_at' => $this->starts_at ?: null,
+                'ends_at' => $this->ends_at ?: null,
+            ]);
             $this->course->save();
         } else {
             Course::create(

@@ -10,6 +10,13 @@ class Column
 
     public string $label;
 
+    public static array $modifierColumns = [
+        'sitebrew::table.edit',
+        'sitebrew::table.delete',
+    ];
+
+    public bool $readonly;
+
     public string $custom = '';
 
     public function __construct($key, $label)

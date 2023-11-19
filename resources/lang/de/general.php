@@ -28,8 +28,10 @@ return [
     'username' => 'Benutzername',
     'starts_at' => 'Startet am',
     'ends_at' => 'Endet am',
+    'price' => 'Preis',
 
     'no_value_available' => 'Kein Wert vorhanden',
+    'select_items' => 'Elemente auswählen',
     'search_items' => 'Suche Elemente...',
     'no_icon_selected' => 'Kein Symbol ausgewählt',
     'more_to_come' => 'Weitere Funktionen folgen...',

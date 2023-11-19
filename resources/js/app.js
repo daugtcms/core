@@ -4,6 +4,7 @@ import '@nextapps-be/livewire-sortablejs';
 import Focus from "@alpinejs/focus";
 import AlpineFloatingUI from "@awcodes/alpine-floating-ui";
 import Intersect from "@alpinejs/intersect";
+import mask from "@alpinejs/mask";
 
 import * as FilePond from 'filepond';
 import {registerPlugin} from "filepond";
@@ -25,5 +26,6 @@ Alpine.plugin(Mousetrap)
 Alpine.plugin(Focus);
 Alpine.plugin(AlpineFloatingUI);
 Alpine.plugin(Intersect);
+Alpine.plugin(mask);
 
 Livewire.start()

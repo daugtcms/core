@@ -11,6 +11,11 @@ class Course extends Model
 {
     use HasSlug;
 
+    protected $casts = [
+        'starts_at' => 'date',
+        'ends_at' => 'date',
+    ];
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
