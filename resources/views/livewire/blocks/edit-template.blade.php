@@ -13,7 +13,16 @@
                 'value' => $usage->value,
                 'title' => $usage->name
             ];
-        })->values()->toJson();
+        });
+
+        $usages = $usages->push(...collect(config('sitebrew.content_types'))->map(function (string $item, string $key){
+            return [
+                'value' => $key,
+                'title' => $item
+            ];
+        })->values());
+
+        $usages = $usages->values()->toJson();
     @endphp
     <x-sitebrew::modal.header>{{__('sitebrew::blocks.manage_template')}}</x-sitebrew::modal.header>
     <div class="flex flex-col gap-y-2">

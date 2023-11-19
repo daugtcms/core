@@ -6,18 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Sitebrew\Models\User;
-use Sitebrew\Traits\HasTranslations;
-use Spatie\Sluggable\HasTranslatableSlug;
+use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Content extends Model
 {
-    use HasTranslatableSlug, HasTranslations, SoftDeletes, Prunable;
-
-    public $translatable = [
-        'title',
-        'slug',
-    ];
+    use HasSlug, SoftDeletes, Prunable;
 
     protected $casts = [
         'blocks' => 'array',
@@ -27,7 +21,8 @@ class Content extends Model
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('slug')
+            ->allowDuplicateSlugs();
     }
 
     public function user()
@@ -38,5 +33,10 @@ class Content extends Model
     public function prunable()
     {
         return static::where('created_at', '<=', now()->subYear());
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

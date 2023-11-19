@@ -38,26 +38,26 @@ class BlockEditor extends Modal
 
     public $id = 0;
 
-    public function mount(array $data = null, $templates = null)
+    public function mount($usage, array $data = null)
     {
         if (empty($this->templates)) {
-            $this->templates = Template::all();
+            $this->templates = Template::where('usage', $usage)->get();
         }
 
         $this->template = $this->templates[0];
 
-        $this->restoreState($data);
+        $this->restoreState($data ?? []);
     }
 
     public function restoreState(array $data)
     {
-        if (isset($data['template'])) {
+        if (isset($data['template']['template'])) {
             $templateData = TemplateData::from($data['template']);
             $this->template = Template::findOrFail($templateData->template);
             $templateAttributes = Arr::collapse([$this->template->data, $templateData->attributes]);
         } else {
             $this->template = $this->templates[0];
-            $templateAttributes = $this->template->data;
+            $templateAttributes = Arr::collapse([$this->template->data, $data['template']['attributes']]);
         }
         $this->templateBlock = new (config('sitebrew.available_templates')[$this->template->view_name])(...$templateAttributes);
 

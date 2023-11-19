@@ -16,12 +16,13 @@ class TemplateRenderer extends Component
 {
     private Block $templateBlock;
 
-    public TemplateUsage $usage;
+    public string $usage;
 
+    public bool $withinTemplate = false;
 
     public function __construct(string $usage)
     {
-        $this->usage = TemplateUsage::from($usage);
+        $this->usage = $usage;
         $this->restoreState([]);
     }
 

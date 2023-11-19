@@ -12,4 +12,5 @@ return [
     'manage_template' => 'Template verwalten',
     'attributes' => 'Attribute',
     'open_block_editor' => 'Block Editor öffnen',
+    'readonly_info' => 'Dieses Attribut ist schreibgeschützt.',
 ];

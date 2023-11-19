@@ -17,4 +17,5 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
     Route::delete('/{page}', DeleteContentController::class);
 });
 
+Route::get('/', ShowPageController::class)->name('contents.index');
 Route::get('/{slug}', ShowPageController::class)->name('contents.index');

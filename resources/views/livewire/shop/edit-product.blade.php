@@ -12,13 +12,23 @@
         </div>
 
         <div>
+            <x-sitebrew::form.label for="description">
+                {{__('sitebrew::general.description')}}
+                <x-slot name="additional">
+                    {{__('sitebrew::shop.disclaimer_no_real_data_without_saving')}}
+                </x-slot>
+            </x-sitebrew::form.label>
+            <x-sitebrew::form.button class="w-full" type="button" style="light" wire:click="openBlockEditor()" :disabled="empty($product->id)">{{__('sitebrew::blocks.open_block_editor')}}</x-sitebrew::form.button>
+        </div>
+
+        <div>
             <x-sitebrew::form.label for="media">
                 {{__('sitebrew::shop.product_media')}}
                 <x-slot name="additional">
                     {{__('sitebrew::shop.product_media_description')}}
                 </x-slot>
             </x-sitebrew::form.label>
-            <x-sitebrew::form.media wire:model="media" wire:key="media"></x-sitebrew::form.media>
+            <x-sitebrew::form.media name="media" wire:model="media" wire:key="media"></x-sitebrew::form.media>
         </div>
 
         <x-sitebrew::tabs.tabs class="bg-neutral-100 mt-2 mb-1 py-1.5 px-1.5 rounded-md border-neutral-200 border-2">

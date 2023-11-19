@@ -42,7 +42,7 @@ class BlocksRenderer extends Component
         $this->templateBlock = new (config('sitebrew.available_templates')[$template->view_name])(...$templateAttributes);
         if (isset($data['blocks'])) {
             $this->blocks = collect($data['blocks'])->map(function ($block) {
-                $blockClass = $block['block'];
+                $blockClass = config('sitebrew.available_blocks')[$block['block']];;
                 $blockAttributes = $block['attributes'];
 
                 data_forget($blockAttributes, 'uuid');

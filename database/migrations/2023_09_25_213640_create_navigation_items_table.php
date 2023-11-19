@@ -11,9 +11,9 @@ return new class extends Migration
         Schema::create('navigation_items', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
-            $table->json('name');
-            $table->json('description')->nullable();
-            $table->json('url')->nullable();
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->string('url')->nullable();
             $table->nullableMorphs('navigable');
             $table->string('icon')->nullable();
             $table->string('target')->default('_self');

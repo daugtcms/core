@@ -32,14 +32,17 @@ class ContentTable extends Table
     public function add(): void
     {
         $this->dispatch('modal.open', 'sitebrew::block-editor', [
+            'usage' => $this->type,
             'data' => [],
         ]);
     }
 
     public function edit($id): void
     {
+        $content = Content::findOrFail($id);
         $this->dispatch('modal.open', 'sitebrew::block-editor', [
-            'data' => Content::findOrFail($id)->blocks,
+            'usage' => $content->type,
+            'data' => $content->blocks,
             'id' => $id
         ]);
     }
@@ -74,6 +77,9 @@ class ContentTable extends Table
         } else {
             $content = Content::findOrFail($id);
             $content->title = $title;
+            if(empty($content->title)) {
+                $content->slug = null;
+            }
             $content->blocks = $data;
             $content->save();
         }

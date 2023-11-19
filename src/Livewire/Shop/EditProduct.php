@@ -4,7 +4,10 @@ namespace Sitebrew\Livewire\Shop;
 
 use Livewire\Attributes\On;
 use Livewire\Features\SupportAttributes\AttributeCollection;
+use Plank\Mediable\Media;
+use Sitebrew\Enums\Blocks\TemplateUsage;
 use Sitebrew\Enums\Shop\BillingType;
+use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Livewire\Content\CoursesTable;
 use Sitebrew\Models\Content\Course;
 use Sitebrew\Models\Navigation\Navigation;
@@ -19,6 +22,8 @@ class EditProduct extends Modal
 
     #[Rule('required')]
     public $name = '';
+
+    public ?array $description;
 
     #[Rule('required')]
     public $price = 0;
@@ -50,6 +55,7 @@ class EditProduct extends Modal
     {
         if ($product) {
             $this->name = $product->name;
+            $this->description = $product->description;
             $this->price = $product->price;
 
             $this->isExternal = !empty($product->external_url);
@@ -64,17 +70,17 @@ class EditProduct extends Modal
             $this->course_id = $product->course_id;
             $this->starts_at = $product->starts_at ? $product->starts_at->format('Y-m-d') : $product->starts_at;
             $this->ends_at = $product->ends_at ? $product->ends_at->format('Y-m-d') : $product->ends_at;
+
+            $this->media = $product->getMedia('media')->map(function ($media) {
+                return ['id' => $media->id, 'variant' => 'optimized'];
+            })->toArray();
         }
     }
 
     public function save()
     {
         $this->validate();
-        $properties = [...$this->only(['name', 'price', 'external_url', 'shipping', 'multi', 'content_id', 'course_id', 'starts_at', 'ends_at']), 'billing_type' => BillingType::ONE_TIME];
-
-        if(!empty($external_url)) {
-            // TODO: Clear all other fields
-        }
+        $properties = [...$this->only(['name', 'description', 'price', 'external_url', 'shipping', 'multi', 'content_id', 'course_id', 'starts_at', 'ends_at']), 'billing_type' => BillingType::ONE_TIME];
 
         if (isset($this->product->id)) {
             $this->product->update(
@@ -82,10 +88,16 @@ class EditProduct extends Modal
             );
             $this->product->save();
         } else {
-            Product::create(
+            $this->product = Product::create(
                 $properties
             );
         }
+
+        $this->product->detachMediaTags('media');
+
+        collect($this->media)->each(function ($media) {
+            $this->product->attachMedia($media['id'], 'media');
+        });
 
         $this->close(andDispatch: [
             ProductTable::class => 'refreshComponent',
@@ -140,4 +152,25 @@ class EditProduct extends Modal
             $this->starts_at = null;
         }
     }
+
+    public function openBlockEditor() {
+        $data = [];
+        if(!empty($this->description)) {
+            $data = $this->description;
+        } else {
+            $data['template']['attributes']['product'] = $this->product->id;
+        }
+
+        $this->dispatch('modal.open', component: 'sitebrew::block-editor', arguments: ['usage' => TemplateUsage::SHOP_PRODUCT, 'data' => $data, 'id' => 'product-' . $this->product->id ] );
+    }
+
+    #[On('saveBlocks')]
+    public function saveBlocks($data, $id)
+    {
+        if($id == 'product-' . $this->product->id) {
+            $this->description = $data;
+        }
+    }
+
+
 }

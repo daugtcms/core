@@ -44,6 +44,9 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Blade::directive('svg', function ($expression) {
             return "<?php echo svg($expression); ?>";
         });
+        Blade::directive('number', function ($number) {
+            return "<?php echo number_format($number, 2, ',', '.'); ?>";
+        });
         Blade::component('sitebrew::blocks-renderer', BlocksRenderer::class);
         Blade::component('sitebrew::template-renderer', TemplateRenderer::class);
 

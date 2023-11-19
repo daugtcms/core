@@ -3,20 +3,14 @@
 namespace Sitebrew\Models\Shop;
 
 use Illuminate\Database\Eloquent\Model;
+use Plank\Mediable\Mediable;
 use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\User;
-use Sitebrew\Traits\HasTranslations;
-use Spatie\Sluggable\HasTranslatableSlug;
+use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Product extends Model
 {
-    use HasTranslatableSlug, HasTranslations;
-
-    public $translatable = [
-        'name',
-        'slug',
-    ];
+    use HasSlug, Mediable;
 
     protected $casts = [
         'description' => 'array',
@@ -35,10 +29,5 @@ class Product extends Model
 
     public function content() {
         return $this->belongsTo(Content::class);
-    }
-
-    public function prunable()
-    {
-        return static::where('created_at', '<=', now()->subYear());
     }
 }

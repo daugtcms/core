@@ -1,0 +1,26 @@
+{
+  "_module.esm-98ef9d22.js": {
+    "file": "assets/module.esm-98ef9d22.js"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-d3313118.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-46171a9c.js",
+    "imports": [
+      "_module.esm-98ef9d22.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/stripped.js": {
+    "file": "assets/stripped-dde9979e.js",
+    "imports": [
+      "_module.esm-98ef9d22.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/stripped.js"
+  }
+}

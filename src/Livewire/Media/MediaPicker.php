@@ -47,7 +47,6 @@ class MediaPicker extends Component
     }
 
     public function mediaSelected($media, $key = '') {
-        // TODO: Check if key is correct and only then listen to the event
         if(!empty($key) && $key != $this->id) {
             return;
         }

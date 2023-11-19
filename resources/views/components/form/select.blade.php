@@ -108,6 +108,7 @@
     @if($error)
         <div class="text-sm text-danger-600 mt-1">{{$error}}</div>
     @endif
+
     <ul
             x-ref="panel"
             x-transition:enter="transition ease-out duration-50"

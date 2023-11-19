@@ -4,6 +4,7 @@ namespace Sitebrew;
 
 use Aws\S3\S3Client;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Gate;
@@ -16,6 +17,7 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\Visibility;
 use Plank\Mediable\Facades\ImageManipulator;
 use Plank\Mediable\ImageManipulation;
+use Plank\Mediable\Media;
 use Sitebrew\Commands\SyncIcons;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +25,15 @@ use Laravel\Horizon\HorizonApplicationServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider;
 use Sitebrew\Extensions\CloudflareR2Adapter;
 use Sitebrew\Helpers\Media\MediaHelper;
+use Sitebrew\Livewire\Shop\ProductTable;
+use Sitebrew\Models\Blocks\Template;
+use Sitebrew\Models\Content\Content;
+use Sitebrew\Models\Content\Course;
+use Sitebrew\Models\Content\CourseSection;
+use Sitebrew\Models\Navigation\Navigation;
+use Sitebrew\Models\Navigation\NavigationItem;
+use Sitebrew\Models\Shop\Product;
+use Sitebrew\Models\User;
 use WireElements\Pro\Components\Modal\ModalServiceProvider;
 
 class SitebrewServiceProvider extends ServiceProvider
@@ -33,7 +44,7 @@ class SitebrewServiceProvider extends ServiceProvider
     public function boot()
     {
         // TODO: structure this into different service providers
-        Gate::after(function ($user, $ability) {
+        Gate::before(function ($user, $ability) {
             return $user->hasRole('Admin');
         });
 
@@ -132,6 +143,18 @@ class SitebrewServiceProvider extends ServiceProvider
                 SyncIcons::class,
             ]);
         }
+
+        Relation::enforceMorphMap([
+            'product' => Product::class,
+            'content' => Content::class,
+            'course' => Course::class,
+            'course-section' => CourseSection::class,
+            'template' => Template::class,
+            'navigation' => Navigation::class,
+            'navigation-item' => NavigationItem::class,
+            'user' => User::class,
+            'media' => Media::class
+        ]);
     }
 
     /**

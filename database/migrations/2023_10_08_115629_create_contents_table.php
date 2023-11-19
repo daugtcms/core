@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->json('title')->nullable();
-            $table->json('slug')->nullable();
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained()

@@ -21,4 +21,5 @@ return [
     'linked_course_description' => 'Der ausgewählte Kurs wird mit Kauf dieses Produkts freigeschaltet',
     'product_media' => 'Produkt-Medien',
     'product_media_description' => 'Diese Medien werden auf der Produktseite angezeigt',
+    'disclaimer_no_real_data_without_saving' => 'Ohne vorherigem Speichern, werden im Block-Editor keine aktuellen Produkt-Daten angezeigt!'
 ];

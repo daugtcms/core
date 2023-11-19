@@ -11,7 +11,7 @@ export default defineConfig({
                 manualChunks: {}
             }
         },*/
-        minify: false
+        minify: true
     },
     plugins: [
         laravel({
