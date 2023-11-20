@@ -53,7 +53,7 @@ class EditProduct extends Modal
 
     public function mount(Product $product = null)
     {
-        if ($product) {
+        if (isset($product->id)) {
             $this->name = $product->name;
             $this->description = $product->description;
             $this->price = $product->price;
