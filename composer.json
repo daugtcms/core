@@ -28,6 +28,8 @@
     "spatie/laravel-google-fonts": "^1.2",
     "spatie/laravel-permission": "^6.1",
     "spatie/laravel-sluggable": "^3.5",
+    "symfony/http-client": "^6.3",
+    "symfony/postmark-mailer": "^6.3",
     "wire-elements/pro": "^4.0"
   },
   "require-dev": {
