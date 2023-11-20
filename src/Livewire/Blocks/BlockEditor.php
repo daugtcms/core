@@ -84,7 +84,7 @@ class BlockEditor extends Modal
         }
 
         return view('sitebrew::livewire.blocks.block-editor', [
-            'availableBlocks' => config('sitebrew.available_blocks'),
+            'availableBlocks' => $this->getAvailableBlocks(),
             'viewContent' => BlocksRenderer::fromTemplate($this->templateBlock, $this->blocks)->render(),
         ]);
     }
@@ -142,7 +142,7 @@ class BlockEditor extends Modal
     public function addBlock(string $blockName)
     {
         $this->blocks->add(new $blockName());
-
+        $this->setActiveBlock($this->blocks->last()->uuid);
         return $this->blocks;
     }
 
@@ -195,5 +195,16 @@ class BlockEditor extends Modal
             // xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, fullscreen
             'size' => 'fullscreen',
         ];
+    }
+
+    public function getAvailableBlocks() {
+        $blocks = $this->template->available_blocks;
+        if(!empty($blocks)) {
+            return collect($blocks)->map(function ($block) {
+                return config('sitebrew.available_blocks')[$block];
+            })->values();
+        } else {
+            return config('sitebrew.available_blocks');
+        }
     }
 }

@@ -141,18 +141,15 @@
                 </div>
 
                 <div class="lg:col-span-3">
-                    <!--<div class="border-b border-neutral-300">
+                    <div class="border-b border-neutral-300">
                         <nav class="flex gap-4">
-                            <a href="#" title="" class="border-b-2 border-neutral-900 py-4 text-sm font-medium text-neutral-900 hover:border-neutral-400 hover:text-neutral-800"> Description </a>
+                            <a title="" class="border-b-2 border-primary-500 py-2 text-base font-medium text-neutral-800">
+                                {{__('sitebrew::general.description')}} </a>
 
-                            <a href="#" title="" class="inline-flex items-center border-b-2 border-transparent py-4 text-sm font-medium text-neutral-600">
-                                Reviews
-                                <span class="ml-2 block rounded-full bg-neutral-500 px-2 py-px text-xs font-bold text-neutral-100"> 1,209 </span>
-                            </a>
                         </nav>
-                    </div>-->
+                    </div>
 
-                    <div class="mt-8 flow-root sm:mt-12">
+                    <div class="mt-6 flow-root">
                         {!! $slot !!}
                     </div>
                 </div>
