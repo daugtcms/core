@@ -13,4 +13,6 @@ return [
     'attributes' => 'Attribute',
     'open_block_editor' => 'Block Editor öffnen',
     'readonly_info' => 'Dieses Attribut ist schreibgeschützt.',
+    'limit_blocks' => 'Limitiere verfügbare Blöcke',
+    'limit_blocks_description' => 'Wenn du diese Option aktivierst, kannst du nur die unten ausgewählten Blöcke verwenden. Sonst stehen alle Blöcke zur Verfügung.',
 ];

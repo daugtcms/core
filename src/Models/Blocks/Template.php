@@ -8,5 +8,6 @@ class Template extends Model
 {
     protected $casts = [
         'data' => 'array',
+        'available_blocks' => 'array'
     ];
 }

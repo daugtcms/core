@@ -56,6 +56,24 @@
             </div>
         @endif
 
+        <div class="mt-1">
+            <x-sitebrew::form.label for="limitBlocks">{{__('sitebrew::blocks.limit_blocks')}}
+            <x-slot:additional>
+                {{__('sitebrew::blocks.limit_blocks_description')}}
+            </x-slot:additional>
+            </x-sitebrew::form.label>
+            <x-sitebrew::form.checkbox name="limitBlocks" wire:model.live="limitBlocks">{{__('sitebrew::blocks.limit_blocks')}}</x-sitebrew::form.checkbox>
+            @if($limitBlocks)
+            @php
+                $all_blocks = collect(config('sitebrew.available_blocks'))->map(function (string $item, string $key){
+                    return [
+                        'value' => $key
+                    ];
+                })->values()->toJson();
+            @endphp
+            <x-sitebrew::form.multi-select class="mt-1.5" :options="$all_blocks" :multi="true" wire:model="available_blocks"></x-sitebrew::form.multi-select>
+            @endif
+        </div>
     </div>
     <x-sitebrew::modal.footer class="justify-end">
         <x-sitebrew::form.button style="primary">{{__('sitebrew::general.save')}}</x-sitebrew::form.button>

@@ -23,7 +23,11 @@ class EditTemplate extends Modal
 
     public $data;
 
+    public $available_blocks = [];
+
     public ?Block $templateBlock;
+
+    public bool $limitBlocks = false;
 
     public function mount(Template $template = null)
     {
@@ -33,6 +37,11 @@ class EditTemplate extends Modal
             $this->view_name = $template->view_name;
             $this->data = $template->data;
             $this->usage = $template->usage;
+            $this->available_blocks = $template->available_blocks ?? [];
+
+            if(count($this->available_blocks) > 0) {
+                $this->limitBlocks = true;
+            }
 
             if ($this->view_name) {
                 $this->updateViewName();
@@ -62,14 +71,17 @@ class EditTemplate extends Modal
     {
         $this->validate();
 
+        if(!$this->limitBlocks) {
+            $this->available_blocks = null;
+        }
         if (isset($this->template->id)) {
             $this->template->update(
-                $this->only(['name', 'view_name', 'data', 'usage'])
+                $this->only(['name', 'view_name', 'data', 'usage', 'available_blocks'])
             );
             $this->template->save();
         } else {
             Template::create(
-                $this->only(['name', 'view_name', 'data', 'usage'])
+                $this->only(['name', 'view_name', 'data', 'usage', 'available_blocks'])
             );
         }
 
