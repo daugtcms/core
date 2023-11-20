@@ -6,6 +6,8 @@ enum AttributeType: string
 {
     case TEXT = 'text';
 
+    case RICH_TEXT = 'rich-text';
+
     case NUMBER = 'number';
 
     case BOOLEAN = 'boolean';

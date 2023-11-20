@@ -37,7 +37,6 @@ class SitebrewBladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::component('tiptap', Tiptap::class);
         //Blade::component('sitebrew::blocks.header', Header::class);
         //Blade::component('sitebrew::templates.floating-homepage', FloatingHomepage::class);
         Blade::component('sitebrew::modal', 'components.modal.index');

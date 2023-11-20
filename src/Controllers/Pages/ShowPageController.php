@@ -16,11 +16,9 @@ class ShowPageController extends Controller
         if ($slug) {
             $query->where('slug', $slug);
         } else {
-            $query->whereNull('slug');
+            $query->whereNull('slug')->orWhere('slug', '');
         }
-
         $page = $query->first();
-
         return view('sitebrew::pages.index', compact('page'));
     }
 }

@@ -19,6 +19,9 @@
                     <x-sitebrew::form.checkbox {{$attributes}}>{{$attribute['title']}}</x-sitebrew::form.checkbox>
                 </div>
                 @break
+            @case('rich-text')
+                <x-sitebrew::form.rich-text {{$attributes}}></x-sitebrew::form.rich-text>
+                @break
             @case('navigation')
                 @php
                     \Sitebrew\Models\Navigation\Navigation::all()->each(function(\Sitebrew\Models\Navigation\Navigation $navigation) use (&$navigations){
