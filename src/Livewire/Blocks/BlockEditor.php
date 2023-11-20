@@ -57,7 +57,7 @@ class BlockEditor extends Modal
             $templateAttributes = Arr::collapse([$this->template->data, $templateData->attributes]);
         } else {
             $this->template = $this->templates[0];
-            $templateAttributes = Arr::collapse([$this->template->data, $data['template']['attributes']]);
+            $templateAttributes = Arr::collapse([$this->template->data, $data['template']['attributes'] ?? []]);
         }
         $this->templateBlock = new (config('sitebrew.available_templates')[$this->template->view_name])(...$templateAttributes);
 

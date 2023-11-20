@@ -19,6 +19,13 @@ class ContentTable extends Table
     #[Url]
     public $type = '';
 
+
+    public function mount() {
+        if(empty($this->type)) {
+            $this->allowCreate = false;
+        }
+    }
+
     public function query(): Builder
     {
         $query = Content::with('user');
