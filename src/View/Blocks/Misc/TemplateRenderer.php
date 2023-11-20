@@ -20,7 +20,7 @@ class TemplateRenderer extends Component
 
     public bool $withinTemplate = false;
 
-    public function __construct(string $usage, bool $withinTemplate)
+    public function __construct(string $usage, bool $withinTemplate = false)
     {
         $this->withinTemplate = $withinTemplate;
         $this->usage = $usage;
