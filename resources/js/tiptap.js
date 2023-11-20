@@ -28,6 +28,8 @@ window.setupEditor = function (content) {
                 }
             })
 
+            editor.commands.focus()
+
 
             this.$watch('content', (content) => {
                 // If the new content matches TipTap's then we just skip.
