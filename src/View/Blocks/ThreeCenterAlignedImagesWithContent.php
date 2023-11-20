@@ -37,9 +37,9 @@ class ThreeCenterAlignedImagesWithContent extends Block
     public function __construct(
         public string $title = '',
         public string $text = '',
-        public string $firstImage = '',
-        public string $secondImage = '',
-        public string $thirdImage = '',
+        public array $firstImage = [],
+        public array $secondImage = [],
+        public array $thirdImage = [],
     ) {
         parent::__construct();
     }

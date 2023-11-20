@@ -31,7 +31,7 @@ class Header extends Block
     public function __construct(
         public string $title = '',
         public string $subtitle = '',
-        public string $backgroundImage = '',
+        public array $backgroundImage = [],
     ) {
         parent::__construct();
     }
