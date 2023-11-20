@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('templates', function (Blueprint $table) {
-            $table->string('usage');
+            $table->string('usage')->after('view_name');
         });
     }
 };

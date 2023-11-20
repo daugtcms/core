@@ -20,7 +20,7 @@ class ShowPageController extends Controller
         }
 
         $page = $query->first();
-dd($page);
+
         return view('sitebrew::pages.index', compact('page'));
     }
 }
