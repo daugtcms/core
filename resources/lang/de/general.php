@@ -30,6 +30,7 @@ return [
     'ends_at' => 'Endet am',
     'price' => 'Preis',
     'categories' => 'Kategorien',
+    'enabled' => 'Aktiv',
 
     'no_value_available' => 'Kein Wert vorhanden',
     'select_items' => 'Elemente auswählen',

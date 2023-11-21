@@ -15,6 +15,7 @@ class Content extends Model
 
     protected $casts = [
         'blocks' => 'array',
+        'enabled' => 'boolean',
     ];
 
     public function getSlugOptions(): SlugOptions

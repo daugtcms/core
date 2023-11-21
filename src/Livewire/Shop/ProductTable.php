@@ -43,10 +43,18 @@ class ProductTable extends Table
         ]);
     }
 
+    public function toggleEnabled($id): void
+    {
+        $product = Product::findOrFail($id);
+        $product->enabled = !$product->enabled;
+        $product->save();
+    }
+
     public function columns(): array
     {
         return [
             Column::make('id', '')->component('sitebrew::table.edit'),
+            Column::make('', __('sitebrew::general.enabled'))->component('sitebrew::table.enabled'),
             Column::make('id', __('sitebrew::general.id')),
             Column::make('name', __('sitebrew::general.name')),
             Column::make('price', __('sitebrew::general.price'))->component('sitebrew::table.price'),

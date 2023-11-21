@@ -54,10 +54,18 @@ class ContentTable extends Table
         ]);
     }
 
+    public function toggleEnabled($id): void
+    {
+        $content = Content::findOrFail($id);
+        $content->enabled = !$content->enabled;
+        $content->save();
+    }
+
     public function columns(): array
     {
         return [
             Column::make('id', '')->component('sitebrew::table.edit'),
+            Column::make('', __('sitebrew::general.enabled'))->component('sitebrew::table.enabled'),
             Column::make('title', __('sitebrew::general.title')),
             Column::make('type', __('sitebrew::general.type')),
             Column::make('user', __('sitebrew::general.author'))->component('sitebrew::table.user'),

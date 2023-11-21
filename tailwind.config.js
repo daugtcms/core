@@ -16,6 +16,7 @@ export default {
       colors: {
         'primary': colors.amber,
         'danger': colors.red,
+        'success': colors.green,
       },
     },
     container: {

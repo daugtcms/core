@@ -20,6 +20,7 @@ class Product extends Model
         'multi' => 'boolean',
         'starts_at' => 'date',
         'ends_at' => 'date',
+        'enabled' => 'boolean',
     ];
 
     public function getSlugOptions(): SlugOptions

@@ -47,6 +47,9 @@ abstract class Table extends Component
 
     abstract public function edit($id): void;
 
+    public function toggleEnabled($id): void {
+    }
+
     public function select($id): void {
         if ($this->multiSelect) {
             if (in_array($id, $this->selected)) {
