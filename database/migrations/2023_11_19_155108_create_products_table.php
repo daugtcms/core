@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->json('description')->nullable();
+            $table->jsonb('description')->nullable();
             $table->string('stripe_product_id')->nullable();
             $table->string('stripe_price_id')->nullable();
             $table->decimal('price');

@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('view_name');
-            $table->json('data')->nullable();
+            $table->jsonb('data')->nullable();
             $table->timestamps();
         });
     }

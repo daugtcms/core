@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('set null');
             $table->string('type');
-            $table->json('blocks')->nullable();
+            $table->jsonb('blocks')->nullable();
             $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
