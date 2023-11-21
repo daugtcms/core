@@ -20,18 +20,18 @@ class TemplateRenderer extends Component
 
     public bool $withinTemplate = false;
 
-    public function __construct(string $usage, bool $withinTemplate = false)
+    public function __construct(string $usage, bool $withinTemplate = false, $data = [])
     {
         $this->withinTemplate = $withinTemplate;
         $this->usage = $usage;
-        $this->restoreState([]);
+        $this->restoreState($data);
     }
 
     public function restoreState($data): void
     {
         $template = null;
-        if (isset($data['template'])) {
-            $templateData = TemplateData::from($data['template']);
+        if (isset($data)) {
+            $templateData = TemplateData::from($data);
             $template = Template::findOrFail($templateData->template);
             $templateAttributes = Arr::collapse([$template->data, $templateData->attributes]);
         } else {

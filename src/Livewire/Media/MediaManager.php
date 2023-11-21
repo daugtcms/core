@@ -51,7 +51,7 @@ class MediaManager extends Modal
     #[Layout('sitebrew::components.layouts.admin')]
     public function render()
     {
-        $media = Media::whereNull('original_media_id')->with('variants')->paginate(100);
+        $media = Media::whereNull('original_media_id')->orderBy('created_at', 'desc')->with('variants')->get();
         return view('sitebrew::livewire.media.media-manager', [
             'files' => $media,
         ]);

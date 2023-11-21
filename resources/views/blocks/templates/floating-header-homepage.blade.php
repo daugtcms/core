@@ -20,21 +20,22 @@
     <!-- Primary Navigation Menu -->
     <div class=""
          :class="{
-            'px-4 mx-auto container rounded-lg transition-color duration-300': true,
-            'bg-primary-700 shadow-primary-700/30  shadow-lg': showBackground,
+            'md:container rounded-lg transition-color duration-300': true,
+            'bg-primary-700 shadow-primary-700/20  shadow-lg': showBackground,
         }">
-        <div class="flex justify-between h-full">
+        <div class="flex justify-between h-full container">
             <div class="flex items-center">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0 h-16 py-3">
-                    <a href="#_"
+                    <a href="/"
                        class="h-full">
-                        <img src="{{ get_single_media($logo) ?: 'https://media.felix.beer/temp/hilde-logo.svg'}}" alt="logo"
+                        <img src="{{ get_single_media($logo) ?: 'https://media.felix.beer/temp/hilde-logo.svg'}}"
+                             alt="logo"
                              class="h-full mr-3">
                     </a>
                 </div>
 
-                <div class="border-l-2 border-white/50 h-10 mx-2"></div>
+                <div class="border-l-2 border-white/50 h-10 mx-2 hidden md:block"></div>
 
                 <!-- Navigation Links -->
                 <div class="hidden h-full md:inline-flex">
@@ -47,32 +48,11 @@
                             </div>
                         </a>
                     @endforeach
-                    {{--<x-nav-link :href="route('welcome')"
-                                :active="str_contains(request()->route()->getName(),'welcome')">
-                        {{ __('Home') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('about')"
-                                :active="str_contains(request()->route()->getName(),'about')">
-                        {{ __('Über mich') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('blog.index')"
-                                :active="str_contains(request()->route()->getName(),'blog')">
-                        {{ __('Blog') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('shop.index')"
-                                :active="str_contains(request()->route()->getName(),'shop')">
-                        {{ __('Shop') }}
-                    </x-nav-link>
-                    @admin
-                    <x-nav-link :href="route('admin.order.index')"
-                                :active="str_contains(request()->route()->getName(),'admin')">
-                        {{ __('Admin') }}
-                    </x-nav-link>
-                    @endadmin--}}
                 </div>
             </div>
-            <div class="flex items-center">
-                <x-sitebrew::form.button style="secondary">Login</x-sitebrew::form.button>
+            <div class="items-center hidden md:flex">
+
+                <x-sitebrew::form.button style="secondary" href="{{route('login')}}">Login</x-sitebrew::form.button>
             </div>
             <!-- Settings Dropdown -->
             {{--<div class="flex items-center space-x-3">
@@ -134,94 +114,86 @@
                     <x-shopping-cart></x-shopping-cart>
                 @endif
                 <!-- Hamburger -->
-                <div class="flex items-center -mr-2 md:hidden">
-                    <button @click="open = ! open"
-                            class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
-                        <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M4 6h16M4 12h16M4 18h16"/>
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
-                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
 
             </div>
         </div>--}}
+            <div class="flex items-center md:hidden">
+                <button @click="open = ! open"
+                        class="inline-flex items-center justify-center p-2 text-primary-50 transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-primary-600 focus:outline-none focus:bg-primary-600 focus:text-white">
+                    <span x-show="open">
+                        @svg('x')
+                    </span>
+                    <span x-show="! open">
+                        @svg('menu')
+                    </span>
+                </button>
+            </div>
         </div>
 
         <!-- Responsive Navigation Menu -->
-    {{--<div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('welcome')"
-                                   :active="str_contains(request()->route()->getName(),'welcome')">
-                {{ __('Home') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('about')"
-                                   :active="str_contains(request()->route()->getName(),'about')">
-                {{ __('Über mich') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('shop.index')"
-                                   :active="str_contains(request()->route()->getName(),'shop')">
-                {{ __('Shop') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('blog.index')"
-                                   :active="str_contains(request()->route()->getName(),'blog')">
-                {{ __('Blog') }}
-            </x-responsive-nav-link>
-            @admin
-            <x-responsive-nav-link :href="route('admin.order.index')"
-                                   :active="str_contains(request()->route()->getName(),'admin')">
-                {{ __('Admin') }}
-            </x-responsive-nav-link>
-            @endadmin
-        </div>
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden bg-white rounded-b-lg border-primary-700 border-2 overflow-hidden">
+            <div class="gap-y-1 divide-y-2 divide-neutral-200">
+                @foreach(get_navigation_items((int)$mainNavigation) as $item)
+                    <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
+                       target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
+                       class="group text-neutral-800 flex items-center py-2 px-3 h-full box-border border-b-[3px] border-transparent hover:bg-primary-100 text-lg font-medium">
+                        <div class="rounded-md group-hover:bg-white/10">
+                            {{$item->name}}
+                        </div>
+                    </a>
+                @endforeach
+                <a href="{{route('login')}}"
+                   class="group text-primary-800 flex items-center bg-primary-50 py-2 px-3 h-full box-border border-b-[3px] border-transparent hover:bg-primary-100 text-lg font-medium">
+                    <div class="rounded-md group-hover:bg-white/10">
+                        {{__('sitebrew::auth.login')}}
+                    </div>
+                </a>
+            </div>
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-1 pb-1 border-t border-gray-200">
-            @auth
-                <div class="flex items-center px-4 py-3 w-full">
-                    <x-button :style="'primary'"
-                              :href="route('feed.community', 'all')"
-                              class="rounded-l-md rounded-r-none px-2 border-white w-1/2">{{ __('Community') }}</x-button>
-                    <x-button :style="'primary'"
-                              :href="route('feed.academy', [now()->year, 'all'])"
-                              class="rounded-r-md rounded-l-none px-2 border-white w-1/2">{{ __('Academy') }}</x-button>
-                </div>
-                <div class="px-4 pt-3 border-t">
-                    <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
+            <!-- Responsive Settings Options -->
+            {{--<div class="pt-1 pb-1 border-t border-gray-200">
+                @auth
+                    <div class="flex items-center px-4 py-3 w-full">
+                        <x-button :style="'primary'"
+                                  :href="route('feed.community', 'all')"
+                                  class="rounded-l-md rounded-r-none px-2 border-white w-1/2">{{ __('Community') }}</x-button>
+                        <x-button :style="'primary'"
+                                  :href="route('feed.academy', [now()->year, 'all'])"
+                                  class="rounded-r-md rounded-l-none px-2 border-white w-1/2">{{ __('Academy') }}</x-button>
+                    </div>
+                    <div class="px-4 pt-3 border-t">
+                        <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
+                        <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
+                    </div>
 
-                <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('user.show', Auth::user()->slug)">
-                        Profil
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('user.order.index', Auth::user())">
-                        Käufe & Abos
-                    </x-responsive-nav-link>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                    <div class="mt-3 space-y-1">
+                        <x-responsive-nav-link :href="route('user.show', Auth::user()->slug)">
+                            Profil
                         </x-responsive-nav-link>
-                    </form>
-                </div>
-            @endauth
+                        <x-responsive-nav-link :href="route('user.order.index', Auth::user())">
+                            Käufe & Abos
+                        </x-responsive-nav-link>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
 
-            @guest
-                <div class=" space-y-1">
+                            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-responsive-nav-link>
+                        </form>
+                    </div>
+                @endauth
 
-                    <x-responsive-nav-link :href="route('login')" :active="true">
-                        {{ __('Login') }}
-                    </x-responsive-nav-link>
-                </div>
-            @endguest
+                @guest
+                    <div class=" space-y-1">
+
+                        <x-responsive-nav-link :href="route('login')" :active="true">
+                            {{ __('Login') }}
+                        </x-responsive-nav-link>
+                    </div>
+                @endguest
+            </div>--}}
         </div>
-    </div>--}}
+    </div>
 </nav>
 {!! $slot !!}

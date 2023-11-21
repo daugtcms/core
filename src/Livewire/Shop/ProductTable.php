@@ -27,6 +27,8 @@ class ProductTable extends Table
             $query->whereIn('id', $ids);
         }
 
+        $query->orderBy('created_at', 'desc');
+
         return $query;
     }
 

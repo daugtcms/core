@@ -33,6 +33,8 @@ class ContentTable extends Table
              $query->where('type', $this->type);
         }
 
+        $query->orderBy('created_at', 'desc');
+
         return $query;
     }
 
