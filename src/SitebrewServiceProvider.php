@@ -30,8 +30,9 @@ use Sitebrew\Models\Blocks\Template;
 use Sitebrew\Models\Content\Content;
 use Sitebrew\Models\Content\Course;
 use Sitebrew\Models\Content\CourseSection;
-use Sitebrew\Models\Navigation\Navigation;
-use Sitebrew\Models\Navigation\NavigationItem;
+use Sitebrew\Models\Listing\Listing;
+use Sitebrew\Models\Listing\Navigation;
+use Sitebrew\Models\Listing\ListingItem;
 use Sitebrew\Models\Shop\Product;
 use Sitebrew\Models\User;
 use WireElements\Pro\Components\Modal\ModalServiceProvider;
@@ -150,8 +151,8 @@ class SitebrewServiceProvider extends ServiceProvider
             'course' => Course::class,
             'course-section' => CourseSection::class,
             'template' => Template::class,
-            'navigation' => Navigation::class,
-            'navigation-item' => NavigationItem::class,
+            'listing' => Listing::class,
+            'listing-item' => ListingItem::class,
             'user' => User::class,
             'media' => Media::class
         ]);

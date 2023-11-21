@@ -31,7 +31,7 @@ class MediaManager extends Modal
             'required',
         ],
     ])]
-    public NavigationItemData $currentItem;*/
+    public ListingItemData $currentItem;*/
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 

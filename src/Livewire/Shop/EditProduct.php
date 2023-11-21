@@ -10,7 +10,7 @@ use Sitebrew\Enums\Shop\BillingType;
 use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Livewire\Content\CoursesTable;
 use Sitebrew\Models\Content\Course;
-use Sitebrew\Models\Navigation\Navigation;
+use Sitebrew\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
 use Sitebrew\Models\Shop\Product;
 use Sitebrew\Models\User;
@@ -47,6 +47,8 @@ class EditProduct extends Modal
 
     public array $media;
 
+    public array $categories;
+
     public bool $isExternal = false;
 
     public bool $isCourse = false;
@@ -74,6 +76,10 @@ class EditProduct extends Modal
             $this->media = $product->getMedia('media')->map(function ($media) {
                 return ['id' => $media->id, 'variant' => 'optimized'];
             })->toArray();
+
+            $this->categories = $product->categories->map(function ($cat) {
+                return $cat->id;
+            })->toArray();
         }
     }
 
@@ -98,6 +104,8 @@ class EditProduct extends Modal
         collect($this->media)->each(function ($media) {
             $this->product->attachMedia($media['id'], 'media');
         });
+
+        $this->product->categories()->sync($this->categories);
 
         $this->close(andDispatch: [
             ProductTable::class => 'refreshComponent',

@@ -43,6 +43,9 @@
                 this.selectOpen = false;
             }
         },
+        getItemByValue(value) {
+            return this.selectableItems.find(item => item.value == value);
+        },
         selectKeydown(event){
             if (event.keyCode >= 65 && event.keyCode <= 90) {
                 this.selectKeydownValue += event.key;
@@ -116,7 +119,7 @@
 
     <button type="button" x-modelable="selectedItems" x-ref="selectButton"
             @click="$refs.panel.toggle; selectOpen=true;" {{$attributes->merge(['class' => $classList])}}>
-        <span x-text="selectedItems.length > 0 ? selectedItems.map(item => ({{--item.title ?? item.value--}}item)).join(', ') : '{{ __('sitebrew::general.no_value_available') }}'"
+        <span x-text="selectedItems.length > 0 ? selectedItems.map(item => { const i = getItemByValue(item); return i.title ?? i.value}).join(', ') : '{{ __('sitebrew::general.no_value_available') }}'"
               :class="{ 'truncate pr-7': true, 'text-neutral-500': selectedItems.length === 0 }">{{ __('sitebrew::general.no_value_available') }}</span>
         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             @svg('chevrons-left-right', 'w-5 h-5 text-neutral-400 rotate-90')

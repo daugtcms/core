@@ -28,7 +28,7 @@ class MediaPicker extends Component
             'required',
         ],
     ])]
-    public NavigationItemData $currentItem;*/
+    public ListingItemData $currentItem;*/
 
     protected $listeners = ['refreshComponent' => '$refresh', 'mediaSelected' => 'mediaSelected'];
 

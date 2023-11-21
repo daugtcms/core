@@ -1,44 +1,44 @@
 <div>
     <x-sitebrew::layouts.dashboard-bar>
         <x-sitebrew::tabs.tabs>
-            @foreach($navigations as $navigation)
+            @foreach($listings as $listing)
                 <x-sitebrew::tabs.item
-                        wire:click="setCurrentNavigation({{$navigation->id}})"
-                        :active="$navigation->id === $currentNavigation->id"
+                        wire:click="setCurrentListing({{$listing->id}})"
+                        :active="$listing->id === $currentListing->id"
                 >
-                    {{$navigation->name}}
+                    {{$listing->name}}
                 </x-sitebrew::tabs.item>
             @endforeach
         </x-sitebrew::tabs.tabs>
         <x-sitebrew::form.button
-                wire:click="$dispatch('modal.open', { component: 'sitebrew::navigation.edit-navigation' })"
+                wire:click="$dispatch('modal.open', { component: 'sitebrew::listing.edit-listing' })"
                 class="flex-shrink-0 ml-2">
             {{__('sitebrew::general.add')}}
             @svg('plus', 'w-5 h-5')
         </x-sitebrew::form.button>
     </x-sitebrew::layouts.dashboard-bar>
-    @if($currentNavigation)
+    @if($currentListing)
         <div class="text-neutral-700 block flex-col overflow-y-auto p-2 max-w-3xl mx-auto">
 
             <div class="bg-neutral-50 rounded-md border border-neutral-200 p-2 w-full">
                 <x-sitebrew::form.label>{{__('sitebrew::general.description')}}</x-sitebrew::form.label>
-                {{$currentNavigation->description}}
-                @empty($currentNavigation->description)
+                {{$currentListing->description}}
+                @empty($currentListing->description)
                     <span class="text-neutral-500 italic">{{__('sitebrew::general.no_value_available')}}</span>
                 @endempty
                 <div class="flex gap-x-2 justify-end">
                     <x-sitebrew::form.button
-                            wire:click="$dispatch('modal.open', { component: 'sitebrew::navigation.edit-navigation', arguments: { navigation: {{$currentNavigation->id}} } })"
+                            wire:click="$dispatch('modal.open', { component: 'sitebrew::listing.edit-listing', arguments: { listing: {{$currentListing->id}} } })"
                     >@svg('pencil', 'w-5 h-5'){{__('sitebrew::general.edit')}}</x-sitebrew::form.button>
                     <x-sitebrew::form.button
                             style="danger"
-                            wire:click="deleteNavigation({{$currentNavigation->id}})"
-                            onclick="confirm('{{__('sitebrew::navigation.delete_navigation_confirmation')}}') || event.stopImmediatePropagation()">@svg('trash-2', 'w-5 h-5'){{__('sitebrew::general.delete')}}</x-sitebrew::form.button>
+                            wire:click="deleteListing({{$currentListing->id}})"
+                            onclick="confirm('{{__('sitebrew::listing.delete_list_confirmation')}}') || event.stopImmediatePropagation()">@svg('trash-2', 'w-5 h-5'){{__('sitebrew::general.delete')}}</x-sitebrew::form.button>
                 </div>
             </div>
 
             <x-sitebrew::form.label
-                    class="mt-3 mb-1">{{__('sitebrew::navigation.navigation_items')}}</x-sitebrew::form.label>
+                    class="mt-3 mb-1">{{__('sitebrew::listing.listing_items')}}</x-sitebrew::form.label>
             <ul wire:sortable="updateItemOrder" wire:sortable.options="{ animation: 100 }"
                 @beforeunload.window="{{$this->unsavedChanges() ? '$event.preventDefault(); $event.returnValue = \'\'' : 'true'}}">
                 @foreach($items as $key => $item)
@@ -79,32 +79,34 @@
                                 </div>
                                 <div>
                                     <x-sitebrew::form.label
-                                            for="url">{{__('sitebrew::general.url')}}</x-sitebrew::form.label>
-                                    <x-sitebrew::form.input id="url"
-                                                             wire:model.blur="currentItem.url"
-                                                             :error="$errors->first('currentItem.url')"
-                                    ></x-sitebrew::form.input>
-                                </div>
-                                <div>
-                                    <x-sitebrew::form.label
                                             for="description">{{__('sitebrew::general.description')}}</x-sitebrew::form.label>
                                     <x-sitebrew::form.textarea id="description"
-                                                                wire:model.blur="currentItem.description"></x-sitebrew::form.textarea>
+                                                               wire:model.blur="currentItem.description"></x-sitebrew::form.textarea>
                                 </div>
                                 <div>
                                     <x-sitebrew::form.label
                                             for="icon">{{__('sitebrew::general.icon')}}</x-sitebrew::form.label>
                                     <x-sitebrew::form.icon-picker id="icon"
-                                                                   wire:model.live="currentItem.icon"></x-sitebrew::form.icon-picker>
+                                                                  wire:model.live="currentItem.icon"></x-sitebrew::form.icon-picker>
+                                </div>
+                                @if($currentListing->usage == \Sitebrew\Enums\Listing\ListingUsage::NAVIGATION->value)
+                                <div>
+                                    <x-sitebrew::form.label
+                                            for="url">{{__('sitebrew::general.url')}}</x-sitebrew::form.label>
+                                    <x-sitebrew::form.input id="url"
+                                                             wire:model.blur="currentItem.data.url"
+                                                             :error="$errors->first('currentItem.data.url')"
+                                    ></x-sitebrew::form.input>
                                 </div>
                                 <div class="mt-2.5">
                                     <x-sitebrew::form.checkbox
                                             name="target"
-                                            wire:model.live="currentItem.target"
+                                            wire:model.live="currentItem.data.target"
                                             value="_blank"
-                                            :checked="$currentItem->target == '_blank'"
-                                    >{{__('sitebrew::navigation.open_in_new_tab')}}</x-sitebrew::form.checkbox>
+                                            :checked="isset($currentItem->data['target']) ? $currentItem->data['target'] == '_blank' : false"
+                                    >{{__('sitebrew::listing.open_in_new_tab')}}</x-sitebrew::form.checkbox>
                                 </div>
+                                @endif
                             </div>
                         @endif
                     </div>

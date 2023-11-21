@@ -18,7 +18,7 @@ class FloatingHeaderHomepage extends SitebrewBlock
             'transparentNavigation' => [
                 'type' => AttributeType::BOOLEAN,
                 'title' => 'Transparent Navigation',
-                'description' => 'Whether the navigation should be transparent or not',
+                'description' => 'Whether the listing should be transparent or not',
             ],
             'mainNavigation' => [
                 'type' => AttributeType::NAVIGATION,

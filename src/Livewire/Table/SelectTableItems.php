@@ -6,7 +6,7 @@ use Livewire\Features\SupportAttributes\AttributeCollection;
 use Sitebrew\Enums\Shop\BillingType;
 use Sitebrew\Livewire\Content\CoursesTable;
 use Sitebrew\Models\Content\Course;
-use Sitebrew\Models\Navigation\Navigation;
+use Sitebrew\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
 use Sitebrew\Models\Shop\Product;
 use Sitebrew\Models\User;

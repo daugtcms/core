@@ -2,8 +2,8 @@
 
 namespace Sitebrew\Livewire\Users;
 
-use Sitebrew\Livewire\Navigation\NavigationEditor;
-use Sitebrew\Models\Navigation\Navigation;
+use Sitebrew\Livewire\Listing\NavigationEditor;
+use Sitebrew\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
 use Sitebrew\Models\User;
 use WireElements\Pro\Components\Modal\Modal;

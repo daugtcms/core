@@ -22,6 +22,22 @@
         </div>
 
         <div>
+            @php
+                $categories = \Sitebrew\Models\Listing\Listing::where('usage', \Sitebrew\Enums\Listing\ListingUsage::SHOP_CATEGORIES)->first()->items
+                ->map(function (\Sitebrew\Models\Listing\ListingItem $item){
+                    return [
+                        'value' => $item->id,
+                        'title' => $item->name
+                    ];
+                })->values()->toJson();
+            @endphp
+            <x-sitebrew::form.label for="categories">
+                {{__('sitebrew::general.categories')}}
+            </x-sitebrew::form.label>
+            <x-sitebrew::form.multi-select :options="$categories" :multi="true" wire:model="categories"></x-sitebrew::form.multi-select>
+        </div>
+
+        <div>
             <x-sitebrew::form.label for="media">
                 {{__('sitebrew::shop.product_media')}}
                 <x-slot name="additional">

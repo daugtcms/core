@@ -4,9 +4,9 @@ namespace Sitebrew\Livewire\Content;
 
 use Carbon\Carbon;
 use Livewire\Features\SupportAttributes\AttributeCollection;
-use Sitebrew\Livewire\Navigation\NavigationEditor;
+use Sitebrew\Livewire\Listing\NavigationEditor;
 use Sitebrew\Models\Content\Course;
-use Sitebrew\Models\Navigation\Navigation;
+use Sitebrew\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
 use Sitebrew\Models\User;
 use WireElements\Pro\Components\Modal\Modal;

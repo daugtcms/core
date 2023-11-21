@@ -39,8 +39,8 @@
                 <!-- Navigation Links -->
                 <div class="hidden h-full md:inline-flex">
                     @foreach(get_navigation_items((int)$mainNavigation) as $item)
-                        <a href="{{$item->url}}"
-                           target="{{$item->target}}"
+                        <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
+                           target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
                            class="group text-white flex items-center h-full box-border border-b-[3px] border-transparent hover:border-primary-300 text-lg font-medium px-1">
                             <div class="rounded-md group-hover:bg-white/10 -mb-1 px-2.5 py-1">
                                 {{$item->name}}

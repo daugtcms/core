@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 use Sitebrew\Data\Media\MediaPickerData;
 use Sitebrew\Helpers\Media\MediaHelper;
-use Sitebrew\Models\Navigation\Navigation;
+use Sitebrew\Models\Listing\Listing;
+use Sitebrew\Models\Listing\Navigation;
 
 if (! function_exists('svg')) {
     function svg(string $path, $class = '', array $attributes = []): string
@@ -58,7 +59,7 @@ if (! function_exists('collection_compare')) {
 if (! function_exists('get_navigation_items')) {
     function get_navigation_items($navigationId)
     {
-        return Navigation::findOrFail($navigationId)->items;
+        return Listing::findOrFail($navigationId)->items;
     }
 }
 

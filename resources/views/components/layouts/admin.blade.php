@@ -41,8 +41,8 @@
                 $title = __('sitebrew::general.structure');
                 $navigationItems = [
                     [
-                        'name' => __('sitebrew::general.navigation'),
-                        'url' => route('admin.structure.navigation'),
+                        'name' => __('sitebrew::general.listing'),
+                        'url' => route('admin.structure.listing'),
                     ],
                     [
                         'name' => __('sitebrew::general.templates'),
@@ -59,7 +59,7 @@
 
                 $navigationItems = collect();
 
-                // add all content types to navigation
+                // add all content types to listing
                 $navigationItems = (collect(config('sitebrew.content_types'))->map(function($contentType, $key){
                     return [
                         'name' => $contentType,
@@ -71,7 +71,7 @@
                     'name' => __('sitebrew::general.all'),
                     'url' => route('admin.content.index'),
                 ]);
-                // add another navigation item for all content types
+                // add another listing item for all content types
         }
 
     @endphp

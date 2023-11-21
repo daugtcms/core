@@ -1,30 +1,31 @@
 <?php
 
-namespace Sitebrew\Livewire\Navigation;
+namespace Sitebrew\Livewire\Listing;
 
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-use Sitebrew\Data\Navigation\NavigationItemData;
-use Sitebrew\Models\Navigation\Navigation;
+use Sitebrew\Data\Listing\ListingItemData;
+use Sitebrew\Enums\Listing\ListingUsage;
+use Sitebrew\Models\Listing\Listing;
 
-class NavigationEditor extends Component
+class ListingEditor extends Component
 {
     public array $items = [];
 
-    public Navigation $currentNavigation;
+    public Listing $currentListing;
 
     #[Rule([
         'currentItem' => ['nullable'],
         'currentItem.name' => [
             'required',
         ],
-        'currentItem.url' => [
+        /*'currentItem.url' => [
             'required',
-        ],
+        ],*/
     ])]
-    public NavigationItemData $currentItem;
+    public ListingItemData $currentItem;
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
@@ -40,26 +41,26 @@ class NavigationEditor extends Component
     #[Layout('sitebrew::components.layouts.admin')]
     public function render()
     {
-        $navigations = Navigation::all();
-        if ($navigations->count() > 0 && empty($this->currentNavigation)) {
-            $this->currentNavigation = $navigations->first();
-            $this->currentNavigation->items()->orderBy('order')->get()->each(function ($item) {
-                $this->items[] = NavigationItemData::from($item);
+        $listings = Listing::all();
+        if ($listings->count() > 0 && empty($this->currentListing)) {
+            $this->currentListing = $listings->first();
+            $this->currentListing->items()->orderBy('order')->get()->each(function ($item) {
+                $this->items[] = ListingItemData::from($item);
             });
         }
 
-        return view('sitebrew::livewire.navigation.navigation-editor', [
-            'navigations' => $navigations,
+        return view('sitebrew::livewire.listing.listing-editor', [
+            'listings' => $listings,
         ]);
     }
 
-    public function setCurrentNavigation($id): void
+    public function setCurrentListing($id): void
     {
         $this->persistCurrentItem();
-        $this->currentNavigation = Navigation::findOrFail($id);
+        $this->currentListing = Listing::findOrFail($id);
         $this->items = [];
-        $this->currentNavigation->items()->orderBy('order')->get()->each(function ($item) {
-            $this->items[] = NavigationItemData::from($item);
+        $this->currentListing->items()->orderBy('order')->get()->each(function ($item) {
+            $this->items[] = ListingItemData::from($item);
         });
     }
 
@@ -80,20 +81,20 @@ class NavigationEditor extends Component
         }
     }
 
-    public function deleteNavigation($id): void
+    public function deleteListing($id): void
     {
-        $navigation = Navigation::findOrFail($id);
-        $navigation->delete();
-        unset($this->currentNavigation);
+        $listing = Listing::findOrFail($id);
+        $listing->delete();
+        unset($this->currentListing);
         $this->items = [];
-        $this->currentItem = new NavigationItemData();
+        $this->currentItem = new ListingItemData();
     }
 
     public function addItem(): void
     {
         $this->persistCurrentItem();
         $order = collect($this->items)->max('order') + 1;
-        $item = new NavigationItemData(Str::uuid(), $order);
+        $item = new ListingItemData(Str::uuid(), $order);
         $this->items[] = $item;
         $this->setCurrentItem($item->uuid);
     }
@@ -102,7 +103,7 @@ class NavigationEditor extends Component
     {
         $this->persistCurrentItem();
         if (! empty($this->currentItem->uuid) && $this->currentItem->uuid === $uuid) {
-            $this->currentItem = new NavigationItemData();
+            $this->currentItem = new ListingItemData();
         } else {
             $item = collect($this->items)->where('uuid', $uuid)->first();
             $this->currentItem = $item;
@@ -116,7 +117,7 @@ class NavigationEditor extends Component
         })->all();
 
         if (! empty($this->currentItem->uuid) && $this->currentItem->uuid === $uuid) {
-            $this->currentItem = new NavigationItemData();
+            $this->currentItem = new ListingItemData();
         }
         $this->resetErrorBag();
     }
@@ -146,16 +147,18 @@ class NavigationEditor extends Component
     {
         $this->persistCurrentItem();
 
-        $oldItems = $this->currentNavigation->items()->get();
+        $oldItems = $this->currentListing->items()->get();
         foreach ($this->items as $item) {
             // convert boolean to target string
-            if ($item->target == 1 || $item->target === '_blank') {
-                $item->target = '_blank';
-            } else {
-                $item->target = '_self';
+            if($this->currentListing->usage == ListingUsage::NAVIGATION) {
+                if (isset($item->data['target']) && $item->data['target'] == 1 || $item->data['target'] === '_blank') {
+                    $item->data['target'] = '_blank';
+                } else {
+                    $item->data['target'] = '_self';
+                }
             }
 
-            $this->currentNavigation->items()->updateOrCreate(
+            $this->currentListing->items()->updateOrCreate(
                 ['uuid' => $item->uuid],
                 $item->toArray());
         }
@@ -170,7 +173,7 @@ class NavigationEditor extends Component
     public function unsavedChanges(): bool
     {
         $dbItems = collect([]);
-        $this->currentNavigation->items()->orderBy('order')->get()->each(fn ($item) => $dbItems->add(NavigationItemData::from($item)));
+        $this->currentListing->items()->orderBy('order')->get()->each(fn ($item) => $dbItems->add(ListingItemData::from($item)));
 
         $currentItems = collect($this->items)->map(function ($item) {
             if (! empty($this->currentItem->uuid) && $item->uuid == $this->currentItem->uuid) {

@@ -1,7 +1,7 @@
 @php
-    $path = 'icons/default';
-    $icons = collect(Storage::disk('public')->files($path))->map(function ($item) {
-        return str_replace('.svg', '', str_replace('/icons/default/', '', $item));
+    $path = 'icons/default/';
+    $icons = collect(Storage::disk('public')->files($path))->map(function ($item) use ($path) {
+        return str_replace('.svg', '', str_replace($path, '', $item));
     })->toArray();
 @endphp
 <div class="component" x-data='{
@@ -22,7 +22,7 @@
         <template x-if="selectedIcon">
             <div class="flex justify-between items-center min-w-0">
                 <div class="flex items-center gap-x-3 min-w-0 py-1.5 px-2">
-                    <img :src="'/' + selectedIcon + '.svg'" loading="lazy" class="h-6 w-6">
+                    <img :src="'{{'/storage/' . $path}}' + selectedIcon + '.svg'" loading="lazy" class="h-6 w-6">
                     <p x-text="selectedIcon"
                        class="leading-tight truncate"></p>
                 </div>
@@ -55,7 +55,7 @@
             <template x-for="icon in filteredIcons">
                 <div class="flex items-center gap-x-3 hover:bg-neutral-50 py-1 px-2"
                      @click="selectedIcon = icon; $refs.input.value = ''; filterItems()">
-                    <img :src="'/' + icon + '.svg'" loading="lazy" class="h-6 w-6">
+                    <img :src="'{{'/storage/' . $path}}' + icon + '.svg'" loading="lazy" class="h-6 w-6">
                     <p x-text="icon" class="leading-tight"></p>
                 </div>
             </template>

@@ -3,7 +3,7 @@
 namespace Sitebrew;
 
 use Illuminate\Support\Facades\Route;
-use Sitebrew\Livewire\Navigation\NavigationEditor;
+use Sitebrew\Livewire\Listing\NavigationEditor;
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/admin', function () {
@@ -12,7 +12,7 @@ Route::group(['middleware' => ['web']], function () {
 
     require __DIR__.'/Routes/auth.php';
     require __DIR__.'/Routes/blocks.php';
-    require __DIR__.'/Routes/navigation.php';
+    require __DIR__ . '/Routes/listing.php';
     require __DIR__ . '/Routes/content.php';
     require __DIR__.'/Routes/media.php';
     require __DIR__.'/Routes/users.php';

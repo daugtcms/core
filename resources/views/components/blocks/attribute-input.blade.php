@@ -22,9 +22,9 @@
             @case('rich-text')
                 <x-sitebrew::form.rich-text {{$attributes}}></x-sitebrew::form.rich-text>
                 @break
-            @case('navigation')
+            @case('listing')
                 @php
-                    \Sitebrew\Models\Navigation\Navigation::all()->each(function(\Sitebrew\Models\Navigation\Navigation $navigation) use (&$navigations){
+                    \Sitebrew\Models\Listing\Listing::where('usage', \Sitebrew\Enums\Listing\ListingUsage::NAVIGATION)->each(function(\Sitebrew\Models\Listing\Listing $navigation) use (&$navigations){
                         $navigations[] = [
                             'value' => $navigation->id,
                             'title' => $navigation->name
