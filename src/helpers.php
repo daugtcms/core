@@ -59,7 +59,7 @@ if (! function_exists('collection_compare')) {
 if (! function_exists('get_navigation_items')) {
     function get_navigation_items($navigationId)
     {
-        return Listing::findOrFail($navigationId)->items;
+        return Listing::findOrFail($navigationId)->items()->orderBy('order')->get();
     }
 }
 
