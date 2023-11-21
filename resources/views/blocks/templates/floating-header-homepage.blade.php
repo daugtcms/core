@@ -21,9 +21,9 @@
     <div class=""
          :class="{
             'md:container rounded-lg transition-color duration-300': true,
-            'bg-primary-700 shadow-primary-700/20  shadow-lg': showBackground,
+            'bg-primary-700 shadow-primary-700/20  shadow-lg': showBackground || open,
         }">
-        <div class="flex justify-between h-full container">
+        <div class="flex justify-between h-full px-4 md:px-0">
             <div class="flex items-center">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0 h-16 py-3">
@@ -51,8 +51,28 @@
                 </div>
             </div>
             <div class="items-center hidden md:flex">
-
+                @guest
                 <x-sitebrew::form.button style="secondary" href="{{route('login')}}">Login</x-sitebrew::form.button>
+                @endguest
+                @auth
+                    <button class="flex items-center group" @click="$refs.panel.toggle">
+                        @svg('chevron-down', 'w-5 h-5 mr-1.5 text-white')
+
+                        <div class="rounded-full overflow-hidden w-9 h-9 bg-primary-100 group-hover:bg-white transition-colors text-primary-500 flex items-center justify-center">
+                            @svg('user', 'w-full h-full -mb-1')
+                        </div>
+                    </button>
+
+                    <div x-ref="panel" class="absolute bg-white rounded-md border-2 font-medium border-neutral-200 text-neutral-800 overflow-hidden divide-y" x-float.placement.bottom-end.offset>
+                        <div class="px-3 py-2 hover:bg-neutral-100 cursor-pointer">Mitgliederbereich</div>
+                        <div class="px-3 py-2 hover:bg-neutral-100 cursor-pointer">Meine Käufe & Abos</div>
+                        <div class="px-3 py-2 hover:bg-neutral-100 cursor-pointer">Mein Account</div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="px-3 py-2 w-full hover:bg-neutral-100 text-danger-500 hover:bg-danger-50 text-left">Abmelden</button>
+                        </form>
+                    </div>
+                @endauth
             </div>
             <!-- Settings Dropdown -->
             {{--<div class="flex items-center space-x-3">
