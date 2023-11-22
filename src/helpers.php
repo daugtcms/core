@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Sitebrew\Data\Media\MediaPickerData;
 use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Models\Listing\Listing;
+use Sitebrew\Models\Listing\ListingItem;
 use Sitebrew\Models\Listing\Navigation;
 
 if (! function_exists('svg')) {
@@ -59,7 +60,14 @@ if (! function_exists('collection_compare')) {
 if (! function_exists('get_navigation_items')) {
     function get_navigation_items($navigationId)
     {
-        return Listing::findOrFail($navigationId)->items()->orderBy('order')->get();
+        return Listing::where('id', $navigationId)->firstOrFail()->items()->orderBy('order')->get();
+    }
+}
+
+if (! function_exists('get_listing_item')) {
+    function get_listing_item($id)
+    {
+        return ListingItem::findOrFail($id);
     }
 }
 

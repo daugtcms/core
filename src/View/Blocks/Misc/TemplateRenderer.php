@@ -20,24 +20,17 @@ class TemplateRenderer extends Component
 
     public bool $withinTemplate = false;
 
-    public function __construct(string $usage, bool $withinTemplate = false, $data = null)
+    public function __construct(string $usage, bool $withinTemplate = false, $attributes = null)
     {
         $this->withinTemplate = $withinTemplate;
         $this->usage = $usage;
-        $this->restoreState($data);
+        $this->restoreState($attributes);
     }
 
-    public function restoreState($data): void
+    public function restoreState($attributes): void
     {
-        $template = null;
-        if (isset($data)) {
-            $templateData = TemplateData::from($data);
-            $template = Template::findOrFail($templateData->template);
-            $templateAttributes = Arr::collapse([$template->data, $templateData->attributes]);
-        } else {
-            $template = Template::where('usage', $this->usage)->first();
-            $templateAttributes = $template->data;
-        }
+        $template = Template::where('usage', $this->usage)->first();
+        $templateAttributes = Arr::collapse([$template->data, $attributes]);;
         $this->templateBlock = new (config('sitebrew.available_templates')[$template->view_name])(...$templateAttributes);
     }
 

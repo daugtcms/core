@@ -1,4 +1,7 @@
 @props(['key' => '', 'attribute'])
+@php
+    use Sitebrew\Enums\Blocks\AttributeType;
+@endphp
 <div class="w-full px-3 py-2">
     <h2 class="font-medium">{{$attribute['title']}}</h2>
     @isset($attribute['description'])
@@ -8,21 +11,21 @@
         <p class="text-sm mt-1.5 text-neutral-500 italic text-center">{{__('sitebrew::blocks.readonly_info')}}</p>
     @else
         @switch($attribute['type']->value)
-            @case('text')
-            @case('number')
+            @case(AttributeType::TEXT->value)
+            @case(AttributeType::NUMBER->value)
                 <x-sitebrew::form.input class="w-full mt-1" type="text"
                                         placeholder="{{Str::ucfirst($attribute['type']->value)}}" {{ $attributes }}>
                 </x-sitebrew::form.input>
                 @break
-            @case('boolean')
+            @case(AttributeType::BOOLEAN->value)
                 <div class="pt-1 -mb-2">
                     <x-sitebrew::form.checkbox {{$attributes}}>{{$attribute['title']}}</x-sitebrew::form.checkbox>
                 </div>
                 @break
-            @case('rich-text')
+            @case(AttributeType::RICH_TEXT->value)
                 <x-sitebrew::form.rich-text {{$attributes}}></x-sitebrew::form.rich-text>
                 @break
-            @case('listing')
+            @case(AttributeType::NAVIGATION->value)
                 @php
                     \Sitebrew\Models\Listing\Listing::where('usage', \Sitebrew\Enums\Listing\ListingUsage::NAVIGATION)->each(function(\Sitebrew\Models\Listing\Listing $navigation) use (&$navigations){
                         $navigations[] = [
@@ -34,8 +37,20 @@
                 @endphp
                 <x-sitebrew::form.select :options="$navigations" {{ $attributes }}></x-sitebrew::form.select>
                 @break
-            @case('image')
+            @case(AttributeType::IMAGE->value)
                 <x-sitebrew::form.media {{$attributes}}></x-sitebrew::form.media>
+                @break
+            @case(AttributeType::BLOG_CATEGORY->value)
+                @php
+                    \Sitebrew\Models\Listing\Listing::where('usage', \Sitebrew\Enums\Listing\ListingUsage::BLOG_CATEGORIES)->first()->items->each(function(\Sitebrew\Models\Listing\ListingItem $blogCategory) use (&$blogCategories){
+                        $blogCategories[] = [
+                            'value' => $blogCategory->id,
+                            'title' => $blogCategory->name
+                        ];
+                    });
+                    $blogCategories = collect($blogCategories)->toJson()
+                @endphp
+                <x-sitebrew::form.select :options="$blogCategories" {{ $attributes }}></x-sitebrew::form.select>
                 @break
         @endswitch
     @endif

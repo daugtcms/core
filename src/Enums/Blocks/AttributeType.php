@@ -14,7 +14,11 @@ enum AttributeType: string
 
     case IMAGE = 'image';
 
-    case NAVIGATION = 'listing';
+    case NAVIGATION = 'navigation';
+
+    case BLOG_CATEGORY = 'blog-category';
 
     case PRODUCT = 'product';
+
+    case USER = 'user';
 }

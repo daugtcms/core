@@ -14,7 +14,6 @@ class ListingItem extends Model
         'data' => 'array',
     ];
 
-
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
