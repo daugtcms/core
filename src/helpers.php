@@ -67,7 +67,11 @@ if (! function_exists('get_navigation_items')) {
 if (! function_exists('get_listing_item')) {
     function get_listing_item($id)
     {
-        return ListingItem::findOrFail($id);
+        if(!empty($id)) {
+            return ListingItem::findOrFail($id);
+        } else {
+            return new ListingItem();
+        }
     }
 }
 
