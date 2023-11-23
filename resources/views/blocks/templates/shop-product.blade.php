@@ -39,7 +39,7 @@
                     <div class="lg:flex lg:items-start">
                         <div class="lg:order-2 lg:ml-5">
                             <div class="max-w-xl overflow-hidden rounded-lg">
-                                <img class="h-full w-full max-w-full object-cover" src="{{\Sitebrew\Helpers\Media\MediaHelper::getMedia($media[0], 'optimized')}}" alt="" />
+                                <img class="h-full w-full max-w-full object-cover" src="{{isset($media[0]) ? \Sitebrew\Helpers\Media\MediaHelper::getMedia($media[0], 'optimized') : ''}}" alt="" />
                             </div>
                         </div>
 
