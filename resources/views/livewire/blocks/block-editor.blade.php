@@ -42,12 +42,12 @@
                     </div>
                 </div>
 
-                <section id="available-blocks" class="p-2 gap-y-2 flex flex-col">
+                <section id="available-blocks" class="p-2 gap-y-2 flex-grow overflow-y-auto flex flex-col">
                     @foreach($availableBlocks as $blockName)
                         @php
                             $block = new $blockName;
                         @endphp
-                        <div class="bg-white rounded-md shadow-sm p-4 cursor-grab select-none relative overflow-hidden group border border-neutral-100"
+                        <div class="bg-white flex-shrink-0 rounded-md shadow-sm p-4 cursor-grab select-none relative overflow-hidden group border border-neutral-100"
                              wire:click="addBlock('{{addslashes($blockName)}}')"
                              drag-item>
                             <h2 class="text-lg font-medium leading-snug">{{$block::getMetadata()['name']}}</h2>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <section id="active-block"
-                         class="flex flex-col gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0">
+                         class="flex flex-col overflow-y-auto gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0">
                     @php
                         $attributes = $activeBlock->getMetadata()['attributes'];
                     @endphp
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <section id="active-block"
-                         class="flex flex-col gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0">
+                         class="flex flex-col gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0 overflow-y-auto">
 
                     @foreach($templateBlock->getMetadata()['attributes'] as $key => $attribute)
                         <x-sitebrew::blocks.attribute-input :key="$key"
