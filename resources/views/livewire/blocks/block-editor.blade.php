@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="border-b-2 border-neutral-100"></div>
-        <div class="overflow-y-auto flex-grow isolate relative">
+        <div class="overflow-y-auto flex-grow isolate relative bg-white">
             <iframe class="w-full h-full" id="frame" ref="iframe" x-data
                     srcdoc="{{ $viewContent }}"></iframe>
         </div>

@@ -2,6 +2,7 @@
 
 namespace Sitebrew\Helpers\Media;
 
+use Illuminate\Support\Facades\Storage;
 use Plank\Mediable\Media;
 
 class MediaHelper
@@ -20,7 +21,7 @@ class MediaHelper
                 return $media->getUrl();
             } else {
                 if ($type == 'thumbnail') {
-                    $url = '/assets/default/';
+                    $url = Storage::disk('sitebrew-media')->url('/default/');
                     switch ($media->aggregate_type) {
                         case Media::TYPE_AUDIO:
                             $url = $url.'audio.svg';
@@ -28,18 +29,21 @@ class MediaHelper
                         case Media::TYPE_VIDEO:
                             $url = $url.'video.svg';
                             break;
+                        case Media::TYPE_DOCUMENT:
+                            $url = $url.'document.svg';
+                            break;
                         default:
-                            $url = $url.'photo.svg';
+                            $url = $url.'image.svg';
                             break;
                     }
 
                     return $url.'?'.random_int(1000, 9999);
-                } elseif ($type == 'optimized') {
+                } elseif (empty($type) || $type == 'optimized') {
                     return $media->getUrl();
                 }
             }
         } else {
-            return '/assets/default/'.$default.'.svg?'.random_int(1000, 9999);
+            return Storage::disk('sitebrew-media')->url('/default/'.$default.'.svg');
         }
     }
 

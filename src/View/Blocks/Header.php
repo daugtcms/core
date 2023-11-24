@@ -22,7 +22,7 @@ class Header extends Block
                 'description' => 'The bottom text',
             ],
             'backgroundImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Background Image',
             ],
         ],

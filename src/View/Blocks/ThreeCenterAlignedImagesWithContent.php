@@ -20,15 +20,15 @@ class ThreeCenterAlignedImagesWithContent extends Block
                 'title' => 'Text',
             ],
             'firstImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'First Image',
             ],
             'secondImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Second Image',
             ],
             'thirdImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Third Image',
             ],
         ],

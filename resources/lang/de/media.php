@@ -19,4 +19,5 @@ return [
     ],
     'all_media' => 'Alle Medien',
     'delete_media_confirmation' => 'Möchten Sie diese Medien-Datei wirklich löschen?',
+    'no_preview_available' => 'Keine Vorschau verfügbar',
 ];

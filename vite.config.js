@@ -17,7 +17,7 @@ export default defineConfig({
         laravel({
             hotFile: 'public/vendor/sitebrew/sitebrew.hot',
             buildDirectory: 'vendor/sitebrew',
-            input: ['resources/js/app.js', 'resources/js/stripped.js', 'resources/css/app.css'],
+            input: ['resources/js/app.js', 'resources/js/stripped.js', 'resources/css/app.css', 'resources/css/stripped.css'],
             refresh: true,
         }),
     ],

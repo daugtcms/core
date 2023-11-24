@@ -12,11 +12,11 @@ class CenterAuth extends SitebrewBlock
         'viewName' => 'sitebrew::blocks.templates.center-auth',
         'attributes' => [
             'logo' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Logo',
             ],
             'background' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Background',
             ]
         ],

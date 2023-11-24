@@ -11,7 +11,7 @@
 
     {{ Vite::useHotFile('vendor/sitebrew/sitebrew.hot')
         ->useBuildDirectory("vendor/sitebrew")
-        ->withEntryPoints(['resources/js/stripped.js']) }}
+        ->withEntryPoints(['resources/js/stripped.js', 'resources/css/stripped.css']) }}
 
     @googlefonts
 

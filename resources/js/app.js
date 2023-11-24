@@ -11,12 +11,15 @@ import {registerPlugin} from "filepond";
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import de_de from 'filepond/locale/de-de';
 
+import Plyr from 'plyr';
+
 import '/vendor/wire-elements/pro/resources/js/overlay-component.js'
 
 
 registerPlugin(FilePondPluginImagePreview);
 FilePond.setOptions(de_de);
 window.FilePond = FilePond;
+window.Plyr = Plyr;
 
 import './tiptap';
 import './block-editor'

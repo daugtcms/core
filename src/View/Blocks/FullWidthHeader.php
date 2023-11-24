@@ -22,12 +22,12 @@ class FullWidthHeader extends Block
                 'description' => 'The bottom text',
             ],
             'personImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Person Image',
                 'description' => 'Picture of a person, cut out with a transparent background',
             ],
             'backgroundImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Background Image',
             ],
         ],

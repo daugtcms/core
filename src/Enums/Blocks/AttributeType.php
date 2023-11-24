@@ -12,7 +12,7 @@ enum AttributeType: string
 
     case BOOLEAN = 'boolean';
 
-    case IMAGE = 'image';
+    case MEDIA = 'media';
 
     case NAVIGATION = 'navigation';
 

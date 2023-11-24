@@ -1,24 +1,29 @@
 {
-  "_module.esm-98ef9d22.js": {
-    "file": "assets/module.esm-98ef9d22.js"
+  "_plyr.min-102398fd.js": {
+    "file": "assets/plyr.min-102398fd.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-88545cc1.css",
+    "file": "assets/app-d3782ef6.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/css/stripped.css": {
+    "file": "assets/stripped-40e82d6e.css",
+    "isEntry": true,
+    "src": "resources/css/stripped.css"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-1ff2cc67.js",
+    "file": "assets/app-93480356.js",
     "imports": [
-      "_module.esm-98ef9d22.js"
+      "_plyr.min-102398fd.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-dde9979e.js",
+    "file": "assets/stripped-4e84c14e.js",
     "imports": [
-      "_module.esm-98ef9d22.js"
+      "_plyr.min-102398fd.js"
     ],
     "isEntry": true,
     "src": "resources/js/stripped.js"

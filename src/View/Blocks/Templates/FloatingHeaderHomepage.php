@@ -25,7 +25,7 @@ class FloatingHeaderHomepage extends SitebrewBlock
                 'title' => 'Main Navigation',
             ],
             'logo' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Logo',
             ],
         ],

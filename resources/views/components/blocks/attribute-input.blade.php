@@ -37,7 +37,7 @@
                 @endphp
                 <x-sitebrew::form.select :options="$navigations" {{ $attributes }}></x-sitebrew::form.select>
                 @break
-            @case(AttributeType::IMAGE->value)
+            @case(AttributeType::MEDIA->value)
                 <x-sitebrew::form.media {{$attributes}}></x-sitebrew::form.media>
                 @break
             @case(AttributeType::BLOG_CATEGORY->value)

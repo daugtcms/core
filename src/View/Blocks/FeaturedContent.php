@@ -24,7 +24,7 @@ class FeaturedContent extends Block
                 'title' => 'Text',
             ],
             'featuredImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Featured Image',
             ],
             'link' => [

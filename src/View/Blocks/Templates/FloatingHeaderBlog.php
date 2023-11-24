@@ -20,7 +20,7 @@ class FloatingHeaderBlog extends SitebrewBlock
                 'title' => 'Category',
             ],
             'backgroundImage' => [
-                'type' => AttributeType::IMAGE,
+                'type' => AttributeType::MEDIA,
                 'title' => 'Background Image',
             ],
             'author' => [
