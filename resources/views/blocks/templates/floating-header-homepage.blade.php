@@ -217,3 +217,39 @@
     </div>
 </nav>
 {!! $slot !!}
+<footer class="border-t-2 border-x-2 sm:rounded-t-xl border-neutral-100 bg-neutral-50 mt-4 container">
+    <div class="mx-auto w-full max-w-7xl px-5 pt-8 pb-5">
+        <div class="flex flex-col items-center">
+            <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 border-b-2 border-neutral-200 pb-4">
+                @if(!empty($footerNavigation))
+                @php
+                    $navigation = get_navigation_items((int)$footerNavigation);
+                @endphp
+                @foreach($navigation as $item)
+                    <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
+                       target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
+                       class="text-base font-medium text-neutral-600 hover:text-primary-500">
+                        {{$item->name}}
+                    </a>
+                @endforeach
+                @endif
+            </div>
+
+            <div class="mb-6 flex items-center gap-x-5 pt-5">
+                @if(!empty($socialMediaLinks))
+                    @php
+                        $socialMedia = get_navigation_items((int)$socialMediaLinks);
+                    @endphp
+                    @foreach($socialMedia as $item)
+                        <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
+                           target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
+                           class="text-base text-neutral-600 hover:text-primary-500">
+                            @svg($item->icon, 'w-6 h-6')
+                        </a>
+                    @endforeach
+                @endif
+            </div>
+            <p class="text-sm text-neutral-500">&copy; {{ date('Y') }} {{config('app.name')}}, all rights reserved.</p>
+        </div>
+    </div>
+</footer>

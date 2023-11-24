@@ -28,6 +28,14 @@ class FloatingHeaderHomepage extends SitebrewBlock
                 'type' => AttributeType::MEDIA,
                 'title' => 'Logo',
             ],
+            'footerNavigation' => [
+                'type' => AttributeType::NAVIGATION,
+                'title' => 'Footer Navigation',
+            ],
+            'socialMediaLinks' => [
+                'type' => AttributeType::NAVIGATION,
+                'title' => 'Social Media Links',
+            ]
         ],
     ];
 
@@ -36,6 +44,8 @@ class FloatingHeaderHomepage extends SitebrewBlock
         public bool $transparentNavigation = false,
         public int $mainNavigation = 0,
         public array $logo = [],
+        public int $footerNavigation = 0,
+        public int $socialMediaLinks = 0,
     ) {
         parent::__construct();
     }
