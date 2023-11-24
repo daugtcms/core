@@ -1,4 +1,3 @@
-import {Alpine} from '../../vendor/livewire/livewire/dist/livewire.esm'
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 

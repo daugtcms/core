@@ -2,8 +2,11 @@
   "_plyr.min-102398fd.js": {
     "file": "assets/plyr.min-102398fd.js"
   },
+  "_tiptap-7dc117f4.js": {
+    "file": "assets/tiptap-7dc117f4.js"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-d3782ef6.css",
+    "file": "assets/app-29c8e818.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -13,12 +16,22 @@
     "src": "resources/css/stripped.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-93480356.js",
+    "file": "assets/app-1d3f9808.js",
     "imports": [
+      "_tiptap-7dc117f4.js",
       "_plyr.min-102398fd.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/member-area.js": {
+    "file": "assets/member-area-5f8e7820.js",
+    "imports": [
+      "_tiptap-7dc117f4.js",
+      "_plyr.min-102398fd.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/member-area.js"
   },
   "resources/js/stripped.js": {
     "file": "assets/stripped-4e84c14e.js",

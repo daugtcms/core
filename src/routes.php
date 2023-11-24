@@ -13,8 +13,9 @@ Route::group(['middleware' => ['web']], function () {
     require __DIR__.'/Routes/auth.php';
     require __DIR__.'/Routes/blocks.php';
     require __DIR__ . '/Routes/listing.php';
-    require __DIR__ . '/Routes/content.php';
     require __DIR__.'/Routes/media.php';
     require __DIR__.'/Routes/users.php';
     require __DIR__.'/Routes/shop.php';
+    require __DIR__.'/Routes/member-area.php';
+    require __DIR__ . '/Routes/content.php';
 });

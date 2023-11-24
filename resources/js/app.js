@@ -9,6 +9,7 @@ import mask from "@alpinejs/mask";
 import * as FilePond from 'filepond';
 import {registerPlugin} from "filepond";
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import de_de from 'filepond/locale/de-de';
 
 import Plyr from 'plyr';
@@ -17,6 +18,7 @@ import '/vendor/wire-elements/pro/resources/js/overlay-component.js'
 
 
 registerPlugin(FilePondPluginImagePreview);
+registerPlugin(FilePondPluginImageExifOrientation);
 FilePond.setOptions(de_de);
 window.FilePond = FilePond;
 window.Plyr = Plyr;
