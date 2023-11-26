@@ -28,6 +28,7 @@ use Sitebrew\View\Blocks\Misc\TemplateRenderer;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Sitebrew\View\Components\Shop\ShoppingCart;
 
 class SitebrewBladeServiceProvider extends ServiceProvider
 {
@@ -36,8 +37,7 @@ class SitebrewBladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //Blade::component('sitebrew::blocks.header', Header::class);
-        //Blade::component('sitebrew::templates.floating-homepage', FloatingHomepage::class);
+
         Blade::component('sitebrew::modal', 'components.modal.index');
         Blade::directive('svg', function ($expression) {
             return "<?php echo svg($expression); ?>";
@@ -45,6 +45,8 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Blade::directive('number', function ($number) {
             return "<?php echo number_format($number, 2, ',', '.'); ?>";
         });
+
+        Blade::component('sitebrew::shop.shopping-cart', ShoppingCart::class);
         Blade::component('sitebrew::blocks-renderer', BlocksRenderer::class);
         Blade::component('sitebrew::template-renderer', TemplateRenderer::class);
 

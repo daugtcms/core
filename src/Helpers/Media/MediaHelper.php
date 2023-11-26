@@ -11,9 +11,9 @@ class MediaHelper
         $media = Media::findOrFail($mediaId);
         return static::getMedia($media, $type, $isAvatar);
     }
-    public static function getMedia(Media $media, $type, $isAvatar = false)
+    public static function getMedia(?Media $media, $type, $isAvatar = false)
     {
-        $default = $isAvatar ? 'avatar' : 'photo';
+        $default = $isAvatar ? 'avatar' : 'image';
         if ($media) {
             if ($media->aggregate_type == Media::TYPE_IMAGE) {
                 return $media->findVariant($type) ? $media->findVariant($type)->getUrl() : '/assets/default/' . $default . '.svg?' . random_int(1000, 9999);

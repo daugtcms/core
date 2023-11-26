@@ -10,8 +10,7 @@ enum TemplateUsage: string
 
     case SHOP_OVERVIEW = 'shop';
 
-    case SHOP_CATEGORY = 'shop-category';
-
     case SHOP_PRODUCT = 'shop-product';
 
+    case SHOP_PRODUCT_CARD = 'show-product-card';
 }

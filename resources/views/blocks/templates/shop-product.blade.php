@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                    <h1 class="sm: text-2xl font-bold text-neutral-900 sm:text-3xl">{{$product->name}}</h1>
+                    <h1 class="sm: text-2xl font-bold text-neutral-800 sm:text-3xl">{{$product->name}}</h1>
 
                     {{--<div class="mt-5 flex items-center">
                         <div class="flex items-center">
@@ -116,11 +116,12 @@
 
                     <div class="mt-5 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
                         <div class="flex items-end">
-                            <h1 class="text-3xl font-bold">€@number($product->price)</h1>
+                            <h1 class="text-2xl font-bold text-neutral-800">€@number($product->price)</h1>
                             {{--<span class="text-base">/month</span>--}}
                         </div>
 
-                        <x-sitebrew::form.button style="secondary" class="px-12 py-3 gap-x-2 !text-lg">@svg('shopping-basket') Add to cart</x-sitebrew::form.button>
+                        <x-sitebrew::form.button style="secondary" class="px-4 py-2 gap-x-2" :href="route('cart.add',$product)">@svg('shopping-basket')
+                            {{__('sitebrew::shop.add_to_cart')}}</x-sitebrew::form.button>
                     </div>
 
                     {{--<ul class="mt-8 space-y-2">

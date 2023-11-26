@@ -2,7 +2,8 @@
 
 use Sitebrew\Controllers\Admin\Content\DeleteContentController;
 use Sitebrew\Controllers\Admin\Content\ShowContentsController;
-use Sitebrew\Controllers\Pages\ShowPageController;
+use Sitebrew\Controllers\Content\ShowBlogController;
+use Sitebrew\Controllers\Content\ShowPageController;
 use Illuminate\Support\Facades\Route;
 use Sitebrew\Livewire\Content\ContentTable;
 use Sitebrew\Livewire\Content\CoursesTable;
@@ -17,5 +18,8 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
     Route::delete('/{page}', DeleteContentController::class);
 });
 
-Route::get('/', ShowPageController::class)->name('contents.index');
-Route::get('/{slug}', ShowPageController::class)->name('contents.index');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', ShowPageController::class)->name('content.pages.index');
+    Route::get('/{slug}', ShowPageController::class)->name('content.pages.index');
+    Route::get('/blog/{slug}', ShowBlogController::class)->name('content.blog.index');
+});

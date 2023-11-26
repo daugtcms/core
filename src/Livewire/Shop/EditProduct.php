@@ -2,18 +2,23 @@
 
 namespace Sitebrew\Livewire\Shop;
 
+use Illuminate\Support\Arr;
 use Livewire\Attributes\On;
 use Livewire\Features\SupportAttributes\AttributeCollection;
 use Plank\Mediable\Media;
+use Sitebrew\Data\Blocks\BlockEditorData;
+use Sitebrew\Data\Blocks\TemplateData;
 use Sitebrew\Enums\Blocks\TemplateUsage;
 use Sitebrew\Enums\Shop\BillingType;
 use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Livewire\Content\CoursesTable;
+use Sitebrew\Models\Blocks\Template;
 use Sitebrew\Models\Content\Course;
 use Sitebrew\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
 use Sitebrew\Models\Shop\Product;
 use Sitebrew\Models\User;
+use Spatie\LaravelData\DataCollection;
 use WireElements\Pro\Components\Modal\Modal;
 
 class EditProduct extends Modal
@@ -86,6 +91,14 @@ class EditProduct extends Modal
     public function save()
     {
         $this->validate();
+
+        if(empty($this->description)) {
+            $template = Template::where('usage', TemplateUsage::SHOP_PRODUCT)->first();
+            $templateAttributes = Arr::collapse([$template->data, ['product' => $this->product->id]]);
+            $template = new TemplateData($template->id, $templateAttributes);
+            $this->description = ['template' => $template->toArray(), 'blocks' => []];
+        }
+
         $properties = [...$this->only(['name', 'description', 'price', 'external_url', 'shipping', 'multi', 'content_id', 'course_id', 'starts_at', 'ends_at']), 'billing_type' => BillingType::ONE_TIME];
 
         if (isset($this->product->id)) {

@@ -57,10 +57,10 @@ if (! function_exists('collection_compare')) {
     }
 }
 
-if (! function_exists('get_navigation_items')) {
-    function get_navigation_items($navigationId)
+if (! function_exists('get_listing_items')) {
+    function get_listing_items($id)
     {
-        return Listing::where('id', $navigationId)->firstOrFail()->items()->orderBy('order')->get();
+        return Listing::where('id', $id)->firstOrFail()->items()->orderBy('order')->get();
     }
 }
 
