@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider;
+use Sitebrew\Commands\SyncStripeTaxCodes;
 use Sitebrew\Extensions\CloudflareR2Adapter;
 use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Livewire\Shop\ProductTable;
@@ -142,6 +143,7 @@ class SitebrewServiceProvider extends ServiceProvider
             // Registering package commands.
             $this->commands([
                 SyncIcons::class,
+                SyncStripeTaxCodes::class
             ]);
         }
 
@@ -173,6 +175,8 @@ class SitebrewServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/wire-elements-pro.php', 'wire-elements-pro');
 
         $this->mergeConfigFrom(__DIR__.'/../config/permission.php', 'permission');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/stripe-webhooks.php', 'stripe-webhooks');
 
         // Register the main class to use with the facade
         $this->app->singleton('sitebrew', function () {

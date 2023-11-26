@@ -23,5 +23,7 @@ return [
     'product_media_description' => 'Diese Medien werden auf der Produktseite angezeigt',
     'disclaimer_no_real_data_without_saving' => 'Ohne vorherigem Speichern, werden im Block-Editor keine aktuellen Produkt-Daten angezeigt!',
     'add_to_cart' => 'In den Einkaufswagen',
-    'all_products' => 'Alle Produkte'
+    'all_products' => 'Alle Produkte',
+    'tax_code' => 'Steuercode',
+    'tax_code_description' => 'Der Steuercode wird für die automatische Steuerberechnung verwendet',
 ];

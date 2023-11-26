@@ -2,7 +2,7 @@
 
 All the core functionality for the shop+blogging sites.
 
-## Icons
+## Commands
 
 To sync icons run:
 
@@ -12,6 +12,12 @@ php artisan sitebrew:sync-icons
 
 To ensure new items are synced run this command after every deployment or in ``post-autoload-dump`` script.
 
+
+To sync stripe tax codes run:
+
+```bash
+php artisan sitebrew:sync-stripe-tax-codes
+```
 
 ## Development
 To add assets from this package to the main project during development you need to symlink the asset directory:

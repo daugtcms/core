@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Sitebrew\Jobs\Shop\SyncStripeUser;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Sluggable\SlugOptions;
 
 /*use Laravel\Sanctum\HasApiTokens;
 use Plank\Mediable\Mediable;
@@ -46,7 +48,24 @@ class User extends Authenticatable implements MustVerifyEmail
         return static::where('created_at', '<=', now()->subWeek());
     }
 
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
 
+    protected static function boot(): void
+    {
+        parent::boot();
+        // sync stripe user on creation syncronously and on update asyncronously
+        static::created(function ($user) {
+            SyncStripeUser::dispatchSync($user);
+        });
+        static::updated(function ($user) {
+            SyncStripeUser::dispatch($user);
+        });
+    }
 
     /*public function posts()
     {
@@ -66,38 +85,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
-    }
-
-    protected static function booted()
-    {
-        static::updated(function ($customer) {
-            $customer->syncStripe();
-        });
-    }*/
-
-    /*public function syncStripe()
-    {
-        $stripe = StripeClient::init();
-        if (! $this->stripe_id) {
-            $customer = $stripe->customers->create([
-                'name' => $this->name,
-                'email' => $this->email,
-                'preferred_locales' => ['de-DE'],
-            ]);
-            $this->stripe_id = $customer->id;
-            $this->save();
-        } else {
-            $stripe->customers->update($this->stripe_id, [
-                'name' => $this->name,
-                'email' => $this->email,
-            ]);
-        }
-    }
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
     }*/
 }

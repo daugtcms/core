@@ -33,6 +33,8 @@ class EditProduct extends Modal
     #[Rule('required')]
     public $price = 0;
 
+    public string $stripe_tax_code_id = '';
+
     #[Rule('nullable|url')]
     public ?string $external_url = null;
 
@@ -64,6 +66,12 @@ class EditProduct extends Modal
             $this->name = $product->name;
             $this->description = $product->description;
             $this->price = $product->price;
+
+            if(empty($product->stripe_tax_code_id)) {
+                $this->stripe_tax_code_id = config('sitebrew.stripe.default_tax_code');
+            } else {
+                $this->stripe_tax_code_id = $product->stripe_tax_code_id;
+            }
 
             $this->isExternal = !empty($product->external_url);
             $this->external_url = $product->external_url;
@@ -99,7 +107,7 @@ class EditProduct extends Modal
             $this->description = ['template' => $template->toArray(), 'blocks' => []];
         }
 
-        $properties = [...$this->only(['name', 'description', 'price', 'external_url', 'shipping', 'multi', 'content_id', 'course_id', 'starts_at', 'ends_at']), 'billing_type' => BillingType::ONE_TIME];
+        $properties = [...$this->only(['name', 'description', 'price', 'external_url', 'shipping', 'multi', 'content_id', 'course_id', 'starts_at', 'ends_at', 'stripe_tax_code_id']), 'billing_type' => BillingType::ONE_TIME];
 
         if (isset($this->product->id)) {
             $this->product->update(
@@ -192,6 +200,5 @@ class EditProduct extends Modal
             $this->description = $data;
         }
     }
-
 
 }

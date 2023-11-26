@@ -20,7 +20,7 @@ class ShopIndexController extends Controller
           });
         }
 
-        $products = $query->paginate(20);
+        $products = $query->get();
 
         return view('sitebrew::shop.index', compact('products'));
     }

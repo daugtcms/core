@@ -105,8 +105,11 @@
               </div>
             </div>
 
+            @php
+                $country = Locale::getDisplayRegion(config('sitebrew.shop.shipping.locale'), config('sitebrew.shop.shipping.locale'));
+            @endphp
             <div class="px-4 py-6 border-t border-neutral-200 sm:px-6 @if($disabled) pointer-events-none @endif" x-data="{
-              austria: true,
+              within_country: true,
               formatPrice(price) {
                 var formatter = new Intl.NumberFormat('de-AT', {
                   style: 'currency',
@@ -123,21 +126,21 @@
               </x-label>
               @endif--}}
               @if($includesShipping && !$includesSubscription)
-              <label for="shipping" class="inline-flex items-center">
-                <input id="shipping" x-model="austria" type="checkbox" name="shipping">
-                <span class="ml-2 text-sm text-neutral-600">Versand innerhalb Österreichs</span>
+              <label for="shipping" class="inline-flex items-center pb-3">
+                <input id="shipping" x-model="within_country" type="checkbox" name="shipping">
+                <span class="ml-2 text-sm text-neutral-600">Versand innerhalb {{$country}}</span>
               </label>
               <div class="flex justify-between text-sm font-medium text-neutral-900">
                 <p>Zwischensumme</p>
                 <p x-text="formatPrice({{$total}})"></p>
               </div>
               <div class="flex justify-between text-sm font-normal text-neutral-500">
-                <p>Versand <span x-show="austria">nach Ö</span><span x-show="!austria">außerhalb Ö</span></p>
-                <p x-text="formatPrice(austria ? 5 : 10)"></p>
+                <p>Versand <span x-show="within_country">nach {{$country}}</span><span x-show="!within_country">außerhalb {{$country}}</span></p>
+                <p x-text="formatPrice(within_country ? 5 : 10)"></p>
               </div>
               <div class="flex justify-between mt-1 text-base font-medium text-neutral-900 border-t-2">
                 <p>Gesamtpreis</p>
-                <p x-text="formatPrice({{$total}} + (austria ? 5 : 10))"></p>
+                <p x-text="formatPrice({{$total}} + (within_country ? 5 : 10))"></p>
               </div>
               @else
               @if(!$includesShipping)
@@ -170,6 +173,11 @@
                   kaufen</x-button>
               </div>
               --}}
+              <x-sitebrew::form.button href="{{route('checkout')}}"
+                        x-bind:href="'{{route('checkout')}}' + (within_country ? '?within_country' : '')" :style="'primary'"
+                        :class="$disabled ? 'w-full py-2 text-base opacity-50 pointer-events-none mt-2' : 'w-full py-2 text-base mt-2'">
+                Jetzt
+                kaufen</x-sitebrew::form.button>
             </div>
           </div>
         </div>

@@ -91,7 +91,7 @@
      class="relative">
 
     @php
-        $classList = 'relative py-1.5 rounded-md shadow-sm border-neutral-300 border focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 w-full text-left pl-3 focus:outline-none';
+        $classList = 'relative py-1.5 rounded-md shadow-sm border-neutral-300 border focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 w-full flex text-left pl-3 focus:outline-none';
         if($error) {
             $classList .= ' border-danger-500 ring ring-danger-200 ring-opacity-50';
         }
