@@ -31,6 +31,14 @@ class ThreeCenterAlignedImagesWithContent extends Block
                 'type' => AttributeType::MEDIA,
                 'title' => 'Third Image',
             ],
+            'link' => [
+                'type' => AttributeType::TEXT,
+                'title' => 'Link',
+            ],
+            'linkText' => [
+                'type' => AttributeType::TEXT,
+                'title' => 'Link Text',
+            ],
         ],
     ];
 
@@ -40,6 +48,8 @@ class ThreeCenterAlignedImagesWithContent extends Block
         public array $firstImage = [],
         public array $secondImage = [],
         public array $thirdImage = [],
+        public string $link = '',
+        public string $linkText = '',
     ) {
         parent::__construct();
     }

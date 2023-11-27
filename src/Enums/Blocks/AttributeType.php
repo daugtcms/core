@@ -23,4 +23,6 @@ enum AttributeType: string
     case USER = 'user';
 
     case COURSE_SECTION = 'course-section';
+
+    case CUSTOM_SELECT = 'custom-select';
 }

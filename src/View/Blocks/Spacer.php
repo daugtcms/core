@@ -20,7 +20,7 @@ class Spacer extends Block
     ];
 
     public function __construct(
-        public int $height = 25,
+        public ?int $height = 25,
     ) {
         parent::__construct();
     }

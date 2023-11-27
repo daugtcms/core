@@ -35,6 +35,24 @@ class FeaturedContent extends Block
                 'type' => AttributeType::TEXT,
                 'title' => 'Link Text',
             ],
+            'color' => [
+                'type' => AttributeType::CUSTOM_SELECT,
+                'title' => 'Color',
+                'options' => [
+                    'primary' => 'Primary',
+                    'secondary' => 'Secondary',
+                    'neutral' => 'Neutral',
+                ],
+            ],
+            'backgroundColor' => [
+                'type' => AttributeType::CUSTOM_SELECT,
+                'title' => 'Background Color',
+                'options' => [
+                    'primary' => 'Primary',
+                    'secondary' => 'Secondary',
+                    'neutral' => 'Neutral',
+                ],
+            ]
         ],
     ];
 
@@ -44,7 +62,9 @@ class FeaturedContent extends Block
         public string $text = '',
         public array $featuredImage = [],
         public string $link = '',
-        public string $linkText = ''
+        public string $linkText = '',
+        public string $color = 'secondary',
+        public string $backgroundColor = 'neutral',
     ) {
         parent::__construct();
     }

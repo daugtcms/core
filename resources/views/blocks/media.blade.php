@@ -3,6 +3,7 @@
         @php
             $media = \Plank\Mediable\Media::where('id', $item['id'])->first();
         @endphp
+        @if(!empty($media))
         <div
                 @class([
                 'border-2 border-neutral-200' => $showLabel || ($media->aggregate_type != 'image' && $media->aggregate_type != 'video'),
@@ -72,5 +73,6 @@
                 @break
         @endswitch
         </div>
+        @endif
     @endforeach
 </div>

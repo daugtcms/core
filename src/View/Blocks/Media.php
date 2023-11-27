@@ -32,7 +32,7 @@ class Media extends Block
     public function __construct(
         public array $mediaList = [],
         public bool $showLabel = false,
-        public int $maxItemHeight = 512,
+        public ?int $maxItemHeight = 512,
     ) {
         parent::__construct();
     }

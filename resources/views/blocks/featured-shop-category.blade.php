@@ -1,7 +1,5 @@
 <div class="container w-full ">
     <div class=" rounded-md  py-3 overflow-hidden">
-        <h2 class="text-primary-700 text-2xl font-semibold">{{$title}}</h2>
-        <h3 class="text-neutral-700 pb-2 pt-1">{{$subtitle}}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-auto-x">
             @for ($i = 0; $i < 4; $i++)
                 <article

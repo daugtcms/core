@@ -16,11 +16,17 @@ class Text extends Block
                 'title' => 'Text',
                 'description' => 'The text that will be displayed in this block'
             ],
+            'fullWidth' => [
+                'type' => AttributeType::BOOLEAN,
+                'title' => 'Full Width',
+                'description' => 'Whether or not the text should be displayed full width'
+            ],
         ],
     ];
 
     public function __construct(
         public string $text = '',
+        public bool $fullWidth = false,
     ) {
         parent::__construct();
     }

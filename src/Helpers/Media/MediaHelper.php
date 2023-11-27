@@ -8,7 +8,7 @@ use Plank\Mediable\Media;
 class MediaHelper
 {
     public static function getMediaById(int $mediaId, $type, $isAvatar = false) {
-        $media = Media::findOrFail($mediaId);
+        $media = Media::find($mediaId);
         return static::getMedia($media, $type, $isAvatar);
     }
     public static function getMedia(?Media $media, $type, $isAvatar = false)

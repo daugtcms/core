@@ -69,12 +69,6 @@ class EditProduct extends Modal
             $this->description = $product->description;
             $this->price = $product->price;
 
-            if(empty($product->stripe_tax_code_id)) {
-                $this->stripe_tax_code_id = config('sitebrew.stripe.default_tax_code');
-            } else {
-                $this->stripe_tax_code_id = $product->stripe_tax_code_id;
-            }
-
             $this->isExternal = !empty($product->external_url);
             $this->external_url = $product->external_url;
 
@@ -96,18 +90,17 @@ class EditProduct extends Modal
                 return $cat->id;
             })->toArray();
         }
+
+        if(empty($product->stripe_tax_code_id)) {
+            $this->stripe_tax_code_id = config('sitebrew.stripe.default_tax_code');
+        } else {
+            $this->stripe_tax_code_id = $product->stripe_tax_code_id;
+        }
     }
 
     public function save()
     {
         $this->validate();
-
-        if(empty($this->description)) {
-            $template = Template::where('usage', TemplateUsage::SHOP_PRODUCT)->first();
-            $templateAttributes = Arr::collapse([$template->data, ['product' => $this->product->id]]);
-            $template = new TemplateData($template->id, $templateAttributes);
-            $this->description = ['template' => $template->toArray(), 'blocks' => []];
-        }
 
         $properties = [...$this->only(['name', 'description', 'price', 'external_url', 'shipping', 'multi', 'content_id', 'course_id', 'starts_at', 'ends_at', 'stripe_tax_code_id']), 'billing_type' => BillingType::ONE_TIME];
 
@@ -120,6 +113,13 @@ class EditProduct extends Modal
             $this->product = Product::create(
                 $properties
             );
+        }
+
+        if(empty($this->product->description)) {
+            $template = Template::where('usage', TemplateUsage::SHOP_PRODUCT)->first();
+            $templateAttributes = Arr::collapse([$template->data, ['product' => $this->product->id]]);
+            $template = new TemplateData($template->id, $templateAttributes);
+            $this->product->description = ['template' => $template->toArray(), 'blocks' => []];
         }
 
         $this->product->detachMediaTags('media');

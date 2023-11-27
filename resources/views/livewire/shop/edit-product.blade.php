@@ -47,23 +47,6 @@
             <x-sitebrew::form.media name="media" wire:model="media" wire:key="media"></x-sitebrew::form.media>
         </div>
 
-        <div>
-            @php
-                $taxCodes = \Sitebrew\Models\Shop\StripeTaxCode::all()->map(function (\Sitebrew\Models\Shop\StripeTaxCode $taxCode){
-                    return [
-                        'value' => $taxCode->id,
-                        'title' => $taxCode->name
-                    ];
-                })->values()->toJson();
-            @endphp
-            <x-sitebrew::form.label for="tax_code">{{__('sitebrew::shop.tax_code')}}
-                <x-slot name="additional">
-                    {{__('sitebrew::shop.tax_code_description')}}
-                </x-slot>
-            </x-sitebrew::form.label>
-            <x-sitebrew::form.select id="tax_code" wire:model.live="stripe_tax_code_id" :options="$taxCodes"></x-sitebrew::form.select>
-        </div>
-
         <x-sitebrew::tabs.tabs class="bg-neutral-100 mt-2 mb-1 py-1.5 px-1.5 rounded-md border-neutral-200 border-2">
             <x-sitebrew::tabs.item :active="!$isExternal"
                                    wire:click="setIsExternal(false)">{{__('sitebrew::shop.normal_shop_product')}}</x-sitebrew::tabs.item>
@@ -82,6 +65,22 @@
                                         :error="$errors->first('external_url')"/>
             </div>
         @else
+            <div>
+                @php
+                    $taxCodes = \Sitebrew\Models\Shop\StripeTaxCode::all()->map(function (\Sitebrew\Models\Shop\StripeTaxCode $taxCode){
+                        return [
+                            'value' => $taxCode->id,
+                            'title' => $taxCode->name
+                        ];
+                    })->values()->toJson();
+                @endphp
+                <x-sitebrew::form.label for="tax_code">{{__('sitebrew::shop.tax_code')}}
+                    <x-slot name="additional">
+                        {{__('sitebrew::shop.tax_code_description')}}
+                    </x-slot>
+                </x-sitebrew::form.label>
+                <x-sitebrew::form.select id="tax_code" wire:model.live="stripe_tax_code_id" :options="$taxCodes"></x-sitebrew::form.select>
+            </div>
             <div>
                 <x-sitebrew::form.label for="shipping">{{__('sitebrew::shop.shipping')}}
                     <x-slot name="additional">

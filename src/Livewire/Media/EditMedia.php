@@ -25,7 +25,7 @@ class EditMedia extends Modal
     public function delete() {
         MediaHelper::deleteMedia($this->media->id);
 
-        $this->close(andDispatch: [
+        $this->close(withForce: true, andDispatch: [
             MediaManager::class => 'refreshComponent',
         ]);
     }
