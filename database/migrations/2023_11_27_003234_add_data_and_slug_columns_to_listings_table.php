@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('course_sections', function (Blueprint $table) {
-            $table->smallInteger('order')->default(0);
+        Schema::table('listings', function (Blueprint $table) {
+            $table->string('slug')->nullable()->after('name');
+            $table->jsonb('data')->nullable()->after('usage');
         });
     }
 };

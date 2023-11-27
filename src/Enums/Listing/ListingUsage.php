@@ -9,4 +9,6 @@ enum ListingUsage: string
     case SHOP_CATEGORIES = 'shop-categories';
 
     case BLOG_CATEGORIES = 'blog-categories';
+
+    case COURSE = 'course';
 }

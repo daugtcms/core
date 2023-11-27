@@ -29,10 +29,7 @@ use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Livewire\Shop\ProductTable;
 use Sitebrew\Models\Blocks\Template;
 use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Content\Course;
-use Sitebrew\Models\Content\CourseSection;
 use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\Navigation;
 use Sitebrew\Models\Listing\ListingItem;
 use Sitebrew\Models\Shop\Product;
 use Sitebrew\Models\User;
@@ -150,8 +147,6 @@ class SitebrewServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'product' => Product::class,
             'content' => Content::class,
-            'course' => Course::class,
-            'course-section' => CourseSection::class,
             'template' => Template::class,
             'listing' => Listing::class,
             'listing-item' => ListingItem::class,

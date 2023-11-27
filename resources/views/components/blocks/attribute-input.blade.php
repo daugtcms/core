@@ -52,6 +52,22 @@
                 @endphp
                 <x-sitebrew::form.select :options="$blogCategories" {{ $attributes }}></x-sitebrew::form.select>
                 @break
+            @case(AttributeType::COURSE_SECTION->value)
+                @php
+                    $courseSections = [];
+                    \Sitebrew\Models\Listing\Listing::where('usage', \Sitebrew\Enums\Listing\ListingUsage::COURSE->value)->with('items')->get()->each(function(\Sitebrew\Models\Listing\Listing $course) use (&$courseSections){
+                        $course->items->each(function(\Sitebrew\Models\Listing\ListingItem $courseSection) use (&$courseSections, $course){
+                            $courseSections[] = [
+                                'value' => $courseSection->id,
+                                'title' => $course->name . ' - ' . $courseSection->name
+                            ];
+                        });
+                    });
+                    $courseSections = collect($courseSections)->toJson()
+
+                @endphp
+                <x-sitebrew::form.select :options="$courseSections" {{ $attributes }}></x-sitebrew::form.select>
+                @break
         @endswitch
     @endif
 </div>

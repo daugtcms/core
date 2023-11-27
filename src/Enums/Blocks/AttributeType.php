@@ -21,4 +21,6 @@ enum AttributeType: string
     case PRODUCT = 'product';
 
     case USER = 'user';
+
+    case COURSE_SECTION = 'course-section';
 }

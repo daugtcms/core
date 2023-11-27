@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->boolean('multi')->default(false);
             $table->string('external_url')->nullable();
             $table->foreignId('content_id')->nullable()->constrained('contents')->onDelete('cascade');
-            $table->foreignId('course_id')->nullable()->constrained('courses')->onDelete('cascade');
+            $table->foreignId('course_id')->nullable()->constrained('listings')->onDelete('cascade');
             $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->timestamps();

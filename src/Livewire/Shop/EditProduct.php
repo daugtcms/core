@@ -9,11 +9,13 @@ use Plank\Mediable\Media;
 use Sitebrew\Data\Blocks\BlockEditorData;
 use Sitebrew\Data\Blocks\TemplateData;
 use Sitebrew\Enums\Blocks\TemplateUsage;
+use Sitebrew\Enums\Listing\ListingUsage;
 use Sitebrew\Enums\Shop\BillingType;
 use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Livewire\Content\CoursesTable;
 use Sitebrew\Models\Blocks\Template;
 use Sitebrew\Models\Content\Course;
+use Sitebrew\Models\Listing\Listing;
 use Sitebrew\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
 use Sitebrew\Models\Shop\Product;
@@ -143,7 +145,7 @@ class EditProduct extends Modal
     {
 
         return view('sitebrew::livewire.shop.edit-product', [
-            'courses' => Course::all(),
+            'courses' => Listing::where('usage', ListingUsage::COURSE)->get(),
         ]);
     }
 

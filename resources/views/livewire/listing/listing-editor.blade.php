@@ -90,23 +90,30 @@
                                                                   wire:model.live="currentItem.icon"></x-sitebrew::form.icon-picker>
                                 </div>
                                 @if($currentListing->usage == \Sitebrew\Enums\Listing\ListingUsage::NAVIGATION->value)
-                                <div>
-                                    <x-sitebrew::form.label
-                                            for="url">{{__('sitebrew::general.url')}}</x-sitebrew::form.label>
-                                    <x-sitebrew::form.input id="url"
-                                                             wire:model.blur="currentItem.data.url"
-                                                             :error="$errors->first('currentItem.data.url')"
-                                    ></x-sitebrew::form.input>
-                                </div>
-                                <div class="mt-2.5">
-                                    <x-sitebrew::form.checkbox
-                                            name="target"
-                                            wire:model.live="currentItem.data.target"
-                                            value="_blank"
-                                            :checked="isset($currentItem->data['target']) ? $currentItem->data['target'] == '_blank' : false"
-                                    >{{__('sitebrew::listing.open_in_new_tab')}}</x-sitebrew::form.checkbox>
-                                </div>
+                                    <div>
+                                        <x-sitebrew::form.label
+                                                for="url">{{__('sitebrew::general.url')}}</x-sitebrew::form.label>
+                                        <x-sitebrew::form.input id="url"
+                                                                 wire:model.blur="currentItem.data.url"
+                                                                 :error="$errors->first('currentItem.data.url')"
+                                        ></x-sitebrew::form.input>
+                                    </div>
+                                    <div class="mt-2.5">
+                                        <x-sitebrew::form.checkbox
+                                                name="target"
+                                                wire:model.live="currentItem.data.target"
+                                                value="_blank"
+                                                :checked="isset($currentItem->data['target']) ? $currentItem->data['target'] == '_blank' : false"
+                                        >{{__('sitebrew::listing.open_in_new_tab')}}</x-sitebrew::form.checkbox>
+                                    </div>
+                                @elseif($currentListing->usage == \Sitebrew\Enums\Listing\ListingUsage::COURSE->value)
+                                    <div class="flex flex-col gap-y-2 mt-2">
+                                        <x-sitebrew::form.checkbox name="users_can_comment" wire:model="currentItem.data.users_can_comment">{{__('sitebrew::content.users_can_comment')}}</x-sitebrew::form.checkbox>
+                                        <x-sitebrew::form.checkbox name="users_can_post" wire:model="currentItem.data.users_can_post">{{__('sitebrew::content.users_can_post')}}</x-sitebrew::form.checkbox>
+                                        <x-sitebrew::form.checkbox name="users_can_post_anonymously" wire:model="currentItem.data.users_can_post_anonymously">{{__('sitebrew::content.users_can_post_anonymously')}}</x-sitebrew::form.checkbox>
+                                    </div>
                                 @endif
+
                             </div>
                         @endif
                     </div>

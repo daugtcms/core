@@ -42,11 +42,6 @@ class Product extends Model
         return $this->morphToMany(ListingItem::class, 'model', 'model_has_listing_items', 'model_id', 'listing_item_id');
     }
 
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
-
     protected static function boot(): void
     {
         parent::boot();

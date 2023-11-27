@@ -19,6 +19,9 @@ class EditListing extends Modal
     #[Rule('nullable')]
     public $description = '';
 
+    #[Rule('nullable')]
+    public $data = [];
+
     public function mount(Listing $listing = null)
     {
         if ($listing) {
@@ -26,21 +29,21 @@ class EditListing extends Modal
             $this->name = $listing->name;
             $this->usage = $listing->usage;
             $this->description = $listing->description;
+            $this->data = $listing->data ?? [];
         }
     }
 
     public function save()
     {
         $this->validate();
-
         if (isset($this->listing->id)) {
             $this->listing->update(
-                $this->only(['name', 'description', 'usage'])
+                $this->only(['name', 'description', 'usage', 'data'])
             );
             $this->listing->save();
         } else {
             Listing::create(
-                $this->only(['name', 'description', 'usage'])
+                $this->only(['name', 'description', 'usage', 'data'])
             );
         }
 

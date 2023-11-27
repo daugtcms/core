@@ -19,12 +19,12 @@ class BlocksRenderer extends Component
 
     private string $context = 'frontend';
 
-    public function __construct(array $data = null, string $inEditor = 'frontend')
+    public function __construct(array $data = null, string $context = 'frontend')
     {
         if (isset($data)) {
             $this->restoreState($data);
         }
-        $this->context = $inEditor;
+        $this->context = $context;
     }
 
     public function restoreState($data): void

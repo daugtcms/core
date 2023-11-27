@@ -125,7 +125,7 @@
             @else
             <div>
                 @php
-                    $courses = $courses->map(function (\Sitebrew\Models\Content\Course $course){
+                    $courses = $courses->map(function (\Sitebrew\Models\Listing\Listing $course){
                         return [
                             'value' => $course->id,
                             'title' => $course->name
