@@ -13,7 +13,7 @@ class Dashboard extends Component
     {
     }
 
-    #[Layout('sitebrew::components.layouts.member-area-base')]
+    #[Layout('sitebrew::components.layouts.member-area-layout')]
     public function render()
     {
 
