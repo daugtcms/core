@@ -202,6 +202,9 @@ class EditProduct extends Modal
         if($id == 'product-' . $this->product->id) {
             $this->description = $data;
         }
+
+        $this->product->description = $this->description;
+        $this->product->save();
     }
 
 }
