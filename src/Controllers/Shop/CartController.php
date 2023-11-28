@@ -13,6 +13,7 @@ class CartController extends Controller
 
         $amount = $cart->get($product->id);
 
+        if($product->enabled && empty($product->external_url)) {
         if ($product->type == 'subscription') {
             $cartProducts = Product::where('billing_type', 'subscription')->whereIn('id', $cart->keys())->get();
             if ($cartProducts->isNotEmpty()) {
@@ -36,6 +37,11 @@ class CartController extends Controller
         return redirect()->to(
             $previousUrl.'?cart'
         );
+        } else {
+            return redirect()->to(
+                $product->external_url
+            );
+        }
     }
 
     public function remove(Product $product)

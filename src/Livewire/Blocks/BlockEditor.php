@@ -197,6 +197,13 @@ class BlockEditor extends Modal
         ];
     }
 
+    public static function behavior(): array
+    {
+        return [
+            'remove-state-on-close' => true,
+        ];
+    }
+
     public function getAvailableBlocks() {
         $blocks = $this->template->available_blocks;
         if(!empty($blocks)) {

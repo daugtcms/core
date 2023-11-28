@@ -26,4 +26,11 @@ return [
     'all_products' => 'Alle Produkte',
     'tax_code' => 'Steuercode',
     'tax_code_description' => 'Der Steuercode wird für die automatische Steuerberechnung verwendet',
+    'navigate_to_external_shop' => 'In externem Shop ansehen',
+    'selled_by' => 'Verkauft durch',
+    'shipping_product' => 'Versandprodukt',
+    'shipping_costs' => '5€ nach :country, 10€ nach :other_countries',
+    'access_to_course' => 'Zugang zu',
+    'from' => 'Von :from',
+    'to' => 'Bis :to',
 ];

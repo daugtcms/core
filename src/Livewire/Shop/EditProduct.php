@@ -120,6 +120,7 @@ class EditProduct extends Modal
             $templateAttributes = Arr::collapse([$template->data, ['product' => $this->product->id]]);
             $template = new TemplateData($template->id, $templateAttributes);
             $this->product->description = ['template' => $template->toArray(), 'blocks' => []];
+            $this->product->save();
         }
 
         $this->product->detachMediaTags('media');

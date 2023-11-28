@@ -120,25 +120,62 @@
                             {{--<span class="text-base">/month</span>--}}
                         </div>
 
-                        <x-sitebrew::form.button style="secondary" class="px-4 py-2 gap-x-2" :href="route('cart.add',$product)">@svg('shopping-basket')
-                            {{__('sitebrew::shop.add_to_cart')}}</x-sitebrew::form.button>
+                        <x-sitebrew::form.button style="secondary" class="px-4 py-2 gap-x-2" target="{{$product->external_url ? '_blank' : ''}}" :href="$product->external_url ?: route('cart.add',$product)">
+                            @if(!$product->external_url)
+                                @svg('shopping-basket')
+                                {{__('sitebrew::shop.add_to_cart')}}
+                            @else
+                                {{__('sitebrew::shop.navigate_to_external_shop')}}
+                                @svg('arrow-right')
+                            @endif
+                        </x-sitebrew::form.button>
                     </div>
 
-                    {{--<ul class="mt-8 space-y-2">
-                        <li class="flex items-center text-left text-sm font-medium text-neutral-600">
-                            <svg class="mr-2 block h-5 w-5 align-middle text-neutral-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" class=""></path>
-                            </svg>
-                            Free shipping worldwide
-                        </li>
+                    <ul class="mt-8 space-y-3">
+                        @if($product->external_url)
+                            <li class="flex items-center text-left text-sm font-normal text-neutral-600">
+                                @svg('store', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                {{__('sitebrew::shop.selled_by')}}&nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
+                            </li>
+                        @endif
 
-                        <li class="flex items-center text-left text-sm font-medium text-neutral-600">
-                            <svg class="mr-2 block h-5 w-5 align-middle text-neutral-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" class=""></path>
-                            </svg>
-                            Cancel Anytime
-                        </li>
-                    </ul>--}}
+                        @if($product->shipping)
+                            <li class="flex items-center text-left text-sm font-normal text-neutral-600">
+                                @svg('truck', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                {{__('sitebrew::shop.shipping_product')}}&nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
+                            </li>
+                            @php
+                            $other_countries = collect(explode(',', config('sitebrew.shop.shipping.allowed_countries')));
+                            $other_countries = $other_countries->filter(function ($country) {
+                                return $country !== config('sitebrew.shop.shipping.code');
+                            })->implode(', ');
+                            @endphp
+                            <li class="flex items-center text-left text-sm font-normal text-neutral-600">
+                                @svg('package', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                {{__('sitebrew::shop.shipping_costs', ['country' => Locale::getDisplayRegion(config('sitebrew.shop.shipping.locale'), config('sitebrew.shop.shipping.locale')), 'other_countries' => $other_countries])}}
+                            </li>
+                        @endif
+
+                        @if($product->course_id)
+                            <li class="flex items-center text-left text-sm font-normal text-neutral-600">
+                                @svg('book-marked', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                {{ __('sitebrew::shop.access_to_course') }}&nbsp;<b>{{$product->course->name}}</b>
+                            </li>
+                            @if($product->starts_at)
+                                <li class="flex items-center text-left text-sm font-normal text-neutral-600">
+                                    @svg('arrow-up-from-dot', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                    {{__('sitebrew::shop.from', ['from' => $product->starts_at->format('d.m.Y')])}}
+                                </li>
+                            @endif
+                            @if($product->ends_at)
+                                    <li class="flex items-center text-left text-sm font-normal text-neutral-600">
+                                        @svg('arrow-down-to-dot', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                        {{__('sitebrew::shop.to', ['to' => $product->ends_at->format('d.m.Y')])}}
+                                    </li>
+                            @endif
+                        @endif
+
+                    </ul>
                 </div>
 
                 <div class="lg:col-span-3">
