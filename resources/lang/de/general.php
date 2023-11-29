@@ -51,4 +51,6 @@ return [
     'shop.description' => 'Verwaltung aller Produkte im System. Hier können Sie neue Produkte erstellen und bestehende bearbeiten.',
     'listing' => 'Listen',
     'templates' => 'Templates',
+    'products' => 'Produkte',
+    'orders' => 'Bestellungen',
 ];

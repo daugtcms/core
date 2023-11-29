@@ -1,5 +1,8 @@
 <form class="p-3" wire:submit="save">
-    <x-sitebrew::modal.header>{{__('sitebrew::users.manage_user')}}</x-sitebrew::modal.header>
+    @php
+        $isOwnProfile = $this->user->id === auth()->user()->id;
+    @endphp
+    <x-sitebrew::modal.header>{{__($isOwnProfile ? 'sitebrew::users.edit_profile' : 'sitebrew::users.manage_user')}}</x-sitebrew::modal.header>
     <div class="flex flex-col gap-y-2">
         <div>
             <x-sitebrew::form.label for="name">{{__('sitebrew::general.username')}}</x-sitebrew::form.label>

@@ -13,6 +13,9 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
     })->name('index');
 
     Route::get('/product', ProductTable::class)->name('product.index');
+
+    Route::get('/order', \Sitebrew\Controllers\Admin\Shop\ShowOrdersController::class)->name('orders.index');
+
 });
 
 Route::stripeWebhooks('/shop/stripe/webhook');

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Sitebrew\Jobs\Shop\SyncStripeUser;
+use Sitebrew\Models\Shop\Order;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\SlugOptions;
 
@@ -65,6 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
         static::updated(function ($user) {
             SyncStripeUser::dispatch($user);
         });
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class);
     }
 
     /*public function posts()

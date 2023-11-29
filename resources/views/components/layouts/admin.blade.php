@@ -67,7 +67,20 @@
                     'name' => __('sitebrew::general.all'),
                     'url' => route('admin.content.index'),
                 ]);
-                // add another listing item for all content types
+                break;
+            case AdminPath::SHOP->value:
+                $title = __('sitebrew::general.shop');
+                $navigationItems = [
+                    [
+                        'name' => __('sitebrew::general.orders'),
+                        'url' => route('admin.shop.orders.index'),
+                    ],
+                    [
+                        'name' => __('sitebrew::general.products'),
+                        'url' => route('admin.shop.product.index'),
+                    ],
+                ];
+                break;
         }
 
     @endphp

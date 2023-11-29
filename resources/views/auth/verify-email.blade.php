@@ -1,5 +1,5 @@
 <x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::AUTH->value">
-    <h2 class="text-2xl text-neutral-700 font-semibold">{{__('sitebrew::verify_email')}}</h2>
+    <h2 class="text-2xl text-neutral-700 font-semibold">{{__('sitebrew::auth.verify_email')}}</h2>
 
     <x-sitebrew::form.label class="mb-2 text-sm text-neutral-500">{{ __('sitebrew::auth.verify_email.text') }}
     </x-sitebrew::form.label>

@@ -3,6 +3,7 @@
 namespace Sitebrew\Controllers\MemberArea;
 
 use Sitebrew\Controllers\Controller;
+use Sitebrew\Helpers\MemberArea\AccessHelper;
 use Sitebrew\Models\Content\Content;
 
 class ShowPostController extends Controller
@@ -16,8 +17,12 @@ class ShowPostController extends Controller
         }
 
         $post = $query->firstOrFail();
-        return view('sitebrew::member-area.post.show', [
-            'post' => $post,
-        ]);
+        if(AccessHelper::canViewPost($post)) {
+            return view('sitebrew::member-area.post.show', [
+                'post' => $post,
+            ]);
+        } else {
+            return redirect()->route('member-area.index');
+        }
     }
 }

@@ -10,6 +10,7 @@ export default {
     "./resources/**/*.js",
     './vendor/wire-elements/pro/config/wire-elements-pro.php',
     './vendor/wire-elements/pro/**/*.blade.php',
+    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
   ],
   theme: {
     extend: {

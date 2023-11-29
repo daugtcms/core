@@ -31,6 +31,8 @@ use Sitebrew\Models\Blocks\Template;
 use Sitebrew\Models\Content\Content;
 use Sitebrew\Models\Listing\Listing;
 use Sitebrew\Models\Listing\ListingItem;
+use Sitebrew\Models\Shop\Order;
+use Sitebrew\Models\Shop\OrderItem;
 use Sitebrew\Models\Shop\Product;
 use Sitebrew\Models\User;
 use WireElements\Pro\Components\Modal\ModalServiceProvider;
@@ -151,7 +153,9 @@ class SitebrewServiceProvider extends ServiceProvider
             'listing' => Listing::class,
             'listing-item' => ListingItem::class,
             'user' => User::class,
-            'media' => Media::class
+            'media' => Media::class,
+            'order' => Order::class,
+            'order-item' => OrderItem::class
         ]);
     }
 

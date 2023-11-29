@@ -6,9 +6,14 @@
     "file": "assets/tiptap-7dc117f4.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-26e2ee6c.css",
+    "file": "assets/app-21a0c64c.css",
     "isEntry": true,
     "src": "resources/css/app.css"
+  },
+  "resources/css/member-area.css": {
+    "file": "assets/member-area-f3752870.css",
+    "isEntry": true,
+    "src": "resources/css/member-area.css"
   },
   "resources/css/stripped.css": {
     "file": "assets/stripped-40e82d6e.css",

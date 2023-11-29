@@ -20,4 +20,9 @@ class ListingItem extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
+
+    public function listing()
+    {
+        return $this->belongsTo(Listing::class);
+    }
 }
