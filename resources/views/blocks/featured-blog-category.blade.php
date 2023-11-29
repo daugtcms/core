@@ -5,9 +5,9 @@
                 $posts = collect();
                 if(!empty($category)) {
                     $category = \Sitebrew\Models\Listing\ListingItem::with('listing')->where('id', $category)->first();
-                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->orderBy('updated_at', 'DESC')->where('blocks->template->attributes->category', $category->id)->limit(4)->get();
+                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->orderBy('updated_at', 'DESC')->where('blocks->template->attributes->category', $category->id)->limit(3)->get();
                 } else {
-                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->orderBy('updated_at', 'DESC')->limit(4)->get();
+                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->orderBy('updated_at', 'DESC')->limit(3)->get();
                 }
             @endphp
             @foreach($posts as $key=>$post)

@@ -1,0 +1,1 @@
+import{m as l,a as e,b as a,L as i}from"./tiptap-369fb81d.js";import{P as u,m as p,a as d}from"./plyr.min-102398fd.js";window.Plyr=u;Alpine.plugin(l);Alpine.plugin(e);Alpine.plugin(p);Alpine.plugin(d);Alpine.plugin(a);i.start();
