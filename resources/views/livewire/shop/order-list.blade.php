@@ -110,7 +110,16 @@
                                     </a>
                                 </div>
                             @endif
-                            @if($order->status !== 'paid' && $item->product->course_id || $item->product->content_id)
+                            @if($order->status === 'paid' && !empty($item->product->content_id))
+                                <div>
+                                    <a href="{{route('member-area.post.show', \Sitebrew\Models\Content\Content::where('id', $item->product->content_id)->first()->slug) }}"
+                                       class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
+                                        @svg('unlock', 'h-3 w-3 mr-1.5')
+                                        Inhalt ansehen
+                                    </a>
+                                </div>
+                            @endif
+                            @if($order->status !== 'paid' && ($item->product->course_id || $item->product->content_id))
                                 <span class="text-neutral-600 text-sm">Medien werden erst nach erfolgreicher Bezahlung freigeschalten.</span>
                             @endif
                         </div>

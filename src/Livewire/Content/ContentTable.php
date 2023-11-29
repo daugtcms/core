@@ -32,6 +32,9 @@ class ContentTable extends Table
         if (!empty($this->type)) {
              $query->where('type', $this->type);
         }
+        if(!empty($this->ids)) {
+            $query->whereIn('id', $this->ids);
+        }
 
         $query->orderBy('created_at', 'desc');
 

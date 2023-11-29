@@ -13,4 +13,8 @@ enum TemplateUsage: string
     case SHOP_PRODUCT = 'shop-product';
 
     case SHOP_PRODUCT_CARD = 'show-product-card';
+
+    case BLOG_POST_CARD = 'blog-post-card';
+
+    case BLOG_OVERVIEW = 'blog-overview';
 }

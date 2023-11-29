@@ -39,7 +39,7 @@ class CheckoutController extends Controller
                 $stripe = StripeClient::init();
 
                 $payload = [
-                    'success_url' => route('content.pages.index', ''),
+                    'success_url' => route('member-area.orders.index').'?success',
                     'cancel_url' => url()->previous(),
                     'line_items' => $itemArray,
                     'mode' => $isSubscription ? 'subscription' : 'payment',

@@ -21,7 +21,7 @@ class OrderList extends Component
     public function render()
     {
         $query = Order::with('items')->orderBy('created_at', 'desc');
-        if(empty($this->user)) {
+        if($this->user->exists) {
             $query = $query->where('user_id', $this->user->id);
         }
         return view('sitebrew::livewire.shop.order-list', [

@@ -134,7 +134,6 @@
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-6 sm:-my-px sm:ml-4 sm:flex">
-                        {{--  :active="request()->routeIs('feed.community')" :href="route('feed.community', 'all')" --}}
                         @foreach($navigationItems as $item)
                             <a href="{{ $item['url'] }}"
                                     @class([
@@ -185,7 +184,7 @@
                     </x-dropdown>
                 </div>--}}
                 @if($path == Sitebrew\Enums\Admin\AdminPath::ADMIN->value)
-                    <p class="my-auto text-neutral-500">v0.0.1</p>
+                    <p class="my-auto text-neutral-500 hidden sm:block">v0.0.1</p>
                 @endif
 
                 <!-- Hamburger -->
@@ -205,56 +204,22 @@
             </div>
         </div>
 
-        {{--<div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('feed.community', 'all')"
-                                       :active="request()->routeIs('feed.community')">
-                    {{ __('Community') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('feed.academy', [$year, 'all'])"
-                                       :active="request()->routeIs('feed.academy')">
-                    {{ __('Academy') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('feed.trainer', [$year, 'all'])"
-                                       :active="request()->routeIs('feed.trainer')">
-                    {{ __('Trainer') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('shop.index')">
-                    {{ __('Shop') }}
-                </x-responsive-nav-link>
-                @admin
-                <x-responsive-nav-link :href="route('admin.order.index')"
-                                       :active="str_contains(request()->route()->getName(),'admin')">
-                    {{ __('Admin') }}
-                </x-responsive-nav-link>
-                @endadmin
-            </div>
-
-            <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200">
-                <div class="px-4">
-                    <div class="text-base font-medium text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
-
-                <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('user.show', Auth::user()->slug)">
-                        Profil
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('user.order.index', Auth::user())">
-                        Käufe & Abos
-                    </x-responsive-nav-link>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                        this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
-                    </form>
+        <div :class="{'block sm:hidden': open, 'hidden': ! open}">
+            <div class=" space-y-1">
+                <div class="mx-3 flex flex-col divide-y divide-neutral-100">
+                    @foreach($navigationItems as $item)
+                        <a href="{{ $item['url'] }}"
+                                @class([
+                                    'hover:bg-neutral-50 border-l-2 py-2 px-5',
+                                    'inline-flex items-center border-primary-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-primary-700 transition duration-150 ease-in-out bg-neutral-50' => $item['url'] == request()->fullUrl(),
+                                    'inline-flex items-center border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out' => $item['url'] != request()->fullUrl(),
+                                ])>
+                            {{ $item['name'] }}
+                        </a>
+                    @endforeach
                 </div>
             </div>
-        </div>--}}
+        </div>
     </nav>
     <div class="flex-grow">
         {{ $slot }}

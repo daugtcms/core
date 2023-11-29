@@ -35,6 +35,13 @@ class AccessHelper
                     return 'interact';
                 }
             }
+            $products = Product::where('content_id', $post->id)->get()->pluck('id');
+            $items = OrderItem::where('user_id', Auth::id())->whereHas('order', function($query) { return $query->where('status', PaymentStatus::PAID); })->whereHas('product', function ($query) use ($products) {
+                return $query->whereIn('id', $products);
+            })->get();
+            if(!$items->isEmpty()) {
+                return 'interact';
+            }
 
             return false;
         }

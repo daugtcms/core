@@ -53,4 +53,6 @@ return [
     'templates' => 'Templates',
     'products' => 'Produkte',
     'orders' => 'Bestellungen',
+    'homepage' => 'Homepage',
+    'homepage.description' => 'Zurück zur Homepage',
 ];

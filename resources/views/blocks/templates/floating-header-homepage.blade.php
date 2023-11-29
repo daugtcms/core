@@ -61,23 +61,7 @@
                 <x-sitebrew::form.button style="secondary" href="{{route('login')}}">Login</x-sitebrew::form.button>
                 @endguest
                 @auth
-                    <button class="flex items-center group" @click="$refs.panel.toggle">
-                        @svg('chevron-down', 'w-5 h-5 mr-1.5 text-white')
-
-                        <div class="rounded-full overflow-hidden w-9 h-9 bg-primary-100 group-hover:bg-white transition-colors text-primary-500 flex items-center justify-center">
-                            @svg('user', 'w-full h-full -mb-1')
-                        </div>
-                    </button>
-
-                    <div x-ref="panel" x-cloak class="absolute bg-white rounded-md border-2 font-medium border-neutral-200 text-neutral-800 overflow-hidden divide-y" x-float.placement.bottom-end.offset>
-                        <div class="px-3 py-2 hover:bg-neutral-100 cursor-pointer">Mitgliederbereich</div>
-                        <div class="px-3 py-2 hover:bg-neutral-100 cursor-pointer">Meine Käufe & Abos</div>
-                        <div class="px-3 py-2 hover:bg-neutral-100 cursor-pointer">Mein Account</div>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="px-3 py-2 w-full hover:bg-neutral-100 text-danger-500 hover:bg-danger-50 text-left">Abmelden</button>
-                        </form>
-                    </div>
+                    <x-sitebrew::user-button></x-sitebrew::user-button>
                 @endauth
             </div>
             <div class="flex items-center md:hidden">
@@ -96,7 +80,7 @@
 
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden bg-white rounded-b-lg border-primary-700 border-2 overflow-hidden">
-            <div class="gap-y-1 divide-y-2 divide-neutral-200">
+            <div class="gap-y-1 divide-y-2 divide-neutral-200" x-data>
                 @foreach(get_listing_items((int)$mainNavigation) as $item)
                     <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
                        target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
@@ -106,12 +90,17 @@
                         </div>
                     </a>
                 @endforeach
-                <a href="{{route('login')}}"
-                   class="group text-primary-800 flex items-center bg-primary-50 py-2 px-3 h-full box-border border-b-[3px] border-transparent hover:bg-primary-100 text-lg font-medium">
-                    <div class="rounded-md group-hover:bg-white/10">
-                        {{__('sitebrew::auth.login')}}
-                    </div>
-                </a>
+                    @auth
+                        <x-sitebrew::responsive-user-button></x-sitebrew::responsive-user-button>
+                    @endauth
+                    @guest
+                        <a href="{{route('login')}}"
+                           class="group text-primary-800 flex items-center bg-primary-50 py-2 px-3 h-full box-border border-b-[3px] border-transparent hover:bg-primary-100 text-lg font-medium">
+                            <div class="rounded-md group-hover:bg-white/10">
+                                {{__('sitebrew::auth.login')}}
+                            </div>
+                        </a>
+                    @endguest
             </div>
 
             <!-- Responsive Settings Options -->

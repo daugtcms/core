@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Lab404\Impersonate\Models\Impersonate;
 use Sitebrew\Jobs\Shop\SyncStripeUser;
 use Sitebrew\Models\Shop\Order;
 use Spatie\Permission\Traits\HasRoles;
@@ -20,7 +21,7 @@ use Spatie\Sluggable\SlugOptions;*/
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasRoles, SoftDeletes, Prunable;
+    use Notifiable, HasRoles, SoftDeletes, Prunable, Impersonate;
 
     //HasApiTokens, HasFactory, HasSlug, Mediable,
 
@@ -70,6 +71,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function orders() {
         return $this->hasMany(Order::class);
+    }
+
+    public function canImpersonate()
+    {
+        return $this->can('impersonate');
+    }
+
+    public function canBeImpersonated()
+    {
+        return !$this->canImpersonate();
     }
 
     /*public function posts()

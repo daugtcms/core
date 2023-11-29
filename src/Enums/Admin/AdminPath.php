@@ -15,4 +15,6 @@ enum AdminPath: string
     case USERS = 'users';
 
     case STRUCTURE = 'structure';
+
+    case HOMEPAGE = 'homepage';
 }

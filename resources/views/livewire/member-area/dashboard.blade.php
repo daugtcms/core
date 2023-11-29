@@ -1,11 +1,12 @@
 <div class="container" wire:poll.10s>
-    <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3">
-        <div class="col-span-2 row-span-2 rounded-lg bg-white border-neutral-200/75 border-2 shadow flex flex-col">
+    <h1 class="text-white/80 text-3xl sm:text-5xl font-semibold mt-4 sm:mt-10">Willkommen, {{Auth::user()->name}}!</h1>
+    <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-x-3 gap-y-3 mt-4 sm:mt-8">
+        <div class="col-span-2 row-span-2 rounded-lg bg-white/75 backdrop-blur-md shadow flex flex-col">
             <p class="text-neutral-800 font-medium text-xl border-b-2 border-neutral-200 px-3 py-2">Deine Kurse</p>
             <div class="flex-1 flex flex-col divide-y divide-neutral-200 overflow-y-auto">
             @forelse($courses as $course)
                 <div x-data @click="$refs.link.click()"
-                        class="cursor-pointer w-full px-4 py-4 bg-white drop-shadow-sm hover:bg-neutral-50 focus:outline-none">
+                        class="cursor-pointer w-full px-4 py-4 drop-shadow-sm hover:bg-white/50 focus:outline-none">
                     <div class="w-full flex flex-col items-between justify-center">
                         <a href="{{route('member-area.course.show', ['course' => $course->slug, 'section' => 'all'])}}"
                                 class="inline-flex text font-medium truncate text-neutral-700" x-ref="link">
@@ -27,12 +28,12 @@
             @endforelse
             </div>
         </div>
-        <div class="col-span-2 row-span-2 rounded-lg bg-white border-neutral-200/75 border-2 shadow flex flex-col">
+        <div class="col-span-2 row-span-2 rounded-lg bg-white/75 backdrop-blur-md shadow flex flex-col overflow-hidden">
             <p class="text-neutral-800 font-medium text-xl border-b-2 border-neutral-200 px-3 py-2">Deine letzten Bestellungen</p>
             <div class="flex-1 flex flex-col divide-y divide-neutral-200 max-h-56 overflow-y-auto">
                 @forelse($orders as $order)
                     <button wire:click="$dispatch('modal.open', { component: 'sitebrew::shop.edit-order', arguments: { order: {{$order->id}} } })"
-                            class="w-full px-4 py-4 bg-white drop-shadow-sm hover:bg-neutral-50 focus:outline-none">
+                            class="w-full px-4 py-4 hover:bg-white/50 drop-shadow-sm hover:bg-neutral-50 focus:outline-none">
                         <div class="w-full flex items-center justify-between">
                             <p
                                     class="inline-flex text font-medium truncate text-primary-600 hover:underline hover:text-primary-500">
@@ -88,9 +89,9 @@
                 </div>
                 @endforelse
             </div>
-            <a class="bg-neutral-100 w-full px-3 py-1.5 flex items-center focus:outline-none flex justify-between hover:bg-neutral-200 border-t border-neutral-200" href="{{route('member-area.orders.index')}}">Alle Bestellungen ansehen @svg('arrow-right', 'w-5 h-5')</a>
+            <a class="bg-neutral-100/50 w-full px-3 py-1.5 flex items-center focus:outline-none justify-between hover:bg-white/50 border-t border-neutral-200" href="{{route('member-area.orders.index')}}">Alle Bestellungen ansehen @svg('arrow-right', 'w-5 h-5')</a>
         </div>
-        <div class="col-span-2 row-span-1 rounded-lg bg-white border-neutral-200/75 border-2 shadow">
+        <div class="col-span-2 row-span-1 rounded-lg bg-white/75 backdrop-blur-md shadow">
             <p class="text-neutral-800 font-medium text-xl border-b-2 border-neutral-200 px-3 py-2">Dein Profil</p>
             <div class="flex items-center justify-between py-3 gap-x-3 px-3">
             <div class="flex items-center gap-x-3">

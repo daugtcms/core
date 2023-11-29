@@ -70,6 +70,11 @@ class EditUser extends Modal
         ]);
     }
 
+    public function impersonate($id) {
+        Auth::user()->impersonate(User::find($id));
+        return redirect()->route('member-area.index');
+    }
+
     public function render()
     {
 

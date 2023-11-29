@@ -176,8 +176,7 @@
               <x-sitebrew::form.button href="{{route('checkout')}}"
                         x-bind:href="'{{route('checkout')}}' + (within_country ? '?within_country' : '')" :style="'primary'"
                         :class="$disabled ? 'w-full py-2 text-base opacity-50 pointer-events-none mt-2' : 'w-full py-2 text-base mt-2'">
-                Jetzt
-                kaufen</x-sitebrew::form.button>
+                Zahlungspflichtig bestellen</x-sitebrew::form.button>
             </div>
           </div>
         </div>

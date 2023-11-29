@@ -22,9 +22,10 @@
         </div>
     </div>
     <x-sitebrew::modal.footer class="justify-between">
-        <div>
+        <div class="gap-x-2 flex">
             @if($this->user->id !== auth()->user()->id)
                 <x-sitebrew::form.button type="button" style="danger" wire:confirm="{{__('sitebrew::users.delete_user_confirmation')}}" wire:click="delete({{$this->user->id}})">{{__('sitebrew::general.delete')}}</x-sitebrew::form.button>
+                <x-sitebrew::form.button type="button" style="light" wire:click="impersonate({{$this->user->id}})">{{__('sitebrew::users.impersonate')}}</x-sitebrew::form.button>
             @endif
         </div>
         <x-sitebrew::form.button style="primary">{{__('sitebrew::general.save')}}</x-sitebrew::form.button>
