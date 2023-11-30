@@ -9,7 +9,7 @@
         @endphp
         <img
         src="{{get_single_media($backgroundImage)}}"
-        alt="Guitar"
+        alt=""
         class="h-full w-full object-cover group-hover:scale-110 duration-500 transition"
 />
 </div>

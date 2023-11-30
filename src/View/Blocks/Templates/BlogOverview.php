@@ -20,12 +20,17 @@ class BlogOverview extends SitebrewBlock
                 'type' => AttributeType::TEXT,
                 'title' => 'Subtitle',
             ],
+            'backgroundImage' => [
+                'type' => AttributeType::MEDIA,
+                'title' => 'Background Image',
+            ],
         ],
     ];
 
     public function __construct(
         public string $title = '',
         public string $subtitle = '',
+        public array $backgroundImage = [],
     ) {
         parent::__construct();
     }

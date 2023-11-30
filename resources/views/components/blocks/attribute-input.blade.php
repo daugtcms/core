@@ -5,7 +5,7 @@
 <div class="w-full px-3 py-2">
     <h2 class="font-medium">{{$attribute['title']}}</h2>
     @isset($attribute['description'])
-        <h3 class="text-sm text-neutral-500">{{$attribute['description']}}</h3>
+        <h3 class="text-sm text-neutral-500 break-words">{{$attribute['description']}}</h3>
     @endisset
     @if(isset($attribute['readonly']) && $attribute['readonly'])
         <p class="text-sm mt-1.5 text-neutral-500 italic text-center">{{__('sitebrew::blocks.readonly_info')}}</p>

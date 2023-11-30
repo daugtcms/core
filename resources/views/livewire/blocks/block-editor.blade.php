@@ -51,7 +51,7 @@
                              wire:click="addBlock('{{addslashes($blockName)}}')"
                              drag-item>
                             <h2 class="text-lg font-medium leading-snug">{{$block::getMetadata()['name']}}</h2>
-                            <p class="text-sm text-neutral-500">{{$block::getMetadata()['description']}}</p>
+                            <p class="text-sm text-neutral-500 break-words">{{$block::getMetadata()['description']}}</p>
                             <div class="absolute w-full h-full bg-black/30 inset-0 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <p class="text-white font-semibold inline-flex items-center gap-x-1">
                                     @svg('plus')

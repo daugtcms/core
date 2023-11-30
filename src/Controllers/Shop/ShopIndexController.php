@@ -20,7 +20,7 @@ class ShopIndexController extends Controller
           });
         }
 
-        $products = $query->get();
+        $products = $query->orderBy('updated_at', 'DESC')->get();
 
         return view('sitebrew::shop.index', compact('products'));
     }
