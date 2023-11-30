@@ -5,8 +5,8 @@
         @class([
         'text-2xl font-semibold text-primary-600',
         ])>{{$title ?: 'Lorem ipsum dolor sit amet.'}}</h2>
-    <h3 class="text-neutral-700 pb-2 pt-1">{{$subtitle}}</h3>
-        <div class="w-full bg-neutral-100/75 backdrop-blur-md rounded-xl flex p-3 gap-x-2 mb-5 overflow-x-auto">
+    <h3 class="text-neutral-700 pt-1">{{$subtitle}}</h3>
+        <div class="w-full bg-neutral-100/75 backdrop-blur-md rounded-xl flex p-3 gap-x-2 mb-5 overflow-x-auto mt-6">
             <a
                     @class([
      'px-1.5 py-0.5 text-base sm:text-lg hover:text-primary-600 rounded-md hover:bg-primary-50',

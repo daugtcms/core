@@ -20,27 +20,31 @@ class AccessHelper
         if (Auth::user()->can('edit contents')) {
             return 'interact';
         } else {
-            if(isset($post->blocks['template']['attributes']['courseSection'])) {
-                $courseSection = $post->blocks['template']['attributes']['courseSection'];
-                $courseSection = ListingItem::with('listing')->find($courseSection);
-                $course = $courseSection->listing;
-                $timeslots = self::canAccessCourse($course);
-                if ($timeslots instanceof Collection) {
-                    foreach ($timeslots as $slot) {
-                        if ($post->created_at->between($slot['starts_at'], $slot['ends_at'])) {
-                            return 'interact';
+            if($post->published_at <= now()) {
+                if (isset($post->blocks['template']['attributes']['courseSection'])) {
+                    $courseSection = $post->blocks['template']['attributes']['courseSection'];
+                    $courseSection = ListingItem::with('listing')->find($courseSection);
+                    $course = $courseSection->listing;
+                    $timeslots = self::canAccessCourse($course);
+                    if ($timeslots instanceof Collection) {
+                        foreach ($timeslots as $slot) {
+                            if ($post->published_at->between($slot['starts_at'], $slot['ends_at'])) {
+                                return 'interact';
+                            }
                         }
+                    } elseif ($timeslots === true) {
+                        return 'interact';
                     }
-                } elseif ($timeslots === true) {
+                }
+                $products = Product::where('content_id', $post->id)->get()->pluck('id');
+                $items = OrderItem::where('user_id', Auth::id())->whereHas('order', function ($query) {
+                    return $query->where('status', PaymentStatus::PAID);
+                })->whereHas('product', function ($query) use ($products) {
+                    return $query->whereIn('id', $products);
+                })->get();
+                if (!$items->isEmpty()) {
                     return 'interact';
                 }
-            }
-            $products = Product::where('content_id', $post->id)->get()->pluck('id');
-            $items = OrderItem::where('user_id', Auth::id())->whereHas('order', function($query) { return $query->where('status', PaymentStatus::PAID); })->whereHas('product', function ($query) use ($products) {
-                return $query->whereIn('id', $products);
-            })->get();
-            if(!$items->isEmpty()) {
-                return 'interact';
             }
 
             return false;
@@ -48,7 +52,7 @@ class AccessHelper
     }
 
     public static function canAccessCourse(Listing $course) {
-        if (Auth::user()->can('edit contents')) {
+        if (/*Auth::user()->can('edit contents')*/ false) {
             return true;
         } else {
             $products = Product::where('course_id', $course->id)->get()->pluck('id');

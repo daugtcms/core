@@ -5,14 +5,14 @@
                 $posts = collect();
                 if(!empty($category)) {
                     $category = \Sitebrew\Models\Listing\ListingItem::with('listing')->where('id', $category)->first();
-                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->orderBy('updated_at', 'DESC')->where('blocks->template->attributes->category', $category->id)->limit(3)->get();
+                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->where('published_at', '<=', now())->orderBy('published_at', 'DESC')->where('blocks->template->attributes->category', $category->id)->limit(3)->get();
                 } else {
-                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->orderBy('updated_at', 'DESC')->limit(3)->get();
+                    $posts = \Sitebrew\Models\Content\Content::where('type', 'blog')->where('enabled', true)->where('published_at', '<=', now())->orderBy('published_at', 'DESC')->limit(3)->get();
                 }
             @endphp
             @foreach($posts as $key=>$post)
                     <div @class([
-                        'mt-12' => $key % 2 === 1
+                        'md:mt-12' => $key % 2 === 1
                     ])>
                 <x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::BLOG_POST_CARD->value" :within-template="true" :attributes="['content' => $post]"></x-sitebrew::template-renderer>
                     </div>

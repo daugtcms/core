@@ -28,6 +28,7 @@ return [
     'username' => 'Benutzername',
     'starts_at' => 'Startet am',
     'ends_at' => 'Endet am',
+    'published_at' => 'Veröffentlicht am',
     'price' => 'Preis',
     'categories' => 'Kategorien',
     'enabled' => 'Aktiv',

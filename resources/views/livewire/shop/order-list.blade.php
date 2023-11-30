@@ -128,7 +128,7 @@
             </ul>
         </li>
     @empty
-        <p class="my-2">Keine Bestellungen vorhanden</p>
+        <p class="my-2 bg-neutral-100/75 rounded-lg px-4 py-2">Keine Bestellungen vorhanden</p>
     @endforelse
 
     <div class="mt-4 w-full">

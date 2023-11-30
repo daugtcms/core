@@ -13,7 +13,7 @@ class BlogIndexController extends Controller
     public function __invoke()
     {
 
-        $query = Content::where('type', 'blog')->orderBy('updated_at', 'DESC')->where('enabled', true);
+        $query = Content::where('type', 'blog')->where('published_at', '<=', now())->orderBy('published_at', 'DESC')->where('enabled', true);
 
         if(request()->query('category')) {
             $category = ListingItem::where('slug', request()->query('category'))->firstOrFail();

@@ -2,6 +2,7 @@
 
 namespace Sitebrew;
 
+use Sitebrew\Livewire\Content\ScheduleContent;
 use Sitebrew\Livewire\Listing\ListingEditor;
 use Sitebrew\Livewire\Media\EditMedia;
 use Sitebrew\Livewire\Media\MediaManager;
@@ -61,7 +62,6 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Livewire::component('sitebrew::blocks.edit-template', EditTemplate::class);
         Livewire::component('sitebrew::listing.listing-editor', ListingEditor::class);
         Livewire::component('sitebrew::listing.edit-listing', EditListing::class);
-        Livewire::component('sitebrew::contents.page-editor', ContentEditor::class);
         Livewire::component('sitebrew::content.content-table', ContentTable::class);
         Livewire::component('sitebrew::media.media-manager', MediaManager::class);
         Livewire::component('sitebrew::media.media-uploader', MediaUploader::class);
@@ -76,6 +76,7 @@ class SitebrewBladeServiceProvider extends ServiceProvider
         Livewire::component('sitebrew::shop.edit-order', EditOrder::class);
         Livewire::component('sitebrew::member-area.dashboard', Dashboard::class);
         Livewire::component('sitebrew::member-area.course-posts', CoursePosts::class);
+        Livewire::component('sitebrew::content.schedule-content', ScheduleContent::class);
     }
 
     /**

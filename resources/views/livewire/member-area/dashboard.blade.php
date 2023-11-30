@@ -12,6 +12,9 @@
                                 class="inline-flex text font-medium truncate text-neutral-700" x-ref="link">
                             {{$course->name}}
                         </a>
+                        @if(isset($course->data['starts_at']) && $course->data['starts_at'] > now())
+                            <p class="text-sm text-neutral-500">Startet am {{\Carbon\Carbon::parse($course->data['starts_at'])->format('d.m.Y')}}</p>
+                        @else
                         <div class="flex flex-wrap gap-x-1.5 gap-y-1.5 mt-0.5">
                         @foreach($course->items as $item)
                             <div>
@@ -19,6 +22,7 @@
                             </div>
                         @endforeach
                         </div>
+                        @endif
                     </div>
                 </div>
                 @empty

@@ -48,20 +48,21 @@ class CoursePosts extends Component
                 $items = $this->course->items()->get()->pluck('id');
                 $query = $query->whereIn('blocks->template->attributes->courseSection', $items);
             }
+            $query = $query->where('published_at', '<=', now());
             if($timeslots instanceof Collection) {
                 $query->where(function($query) use ($timeslots) {
                     $timeslots->each(function ($slot, $key) use (&$query) {
                         if ($key === 0) {
-                            $query->whereBetween('created_at', [$slot['starts_at']->toDateTimeString(), $slot['ends_at']->toDateTimeString()]);
+                            $query->whereBetween('published_at', [$slot['starts_at']->toDateTimeString(), $slot['ends_at']->toDateTimeString()]);
                         } else {
-                            $query->orWhereBetween('created_at', [$slot['starts_at']->toDateTimeString(), $slot['ends_at']->toDateTimeString()]);
+                            $query->orWhereBetween('published_at', [$slot['starts_at']->toDateTimeString(), $slot['ends_at']->toDateTimeString()]);
                         }
                     });
                 });
             }
         }
 
-        $query->orderBy('created_at', 'desc');
+        $query->orderBy('published_at', 'desc');
         return view('sitebrew::livewire.member-area.course-posts', [
             'course_posts' => $query->paginate(25)
         ]);

@@ -15,7 +15,6 @@ class ShowCourseController extends Controller
     {
         $course = Listing::where('slug', $course)->first();
         $timeslots = AccessHelper::canAccessCourse($course);
-
         if(!$timeslots) {
             return redirect()->route('member-area.index');
         }

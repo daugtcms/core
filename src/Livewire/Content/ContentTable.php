@@ -2,6 +2,7 @@
 
 namespace Sitebrew\Livewire\Content;
 
+use Carbon\Carbon;
 use Livewire\Attributes\Url;
 use Sitebrew\Enums\Blocks\TemplateUsage;
 use Sitebrew\Livewire\Table\Table;
@@ -14,6 +15,7 @@ class ContentTable extends Table
 {
     protected $listeners = [
         'saveBlocks' => 'saveBlocks',
+        'refreshComponent' => '$refresh',
     ];
 
     #[Url]
@@ -75,6 +77,7 @@ class ContentTable extends Table
             Column::make('type', __('sitebrew::general.type')),
             Column::make('user', __('sitebrew::general.author'))->component('sitebrew::table.user'),
             // Column::make('slug', 'URL'),
+            Column::make('', __('sitebrew::general.published_at'))->component('sitebrew::table.schedule-content'),
             Column::make('updated_at', __('sitebrew::general.updated_at'))->component('sitebrew::table.human-diff'),
             Column::make('created_at', __('sitebrew::general.created_at'))->component('sitebrew::table.human-diff'),
             Column::make('id', '')->component('sitebrew::table.delete'),
@@ -93,6 +96,7 @@ class ContentTable extends Table
                 'blocks' => $data,
                 'type' => $this->type,
                 'user_id' => auth()->user()->id,
+                'published_at' => Carbon::now(),
             ]);
         } else {
             $content = Content::findOrFail($id);
@@ -101,6 +105,9 @@ class ContentTable extends Table
                 $content->slug = null;
             }
             $content->blocks = $data;
+            if(empty($content->published_at)) {
+                $content->published_at = $content->created_at;
+            }
             $content->save();
         }
     }
