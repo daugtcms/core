@@ -25,7 +25,7 @@
                     datetime="2022-10-10"
                     class="flex items-center justify-between gap-4 text-xs font-bold uppercase text-neutral-400"
             >
-                <span>{{$content->updated_at->diffForHumans()}}</span>
+                <span>{{$content->published_at->diffForHumans()}}</span>
             </time>
     </div>
 </div>
