@@ -18,11 +18,11 @@
          @scroll.window="showBackground = window.scrollY > 20"
         @endif>
     <!-- Primary Navigation Menu -->
-    <div class="md:container rounded-lg transition-color duration-300"
+    <div class="lg:container rounded-lg transition-color duration-300"
          :class="{
             'bg-primary-700 shadow-primary-700/20  shadow-lg': showBackground || open,
         }">
-        <div class="flex justify-between h-full px-4 md:px-0">
+        <div class="flex justify-between h-full px-4 lg:px-0">
             <div class="flex items-center">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0 h-16 py-3">
@@ -34,15 +34,15 @@
                     </a>
                 </div>
 
-                <div class="border-l-2 border-white/50 h-10 mx-2 hidden md:block"></div>
+                <div class="border-l-2 border-white/50 h-10 mx-2 hidden lg:block"></div>
 
                 <!-- Navigation Links -->
-                <div class="hidden h-full md:inline-flex">
+                <div class="hidden h-full lg:inline-flex">
                     @foreach(get_listing_items((int)$mainNavigation) as $item)
                         <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
                            target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
-                           class="group text-white flex items-center h-full box-border border-b-[3px] border-transparent hover:border-primary-300 text-lg font-medium px-1">
-                            <div class="rounded-md group-hover:bg-white/10 -mb-1 px-2.5 py-1">
+                           class="group text-white flex whitespace-nowrap items-center h-full box-border border-b-[3px] border-transparent hover:border-primary-300 text-lg font-medium px-1">
+                            <div class="rounded-md group-hover:bg-white/10 -mb-1 px-2.5 py-1 whitespace-nowrap">
                                 {{$item->name}}
                             </div>
                         </a>
@@ -56,7 +56,7 @@
                 </div>
             </x-sitebrew::shop.shopping-cart>
 
-            <div class="items-center hidden md:flex">
+            <div class="items-center hidden lg:flex">
                 @guest
                 <x-sitebrew::form.button style="secondary" href="{{route('login')}}">Login</x-sitebrew::form.button>
                 @endguest
@@ -64,7 +64,7 @@
                     <x-sitebrew::user-button></x-sitebrew::user-button>
                 @endauth
             </div>
-            <div class="flex items-center md:hidden">
+            <div class="flex items-center lg:hidden">
                 <button @click="open = ! open"
                         class="inline-flex items-center justify-center p-2 text-primary-50 transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-primary-600 focus:outline-none focus:bg-primary-600 focus:text-white">
                     <span x-show="open">
@@ -79,7 +79,7 @@
         </div>
 
         <!-- Responsive Navigation Menu -->
-        <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden bg-white rounded-b-lg border-primary-700 border-2 overflow-hidden">
+        <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden bg-white rounded-b-lg border-primary-700 border-2 overflow-hidden">
             <div class="gap-y-1 divide-y-2 divide-neutral-200" x-data>
                 @foreach(get_listing_items((int)$mainNavigation) as $item)
                     <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
