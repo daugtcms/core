@@ -39,7 +39,7 @@
             @endforeach
         </div>
     </div>
-        <div class="grid grid-cols-3 gap-6 mt-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
         {!! $slot !!}
         </div>
     </div>

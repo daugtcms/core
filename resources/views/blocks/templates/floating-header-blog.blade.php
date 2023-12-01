@@ -7,10 +7,11 @@
     <div class="container mx-auto px-4 h-full">
         <div class="relative sm:overflow-hidden h-full flex flex-col sm:flex-row items-center justify-center sm:pt-0">
             <div class="relative flex items-center justify-center flex-col pl-4">
-            <span class="inline-flex items-center rounded-full bg-primary-100/60 px-2 py-1 text-sm mb-2 font-medium text-primary-800 backdrop-blur ring-1 ring-inset ring-primary-700/10">
-                    @php
-                        $item = get_listing_item($category);
-                    @endphp
+                @php
+                    $item = get_listing_item($category);
+                @endphp
+                @if($item->id)
+                <span class="inline-flex items-center rounded-full bg-primary-100/60 px-2 py-1 text-sm mb-2 font-medium text-primary-800 backdrop-blur ring-1 ring-inset ring-primary-700/10">
                     @if($item)
                         @if($item->icon)
                             @svg($item->icon, 'w-4 h-4 mr-1')
@@ -20,10 +21,11 @@
                         }}
                     @endif
                 </span>
-                <h1 class="text-4xl text-left font-extrabold drop-shadow tracking-tight sm:text-5xl lg:text-7xl underline decoration-secondary-500/50">
+                @endif
+                <h1 class="text-4xl text-center font-extrabold drop-shadow tracking-tight sm:text-5xl lg:text-7xl underline decoration-secondary-500/50">
                     <span class="block text-secondary-400 drop-shadow-xl">{{$title ?: 'Lorem ipsum'}}</span>
                 </h1>
-                <p class="mt-6 max-w-lg text-xl md:text-2xl text-secondary-50 text-left">
+                <p class="mt-6 max-w-lg text-xl md:text-2xl text-secondary-50 text-center">
                 </p>
             </div>
         </div>
