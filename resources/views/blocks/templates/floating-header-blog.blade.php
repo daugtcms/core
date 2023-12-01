@@ -6,7 +6,7 @@
     <div class="absolute h-full w-full bg-gradient-to-tl from-primary-800/70 to-primary-300/60"></div>
     <div class="container mx-auto px-4 h-full">
         <div class="relative sm:overflow-hidden h-full flex flex-col sm:flex-row items-center justify-center sm:pt-0">
-            <div class="relative flex items-center justify-center flex-col pl-4">
+            <div class="relative flex items-center justify-center flex-col">
                 @php
                     $item = get_listing_item($category);
                 @endphp
