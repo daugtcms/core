@@ -14,6 +14,8 @@
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
 
+            <x-honeypot />
+
             <div>
                 <x-sitebrew::form.button>
                     {{ __('sitebrew::auth.verify_email.resend') }}

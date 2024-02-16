@@ -14,6 +14,8 @@
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
+            <x-honeypot />
+
             <!-- Email Address -->
             <div>
                 <x-sitebrew::form.label for="email" :value="__('sitebrew::auth.email')" />

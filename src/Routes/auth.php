@@ -9,8 +9,9 @@ use Sitebrew\Controllers\Auth\NewPasswordController;
 use Sitebrew\Controllers\Auth\PasswordResetLinkController;
 use Sitebrew\Controllers\Auth\RegisteredUserController;
 use Sitebrew\Controllers\Auth\VerifyEmailController;
+use Spatie\Honeypot\ProtectAgainstSpam;
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web', ProtectAgainstSpam::class]], function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])
         ->middleware('guest')
         ->name('register');

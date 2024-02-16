@@ -10,6 +10,8 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <x-honeypot />
+
             <!-- Name -->
             <div>
                 <x-sitebrew::form.label for="name" :value="__('sitebrew::auth.username')"/>

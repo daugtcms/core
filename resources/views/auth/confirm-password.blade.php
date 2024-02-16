@@ -11,6 +11,8 @@
     <form method="POST" action="{{ route('password.confirm') }}">
         @csrf
 
+        <x-honeypot />
+
         <!-- Password -->
         <div>
             <x-sitebrew::form.label for="password" :value="__('sitebrew::auth.password')" />

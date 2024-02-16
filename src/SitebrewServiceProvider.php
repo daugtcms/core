@@ -177,6 +177,8 @@ class SitebrewServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/stripe-webhooks.php', 'stripe-webhooks');
 
+        $this->mergeConfigFrom(__DIR__.'/../config/honeypot.php', 'honeypot');
+
         // Register the main class to use with the facade
         $this->app->singleton('sitebrew', function () {
             return new Sitebrew;
