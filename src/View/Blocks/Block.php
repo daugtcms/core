@@ -6,37 +6,33 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Nette\NotImplementedException;
+use Sitebrew\View\ThemeRegistry;
 
 class Block extends Component
 {
     public string $uuid;
 
-    public static array $metadata = [
-        'name' => 'Example Block',
-        'description' => 'A basic example of what a block looks like',
-        'viewName' => 'sitebrew::blocks.block',
-        'attributes' => [
-        ],
-    ];
+    public string $name;
+
+    public $attributes = [];
 
     public static function getMetadata(): array
     {
-        return get_called_class()::$metadata;
+        throw new NotImplementedException();
     }
 
     public function getAttributeValues(): array
     {
-        $attributes = [];
-        foreach (get_called_class()::getMetadata()['attributes'] as $attributeName => $attribute) {
-            $attributes[$attributeName] = $this->$attributeName;
-        }
-
-        return $attributes;
+        throw new NotImplementedException();
     }
 
-    public function __construct()
+    public function __construct(string $name = null)
     {
         $this->uuid = Str::uuid();
+        if (isset($name)) {
+            $this->name = $name;
+        }
     }
 
     /**
@@ -44,7 +40,13 @@ class Block extends Component
      */
     public function render(): View|Closure|string
     {
+        dump($this->attributes);
         // get_called_class():: is necessary as self:: returns the Block class instead of the actual child class
-        return view(get_called_class()::getMetadata()['viewName']);
+        return view(ThemeRegistry::getThemeBlock($this->name)['viewName'], $this->attributes);
+    }
+
+    public function getView(): string
+    {
+        return ThemeRegistry::getThemeBlock($this->name)['viewName'] ?? ThemeRegistry::getThemeTemplate($this->name)['viewName'];
     }
 }

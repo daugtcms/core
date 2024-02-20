@@ -7,7 +7,7 @@ use Livewire\Mechanisms\HandleComponents\Synthesizers\Synth;
 
 class BlockSynth extends Synth
 {
-    public static $ignoredProperties = ['attributes', 'componentName'];
+    public static $ignoredProperties = ['componentName'];
 
     public static $key = 'block';
 

@@ -1,10 +1,11 @@
 <form class="p-3" wire:submit="save">
     @php
-        $templates = config('sitebrew.available_templates');
+        $templates = \Sitebrew\View\ThemeRegistry::getThemeTemplates();
 
-        $templates = collect($templates)->map(function (string $item, string $key){
+        $templates = collect($templates)->map(function (array $item, string $key){
             return [
-                'value' => $key
+                'value' => $key,
+                'title' => $item['name']
             ];
         })->values()->toJson();
 
@@ -37,17 +38,17 @@
                                      :options="$usages"></x-sitebrew::form.select>
         </div>
         <div class="mb-1">
-            <x-sitebrew::form.label for="view_name">{{__('sitebrew::general.viewName')}}</x-sitebrew::form.label>
-            <x-sitebrew::form.select id="view_name" wire:model.live="view_name"
-                                      :error="$errors->first('view_name')"
+            <x-sitebrew::form.label for="block_name">{{__('sitebrew::general.viewName')}}</x-sitebrew::form.label>
+            <x-sitebrew::form.select id="block_name" wire:model.live="block_name"
+                                      :error="$errors->first('block_name')"
                                       :options="$templates"></x-sitebrew::form.select>
         </div>
-        @if(isset($templateBlock))
+        @if(isset($this->block_name))
             <div class="bg-neutral-50 rounded-md pb-1 divide-y-2 divide-neutral-200 overflow-hidden border-neutral-200 border-2">
                 <div class="px-3 py-1 bg-neutral-100">
                     <p class="text-lg">{{__('sitebrew::blocks.attributes')}}</p>
                 </div>
-                @foreach($templateBlock->getMetadata()['attributes'] as $key => $attribute)
+                @foreach(\Sitebrew\View\ThemeRegistry::getThemeTemplate($this->block_name)['attributes'] as $key => $attribute)
                     <x-sitebrew::blocks.attribute-input :key="$key"
                                                         wire:key="{{$key}}"
                                                          :attribute="$attribute"

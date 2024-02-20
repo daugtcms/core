@@ -4,9 +4,8 @@
  * You can place your custom package configuration in here.
  */
 return [
-    'available_blocks' => [
-    ],
-    'available_templates' => [
+    'themes' => [
+        'hilde-gerg'
     ],
     'content_types' => [
         'post' => 'Beitrag',

@@ -43,15 +43,13 @@
                 </div>
 
                 <section id="available-blocks" class="p-2 gap-y-2 flex-grow overflow-y-auto flex flex-col">
-                    @foreach($availableBlocks as $blockName)
-                        @php
-                            $block = new $blockName;
-                        @endphp
+                    @foreach($availableBlocks as $key => $block)
+
                         <div class="bg-white flex-shrink-0 rounded-md shadow-sm p-4 cursor-grab select-none relative overflow-hidden group border border-neutral-100"
-                             wire:click="addBlock('{{addslashes($blockName)}}')"
+                             wire:click="addBlock('{{addslashes($key)}}')"
                              drag-item>
-                            <h2 class="text-lg font-medium leading-snug">{{$block::getMetadata()['name']}}</h2>
-                            <p class="text-sm text-neutral-500 break-words">{{$block::getMetadata()['description']}}</p>
+                            <h2 class="text-lg font-medium leading-snug">{{$block['name']}}</h2>
+                            <p class="text-sm text-neutral-500 break-words">{{$block['description']}}</p>
                             <div class="absolute w-full h-full bg-black/30 inset-0 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <p class="text-white font-semibold inline-flex items-center gap-x-1">
                                     @svg('plus')
@@ -85,15 +83,11 @@
                 </div>
                 <section id="active-block"
                          class="flex flex-col overflow-y-auto gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0">
-                    @php
-                        $attributes = $activeBlock->getMetadata()['attributes'];
-                    @endphp
-
-                    @foreach($attributes as $key => $attribute)
+                    @foreach(\Sitebrew\View\ThemeRegistry::getThemeBlock($activeBlock->name)['attributes'] as $key => $attribute)
                         <x-sitebrew::blocks.attribute-input :key="$key"
                                                              wire:key="{{$activeBlock->uuid . $key}}"
                                                              :attribute="$attribute"
-                                                             wire:model.live.debounce.250ms="activeBlock.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                                                             wire:model.live.debounce.250ms="activeBlock.attributes.{{$key}}"></x-sitebrew::blocks.attribute-input>
                     @endforeach
                 </section>
                 <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">
@@ -111,12 +105,11 @@
                 </div>
                 <section id="active-block"
                          class="flex flex-col gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0 overflow-y-auto">
-
-                    @foreach($templateBlock->getMetadata()['attributes'] as $key => $attribute)
+                    @foreach(\Sitebrew\View\ThemeRegistry::getThemeTemplate($this->templateBlock->name)['attributes'] as $key => $attribute)
                         <x-sitebrew::blocks.attribute-input :key="$key"
                                                             wire:key="{{$template->id . $key}}"
                                                             :attribute="$attribute"
-                                                            wire:model.live="templateBlock.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                                                            wire:model.live="templateBlock.attributes.{{$key}}"></x-sitebrew::blocks.attribute-input>
                     @endforeach
                 </section>
                 @break

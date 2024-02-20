@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('view_name');
+            $table->string('block_name');
             $table->jsonb('data')->nullable();
             $table->timestamps();
         });

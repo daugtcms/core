@@ -12,8 +12,8 @@ use Sitebrew\Data\Blocks\TemplateData;
 use Sitebrew\Enums\Blocks\BlockEditorSidebar;
 use Sitebrew\Models\Blocks\Template;
 use Sitebrew\View\Blocks\Block;
-use Sitebrew\View\Blocks\Misc\BlockSynth;
 use Sitebrew\View\Blocks\Misc\BlocksRenderer;
+use Sitebrew\View\ThemeRegistry;
 use WireElements\Pro\Components\Modal\Modal;
 
 class BlockEditor extends Modal
@@ -38,7 +38,7 @@ class BlockEditor extends Modal
 
     public $id = 0;
 
-    public function mount($usage, array $data = null)
+    public function mount($usage, array $data = null): void
     {
         if (empty($this->templates)) {
             $this->templates = Template::where('usage', $usage)->get();
@@ -49,26 +49,26 @@ class BlockEditor extends Modal
         $this->restoreState($data ?? []);
     }
 
-    public function restoreState(array $data)
+    public function restoreState(array $data): void
     {
         if (isset($data['template']['template'])) {
             $templateData = TemplateData::from($data['template']);
             $this->template = Template::findOrFail($templateData->template);
-            $templateAttributes = Arr::collapse([$this->template->data, $templateData->attributes]);
+            $templateAttributes = Arr::collapse([ThemeRegistry::getThemeTemplateAttributes($this->template->block_name), $this->template->data, $templateData->attributes]);
         } else {
             $this->template = $this->templates[0];
-            $templateAttributes = Arr::collapse([$this->template->data, $data['template']['attributes'] ?? []]);
+            $templateAttributes = Arr::collapse([ThemeRegistry::getThemeTemplateAttributes($this->template->block_name), $this->template->data, $data['template']['attributes'] ?? []]);
         }
-        $this->templateBlock = new (config('sitebrew.available_templates')[$this->template->view_name])(...$templateAttributes);
+        $this->templateBlock = new Block($this->template->block_name);
+        $this->templateBlock->attributes = $templateAttributes;
 
         if (isset($data['blocks'])) {
             $this->blocks = collect($data['blocks'])->map(function ($block) {
-                $blockClass = config('sitebrew.available_blocks')[$block['block']];
                 $blockAttributes = $block['attributes'];
-
-                data_forget($blockAttributes, 'uuid');
-                $newBlock = new $blockClass(...$blockAttributes);
-                $newBlock->uuid = $block['attributes']['uuid'];
+                $blockAttributes = Arr::collapse([ThemeRegistry::getThemeBlockAttributes($block['block']), $blockAttributes]);
+                $newBlock = new Block($block['block']);
+                $newBlock->attributes = $blockAttributes;
+                $newBlock->uuid = $block['uuid'];
 
                 return $newBlock;
             });
@@ -91,38 +91,19 @@ class BlockEditor extends Modal
 
     public function save()
     {
-        $attributes = [];
-
-        BlockSynth::getAvailableBlockProperties($this->templateBlock)->map(function ($property) use (&$attributes) {
-            $propertyName = $property->getName();
-            $propertyValue = $this->templateBlock->$propertyName;
-            if ($propertyName != 'uuid' && $propertyValue != $this->template->data[$propertyName]) {
-                $attributes[$propertyName] = $propertyValue;
-            }
-        });
-
-        $template = new TemplateData($this->template->id, $attributes);
+        $template = new TemplateData($this->template->id, $this->templateBlock->attributes);
 
         $blocks = BlockData::collection([]);
         $this->blocks->map(function ($block) use (&$blocks) {
-            $attributes = [];
-
-            BlockSynth::getAvailableBlockProperties($block)->map(function ($property) use ($block, &$attributes) {
-                $propertyName = $property->getName();
-                $propertyValue = $block->$propertyName;
-                $attributes[$propertyName] = $propertyValue;
-            });
-
             // get index of available_blocks
-            $blockName = array_search(get_class($block), config('sitebrew.available_blocks'));
-            $blocks[] = new BlockData($blockName, $attributes);
+            $blocks[] = new BlockData($block->name, $block->uuid, $block->attributes);
         })->values();
 
         // $this->dispatch('save-blocks', (new BlockEditorData($template, $blocks))->toArray());
         $this->close(
             andDispatch: [
-            'saveBlocks' => [(new BlockEditorData($template, $blocks))->toArray(), $this->id]
-        ]
+                'saveBlocks' => [(new BlockEditorData($template, $blocks))->toArray(), $this->id],
+            ]
         );
     }
 
@@ -141,8 +122,13 @@ class BlockEditor extends Modal
 
     public function addBlock(string $blockName)
     {
-        $this->blocks->add(new $blockName());
+        $block = new Block($blockName);
+
+        $block->attributes = ThemeRegistry::getThemeBlockAttributes($blockName);
+
+        $this->blocks->add($block);
         $this->setActiveBlock($this->blocks->last()->uuid);
+
         return $this->blocks;
     }
 
@@ -169,7 +155,7 @@ class BlockEditor extends Modal
     {
         // setting the active block to a new instance of Block to prevent Livewire from throwing an error and crashing
         // hence also the introduction of the helper boolean
-        $this->activeBlock = new Block();
+        // $this->activeBlock = new Block();
         $this->sidebarState = BlockEditorSidebar::TEMPLATE;
     }
 
@@ -181,6 +167,7 @@ class BlockEditor extends Modal
         }
         $this->sidebarState = $state;
     }
+
     public function reorder($list)
     {
         $this->blocks = collect($list)->map(function ($uuid) {
@@ -204,9 +191,11 @@ class BlockEditor extends Modal
         ];
     }
 
-    public function getAvailableBlocks() {
+    public function getAvailableBlocks()
+    {
+        return ThemeRegistry::getThemeBlocks();
         $blocks = $this->template->available_blocks;
-        if(!empty($blocks)) {
+        if (! empty($blocks)) {
             return collect($blocks)->map(function ($block) {
                 return config('sitebrew.available_blocks')[$block];
             })->values();
