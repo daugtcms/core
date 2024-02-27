@@ -4,16 +4,16 @@
         <div class="bg-white w-full h-12 flex items-center justify-between pl-2 pr-4 flex-shrink-0">
             <div class="flex items-center gap-x-1.5">
                 <x-sitebrew::form.icon-button icon="x"
-                                               wire:click="$dispatch('modal.close')"></x-sitebrew::form.icon-button>
+                                              wire:click="$dispatch('modal.close')"></x-sitebrew::form.icon-button>
                 <h1 class="text-lg font-medium">{{$title}}</h1>
             </div>
             <div class="flex gap-x-2">
                 <x-sitebrew::form.icon-button icon="plus"
-                                               @click="sidebarOpen = true"
-                                               wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
+                                              @click="sidebarOpen = true"
+                                              wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
                 ></x-sitebrew::form.icon-button>
                 <x-sitebrew::form.icon-button icon="save" style="primary"
-                                               wire:click="save()"
+                                              wire:click="save()"
                 ></x-sitebrew::form.icon-button>
             </div>
         </div>
@@ -37,14 +37,13 @@
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
                         <x-sitebrew::form.icon-button icon="chevron-left"
-                                                       wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-sitebrew::form.icon-button>
+                                                      wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-sitebrew::form.icon-button>
                         <p>{{__('sitebrew::blocks.available_blocks')}}</p>
                     </div>
                 </div>
 
                 <section id="available-blocks" class="p-2 gap-y-2 flex-grow overflow-y-auto flex flex-col">
                     @foreach($availableBlocks as $key => $block)
-
                         <div class="bg-white flex-shrink-0 rounded-md shadow-sm p-4 cursor-grab select-none relative overflow-hidden group border border-neutral-100"
                              wire:click="addBlock('{{addslashes($key)}}')"
                              drag-item>
@@ -77,22 +76,24 @@
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
                         <x-sitebrew::form.icon-button icon="chevron-left"
-                                                       wire:click="unsetActiveBlock()"></x-sitebrew::form.icon-button>
+                                                      wire:click="unsetActiveBlock()"></x-sitebrew::form.icon-button>
                         <p>{{__('sitebrew::blocks.editing_block')}}</p>
                     </div>
                 </div>
                 <section id="active-block"
                          class="flex flex-col overflow-y-auto gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0">
-                    @foreach(\Sitebrew\View\ThemeRegistry::getThemeBlock($activeBlock->name)['attributes'] as $key => $attribute)
+                    @foreach(\Sitebrew\Misc\ThemeRegistry::getThemeBlock($activeBlock->name)->attributes as $key => $attribute)
+                        <div class="px-2 py-1">
                         <x-sitebrew::blocks.attribute-input :key="$key"
-                                                             wire:key="{{$activeBlock->uuid . $key}}"
-                                                             :attribute="$attribute"
-                                                             wire:model.live.debounce.250ms="activeBlock.attributes.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                                                            wire:key="{{$activeBlock->uuid . $key}}"
+                                                            :attribute="$attribute"
+                                                            wire:model.live.debounce.250ms="activeBlock.attributes.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                        </div>
                     @endforeach
                 </section>
                 <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">
                     <x-sitebrew::form.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
-                                              onclick="confirm('{{__('sitebrew::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
+                                             onclick="confirm('{{__('sitebrew::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
                         @svg('trash-2', 'w-5 h-5 mr-1')
                         {{__('sitebrew::general.delete')}}</x-sitebrew::form.button>
                 </div>
@@ -105,11 +106,19 @@
                 </div>
                 <section id="active-block"
                          class="flex flex-col gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0 overflow-y-auto">
-                    @foreach(\Sitebrew\View\ThemeRegistry::getThemeTemplate($this->templateBlock->name)['attributes'] as $key => $attribute)
+                    @php
+                        $templateAttributes = \Sitebrew\Misc\ThemeRegistry::getThemeTemplate($this->templateBlock->name)->attributes;
+                        $contentAttributes = \Sitebrew\Misc\ContentTypeRegistry::getContentType($usage)->attributes;
+                        $attributes = $templateAttributes->merge($contentAttributes);
+                    @endphp
+
+                    @foreach($attributes as $key => $attribute)
+                        <div class="px-2 py-1">
                         <x-sitebrew::blocks.attribute-input :key="$key"
                                                             wire:key="{{$template->id . $key}}"
                                                             :attribute="$attribute"
                                                             wire:model.live="templateBlock.attributes.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                        </div>
                     @endforeach
                 </section>
                 @break

@@ -14,15 +14,17 @@ enum AttributeType: string
 
     case MEDIA = 'media';
 
-    case NAVIGATION = 'navigation';
+    case DATE = 'date';
 
-    case BLOG_CATEGORY = 'blog-category';
+    case ICON = '';
+
+    case LISTING = 'listing';
+
+    case LISTING_ITEM = 'listing-item';
 
     case PRODUCT = 'product';
 
     case USER = 'user';
-
-    case COURSE_SECTION = 'course-section';
 
     case CUSTOM_SELECT = 'custom-select';
 

@@ -15,4 +15,8 @@ return [
     'readonly_info' => 'Dieses Attribut ist schreibgeschützt.',
     'limit_blocks' => 'Limitiere verfügbare Blöcke',
     'limit_blocks_description' => 'Wenn du diese Option aktivierst, kannst du nur die unten ausgewählten Blöcke verwenden. Sonst stehen alle Blöcke zur Verfügung.',
+
+    'content_type_list' => ':contentType Liste',
+    'content_type_card' => ':contentType Karte',
+    'content_type_categories' => ':contentType Kategorien',
 ];

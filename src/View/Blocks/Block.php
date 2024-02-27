@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Nette\NotImplementedException;
-use Sitebrew\View\ThemeRegistry;
+use Sitebrew\Misc\ThemeRegistry;
 
 class Block extends Component
 {
@@ -42,11 +42,11 @@ class Block extends Component
     {
         dump($this->attributes);
         // get_called_class():: is necessary as self:: returns the Block class instead of the actual child class
-        return view(ThemeRegistry::getThemeBlock($this->name)['viewName'], $this->attributes);
+        return view(ThemeRegistry::getThemeBlock($this->name)->viewName, $this->attributes);
     }
 
     public function getView(): string
     {
-        return ThemeRegistry::getThemeBlock($this->name)['viewName'] ?? ThemeRegistry::getThemeTemplate($this->name)['viewName'];
+        return ThemeRegistry::getThemeBlock($this->name)->viewName ?? ThemeRegistry::getThemeTemplate($this->name)->viewName;
     }
 }

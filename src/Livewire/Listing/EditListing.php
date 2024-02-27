@@ -14,7 +14,7 @@ class EditListing extends Modal
     public $name = '';
 
     #[Rule('required')]
-    public $usage = '';
+    public $type = '';
 
     #[Rule('nullable')]
     public $description = '';
@@ -27,7 +27,7 @@ class EditListing extends Modal
         if ($listing) {
             $this->listing = $listing;
             $this->name = $listing->name;
-            $this->usage = $listing->usage;
+            $this->type = $listing->type;
             $this->description = $listing->description;
             $this->data = $listing->data ?? [];
         }
@@ -38,12 +38,12 @@ class EditListing extends Modal
         $this->validate();
         if (isset($this->listing->id)) {
             $this->listing->update(
-                $this->only(['name', 'description', 'usage', 'data'])
+                $this->only(['name', 'description', 'type', 'data'])
             );
             $this->listing->save();
         } else {
             Listing::create(
-                $this->only(['name', 'description', 'usage', 'data'])
+                $this->only(['name', 'description', 'type', 'data'])
             );
         }
 

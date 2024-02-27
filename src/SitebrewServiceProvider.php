@@ -27,6 +27,9 @@ use Sitebrew\Commands\SyncStripeTaxCodes;
 use Sitebrew\Extensions\CloudflareR2Adapter;
 use Sitebrew\Helpers\Media\MediaHelper;
 use Sitebrew\Livewire\Shop\ProductTable;
+use Sitebrew\Misc\ContentTypeRegistry;
+use Sitebrew\Misc\ListingTypeRegistry;
+use Sitebrew\Misc\TemplateUsageRegistry;
 use Sitebrew\Models\Blocks\Template;
 use Sitebrew\Models\Content\Content;
 use Sitebrew\Models\Listing\Listing;
@@ -56,6 +59,15 @@ class SitebrewServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'sitebrew');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        $contentTypes = include __DIR__ . '/../resources/data/content_types.php';
+        ContentTypeRegistry::registerContentTypes($contentTypes);
+
+        $templateUsages = include __DIR__ . '/../resources/data/template_usages.php';
+        TemplateUsageRegistry::registerTemplateUsages($templateUsages);
+
+        $listingTypes = include __DIR__ . '/../resources/data/listing_types.php';
+        ListingTypeRegistry::registerListingTypes($listingTypes);
 
         Model::unguard();
 
@@ -178,6 +190,9 @@ class SitebrewServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/stripe-webhooks.php', 'stripe-webhooks');
 
         $this->mergeConfigFrom(__DIR__.'/../config/honeypot.php', 'honeypot');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/data.php', 'data');
+
 
         // Register the main class to use with the facade
         $this->app->singleton('sitebrew', function () {

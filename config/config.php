@@ -4,14 +4,6 @@
  * You can place your custom package configuration in here.
  */
 return [
-    'themes' => [
-        'hilde-gerg'
-    ],
-    'content_types' => [
-        'post' => 'Beitrag',
-        'page' => 'Seite',
-        'blog' => 'Blog',
-    ],
     'shop' => [
         'shipping' => [
             'locale' => env('SHOP_SHIPPING_LOCALE'),

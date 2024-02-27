@@ -83,12 +83,21 @@
                                     <x-sitebrew::form.textarea id="description"
                                                                wire:model.blur="currentItem.description"></x-sitebrew::form.textarea>
                                 </div>
-                                <div>
-                                    <x-sitebrew::form.label
-                                            for="icon">{{__('sitebrew::general.icon')}}</x-sitebrew::form.label>
-                                    <x-sitebrew::form.icon-picker id="icon"
-                                                                  wire:model.live="currentItem.icon"></x-sitebrew::form.icon-picker>
-                                </div>
+
+                                @if(isset($currentListing->type) && isset(\Sitebrew\Misc\ListingTypeRegistry::getListingType($currentListing->type)->itemAttributes))
+                                    <div class="flex flex-col gap-y-2">
+                                        @foreach(\Sitebrew\Misc\ListingTypeRegistry::getListingType($currentListing->type)->itemAttributes as $key => $attribute)
+                                            <div>
+                                                <x-sitebrew::blocks.attribute-input
+                                                        :attribute="$attribute"
+                                                        :key="'data.' . $attribute->name"
+                                                        wire:model.live="currentItem.data.{{$key}}"
+                                                />
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                {{--
                                 @if($currentListing->usage == \Sitebrew\Enums\Listing\ListingUsage::NAVIGATION->value)
                                     <div>
                                         <x-sitebrew::form.label
@@ -113,7 +122,7 @@
                                         <x-sitebrew::form.checkbox name="users_can_post_anonymously" wire:model="currentItem.data.users_can_post_anonymously">{{__('sitebrew::content.users_can_post_anonymously')}}</x-sitebrew::form.checkbox>
                                     </div>
                                 @endif
-
+                                --}}
                             </div>
                         @endif
                     </div>

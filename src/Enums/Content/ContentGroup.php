@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitebrew\Enums\Blocks;
+namespace Sitebrew\Enums\Content;
 
-enum BlockGroup: string
+enum ContentGroup: string
 {
     case CONTENT = 'content';
 

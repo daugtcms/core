@@ -7,16 +7,16 @@
         </div>
         <div>
             @php
-                $usages = collect(\Sitebrew\Enums\Listing\ListingUsage::cases())->map(function (\Sitebrew\Enums\Listing\ListingUsage $usage){
+                $types = collect(\Sitebrew\Misc\ListingTypeRegistry::getListingTypes())->map(function (\Sitebrew\Data\Listing\ListingTypeData $type, $key){
                     return [
-                        'value' => $usage->value,
-                        'title' => $usage->name
+                        'value' => $key,
+                        'title' => $type->name
                     ];
                 })->values()->toJson();
             @endphp
             <x-sitebrew::form.label for="usage">{{__('sitebrew::general.usage')}}</x-sitebrew::form.label>
-            <x-sitebrew::form.select id="usage" wire:model.live="usage"
-                                     :options="$usages"
+            <x-sitebrew::form.select id="usage" wire:model.live="type"
+                                     :options="$types"
                                      :error="$errors->first('usage')"/>
         </div>
         <div>
@@ -25,7 +25,20 @@
                                        :error="$errors->first('description')"/>
         </div>
 
-        @if($usage == \Sitebrew\Enums\Listing\ListingUsage::COURSE->value)
+        @if(isset($type) && isset(\Sitebrew\Misc\ListingTypeRegistry::getListingType($type)->listAttributes))
+            <div class="flex flex-col gap-y-2">
+                @foreach(\Sitebrew\Misc\ListingTypeRegistry::getListingType($type)->listAttributes as $key => $attribute)
+                    <div>
+                        <x-sitebrew::blocks.attribute-input
+                                :attribute="$attribute"
+                                :key="'data.' . $attribute->name"
+                                wire:model.live="data.{{$key}}"
+                        />
+                    </div>
+                @endforeach
+            </div>
+        @endif
+        @if($type === 'course')
             <div>
                 <x-sitebrew::form.label for="starts_at">{{__('sitebrew::general.starts_at')}}
                     <x-slot name="additional">{{__('sitebrew::content.leave_empty_for_continuous_course')}}</x-slot>

@@ -7,7 +7,6 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Sitebrew\Data\Listing\ListingItemData;
-use Sitebrew\Enums\Listing\ListingUsage;
 use Sitebrew\Models\Listing\Listing;
 
 class ListingEditor extends Component
@@ -149,15 +148,6 @@ class ListingEditor extends Component
 
         $oldItems = $this->currentListing->items()->get();
         foreach ($this->items as $item) {
-            // convert boolean to target string
-            if($this->currentListing->usage == ListingUsage::NAVIGATION) {
-                if (isset($item->data['target']) && $item->data['target'] == 1 || $item->data['target'] === '_blank') {
-                    $item->data['target'] = '_blank';
-                } else {
-                    $item->data['target'] = '_self';
-                }
-            }
-
             $this->currentListing->items()->updateOrCreate(
                 ['uuid' => $item->uuid],
                 $item->toArray());

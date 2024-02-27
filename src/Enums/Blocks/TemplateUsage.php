@@ -2,6 +2,7 @@
 
 namespace Sitebrew\Enums\Blocks;
 
+/* TODO: remove this enum when migration to new structure is complete */
 enum TemplateUsage: string
 {
     case AUTH = 'auth';

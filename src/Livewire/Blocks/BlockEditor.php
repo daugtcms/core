@@ -10,10 +10,10 @@ use Sitebrew\Data\Blocks\BlockData;
 use Sitebrew\Data\Blocks\BlockEditorData;
 use Sitebrew\Data\Blocks\TemplateData;
 use Sitebrew\Enums\Blocks\BlockEditorSidebar;
+use Sitebrew\Misc\ThemeRegistry;
 use Sitebrew\Models\Blocks\Template;
 use Sitebrew\View\Blocks\Block;
 use Sitebrew\View\Blocks\Misc\BlocksRenderer;
-use Sitebrew\View\ThemeRegistry;
 use WireElements\Pro\Components\Modal\Modal;
 
 class BlockEditor extends Modal
@@ -38,8 +38,12 @@ class BlockEditor extends Modal
 
     public $id = 0;
 
+    public $usage = '';
+
     public function mount($usage, array $data = null): void
     {
+        $this->usage = $usage;
+
         if (empty($this->templates)) {
             $this->templates = Template::where('usage', $usage)->get();
         }
@@ -194,13 +198,5 @@ class BlockEditor extends Modal
     public function getAvailableBlocks()
     {
         return ThemeRegistry::getThemeBlocks();
-        $blocks = $this->template->available_blocks;
-        if (! empty($blocks)) {
-            return collect($blocks)->map(function ($block) {
-                return config('sitebrew.available_blocks')[$block];
-            })->values();
-        } else {
-            return config('sitebrew.available_blocks');
-        }
     }
 }

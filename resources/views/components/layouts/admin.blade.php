@@ -56,9 +56,9 @@
                 $navigationItems = collect();
 
                 // add all content types to listing
-                $navigationItems = (collect(config('sitebrew.content_types'))->map(function($contentType, $key){
+                $navigationItems = (collect(\Sitebrew\Misc\ContentTypeRegistry::getContentTypes())->map(function($contentType, $key){
                     return [
-                        'name' => $contentType,
+                        'name' => $contentType->name,
                         'url' => route('admin.content.index', ['type' => $key]),
                     ];
                 }));

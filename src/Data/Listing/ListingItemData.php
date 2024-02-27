@@ -15,7 +15,6 @@ class ListingItemData extends Data implements Wireable
         public int $order = 0,
         public string $name = '',
         public string $description = '',
-        public string $icon = '',
         public array $data = [],
     ) {
     }
