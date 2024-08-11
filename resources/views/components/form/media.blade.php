@@ -1,4 +1,4 @@
 <div x-data="{selectedMedia: []}" x-modelable="selectedMedia" {{$attributes}} x-on:picker-updated="$event.detail[1] == '{{ $attributes->whereStartsWith('wire:key')->first() }}' ? selectedMedia = $event.detail[0] : false"
      x-init="selectedMedia = $wire.{{$attributes->whereStartsWith('wire:model')->first()}}; selectedMedia ? $dispatch('mediaSelected', {key: '{{ $attributes->whereStartsWith('wire:key')->first() }}', media: selectedMedia}) : false">
-    <livewire:sitebrew::media.media-picker :key="$attributes->only('wire:key')->first()" :id="$attributes->only('wire:key')->first()"></livewire:sitebrew::media.media-picker>
+    <livewire:daugt::media.media-picker :key="$attributes->only('wire:key')->first()" :id="$attributes->only('wire:key')->first()"></livewire:daugt::media.media-picker>
 </div>

@@ -19,4 +19,12 @@ return [
     'content_type_list' => ':contentType Liste',
     'content_type_card' => ':contentType Karte',
     'content_type_categories' => ':contentType Kategorien',
+
+    'block_defaults' => 'Block Voreinstellungen',
+    'edit_block_defaults' => 'Block Voreinstellungen bearbeiten',
+    'overwrite_template_defaults' => [
+        'title' => 'Voreinstellungen überschreiben',
+        'description' => 'Wenn du hier Änderungen vornimmst, werden sie nur für diese Seite übernommen. Stattdessen kannst du auch die Voreinstellungen für das Template bearbeiten.',
+        'action' => 'Zu den Template Voreinstellungen',
+    ],
 ];

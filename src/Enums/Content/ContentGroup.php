@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Enums\Content;
+namespace Daugt\Enums\Content;
 
 enum ContentGroup: string
 {

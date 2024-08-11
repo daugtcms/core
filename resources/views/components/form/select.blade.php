@@ -99,8 +99,8 @@
 
     <button type="button" x-modelable="selectedItem.value" x-ref="selectButton"
             @click="$refs.panel.toggle; selectOpen=true;" {{$attributes->merge(['class' => $classList])}}>
-        <span x-text="selectedItem ? (selectedItem.title ?? selectedItem.value) : '{{ __('sitebrew::general.no_value_available') }}'"
-              :class="{ 'truncate pr-7': true, 'text-neutral-500': !selectedItem }">{{ __('sitebrew::general.no_value_available') }}</span>
+        <span x-text="selectedItem ? (selectedItem.title ?? selectedItem.value) : '{{ __('daugt::general.no_value_available') }}'"
+              :class="{ 'truncate pr-7': true, 'text-neutral-500': !selectedItem }">{{ __('daugt::general.no_value_available') }}</span>
         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             @svg('chevrons-left-right', 'w-5 h-5 text-neutral-400 rotate-90')
         </span>

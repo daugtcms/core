@@ -1,5 +1,5 @@
-<x-sitebrew::layouts.admin>
+<x-daugt::layouts.admin>
     <div class="container py-4">
-    <livewire:sitebrew::shop.order-list></livewire:sitebrew::shop.order-list>
+    <livewire:daugt::shop.order-list></livewire:daugt::shop.order-list>
     </div>
-</x-sitebrew::layouts.admin>
+</x-daugt::layouts.admin>

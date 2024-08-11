@@ -2,15 +2,15 @@
     @forelse ($orders as $order)
         <li class="rounded-md overflow-hidden shadow-sm border-2 border-neutral-200">
             @can('edit orders')
-            <div class="bg-neutral-100 w-full flex items-center px-4 py-1.5 text-neutral-600">
-                Von {{ $order->user->full_name }} - {{ $order->user->email }}
-            </div>
+                <div class="bg-neutral-100 w-full flex items-center px-4 py-1.5 text-neutral-600">
+                    Von {{ $order->user->full_name }} - {{ $order->user->email }}
+                </div>
             @endcan
-            <button wire:click="$dispatch('modal.open', { component: 'sitebrew::shop.edit-order', arguments: { order: {{$order->id}} } })"
+            <button wire:click="$dispatch('openModal', { component: 'daugt::shop.edit-order', arguments: { order: {{$order->id}} } })"
                     class="w-full px-4 py-4 bg-white drop-shadow-sm hover:bg-neutral-50 focus:outline-none">
                 <div class="w-full flex items-center justify-between">
                     <p
-                       class="inline-flex text font-medium truncate text-primary-600 hover:underline hover:text-primary-500">
+                            class="inline-flex text font-medium truncate text-primary-600 hover:underline hover:text-primary-500">
                         Bestellung #{{$order->id}}
                     </p>
                     <div class="flex shrink-0 ml-2 text-sm text-neutral-500">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="mt-2 sm:flex sm:justify-between">
                     <div class="flex items-center justify-start">
-                        @if($order->status===\Sitebrew\Enums\Shop\PaymentStatus::PAID->value)
+                        @if($order->status===\Daugt\Enums\Shop\PaymentStatus::PAID->value)
                             <div
                                     class="w-3 h-3 shrink-0 mr-1.5 rounded-full bg-gradient-to-tr from-green-300 to-green-600">
                             </div>
@@ -35,7 +35,7 @@
                                 @endif
                             </p>
                         @endif
-                        @if($order->status===\Sitebrew\Enums\Shop\PaymentStatus::PENDING->value)
+                        @if($order->status===\Daugt\Enums\Shop\PaymentStatus::PENDING->value)
                             <div
                                     class="w-3 h-3 shrink-0 mr-1.5 rounded-full bg-gradient-to-tr from-yellow-300 to-yellow-600">
                             </div>
@@ -43,7 +43,7 @@
                                 Bezahlung ausstehend
                             </p>
                         @endif
-                        @if($order->status===\Sitebrew\Enums\Shop\PaymentStatus::FAILED->value)
+                        @if($order->status===\Daugt\Enums\Shop\PaymentStatus::FAILED->value)
                             <div
                                     class="w-3 h-3 shrink-0 mr-1.5 rounded-full bg-gradient-to-tr from-red-300 to-red-600">
                             </div>
@@ -81,19 +81,19 @@
                                     <p class="text-neutral-500">
                                         Anzahl: {{ $item->quantity }}
                                     </p>
-                                    @if($item->shipping_status===\Sitebrew\Enums\Shop\ShippingStatus::PENDING->value)
+                                    @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PENDING->value)
                                         <p class="flex items-center text-yellow-500">
                                             Versand ausstehend
                                             @svg('truck', 'ml-1.5')
                                         </p>
                                     @endif
-                                    @if($item->shipping_status===\Sitebrew\Enums\Shop\ShippingStatus::PROCESSING->value)
+                                    @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PROCESSING->value)
                                         <p class="flex items-center text-primary-500">
                                             Bestellung wird verarbeitet
                                             @svg('clock', 'ml-1.5')
                                         </p>
                                     @endif
-                                    @if($item->shipping_status===\Sitebrew\Enums\Shop\ShippingStatus::SHIPPED->value)
+                                    @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::SHIPPED->value)
                                         <p class="flex items-center text-green-500">
                                             Bestellung wurde versandt
                                             @svg('truck', 'ml-1.5')
@@ -103,7 +103,7 @@
                             @endif
                             @if($order->status === 'paid' && !empty($item->product->course_id))
                                 <div>
-                                    <a href="{{route('member-area.course.show', ['course' => \Sitebrew\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all']) }}"
+                                    <a href="{{route('member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all']) }}"
                                        class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
                                         @svg('unlock', 'h-3 w-3 mr-1.5')
                                         Kurs ansehen
@@ -112,7 +112,7 @@
                             @endif
                             @if($order->status === 'paid' && !empty($item->product->content_id))
                                 <div>
-                                    <a href="{{route('member-area.post.show', \Sitebrew\Models\Content\Content::where('id', $item->product->content_id)->first()->slug) }}"
+                                    <a href="{{route('member-area.post.show', \Daugt\Models\Content\Content::where('id', $item->product->content_id)->first()->slug) }}"
                                        class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
                                         @svg('unlock', 'h-3 w-3 mr-1.5')
                                         Inhalt ansehen

@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitebrew\Jobs\Shop;
+namespace Daugt\Jobs\Shop;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Sitebrew\Injectable\StripeClient;
-use Sitebrew\Models\User;
+use Daugt\Injectable\StripeClient;
+use Daugt\Models\User;
 
 class SyncStripeUser implements ShouldQueue
 {

@@ -106,7 +106,7 @@
             </div>
 
             @php
-                $country = Locale::getDisplayRegion(config('sitebrew.shop.shipping.locale'), config('sitebrew.shop.shipping.locale'));
+                $country = Locale::getDisplayRegion(config('daugt.shop.shipping.locale'), config('daugt.shop.shipping.locale'));
             @endphp
             <div class="px-4 py-6 border-t border-neutral-200 sm:px-6 @if($disabled) pointer-events-none @endif" x-data="{
               within_country: true,
@@ -173,10 +173,10 @@
                   kaufen</x-button>
               </div>
               --}}
-              <x-sitebrew::form.button href="{{route('checkout')}}"
+              <x-daugt::form.button href="{{route('checkout')}}"
                         x-bind:href="'{{route('checkout')}}' + (within_country ? '?within_country' : '')" :style="'primary'"
                         :class="$disabled ? 'w-full py-2 text-base opacity-50 pointer-events-none mt-2' : 'w-full py-2 text-base mt-2'">
-                Zahlungspflichtig bestellen</x-sitebrew::form.button>
+                Zahlungspflichtig bestellen</x-daugt::form.button>
             </div>
           </div>
         </div>

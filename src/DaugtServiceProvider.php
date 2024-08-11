@@ -1,8 +1,9 @@
 <?php
 
-namespace Sitebrew;
+namespace Daugt;
 
 use Aws\S3\S3Client;
+use Daugt\Misc\ThemeRegistry;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Filesystem\FilesystemAdapter;
@@ -18,29 +19,28 @@ use League\Flysystem\Visibility;
 use Plank\Mediable\Facades\ImageManipulator;
 use Plank\Mediable\ImageManipulation;
 use Plank\Mediable\Media;
-use Sitebrew\Commands\SyncIcons;
+use Daugt\Commands\SyncIcons;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 use Laravel\Horizon\HorizonServiceProvider;
-use Sitebrew\Commands\SyncStripeTaxCodes;
-use Sitebrew\Extensions\CloudflareR2Adapter;
-use Sitebrew\Helpers\Media\MediaHelper;
-use Sitebrew\Livewire\Shop\ProductTable;
-use Sitebrew\Misc\ContentTypeRegistry;
-use Sitebrew\Misc\ListingTypeRegistry;
-use Sitebrew\Misc\TemplateUsageRegistry;
-use Sitebrew\Models\Blocks\Template;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\ListingItem;
-use Sitebrew\Models\Shop\Order;
-use Sitebrew\Models\Shop\OrderItem;
-use Sitebrew\Models\Shop\Product;
-use Sitebrew\Models\User;
-use WireElements\Pro\Components\Modal\ModalServiceProvider;
+use Daugt\Commands\SyncStripeTaxCodes;
+use Daugt\Extensions\CloudflareR2Adapter;
+use Daugt\Helpers\Media\MediaHelper;
+use Daugt\Livewire\Shop\ProductTable;
+use Daugt\Misc\ContentTypeRegistry;
+use Daugt\Misc\ListingTypeRegistry;
+use Daugt\Misc\TemplateUsageRegistry;
+use Daugt\Models\Blocks\Template;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\ListingItem;
+use Daugt\Models\Shop\Order;
+use Daugt\Models\Shop\OrderItem;
+use Daugt\Models\Shop\Product;
+use Daugt\Models\User;
 
-class SitebrewServiceProvider extends ServiceProvider
+class DaugtServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -55,10 +55,13 @@ class SitebrewServiceProvider extends ServiceProvider
         /*
          * Optional methods to load your package assets
          */
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'sitebrew');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'sitebrew');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'daugt');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'daugt');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        $themes = include __DIR__ . '/../resources/data/themes.php';
+        ThemeRegistry::registerThemes($themes);
 
         $contentTypes = include __DIR__ . '/../resources/data/content_types.php';
         ContentTypeRegistry::registerContentTypes($contentTypes);
@@ -95,7 +98,7 @@ class SitebrewServiceProvider extends ServiceProvider
         $loader->alias('MediaHelper', MediaHelper::class);
 
         Storage::extend('s3', function ($app, $config) {
-            // this is inspired by the createS3Driver method in vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php
+            // this is inspired by the createS3Driver method in vendor/laravel/framework/Daugt/Illuminate/Filesystem/FilesystemManager.php
             $s3Config = [
                 'credentials' => [
                     'key'    => $config['key'],
@@ -120,12 +123,12 @@ class SitebrewServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('sitebrew.php'),
+                __DIR__.'/../config/config.php' => config_path('daugt.php'),
             ], 'config');
 
             $this->publishes([
-                __DIR__.'/../public/vendor/sitebrew' => public_path('vendor/sitebrew'),
-            ], 'sitebrew-assets');
+                __DIR__.'/../public/vendor/daugt' => public_path('vendor/daugt'),
+            ], 'daugt-assets');
 
             $this->publishes([
                 base_path('vendor/laravel/horizon/public') => public_path('vendor/horizon'),
@@ -134,21 +137,21 @@ class SitebrewServiceProvider extends ServiceProvider
             // Publish wire-elements-modal views
             /*$this->publishes([
                 __DIR__.'/../resources/views/vendor/wire-elements-modal' => base_path('resources/views/vendor/wire-elements-modal'),
-            ], 'sitebrew-views');*/
+            ], 'daugt-views');*/
 
             // Publishing the views.
             /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/sitebrew'),
+                __DIR__.'/../resources/views' => resource_path('views/vendor/daugt'),
             ], 'views');*/
 
             // Publishing assets.
             /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/sitebrew'),
+                __DIR__.'/../resources/assets' => public_path('vendor/daugt'),
             ], 'assets');*/
 
             // Publishing the translation files.
             /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/sitebrew'),
+                __DIR__.'/../resources/lang' => resource_path('lang/vendor/daugt'),
             ], 'lang');*/
 
             // Registering package commands.
@@ -177,7 +180,7 @@ class SitebrewServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'sitebrew');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'daugt');
 
         $this->mergeConfigFrom(__DIR__.'/../config/horizon.php', 'horizon');
 
@@ -195,12 +198,12 @@ class SitebrewServiceProvider extends ServiceProvider
 
 
         // Register the main class to use with the facade
-        $this->app->singleton('sitebrew', function () {
-            return new Sitebrew;
+        $this->app->singleton('daugt', function () {
+            return new Daugt;
         });
 
         $newConfig = config('filesystems.disks');
-        $newConfig['sitebrew-media'] = [
+        $newConfig['daugt-media'] = [
             'driver' => 's3',
             'key' => env('SITEBREW_MEDIA_ACCESS_KEY_ID'),
             'secret' => env('SITEBREW_MEDIA_SECRET_ACCESS_KEY'),
@@ -216,7 +219,5 @@ class SitebrewServiceProvider extends ServiceProvider
 
         $this->app->register(HorizonServiceProvider::class);
         $this->app->register(HorizonApplicationServiceProvider::class);
-
-        $this->app->register(ModalServiceProvider::class);
     }
 }

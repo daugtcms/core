@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\Controllers\Auth;
+namespace Daugt\Controllers\Auth;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\SitebrewRouteServiceProvider;
+use Daugt\Controllers\Controller;
+use Daugt\DaugtRouteServiceProvider;
 use Illuminate\Http\Request;
 
 class EmailVerificationPromptController extends Controller
@@ -16,7 +16,7 @@ class EmailVerificationPromptController extends Controller
     public function __invoke(Request $request)
     {
         return $request->user()->hasVerifiedEmail()
-            ? redirect()->intended(SitebrewRouteServiceProvider::HOME)
-            : view('sitebrew::auth.verify-email');
+            ? redirect()->intended(DaugtRouteServiceProvider::HOME)
+            : view('daugt::auth.verify-email');
     }
 }

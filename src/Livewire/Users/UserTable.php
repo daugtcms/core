@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew\Livewire\Users;
+namespace Daugt\Livewire\Users;
 
 use Livewire\Attributes\Url;
-use Sitebrew\Livewire\Table\Table;
-use Sitebrew\Livewire\Table\Column;
-use Sitebrew\Models\Content\Content;
+use Daugt\Livewire\Table\Table;
+use Daugt\Livewire\Table\Column;
+use Daugt\Models\Content\Content;
 use Illuminate\Database\Eloquent\Builder;
-use Sitebrew\Models\User;
+use Daugt\Models\User;
 
 class UserTable extends Table
 {
@@ -27,14 +27,14 @@ class UserTable extends Table
 
     public function add(): void
     {
-        $this->dispatch('modal.open', 'sitebrew::users.edit-user', [
+        $this->dispatch('openModal', 'daugt::users.edit-user', [
             'data' => [],
         ]);
     }
 
     public function edit($id): void
     {
-        $this->dispatch('modal.open', 'sitebrew::users.edit-user', [
+        $this->dispatch('openModal', 'daugt::users.edit-user', [
             'user' => $id
         ]);
     }
@@ -42,13 +42,13 @@ class UserTable extends Table
     public function columns(): array
     {
         return [
-            Column::make('id', '')->component('sitebrew::table.edit'),
-            Column::make('id', __('sitebrew::general.id')),
-            Column::make('name', __('sitebrew::general.username')),
-            Column::make('', __('sitebrew::general.name'))->component('sitebrew::table.user'),
+            Column::make('id', '')->component('daugt::table.edit'),
+            Column::make('id', __('daugt::general.id')),
+            Column::make('name', __('daugt::general.username')),
+            Column::make('', __('daugt::general.name'))->component('daugt::table.user'),
             // Column::make('slug', 'URL'),
-            Column::make('created_at', __('sitebrew::general.created_at'))->component('sitebrew::table.human-diff'),
-            // Column::make('id', '')->component('sitebrew::table.delete'),
+            Column::make('created_at', __('daugt::general.created_at'))->component('daugt::table.human-diff'),
+            // Column::make('id', '')->component('daugt::table.delete'),
         ];
     }
 

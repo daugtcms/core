@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitebrew\Controllers\Shop;
+namespace Daugt\Controllers\Shop;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Shop\Product;
+use Daugt\Controllers\Controller;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Shop\Product;
 
 class ShopIndexController extends Controller
 {
@@ -22,6 +22,6 @@ class ShopIndexController extends Controller
 
         $products = $query->orderBy('updated_at', 'DESC')->get();
 
-        return view('sitebrew::shop.index', compact('products'));
+        return view('daugt::shop.index', compact('products'));
     }
 }

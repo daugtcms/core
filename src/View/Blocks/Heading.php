@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class Heading extends Block
 {
     public static array $metadata = [
         'name' => 'Heading',
         'description' => 'A section for a heading with a subtitle',
-        'viewName' => 'sitebrew::blocks.heading',
+        'viewName' => 'daugt::blocks.heading',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

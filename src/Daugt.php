@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitebrew;
+namespace Daugt;
 
-class Sitebrew
+class Daugt
 {
     // Build your next great package.
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitebrew\Commands;
+namespace Daugt\Commands;
 
 use Illuminate\Support\Facades\DB;
-use Sitebrew\Jobs\DownloadIcons;
+use Daugt\Jobs\DownloadIcons;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use Sitebrew\Models\Shop\StripeTaxCode;
+use Daugt\Models\Shop\StripeTaxCode;
 
 class SyncStripeTaxCodes extends Command
 {
@@ -15,7 +15,7 @@ class SyncStripeTaxCodes extends Command
      *
      * @var string
      */
-    protected $signature = 'sitebrew:sync-stripe-tax-codes';
+    protected $signature = 'daugt:sync-stripe-tax-codes';
 
     /**
      * The console command description.
@@ -29,7 +29,7 @@ class SyncStripeTaxCodes extends Command
      */
     public function handle()
     {
-        $client = new \Stripe\StripeClient(config('sitebrew.stripe.secret'));
+        $client = new \Stripe\StripeClient(config('daugt.stripe.secret'));
         $taxCodes = $client->taxCodes->all(['limit' => 100]);
 
         foreach($taxCodes->autoPagingIterator() as $taxCode) {

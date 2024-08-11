@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew\Livewire\Listing;
+namespace Daugt\Livewire\Listing;
 
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-use Sitebrew\Data\Listing\ListingItemData;
-use Sitebrew\Models\Listing\Listing;
+use Daugt\Data\Listing\ListingItemData;
+use Daugt\Models\Listing\Listing;
 
 class ListingEditor extends Component
 {
@@ -37,7 +37,7 @@ class ListingEditor extends Component
         $this->validate();
     }
 
-    #[Layout('sitebrew::components.layouts.admin')]
+    #[Layout('daugt::components.layouts.admin')]
     public function render()
     {
         $listings = Listing::all();
@@ -48,7 +48,7 @@ class ListingEditor extends Component
             });
         }
 
-        return view('sitebrew::livewire.listing.listing-editor', [
+        return view('daugt::livewire.listing.listing-editor', [
             'listings' => $listings,
         ]);
     }

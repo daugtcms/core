@@ -9,8 +9,8 @@
 
     @vite(['resources/css/app.css'])
 
-    {{ Vite::useHotFile('vendor/sitebrew/sitebrew.hot')
-        ->useBuildDirectory("vendor/sitebrew")
+    {{ Vite::useHotFile('vendor/daugt/daugt.hot')
+        ->useBuildDirectory("vendor/daugt")
         ->withEntryPoints(['resources/js/stripped.js', 'resources/css/stripped.css']) }}
 
     @googlefonts

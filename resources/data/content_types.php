@@ -1,7 +1,7 @@
 <?php
 
-use Sitebrew\Enums\Blocks\AttributeType;
-use Sitebrew\Enums\Content\ContentGroup;
+use Daugt\Enums\Blocks\AttributeType;
+use Daugt\Enums\Content\ContentGroup;
 
 return [
     'page' => [
@@ -10,10 +10,6 @@ return [
         'categorized' => false,
         'listable' => false,
         'attributes' => [
-            'title' => [
-                'type' => AttributeType::TEXT,
-                'name' => 'Title',
-            ],
         ],
     ],
     'blog' => [
@@ -22,10 +18,6 @@ return [
         'categorized' => true,
         'listable' => true,
         'attributes' => [
-            'title' => [
-                'type' => AttributeType::TEXT,
-                'name' => 'Title',
-            ],
             'image' => [
                 'type' => AttributeType::MEDIA,
                 'name' => 'Image',
@@ -33,6 +25,9 @@ return [
             'category' => [
                 'type' => AttributeType::LISTING_ITEM,
                 'name' => 'Blog Category',
+                'options' => [
+                    'type' => 'blog_categories'
+                ]
             ],
         ],
     ],

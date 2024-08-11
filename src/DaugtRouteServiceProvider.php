@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew;
+namespace Daugt;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class SitebrewRouteServiceProvider extends ServiceProvider
+class DaugtRouteServiceProvider extends ServiceProvider
 {
     /**
      * The path to the "home" route for your application.

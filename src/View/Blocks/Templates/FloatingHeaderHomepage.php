@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitebrew\View\Blocks\Templates;
+namespace Daugt\View\Blocks\Templates;
 
-use Sitebrew\View\Blocks\Block as SitebrewBlock;
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\View\Blocks\Block as DaugtBlock;
+use Daugt\Enums\Blocks\AttributeType;
 
-class FloatingHeaderHomepage extends SitebrewBlock
+class FloatingHeaderHomepage extends DaugtBlock
 {
     public static array $metadata = [
-        'viewName' => 'sitebrew::blocks.templates.floating-header-homepage',
+        'viewName' => 'daugt::blocks.templates.floating-header-homepage',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

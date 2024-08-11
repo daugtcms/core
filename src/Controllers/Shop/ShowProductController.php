@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitebrew\Controllers\Shop;
+namespace Daugt\Controllers\Shop;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Shop\Product;
+use Daugt\Controllers\Controller;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Shop\Product;
 
 class ShowProductController extends Controller
 {
@@ -20,6 +20,6 @@ class ShowProductController extends Controller
             $query->whereNull('slug')->orWhere('slug', '');
         }
         $product = $query->firstOrFail();
-        return view('sitebrew::shop.product.show', compact('product'));
+        return view('daugt::shop.product.show', compact('product'));
     }
 }

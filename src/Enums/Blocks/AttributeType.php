@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Enums\Blocks;
+namespace Daugt\Enums\Blocks;
 
 enum AttributeType: string
 {

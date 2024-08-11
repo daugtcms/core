@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Sitebrew\Controllers\Auth\AuthenticatedSessionController;
-use Sitebrew\Controllers\Auth\ConfirmablePasswordController;
-use Sitebrew\Controllers\Auth\EmailVerificationNotificationController;
-use Sitebrew\Controllers\Auth\EmailVerificationPromptController;
-use Sitebrew\Controllers\Auth\NewPasswordController;
-use Sitebrew\Controllers\Auth\PasswordResetLinkController;
-use Sitebrew\Controllers\Auth\RegisteredUserController;
-use Sitebrew\Controllers\Auth\VerifyEmailController;
+use Daugt\Controllers\Auth\AuthenticatedSessionController;
+use Daugt\Controllers\Auth\ConfirmablePasswordController;
+use Daugt\Controllers\Auth\EmailVerificationNotificationController;
+use Daugt\Controllers\Auth\EmailVerificationPromptController;
+use Daugt\Controllers\Auth\NewPasswordController;
+use Daugt\Controllers\Auth\PasswordResetLinkController;
+use Daugt\Controllers\Auth\RegisteredUserController;
+use Daugt\Controllers\Auth\VerifyEmailController;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::group(['middleware' => ['web', ProtectAgainstSpam::class]], function () {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Controllers\Content;
+namespace Daugt\Controllers\Content;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Models\Content\Content;
+use Daugt\Controllers\Controller;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Models\Content\Content;
 
 class ShowPageController extends Controller
 {
@@ -19,6 +19,6 @@ class ShowPageController extends Controller
             $query->whereNull('slug')->orWhere('slug', '');
         }
         $page = $query->firstOrFail();
-        return view('sitebrew::pages.index', compact('page'));
+        return view('daugt::pages.index', compact('page'));
     }
 }

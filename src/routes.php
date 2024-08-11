@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew;
+namespace Daugt;
 
 use Illuminate\Support\Facades\Route;
-use Sitebrew\Livewire\Listing\NavigationEditor;
+use Daugt\Livewire\Listing\NavigationEditor;
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/admin', function () {
-        return view('sitebrew::admin.index');
+        return view('daugt::admin.index');
     })->name('admin.index')->middleware('can:access admin panel');
 
     Route::get('/admin/homepage', function() {

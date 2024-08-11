@@ -14,16 +14,16 @@ import de_de from 'filepond/locale/de-de';
 
 import Plyr from 'plyr';
 
-import '/vendor/wire-elements/pro/resources/js/overlay-component.js'
-
-
 registerPlugin(FilePondPluginImagePreview);
 registerPlugin(FilePondPluginImageExifOrientation);
 FilePond.setOptions(de_de);
 window.FilePond = FilePond;
 window.Plyr = Plyr;
 
+import '/vendor/wire-elements/modal/resources/js/modal.js';
+
 import './tiptap';
+import './content-editor/index.js';
 import './block-editor'
 import './tooltip'
 

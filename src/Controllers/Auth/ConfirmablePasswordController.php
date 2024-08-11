@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\Controllers\Auth;
+namespace Daugt\Controllers\Auth;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\SitebrewRouteServiceProvider;
+use Daugt\Controllers\Controller;
+use Daugt\DaugtRouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -17,7 +17,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function show()
     {
-        return view('sitebrew::auth.confirm-password');
+        return view('daugt::auth.confirm-password');
     }
 
     /**
@@ -38,6 +38,6 @@ class ConfirmablePasswordController extends Controller
 
         $request->session()->put('auth.password_confirmed_at', time());
 
-        return redirect()->intended(SitebrewRouteServiceProvider::HOME);
+        return redirect()->intended(DaugtRouteServiceProvider::HOME);
     }
 }

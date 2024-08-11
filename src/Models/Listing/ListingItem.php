@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Models\Listing;
+namespace Daugt\Models\Listing;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;

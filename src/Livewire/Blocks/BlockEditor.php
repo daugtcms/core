@@ -1,22 +1,23 @@
 <?php
 
-namespace Sitebrew\Livewire\Blocks;
+namespace Daugt\Livewire\Blocks;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Sitebrew\Data\Blocks\BlockData;
-use Sitebrew\Data\Blocks\BlockEditorData;
-use Sitebrew\Data\Blocks\TemplateData;
-use Sitebrew\Enums\Blocks\BlockEditorSidebar;
-use Sitebrew\Misc\ThemeRegistry;
-use Sitebrew\Models\Blocks\Template;
-use Sitebrew\View\Blocks\Block;
-use Sitebrew\View\Blocks\Misc\BlocksRenderer;
-use WireElements\Pro\Components\Modal\Modal;
+use LivewireUI\Modal\ModalComponent;
+use Daugt\Data\Blocks\BlockData;
+use Daugt\Data\Blocks\BlockEditorData;
+use Daugt\Data\Blocks\TemplateData;
+use Daugt\Enums\Blocks\BlockEditorSidebar;
+use Daugt\Misc\ThemeRegistry;
+use Daugt\Models\Blocks\Template;
+use Daugt\View\Blocks\Block;
+use Daugt\View\Blocks\Misc\BlocksRenderer;
+use Spatie\LaravelData\DataCollection;
 
-class BlockEditor extends Modal
+class BlockEditor extends ModalComponent
 {
     public $listeners = [
         'blockSelected' => 'setActiveBlock',
@@ -40,7 +41,7 @@ class BlockEditor extends Modal
 
     public $usage = '';
 
-    public function mount($usage, array $data = null): void
+    public function mount($usage, ?array $data = null): void
     {
         $this->usage = $usage;
 
@@ -84,10 +85,10 @@ class BlockEditor extends Modal
     public function render()
     {
         if (empty($this->title)) {
-            $this->title = Lang::get('sitebrew::blocks.title');
+            $this->title = Lang::get('daugt::blocks.title');
         }
 
-        return view('sitebrew::livewire.blocks.block-editor', [
+        return view('daugt::livewire.blocks.block-editor', [
             'availableBlocks' => $this->getAvailableBlocks(),
             'viewContent' => BlocksRenderer::fromTemplate($this->templateBlock, $this->blocks)->render(),
         ]);
@@ -97,18 +98,16 @@ class BlockEditor extends Modal
     {
         $template = new TemplateData($this->template->id, $this->templateBlock->attributes);
 
-        $blocks = BlockData::collection([]);
+        $blocks = BlockData::collect([], DataCollection::class);
         $this->blocks->map(function ($block) use (&$blocks) {
             // get index of available_blocks
             $blocks[] = new BlockData($block->name, $block->uuid, $block->attributes);
         })->values();
 
         // $this->dispatch('save-blocks', (new BlockEditorData($template, $blocks))->toArray());
-        $this->close(
-            andDispatch: [
-                'saveBlocks' => [(new BlockEditorData($template, $blocks))->toArray(), $this->id],
-            ]
-        );
+        $this->closeModalWithEvents([
+            ['saveBlocks', [(new BlockEditorData($template, $blocks))->toArray(), $this->id]],
+        ]);
     }
 
     public function updated($name, $value)
@@ -179,20 +178,14 @@ class BlockEditor extends Modal
         });
     }
 
-    public static function attributes(): array
+    public static function modalMaxWidth(): string
     {
-        return [
-            // Set the modal size to 2xl, you can choose between:
-            // xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, fullscreen
-            'size' => 'fullscreen',
-        ];
+        return '7xl';
     }
 
-    public static function behavior(): array
+    public static function destroyOnClose(): bool
     {
-        return [
-            'remove-state-on-close' => true,
-        ];
+        return true;
     }
 
     public function getAvailableBlocks()

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Sitebrew\Livewire\Listing\ListingEditor;
+use Daugt\Livewire\Listing\ListingEditor;
 
 Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'admin/structure', 'as' => 'admin.structure.'], function () {
     Route::get('/', function () {

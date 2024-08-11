@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew\Controllers\MemberArea;
+namespace Daugt\Controllers\MemberArea;
 
 use Illuminate\Support\Collection;
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Helpers\MemberArea\AccessHelper;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\ListingItem;
+use Daugt\Controllers\Controller;
+use Daugt\Helpers\MemberArea\AccessHelper;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\ListingItem;
 
 class ShowCourseController extends Controller
 {
@@ -19,7 +19,7 @@ class ShowCourseController extends Controller
             return redirect()->route('member-area.index');
         }
         $section = ListingItem::where('slug', $section)->first();
-        return view('sitebrew::member-area.course.index', [
+        return view('daugt::member-area.course.index', [
             'course' => $course,
             'section' => $section ?? null
         ]);

@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitebrew\Models\Content;
+namespace Daugt\Models\Content;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Sitebrew\Models\User;
+use Daugt\Models\User;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -15,6 +15,7 @@ class Content extends Model
 
     protected $casts = [
         'blocks' => 'array',
+        'attributes' => 'array',
         'enabled' => 'boolean',
         'published_at' => 'datetime',
     ];

@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitebrew\Livewire\Listing;
+namespace Daugt\Livewire\Listing;
 
-use Sitebrew\Models\Listing\Listing;
+use LivewireUI\Modal\ModalComponent;
+use Daugt\Models\Listing\Listing;
 use Livewire\Attributes\Rule;
-use WireElements\Pro\Components\Modal\Modal;
 
-class EditListing extends Modal
+class EditListing extends ModalComponent
 {
     public int|Listing $listing;
 
@@ -47,15 +47,14 @@ class EditListing extends Modal
             );
         }
 
-        $this->close(andDispatch: [
-            Listing::class => 'refreshComponent',
-        ]);
+        $this->closeModalWithEvents([
+            Listing::class => 'refreshComponent']);
     }
 
     public function render()
     {
 
-        return view('sitebrew::livewire.listing.edit-listing', [
+        return view('daugt::livewire.listing.edit-listing', [
 
         ]);
     }

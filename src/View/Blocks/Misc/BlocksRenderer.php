@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks\Misc;
+namespace Daugt\View\Blocks\Misc;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
-use Sitebrew\Data\Blocks\TemplateData;
-use Sitebrew\Models\Blocks\Template;
-use Sitebrew\View\Blocks\Block;
+use Daugt\Data\Blocks\TemplateData;
+use Daugt\Models\Blocks\Template;
+use Daugt\View\Blocks\Block;
 
 class BlocksRenderer extends Component
 {
@@ -21,6 +21,7 @@ class BlocksRenderer extends Component
 
     public function __construct(array $data = null, string $context = 'frontend')
     {
+        dd($context);
         if (isset($data)) {
             $this->restoreState($data);
         }
@@ -29,6 +30,7 @@ class BlocksRenderer extends Component
 
     public function restoreState($data): void
     {
+        dd($data);
         $template = null;
         if (isset($data['template'])) {
             $templateData = TemplateData::from($data['template']);
@@ -74,7 +76,7 @@ class BlocksRenderer extends Component
             $slot = Blade::render($block->getView(), $block->attributes);
 
             if ($this->context === 'editor') {
-                return Blade::render("<x-sitebrew::blocks.block-item uuid=\"$block->uuid\">$slot</x-sitebrew::blocks.block-item>");
+                return Blade::render("<x-daugt::blocks.block-item uuid=\"$block->uuid\">$slot</x-daugt::blocks.block-item>");
             } else {
                 return $slot;
             }
@@ -84,13 +86,13 @@ class BlocksRenderer extends Component
         if (! $blocks->isEmpty()) {
             $content = $blocks->implode("\n");
             if ($this->context === 'editor') {
-                $content = Blade::render("<x-sitebrew::blocks.block-list>$content</x-sitebrew::blocks.block-list>");
+                $content = Blade::render("<x-daugt::blocks.block-list>$content</x-daugt::blocks.block-list>");
             }
         }
 
         $slot = Blade::render($this->templateBlock->getView(), $this->templateBlock->attributes + ['slot' => $content]);
         if ($this->context === 'editor') {
-            return Blade::render("<x-sitebrew::layouts.base>$slot</x-sitebrew::layouts.base>");
+            return Blade::render("<x-daugt::layouts.base>$slot</x-daugt::layouts.base>");
         } else {
             return $slot;
         }

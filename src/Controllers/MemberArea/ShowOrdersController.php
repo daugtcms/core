@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\Controllers\MemberArea;
+namespace Daugt\Controllers\MemberArea;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Models\Content\Content;
+use Daugt\Controllers\Controller;
+use Daugt\Models\Content\Content;
 
 class ShowOrdersController extends Controller
 {
@@ -12,7 +12,7 @@ class ShowOrdersController extends Controller
         if (request()->exists('success')) {
             request()->session()->forget('cart');
         }
-        return view('sitebrew::member-area.orders.index', [
+        return view('daugt::member-area.orders.index', [
         ]);
     }
 }

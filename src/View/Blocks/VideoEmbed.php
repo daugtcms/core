@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class VideoEmbed extends Block
 {
     public static array $metadata = [
         'name' => 'Video Embed',
         'description' => 'Embed a YouTube or Vimeo video',
-        'viewName' => 'sitebrew::blocks.video-embed',
+        'viewName' => 'daugt::blocks.video-embed',
         'attributes' => [
             'url' => [
                 'type' => AttributeType::TEXT,

@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\Livewire\Media;
+namespace Daugt\Livewire\Media;
 
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
+use LivewireUI\Modal\ModalComponent;
 use Plank\Mediable\Media;
-use Sitebrew\Data\Media\MediaPickerData;
-use WireElements\Pro\Components\Modal\Modal;
+use Daugt\Data\Media\MediaPickerData;
 
-class MediaManager extends Modal
+class MediaManager extends ModalComponent
 {
     use WithPagination;
 
@@ -43,33 +43,34 @@ class MediaManager extends Modal
         });
         unset($this->selectedMediaArray);
 
-        if (!isset($this->selectedMedia)) {
+        if (! isset($this->selectedMedia)) {
             $this->selectedMedia = collect();
         }
     }
 
-    #[Layout('sitebrew::components.layouts.admin')]
+    #[Layout('daugt::components.layouts.admin')]
     public function render()
     {
         $media = Media::whereNull('original_media_id')->orderBy('created_at', 'desc')->with('variants')->get();
-        return view('sitebrew::livewire.media.media-manager', [
+
+        return view('daugt::livewire.media.media-manager', [
             'files' => $media,
         ]);
     }
 
-    public static function behavior(): array
+    public static function closeModalOnClickAway(): bool
     {
-        return [
-            'close-on-backdrop-click' => false,
-            'close-on-escape' => false,
-        ];
+        return false;
     }
 
-    public static function attributes(): array
+    public static function closeModalOnEscape(): bool
     {
-        return [
-            'size' => '6xl'
-        ];
+        return false;
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return '6xl';
     }
 
     public function selectFile($id, $variant = 'optimized')
@@ -91,17 +92,18 @@ class MediaManager extends Modal
                 $this->selectedMedia->push($element);
             }
         } else {
-            $this->dispatch('modal.open', 'sitebrew::media.edit-media', [
-                'media' => $id
+            $this->dispatch('openModal', 'daugt::media.edit-media', [
+                'media' => $id,
             ]);
         }
     }
 
-    public function closeModal()
+    public function close()
     {
-        $this->close(
-            andDispatch: [
-                'mediaSelected' => [$this->selectedMedia, $this->id]
-            ]);
+        $this->closeModalWithEvents(
+            [
+                ['mediaSelected', [$this->selectedMedia, $this->id]],
+            ]
+        );
     }
 }

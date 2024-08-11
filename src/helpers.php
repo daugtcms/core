@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Sitebrew\Data\Media\MediaPickerData;
-use Sitebrew\Helpers\Media\MediaHelper;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\ListingItem;
-use Sitebrew\Models\Listing\Navigation;
+use Daugt\Data\Media\MediaPickerData;
+use Daugt\Helpers\Media\MediaHelper;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\ListingItem;
+use Daugt\Models\Listing\Navigation;
 
 if (! function_exists('svg')) {
     function svg(string $path, $class = '', array $attributes = []): string

@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\Controllers\Shop;
+namespace Daugt\Controllers\Shop;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Models\Shop\Product;
+use Daugt\Controllers\Controller;
+use Daugt\Models\Shop\Product;
 
 class CartController extends Controller
 {

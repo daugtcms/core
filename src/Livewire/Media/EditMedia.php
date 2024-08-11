@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew\Livewire\Media;
+namespace Daugt\Livewire\Media;
 
 use Livewire\Features\SupportAttributes\AttributeCollection;
+use LivewireUI\Modal\ModalComponent;
 use Plank\Mediable\Media;
-use Sitebrew\Helpers\Media\MediaHelper;
-use WireElements\Pro\Components\Modal\Modal;
+use Daugt\Helpers\Media\MediaHelper;
 
-class EditMedia extends Modal
+class EditMedia extends ModalComponent
 {
     public int|Media $media;
 
@@ -22,7 +22,8 @@ class EditMedia extends Modal
     {
     }
 
-    public function delete() {
+    public function delete(): void
+    {
         MediaHelper::deleteMedia($this->media->id);
 
         $this->close(withForce: true, andDispatch: [
@@ -33,15 +34,13 @@ class EditMedia extends Modal
     public function render()
     {
 
-        return view('sitebrew::livewire.media.edit-media', [
+        return view('daugt::livewire.media.edit-media', [
 
         ]);
     }
 
-    public static function attributes(): array
+    public static function modalMaxWidth(): string
     {
-        return [
-            'size' => 'fullscreen',
-        ];
+        return '7xl';
     }
 }

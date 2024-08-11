@@ -1,5 +1,7 @@
-<x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::BLOG_OVERVIEW->value">
+<x-daugt::template-renderer :usage="\Daugt\Enums\Blocks\TemplateUsage::BLOG_OVERVIEW->value">
     @foreach($posts as $post)
-        <x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::BLOG_POST_CARD->value" :attributes="['content' => $post]" :within-template="true"></x-sitebrew::template-renderer>
+        <x-daugt::template-renderer :usage="\Daugt\Enums\Blocks\TemplateUsage::BLOG_POST_CARD->value"
+                                       :attributes="['content' => $post]"
+                                       :within-template="true"></x-daugt::template-renderer>
     @endforeach
-</x-sitebrew::template-renderer>
+</x-daugt::template-renderer>

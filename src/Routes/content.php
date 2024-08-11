@@ -1,14 +1,16 @@
 <?php
 
-use Sitebrew\Controllers\Admin\Content\DeleteContentController;
-use Sitebrew\Controllers\Content\BlogIndexController;
-use Sitebrew\Controllers\Content\ShowBlogController;
-use Sitebrew\Controllers\Content\ShowPageController;
+use Daugt\Controllers\Admin\Content\DeleteContentController;
+use Daugt\Controllers\Content\BlogIndexController;
+use Daugt\Controllers\Content\ShowBlogController;
+use Daugt\Controllers\Content\ShowPageController;
+use Daugt\Livewire\Content\EditContent;
 use Illuminate\Support\Facades\Route;
-use Sitebrew\Livewire\Content\ContentTable;
+use Daugt\Livewire\Content\ContentTable;
 
 Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'admin/content', 'as' => 'admin.content.'], function () {
     Route::get('/', ContentTable::class)->name('index');
+    Route::get('/{content:id}', EditContent::class)->name('edit');
     Route::delete('/{page}', DeleteContentController::class);
 });
 

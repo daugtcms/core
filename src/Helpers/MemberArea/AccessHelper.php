@@ -1,17 +1,17 @@
 <?php
 
-namespace Sitebrew\Helpers\MemberArea;
+namespace Daugt\Helpers\MemberArea;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Sitebrew\Enums\Shop\PaymentStatus;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\ListingItem;
-use Sitebrew\Models\Shop\OrderItem;
-use Sitebrew\Models\Shop\Product;
+use Daugt\Enums\Shop\PaymentStatus;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\ListingItem;
+use Daugt\Models\Shop\OrderItem;
+use Daugt\Models\Shop\Product;
 
 class AccessHelper
 {

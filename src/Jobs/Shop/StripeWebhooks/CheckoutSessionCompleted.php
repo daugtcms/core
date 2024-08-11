@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Jobs\Shop\StripeWebhooks;
+namespace Daugt\Jobs\Shop\StripeWebhooks;
 
 use Carbon\Carbon;
 use Exception;
@@ -9,13 +9,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Sitebrew\Enums\Shop\PaymentStatus;
-use Sitebrew\Enums\Shop\ShippingStatus;
-use Sitebrew\Injectable\StripeClient;
-use Sitebrew\Models\Shop\Order;
-use Sitebrew\Models\Shop\OrderItem;
-use Sitebrew\Models\Shop\Product;
-use Sitebrew\Models\User;
+use Daugt\Enums\Shop\PaymentStatus;
+use Daugt\Enums\Shop\ShippingStatus;
+use Daugt\Injectable\StripeClient;
+use Daugt\Models\Shop\Order;
+use Daugt\Models\Shop\OrderItem;
+use Daugt\Models\Shop\Product;
+use Daugt\Models\User;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Stripe\Exception\ApiErrorException;
 

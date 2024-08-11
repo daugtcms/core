@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Controllers\MemberArea;
+namespace Daugt\Controllers\MemberArea;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Helpers\MemberArea\AccessHelper;
-use Sitebrew\Models\Content\Content;
+use Daugt\Controllers\Controller;
+use Daugt\Helpers\MemberArea\AccessHelper;
+use Daugt\Models\Content\Content;
 
 class ShowPostController extends Controller
 {
@@ -18,7 +18,7 @@ class ShowPostController extends Controller
 
         $post = $query->firstOrFail();
         if(AccessHelper::canViewPost($post)) {
-            return view('sitebrew::member-area.post.show', [
+            return view('daugt::member-area.post.show', [
                 'post' => $post,
             ]);
         } else {

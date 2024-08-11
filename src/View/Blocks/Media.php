@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class Media extends Block
 {
     public static array $metadata = [
         'name' => 'Media',
         'description' => 'A section that can display a list of media items',
-        'viewName' => 'sitebrew::blocks.media',
+        'viewName' => 'daugt::blocks.media',
         'attributes' => [
             'mediaList' => [
                 'type' => AttributeType::MEDIA,

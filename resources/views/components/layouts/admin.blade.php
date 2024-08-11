@@ -9,11 +9,10 @@
 
     @livewireStyles
 
-    {{--<link rel="stylesheet" href="/vendor/sitebrew/build/assets/app.css">
-    <script type="module" src="/vendor/sitebrew/build/assets/app.js"></script>--}}
+    @stack('pre-styles')
 
-    {{ Vite::useHotFile('vendor/sitebrew/sitebrew.hot')
-        ->useBuildDirectory("vendor/sitebrew")
+    {{ Vite::useHotFile('vendor/daugt/daugt.hot')
+        ->useBuildDirectory("vendor/daugt")
         ->withEntryPoints(['resources/css/app.css', 'resources/js/app.js']) }}
     @googlefonts
 
@@ -22,8 +21,8 @@
 <div class="flex flex-col h-full">
     @php
 
-        use Sitebrew\Enums\Admin\AdminPath;
-        use Sitebrew\Helpers\Admin\AdminPathColor;
+        use Daugt\Enums\Admin\AdminPath;
+        use Daugt\Helpers\Admin\AdminPathColor;
         // check if route path starts with admin/structure
         $pathComponents = explode("/", request()->path());
         if(count($pathComponents) > 1){
@@ -35,28 +34,28 @@
         $navigationItems = [];
         switch ($path){
             case AdminPath::ADMIN->value:
-                $title = __('sitebrew::general.admin');
+                $title = __('daugt::general.admin');
                 break;
             case AdminPath::STRUCTURE->value:
-                $title = __('sitebrew::general.structure');
+                $title = __('daugt::general.structure');
                 $navigationItems = [
                     [
-                        'name' => __('sitebrew::general.listing'),
+                        'name' => __('daugt::general.listing'),
                         'url' => route('admin.structure.listing'),
                     ],
                     [
-                        'name' => __('sitebrew::general.templates'),
-                        'url' => route('admin.structure.templates'),
+                        'name' => __('daugt::blocks.block_defaults'),
+                        'url' => route('admin.structure.block-defaults'),
                     ]
                 ];
                 break;
             case AdminPath::CONTENT->value:
-                $title = __('sitebrew::general.content');
+                $title = __('daugt::general.content');
 
                 $navigationItems = collect();
 
                 // add all content types to listing
-                $navigationItems = (collect(\Sitebrew\Misc\ContentTypeRegistry::getContentTypes())->map(function($contentType, $key){
+                $navigationItems = (collect(\Daugt\Misc\ContentTypeRegistry::getContentTypes())->map(function($contentType, $key){
                     return [
                         'name' => $contentType->name,
                         'url' => route('admin.content.index', ['type' => $key]),
@@ -64,19 +63,19 @@
                 }));
 
                 $navigationItems->prepend([
-                    'name' => __('sitebrew::general.all'),
+                    'name' => __('daugt::general.all'),
                     'url' => route('admin.content.index'),
                 ]);
                 break;
             case AdminPath::SHOP->value:
-                $title = __('sitebrew::general.shop');
+                $title = __('daugt::general.shop');
                 $navigationItems = [
                     [
-                        'name' => __('sitebrew::general.orders'),
+                        'name' => __('daugt::general.orders'),
                         'url' => route('admin.shop.orders.index'),
                     ],
                     [
-                        'name' => __('sitebrew::general.products'),
+                        'name' => __('daugt::general.products'),
                         'url' => route('admin.shop.product.index'),
                     ],
                 ];
@@ -96,13 +95,13 @@
                                     @click="$refs.panel.toggle">
                                 <div class="p-2 rounded-lg text-primary-50 h-10 w-10"
                                      style="background-color: {{AdminPathColor::getColor(AdminPath::from($path))}}">
-                                    @svg('sitebrew', 'h-full flex-shrink-0 drop-shadow-md')
+                                    @svg('daugt', 'h-full w-full flex-shrink-0 drop-shadow-md')
                                 </div>
 
                                 <p class="text-lg font-semibold text-neutral-700 pt-0.5">@if($path == AdminPath::ADMIN->value)
-                                        Sitebrew
+                                        daugt
                                     @else
-                                        {{ __('sitebrew::general.' . $path) }}
+                                        {{ __('daugt::general.' . $path) }}
                                     @endif</p>
                             </button>
 
@@ -123,7 +122,7 @@
                                         <p class="text-base font-medium text-neutral-700 pt-0.5">@if($casePath == AdminPath::ADMIN)
                                                 Home
                                             @else
-                                                {{ __('sitebrew::general.' . $casePath->value) }}
+                                                {{ __('daugt::general.' . $casePath->value) }}
                                             @endif</p>
                                     </a>
                                 @endforeach
@@ -183,7 +182,7 @@
                         </x-slot>
                     </x-dropdown>
                 </div>--}}
-                @if($path == Sitebrew\Enums\Admin\AdminPath::ADMIN->value)
+                @if($path == Daugt\Enums\Admin\AdminPath::ADMIN->value)
                     <p class="my-auto text-neutral-500 hidden sm:block">v0.0.1</p>
                 @endif
 
@@ -209,14 +208,14 @@
                 <div class="flex flex-col divide-y divide-neutral-100">
                     @foreach($navigationItems as $item)
                         <div class="w-full">
-                        <a href="{{ $item['url'] }}"
-                                @class([
-                                    'hover:bg-neutral-50 border-l-2 py-2 px-5 w-full',
-                                    'inline-flex items-center border-primary-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-primary-700 transition duration-150 ease-in-out bg-neutral-50' => $item['url'] == request()->fullUrl(),
-                                    'inline-flex items-center border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out' => $item['url'] != request()->fullUrl(),
-                                ])>
-                            {{ $item['name'] }}
-                        </a>
+                            <a href="{{ $item['url'] }}"
+                                    @class([
+                                        'hover:bg-neutral-50 border-l-2 py-2 px-5 w-full',
+                                        'inline-flex items-center border-primary-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-primary-700 transition duration-150 ease-in-out bg-neutral-50' => $item['url'] == request()->fullUrl(),
+                                        'inline-flex items-center border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out' => $item['url'] != request()->fullUrl(),
+                                    ])>
+                                {{ $item['name'] }}
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -228,8 +227,7 @@
     </div>
 </div>
 
-@livewire('modal-pro')
-
 @livewireScriptConfig
+@livewire('wire-elements-modal')
 
 </body>

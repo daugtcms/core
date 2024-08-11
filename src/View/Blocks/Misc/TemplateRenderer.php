@@ -1,44 +1,48 @@
 <?php
 
-namespace Sitebrew\View\Blocks\Misc;
+namespace Daugt\View\Blocks\Misc;
 
+use Daugt\Misc\ThemeRegistry;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
-use Sitebrew\Data\Blocks\TemplateData;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Models\Blocks\Template;
-use Sitebrew\View\Blocks\Block;
+use Daugt\Data\Blocks\TemplateData;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Models\Blocks\Template;
+use Daugt\View\Blocks\Block;
 
 class TemplateRenderer extends Component
 {
     private Block $templateBlock;
 
-    public string $usage;
+    public string $template;
 
     public bool $withinTemplate = false;
 
-    public function __construct(string $usage, bool $withinTemplate = false, $attributes = null)
+    public function __construct(string $template, bool $withinTemplate = true, $attributes = null)
     {
         $this->withinTemplate = $withinTemplate;
-        $this->usage = $usage;
+        $this->template = $template;
         $this->restoreState($attributes);
     }
 
     public function restoreState($attributes): void
     {
-        $template = Template::where('usage', $this->usage)->first();
-        $templateAttributes = Arr::collapse([$template->data, $attributes]);;
-        $this->templateBlock = new (config('sitebrew.available_templates')[$template->view_name])(...$templateAttributes);
+        $template = ThemeRegistry::getThemeTemplate($this->template);
+        // $this->templateBlock = ThemeRegistry::getThemeTemplate($template->view_name);
+        $this->templateBlock = new Block($this->template);
+        $this->templateBlock->attributes = $attributes;
     }
 
     public function render(): \Closure
     {
         return function (array $data) {
             $slot = $data['slot'];
-            return view('sitebrew::components.blocks.template-renderer', ['content' => Blade::render($this->templateBlock::getMetadata()['viewName'], $this->templateBlock->getAttributeValues() + ['slot' => $slot])]);
+            //return view('daugt::components.blocks.template-renderer', ['content' => Blade::render($this->templateBlock->getView(), $this->templateBlock->attributes + ['slot' => $slot])]);
+            $this->templateBlock->attributes['slot'] = $slot;
+            return view('daugt::components.blocks.template-renderer', ['content' => $this->templateBlock->render()]);
         };
     }
 }

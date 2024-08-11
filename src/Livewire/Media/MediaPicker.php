@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitebrew\Livewire\Media;
+namespace Daugt\Livewire\Media;
 
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Plank\Mediable\Media;
-use Sitebrew\Data\Media\MediaPickerData;
+use Daugt\Data\Media\MediaPickerData;
 
 class MediaPicker extends Component
 {
@@ -38,10 +38,10 @@ class MediaPicker extends Component
         $this->fetchedMedia = collect();
     }
 
-    #[Layout('sitebrew::components.layouts.admin')]
+    #[Layout('daugt::components.layouts.admin')]
     public function render()
     {
-        return view('sitebrew::livewire.media.media-picker', [
+        return view('daugt::livewire.media.media-picker', [
 
         ]);
     }
@@ -57,5 +57,13 @@ class MediaPicker extends Component
 
         $this->fetchedMedia = Media::whereIn('id', $this->selectedMedia->pluck('id'))->get();
         $this->dispatch('picker-updated', $media, $this->id);
+    }
+
+    public function removeMedia($mediaId) {
+        $this->selectedMedia = $this->selectedMedia->filter(function($item) use ($mediaId) {
+            return $item->id != $mediaId;
+        });
+        $this->fetchedMedia = Media::whereIn('id', $this->selectedMedia->pluck('id'))->get();
+        $this->dispatch('picker-updated', $this->selectedMedia, $this->id);
     }
 }

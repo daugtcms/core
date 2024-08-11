@@ -1,5 +1,5 @@
 <form class="p-3" wire:submit="save">
-    <x-sitebrew::modal.header>Bestellung #{{$order->id}}</x-sitebrew::modal.header>
+    <x-daugt::modal.header>Bestellung #{{$order->id}}</x-daugt::modal.header>
     <div class="overflow-hidden bg-white">
         <div>
             <dl class="sm:divide-y sm:divide-gray-200">
@@ -18,14 +18,15 @@
                     <dd class="flex items-center justify-start mt-1 text-sm text-gray-900 sm:mt-0 w-full sm:col-span-2">
                         @can('edit orders')
                             @php
-                                $statuses = collect(\Sitebrew\Enums\Shop\PaymentStatus::cases())->map(function(\Sitebrew\Enums\Shop\PaymentStatus $item) {
+                                $statuses = collect(\Daugt\Enums\Shop\PaymentStatus::cases())->map(function(\Daugt\Enums\Shop\PaymentStatus $item) {
                                     return [
                                         'value' => $item->value,
                                         'label' => $item->name,
                                     ];
                                 })->toJson()
                             @endphp
-                            <x-sitebrew::form.select :options="$statuses" wire:model.live="status" class="w-full"></x-sitebrew::form.select>
+                            <x-daugt::form.select :options="$statuses" wire:model.live="status"
+                                                     class="w-full"></x-daugt::form.select>
                         @else
                             @if($order->status==="paid")
                                 <div
@@ -69,8 +70,10 @@
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             {{$order->address['shipping']['name']}}<br>
                             {{$order->address['shipping']['address']['line1']}}<br>
-                            @if($order->address['shipping']['address']['line2']){{$order->address['shipping']['address']['line2']}}
-                            <br>@endif
+                            @if($order->address['shipping']['address']['line2'])
+                                {{$order->address['shipping']['address']['line2']}}
+                                <br>
+                            @endif
                             {{$order->address['shipping']['address']['country'] . ' ' .
                             $order->address['shipping']['address']['postal_code'] . ' ' .
                             $order->address['shipping']['address']['city']}}
@@ -112,8 +115,10 @@
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             {{$invoice['customer_name']}}<br>
                             {{$invoice['customer_address']['line1']}}<br>
-                            @if($invoice['customer_address']['line2']){{$invoice['customer_address']['line2']}}
-                            <br>@endif
+                            @if($invoice['customer_address']['line2'])
+                                {{$invoice['customer_address']['line2']}}
+                                <br>
+                            @endif
                             {{$invoice['customer_address']['country'] . ' ' .
                             $invoice['customer_address']['postal_code'] . ' ' .
                             $invoice['customer_address']['city']}}
@@ -135,8 +140,10 @@
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             {{$invoice['shipping_details']['name']}}<br>
                             {{$invoice['shipping_details']['address']['line1']}}<br>
-                            @if($invoice['shipping_details']['address']['line2']){{$invoice['shipping_details']['address']['line2']}}
-                            <br>@endif
+                            @if($invoice['shipping_details']['address']['line2'])
+                                {{$invoice['shipping_details']['address']['line2']}}
+                                <br>
+                            @endif
                             {{$invoice['shipping_details']['address']['country'] . ' ' .
                             $invoice['shipping_details']['address']['postal_code'] . ' ' .
                             $invoice['shipping_details']['address']['city']}}
@@ -144,15 +151,15 @@
                     </div>
                 @endif
                 @if($invoice)
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                        Gesamtpreis<br>
-                        <span class="text-xs">inkl. MwSt., Rabatt & Versand</span>
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        €@number(((int) $invoice['total'])/100)
-                    </dd>
-                </div>
+                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Gesamtpreis<br>
+                            <span class="text-xs">inkl. MwSt., Rabatt & Versand</span>
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            €@number(((int) $invoice['total'])/100)
+                        </dd>
+                    </div>
                 @endif
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
@@ -168,7 +175,7 @@
                                              viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path fill-rule="evenodd"
                                                   d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                                  clip-rule="evenodd" />
+                                                  clip-rule="evenodd"/>
                                         </svg>
                                         <span class="flex-1 w-0 ml-2 truncate">
                                         Rechnung #{{$invoice['number']}}
@@ -215,19 +222,19 @@
                             <p class="text-neutral-500">
                                 Anzahl: {{ $item->quantity }}
                             </p>
-                            @if($item->shipping_status===\Sitebrew\Enums\Shop\ShippingStatus::PENDING->value)
+                            @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PENDING->value)
                                 <p class="flex items-center text-yellow-500">
                                     Versand ausstehend
                                     @svg('truck', 'ml-1.5')
                                 </p>
                             @endif
-                            @if($item->shipping_status===\Sitebrew\Enums\Shop\ShippingStatus::PROCESSING->value)
+                            @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PROCESSING->value)
                                 <p class="flex items-center text-primary-500">
                                     Bestellung wird verarbeitet
                                     @svg('clock', 'ml-1.5')
                                 </p>
                             @endif
-                            @if($item->shipping_status===\Sitebrew\Enums\Shop\ShippingStatus::SHIPPED->value)
+                            @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::SHIPPED->value)
                                 <p class="flex items-center text-green-500">
                                     Bestellung wurde versandt
                                     @svg('truck', 'ml-1.5')
@@ -237,7 +244,7 @@
                     @endif
                     @if($order->status === 'paid' && !empty($item->product->course_id))
                         <div>
-                            <a href="{{route('member-area.course.show', ['course' => \Sitebrew\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all'])}}"
+                            <a href="{{route('member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all'])}}"
                                class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
                                 @svg('unlock', 'h-3 w-3 mr-1.5')
                                 Kurs ansehen

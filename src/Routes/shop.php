@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Sitebrew\Controllers\Shop\CartController;
-use Sitebrew\Controllers\Shop\CheckoutController;
-use Sitebrew\Controllers\Shop\ShopIndexController;
-use Sitebrew\Controllers\Shop\ShowProductController;
-use Sitebrew\Livewire\Shop\ProductTable;
+use Daugt\Controllers\Shop\CartController;
+use Daugt\Controllers\Shop\CheckoutController;
+use Daugt\Controllers\Shop\ShopIndexController;
+use Daugt\Controllers\Shop\ShowProductController;
+use Daugt\Livewire\Shop\ProductTable;
 
 Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'admin/shop', 'as' => 'admin.shop.'], function () {
     Route::get('/', function () {
@@ -14,7 +14,7 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
 
     Route::get('/product', ProductTable::class)->name('product.index');
 
-    Route::get('/order', \Sitebrew\Controllers\Admin\Shop\ShowOrdersController::class)->name('orders.index');
+    Route::get('/order', \Daugt\Controllers\Admin\Shop\ShowOrdersController::class)->name('orders.index');
 
 });
 

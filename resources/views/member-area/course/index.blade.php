@@ -1,4 +1,4 @@
-<x-sitebrew::layouts.member-area-layout>
+<x-daugt::layouts.member-area-layout>
     <div class="container">
         <a href="{{route('member-area.index')}}" class="text-neutral-100 bg-neutral-100/10 hover:bg-neutral-100/25 inline-flex rounded-md items-center font-medium gap-x-1 px-2 py-1 sm:mt-4 mb-4">
             @svg('arrow-left', 'w-4 h-4')
@@ -25,5 +25,5 @@
     </div>
 
 
-    <livewire:sitebrew::member-area.course-posts :course="$course" :section="$section ? $section->slug : ''"></livewire:sitebrew::member-area.course-posts>
-</x-sitebrew::layouts.member-area-layout>
+    <livewire:daugt::member-area.course-posts :course="$course" :section="$section ? $section->slug : ''"></livewire:daugt::member-area.course-posts>
+</x-daugt::layouts.member-area-layout>

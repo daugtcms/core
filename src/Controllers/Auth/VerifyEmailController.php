@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\Controllers\Auth;
+namespace Daugt\Controllers\Auth;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\SitebrewRouteServiceProvider;
+use Daugt\Controllers\Controller;
+use Daugt\DaugtRouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -17,13 +17,13 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(SitebrewRouteServiceProvider::HOME.'?verified=1');
+            return redirect()->intended(DaugtRouteServiceProvider::HOME.'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(SitebrewRouteServiceProvider::HOME.'?verified=1');
+        return redirect()->intended(DaugtRouteServiceProvider::HOME.'?verified=1');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitebrew\Controllers\Content;
+namespace Daugt\Controllers\Content;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Enums\Listing\ListingUsage;
-use Sitebrew\Models\Content\Content;
+use Daugt\Controllers\Controller;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Enums\Listing\ListingUsage;
+use Daugt\Models\Content\Content;
 
 class ShowBlogController extends Controller
 {
@@ -21,6 +21,6 @@ class ShowBlogController extends Controller
         }
 
         $page = $query->first();
-        return view('sitebrew::pages.index', compact('page'));
+        return view('daugt::pages.index', compact('page'));
     }
 }

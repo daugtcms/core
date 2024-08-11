@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Misc;
+namespace Daugt\Misc;
 
 use Illuminate\Support\Collection;
-use Sitebrew\Data\Content\ContentTypeData;
-use Sitebrew\Data\Listing\ListingTypeData;
+use Daugt\Data\Content\ContentTypeData;
+use Daugt\Data\Listing\ListingTypeData;
 
 class ListingTypeRegistry
 {
@@ -31,7 +31,7 @@ class ListingTypeRegistry
         ContentTypeRegistry::getContentTypes()->each(function (ContentTypeData $contentType, string $key) use(&$types){
             if($contentType->categorized) {
                 $types->put($key . '_categories', ListingTypeData::from([
-                    'name' => __('sitebrew::blocks.content_type_categories', ['contentType' => $contentType->name])
+                    'name' => __('daugt::blocks.content_type_categories', ['contentType' => $contentType->name])
                 ]));
             }
         });

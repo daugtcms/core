@@ -1,11 +1,11 @@
 {
-  "name": "felixbeer/sitebrew",
+  "name": "daugtcms/core",
   "description": "",
   "keywords": [
     "felixbeer",
-    "sitebrew"
+    "daugt"
   ],
-  "homepage": "https://github.com/felixbeer/sitebrew",
+  "homepage": "https://github.com/daugtcms/core",
   "license": "MIT",
   "type": "library",
   "authors": [
@@ -34,7 +34,7 @@
     "symfony/http-client": "^6.3",
     "symfony/postmark-mailer": "^6.3",
     "ueberdosis/tiptap-php": "^1.3",
-    "wire-elements/pro": "^4.0"
+    "wire-elements/modal": "^2.0"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.13",
@@ -42,7 +42,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Sitebrew\\": "src"
+      "Daugt\\": "src"
     },
     "files": [
       "src/helpers.php"
@@ -50,7 +50,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Sitebrew\\Tests\\": "tests"
+      "Daugt\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -63,19 +63,13 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Sitebrew\\SitebrewServiceProvider",
-        "Sitebrew\\SitebrewBladeServiceProvider",
-        "Sitebrew\\SitebrewMediableServiceProvider"
+        "Daugt\\DaugtServiceProvider",
+        "Daugt\\DaugtBladeServiceProvider",
+        "Daugt\\DaugtMediableServiceProvider"
       ],
       "aliases": {
-        "Sitebrew": "Sitebrew\\SitebrewFacade"
+        "Daugt": "Daugt\\DaugtFacade"
       }
     }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wire-elements-pro.composer.sh"
-    }
-  ]
+  }
 }

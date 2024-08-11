@@ -1,13 +1,18 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
 use Closure;
+use Daugt\Data\Blocks\BlockData;
+use Daugt\Enums\Blocks\AttributeType;
+use Daugt\Helpers\Media\MediaHelper;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\ListingItem;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Nette\NotImplementedException;
-use Sitebrew\Misc\ThemeRegistry;
+use Daugt\Misc\ThemeRegistry;
 
 class Block extends Component
 {
@@ -35,18 +40,63 @@ class Block extends Component
         }
     }
 
+    public static function fromBlockData(BlockData $blockData)
+    {
+        $block = new Block($blockData->block);
+        $block->uuid = $blockData->uuid;
+        $block->attributes = $blockData->attributes;
+        return $block;
+    }
+
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        dump($this->attributes);
+        $this->propagateAttributes();
         // get_called_class():: is necessary as self:: returns the Block class instead of the actual child class
-        return view(ThemeRegistry::getThemeBlock($this->name)->viewName, $this->attributes);
+        return view($this->getView(), $this->attributes);
     }
 
     public function getView(): string
     {
         return ThemeRegistry::getThemeBlock($this->name)->viewName ?? ThemeRegistry::getThemeTemplate($this->name)->viewName;
+    }
+
+    public function propagateAttributes() {
+        foreach ((ThemeRegistry::getThemeBlock($this->name) ?? ThemeRegistry::getThemeTemplate($this->name))->attributes as $key => $value) {
+            switch($value->type) {
+                case AttributeType::LISTING:
+                    if(!isset($this->attributes[$key])) {
+                        // set attribute to first item of listing of given type
+                        if($value->options['type']) {
+                            $listing = Listing::where('type', $value->options['type'])->with('items')->first();
+                            $this->attributes[$key] = $listing;
+                        }
+                    } else {
+                        $listing = Listing::where('id', $this->attributes[$key])->with('items')->first();
+                        $this->attributes[$key] = $listing;
+                    }
+                    break;
+                case AttributeType::MEDIA:
+                    if(isset($this->attributes[$key]) && isset($this->attributes[$key]->id)) {
+                        if(isset($value->options) && $value->options['multiple']) {
+                            $this->attributes[$key] = $this->attributes[$key]->map(function($media) {
+                                return MediaHelper::getMediaById($media['id'], $media['variant']);
+                            });
+                        } else {
+                            $this->attributes[$key] = MediaHelper::getMediaById($this->attributes[$key][0]['id'], $this->attributes[$key][0]['variant']);
+                        }
+                    } else {
+                        $this->attributes[$key] = null;
+                    }
+                    break;
+                default:
+                    if(!isset($this->attributes[$key])) {
+                        $this->attributes[$key] = "";
+                    }
+                    break;
+            }
+        }
     }
 }

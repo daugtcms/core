@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class FeaturedContent extends Block
 {
     public static array $metadata = [
         'name' => 'Featured Content',
         'description' => 'A card with images, text and an action button',
-        'viewName' => 'sitebrew::blocks.featured-content',
+        'viewName' => 'daugt::blocks.featured-content',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

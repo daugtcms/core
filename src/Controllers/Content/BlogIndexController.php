@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitebrew\Controllers\Content;
+namespace Daugt\Controllers\Content;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Enums\Listing\ListingUsage;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Listing\ListingItem;
+use Daugt\Controllers\Controller;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Enums\Listing\ListingUsage;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Listing\ListingItem;
 
 class BlogIndexController extends Controller
 {
@@ -20,6 +20,6 @@ class BlogIndexController extends Controller
             $query->where('blocks->template->attributes->category', $category->id);
         }
         $posts = $query->get();
-        return view('sitebrew::content.blog.index', compact('posts'));
+        return view('daugt::content.blog.index', compact('posts'));
     }
 }

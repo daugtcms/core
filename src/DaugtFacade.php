@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew;
+namespace Daugt;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Sitebrew\Skeleton\SkeletonClass
+ * @see \Daugt\Skeleton\SkeletonClass
  */
-class SitebrewFacade extends Facade
+class DaugtFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class SitebrewFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'sitebrew';
+        return 'daugt';
     }
 }

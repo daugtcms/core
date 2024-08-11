@@ -1,6 +1,6 @@
 <?php
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 return [
     'navigation' => [

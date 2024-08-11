@@ -2,5 +2,5 @@
     'value',
 ])
 
-<x-sitebrew::form.icon-button icon="pencil" wire:click="edit({{$value}})">
-</x-sitebrew::form.icon-button>
+<x-daugt::form.icon-button icon="pencil" wire:click="edit({{$value}})">
+</x-daugt::form.icon-button>

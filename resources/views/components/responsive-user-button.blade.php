@@ -1,6 +1,6 @@
 <button class="flex items-center justify-between group gap-x-2 w-full px-3 py-1.5" @click="$refs.panel.toggle">
     <div class="flex items-center gap-x-2">
-    <x-sitebrew::avatar class="w-9 h-9"></x-sitebrew::avatar>
+    <x-daugt::avatar class="w-9 h-9"></x-daugt::avatar>
     <div class="flex flex-col items-start">
         <p class="text-lg text-neutral-800">{{Auth::user()->name}}</p>
         <p class="text-neutral-500 -mt-1.5">{{Auth::user()->email}}</p>
@@ -20,7 +20,7 @@
         <a href="{{route('admin.index')}}" class="px-3 py-2 hover:bg-neutral-100 cursor-pointer block">Admin</a>
     @endcan
     @if(app('impersonate')->isImpersonating())
-        <a href="{{ route('impersonate.leave') }}" class="px-3 py-2 text-danger-500 hover:bg-danger-50 cursor-pointer block">{{__('sitebrew::users.end_impersonation')}}</a>
+        <a href="{{ route('impersonate.leave') }}" class="px-3 py-2 text-danger-500 hover:bg-danger-50 cursor-pointer block">{{__('daugt::users.end_impersonation')}}</a>
     @else
         <form method="POST" action="{{ route('logout') }}">
             @csrf

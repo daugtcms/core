@@ -40,7 +40,7 @@
                         {{$text ?: 'Aliqua deserunt laborum excepteur nostrud magna et tempor in esse consequat deserunt aliqua. Id in ullamco in exercitation.'}}
                     </p>
 
-                    <x-sitebrew::form.button style="primary" :href="$link">{{$linkText}} @svg('arrow-right', 'w-5 h-5')</x-sitebrew::form.button>
+                    <x-daugt::form.button style="primary" :href="$link">{{$linkText}} @svg('arrow-right', 'w-5 h-5')</x-daugt::form.button>
                 </div>
                 <!-- End Title -->
 

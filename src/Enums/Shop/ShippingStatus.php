@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Enums\Shop;
+namespace Daugt\Enums\Shop;
 
 enum ShippingStatus: string
 {

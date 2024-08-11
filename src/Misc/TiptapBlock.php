@@ -1,0 +1,28 @@
+<?php
+
+namespace Daugt\Misc;
+
+use Daugt\View\Blocks\Block;
+use Illuminate\Support\Facades\Blade;
+use Tiptap\Core\Node;
+
+class TiptapBlock extends Node
+{
+    public static $name = 'Block';
+
+    public function addAttributes()
+    {
+        return [
+            'uuid',
+        ];
+    }
+
+    public function renderHTML($node)
+    {
+        $block = new Block($node->attrs->block);
+        $block->uuid = $node->attrs->uuid;
+        $block->attributes = json_decode(json_encode($node->attrs->data), true);
+        // return ['content' => '<div class="not-prose">'.Blade::render($block->getView(), $block->attributes).'</div>'];
+        return ['content' => '<div class="not-prose">'.$block->render().'</div>'];
+    }
+}

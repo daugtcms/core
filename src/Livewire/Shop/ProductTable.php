@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitebrew\Livewire\Shop;
+namespace Daugt\Livewire\Shop;
 
 use Livewire\Attributes\Url;
-use Sitebrew\Livewire\Table\Table;
-use Sitebrew\Livewire\Table\Column;
-use Sitebrew\Models\Content\Content;
+use Daugt\Livewire\Table\Table;
+use Daugt\Livewire\Table\Column;
+use Daugt\Models\Content\Content;
 use Illuminate\Database\Eloquent\Builder;
-use Sitebrew\Models\Shop\Product;
-use Sitebrew\Models\User;
+use Daugt\Models\Shop\Product;
+use Daugt\Models\User;
 
 class ProductTable extends Table
 {
@@ -34,13 +34,13 @@ class ProductTable extends Table
 
     public function add(): void
     {
-        $this->dispatch('modal.open', 'sitebrew::shop.edit-product', [
+        $this->dispatch('openModal', 'daugt::shop.edit-product', [
         ]);
     }
 
     public function edit($id): void
     {
-        $this->dispatch('modal.open', 'sitebrew::shop.edit-product', [
+        $this->dispatch('openModal', 'daugt::shop.edit-product', [
             'product' => $id
         ]);
     }
@@ -55,12 +55,12 @@ class ProductTable extends Table
     public function columns(): array
     {
         return [
-            Column::make('id', '')->component('sitebrew::table.edit'),
-            Column::make('', __('sitebrew::general.enabled'))->component('sitebrew::table.enabled'),
-            Column::make('id', __('sitebrew::general.id')),
-            Column::make('name', __('sitebrew::general.name')),
-            Column::make('price', __('sitebrew::general.price'))->component('sitebrew::table.price'),
-            Column::make('created_at', __('sitebrew::general.created_at'))->component('sitebrew::table.human-diff'),
+            Column::make('id', '')->component('daugt::table.edit'),
+            Column::make('', __('daugt::general.enabled'))->component('daugt::table.enabled'),
+            Column::make('id', __('daugt::general.id')),
+            Column::make('name', __('daugt::general.name')),
+            Column::make('price', __('daugt::general.price'))->component('daugt::table.price'),
+            Column::make('created_at', __('daugt::general.created_at'))->component('daugt::table.human-diff'),
         ];
     }
 }

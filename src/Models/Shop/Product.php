@@ -1,16 +1,16 @@
 <?php
 
-namespace Sitebrew\Models\Shop;
+namespace Daugt\Models\Shop;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Plank\Mediable\Mediable;
-use Sitebrew\Injectable\StripeClient;
-use Sitebrew\Jobs\Shop\SyncStripeProduct;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Content\Course;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\ListingItem;
+use Daugt\Injectable\StripeClient;
+use Daugt\Jobs\Shop\SyncStripeProduct;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Content\Course;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\ListingItem;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class ThreeCenterAlignedImagesWithContent extends Block
 {
     public static array $metadata = [
         'name' => 'Three Center Aligned Images With Content',
         'description' => 'Images on the left growing from small to large with text on the right',
-        'viewName' => 'sitebrew::blocks.three-center-aligned-images-with-content',
+        'viewName' => 'daugt::blocks.three-center-aligned-images-with-content',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

@@ -20,6 +20,9 @@
     case 'danger':
     $classes .= 'text-white bg-danger-600 hover:bg-danger-500 active:bg-danger-900 focus:border-danger-900 ring-danger-300';
     break;
+    case 'warning':
+    $classes .= 'text-white bg-warning-600 hover:bg-warning-500 active:bg-warning-900 focus:border-warning-900 ring-warning-300';
+    break;
     case 'success':
     $classes .= 'text-white bg-success-600 hover:bg-success-500 active:bg-success-900 focus:border-success-900 ring-success-300';
     break;

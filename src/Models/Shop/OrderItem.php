@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Models\Shop;
+namespace Daugt\Models\Shop;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Sitebrew\Models\User;
+use Daugt\Models\User;
 
 class OrderItem extends Model
 {

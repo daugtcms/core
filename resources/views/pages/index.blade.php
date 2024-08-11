@@ -1,3 +1,3 @@
-<x-sitebrew::layouts.base :title="$page->title">
-    <x-sitebrew::blocks-renderer :data="$page->blocks"></x-sitebrew::blocks-renderer>
-</x-sitebrew::layouts.base>
+<x-daugt::layouts.base :title="$page->title">
+    <x-daugt::content-renderer :content="$page"></x-daugt::content-renderer>
+</x-daugt::layouts.base>

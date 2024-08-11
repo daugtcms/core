@@ -2,16 +2,16 @@
   "_plyr.min-102398fd.js": {
     "file": "assets/plyr.min-102398fd.js"
   },
-  "_tiptap-369fb81d.js": {
-    "file": "assets/tiptap-369fb81d.js"
+  "_tiptap-5fefe90d.js": {
+    "file": "assets/tiptap-5fefe90d.js"
   },
   "resources/css/app.css": {
-    "file": "assets/app-cb745b5e.css",
+    "file": "assets/app-97bc3e38.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/css/member-area.css": {
-    "file": "assets/member-area-f3752870.css",
+    "file": "assets/member-area-4ed993c7.js",
     "isEntry": true,
     "src": "resources/css/member-area.css"
   },
@@ -21,18 +21,18 @@
     "src": "resources/css/stripped.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-2e69a890.js",
+    "file": "assets/app-856b21ca.js",
     "imports": [
-      "_tiptap-369fb81d.js",
+      "_tiptap-5fefe90d.js",
       "_plyr.min-102398fd.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/member-area.js": {
-    "file": "assets/member-area-e210014f.js",
+    "file": "assets/member-area-7f9ac7ef.js",
     "imports": [
-      "_tiptap-369fb81d.js",
+      "_tiptap-5fefe90d.js",
       "_plyr.min-102398fd.js"
     ],
     "isEntry": true,

@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitebrew\Controllers\Auth;
+namespace Daugt\Controllers\Auth;
 
-use Sitebrew\Controllers\Controller;
+use Daugt\Controllers\Controller;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +19,7 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request)
     {
-        return view('sitebrew::auth.reset-password', ['request' => $request]);
+        return view('daugt::auth.reset-password', ['request' => $request]);
     }
 
     /**

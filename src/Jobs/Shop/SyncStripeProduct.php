@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitebrew\Jobs\Shop;
+namespace Daugt\Jobs\Shop;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Sitebrew\Injectable\StripeClient;
-use Sitebrew\Models\Shop\Product;
+use Daugt\Injectable\StripeClient;
+use Daugt\Models\Shop\Product;
 
 class SyncStripeProduct implements ShouldQueue
 {
@@ -29,7 +29,7 @@ class SyncStripeProduct implements ShouldQueue
         if ($this->product->stripe_product_id && $this->product->stripe_price_id) {
             $stripe->products->update($this->product->stripe_product_id, [
                 'name' => $this->product->name,
-                'tax_code' => $this->product->stripe_tax_code_id ?? config('sitebrew.stripe.default_tax_code'),
+                'tax_code' => $this->product->stripe_tax_code_id ?? config('daugt.stripe.default_tax_code'),
             ]);
 
             if ($this->product->id) {
@@ -53,7 +53,7 @@ class SyncStripeProduct implements ShouldQueue
         } else {
             $stripe_product_id = $stripe->products->create([
                 'name' => $this->product->name,
-                'tax_code' => $this->product->stripe_tax_code_id ?? config('sitebrew.stripe.default_tax_code'),
+                'tax_code' => $this->product->stripe_tax_code_id ?? config('daugt.stripe.default_tax_code'),
             ])->id;
             $price_array = [
                 'unit_amount' => intval($this->product->price * 100),

@@ -1,16 +1,16 @@
 <?php
 
-namespace Sitebrew\View\Blocks\Templates;
+namespace Daugt\View\Blocks\Templates;
 
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Shop\Product;
-use Sitebrew\View\Blocks\Block as SitebrewBlock;
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Shop\Product;
+use Daugt\View\Blocks\Block as DaugtBlock;
+use Daugt\Enums\Blocks\AttributeType;
 
-class BlogOverview extends SitebrewBlock
+class BlogOverview extends DaugtBlock
 {
     public static array $metadata = [
-        'viewName' => 'sitebrew::blocks.templates.blog-overview',
+        'viewName' => 'daugt::blocks.templates.blog-overview',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

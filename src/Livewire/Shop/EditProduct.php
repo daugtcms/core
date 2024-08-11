@@ -1,29 +1,23 @@
 <?php
 
-namespace Sitebrew\Livewire\Shop;
+namespace Daugt\Livewire\Shop;
 
 use Illuminate\Support\Arr;
 use Livewire\Attributes\On;
-use Livewire\Features\SupportAttributes\AttributeCollection;
-use Plank\Mediable\Media;
-use Sitebrew\Data\Blocks\BlockEditorData;
-use Sitebrew\Data\Blocks\TemplateData;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Enums\Listing\ListingUsage;
-use Sitebrew\Enums\Shop\BillingType;
-use Sitebrew\Helpers\Media\MediaHelper;
-use Sitebrew\Livewire\Content\CoursesTable;
-use Sitebrew\Models\Blocks\Template;
-use Sitebrew\Models\Content\Course;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\Navigation;
+use LivewireUI\Modal\ModalComponent;
+use Daugt\Data\Blocks\TemplateData;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Enums\Listing\ListingUsage;
+use Daugt\Enums\Shop\BillingType;
+use Daugt\Livewire\Content\CoursesTable;
+use Daugt\Models\Blocks\Template;
+use Daugt\Models\Content\Course;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
-use Sitebrew\Models\Shop\Product;
-use Sitebrew\Models\User;
-use Spatie\LaravelData\DataCollection;
-use WireElements\Pro\Components\Modal\Modal;
+use Daugt\Models\Shop\Product;
 
-class EditProduct extends Modal
+class EditProduct extends ModalComponent
 {
     public int|Product $product;
 
@@ -92,7 +86,7 @@ class EditProduct extends Modal
         }
 
         if(empty($product->stripe_tax_code_id)) {
-            $this->stripe_tax_code_id = config('sitebrew.stripe.default_tax_code');
+            $this->stripe_tax_code_id = config('daugt.stripe.default_tax_code');
         } else {
             $this->stripe_tax_code_id = $product->stripe_tax_code_id;
         }
@@ -131,7 +125,7 @@ class EditProduct extends Modal
 
         $this->product->categories()->sync($this->categories);
 
-        $this->close(andDispatch: [
+        $this->closeModalWithEvents([
             ProductTable::class => 'refreshComponent',
         ]);
     }
@@ -145,16 +139,14 @@ class EditProduct extends Modal
     public function render()
     {
 
-        return view('sitebrew::livewire.shop.edit-product', [
+        return view('daugt::livewire.shop.edit-product', [
             'courses' => Listing::where('usage', ListingUsage::COURSE)->get(),
         ]);
     }
 
-    public static function attributes(): array
+    public static function modalMaxWidth(): string
     {
-        return [
-            'size' => 'xl',
-        ];
+        return 'xl';
     }
 
     public function setIsExternal(bool $value)
@@ -193,7 +185,7 @@ class EditProduct extends Modal
             $data['template']['attributes']['product'] = $this->product->id;
         }
 
-        $this->dispatch('modal.open', component: 'sitebrew::block-editor', arguments: ['usage' => TemplateUsage::SHOP_PRODUCT, 'data' => $data, 'id' => 'product-' . $this->product->id ] );
+        $this->dispatch('openModal', component: 'daugt::block-editor', arguments: ['usage' => TemplateUsage::SHOP_PRODUCT, 'data' => $data, 'id' => 'product-' . $this->product->id ] );
     }
 
     #[On('saveBlocks')]

@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew\Jobs\Shop\StripeWebhooks;
+namespace Daugt\Jobs\Shop\StripeWebhooks;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Sitebrew\Models\Shop\Order;
+use Daugt\Models\Shop\Order;
 use Spatie\WebhookClient\Models\WebhookCall;
 
 class InvoiceEvent implements ShouldQueue

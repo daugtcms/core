@@ -1,13 +1,17 @@
 <?php
 
-namespace Sitebrew\Data\Theme;
+namespace Daugt\Data\Theme;
 
 use Illuminate\Support\Collection;
-use Sitebrew\Enums\Content\ContentGroup;
+use Daugt\Enums\Content\ContentGroup;
+use Livewire\Wireable;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 
-class ThemeBlockData extends Data
+class ThemeBlockData extends Data implements Wireable
 {
+    use WireableData;
+
     public string $name;
 
     public string $description;

@@ -8,7 +8,7 @@ import mask from "@alpinejs/mask";
 
 window.Plyr = Plyr;
 
-import '/vendor/wire-elements/pro/resources/js/overlay-component.js'
+import '/vendor/wire-elements/modal/resources/js/modal.js';
 import './tiptap';
 
 Alpine.plugin(Mousetrap)

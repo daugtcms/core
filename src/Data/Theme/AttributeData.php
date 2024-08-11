@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitebrew\Data\Theme;
+namespace Daugt\Data\Theme;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 use Spatie\LaravelData\Data;
 
 class AttributeData extends Data

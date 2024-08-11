@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class FeaturedBlogCategory extends Block
 {
     public static array $metadata = [
         'name' => 'Featured Shop Category',
         'description' => 'A section containing a list of shop products from a category',
-        'viewName' => 'sitebrew::blocks.featured-blog-category',
+        'viewName' => 'daugt::blocks.featured-blog-category',
         'attributes' => [
             'category' => [
                 'type' => AttributeType::BLOG_CATEGORY,

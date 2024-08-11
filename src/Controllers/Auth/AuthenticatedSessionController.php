@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Controllers\Auth;
+namespace Daugt\Controllers\Auth;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Requests\Auth\LoginRequest;
-use Sitebrew\SitebrewRouteServiceProvider;
+use Daugt\Controllers\Controller;
+use Daugt\Requests\Auth\LoginRequest;
+use Daugt\DaugtRouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('sitebrew::auth.login');
+        return view('daugt::auth.login');
     }
 
     /**
@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(SitebrewRouteServiceProvider::HOME);
+        return redirect()->intended(DaugtRouteServiceProvider::HOME);
     }
 
     /**

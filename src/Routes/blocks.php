@@ -1,8 +1,8 @@
 <?php
 
+use Daugt\Livewire\Blocks\BlockDefaultsEditor;
 use Illuminate\Support\Facades\Route;
-use Sitebrew\Livewire\Blocks\TemplateEditor;
 
 Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'admin/structure', 'as' => 'admin.structure.'], function () {
-    Route::get('/templates', TemplateEditor::class)->name('templates');
+    Route::get('/block-defaults', BlockDefaultsEditor::class)->name('block-defaults');
 });

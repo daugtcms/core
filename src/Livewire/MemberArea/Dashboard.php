@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitebrew\Livewire\MemberArea;
+namespace Daugt\Livewire\MemberArea;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
-use Sitebrew\Enums\Listing\ListingUsage;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\User;
+use Daugt\Enums\Listing\ListingUsage;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\User;
 
 class Dashboard extends Component
 {
@@ -19,7 +19,7 @@ class Dashboard extends Component
     {
     }
 
-    #[Layout('sitebrew::components.layouts.member-area-layout')]
+    #[Layout('daugt::components.layouts.member-area-layout')]
     public function render()
     {
         $query = Auth::user()->orders();
@@ -31,7 +31,7 @@ class Dashboard extends Component
             $course_ids = $query->with('items.product')->get()->pluck('items')->flatten()->pluck('product')->filter(fn ($product) => $product->course_id)->unique()->map(fn ($product) => $product->course_id);
             $courses = Listing::whereIn('id', $course_ids)->with('items')->get();
         }
-        return view('sitebrew::livewire.member-area.dashboard', [
+        return view('daugt::livewire.member-area.dashboard', [
             'orders' => $query->limit(5)->orderBy('created_at', 'desc')->get(),
             'courses' => $courses
         ]);

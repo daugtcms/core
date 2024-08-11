@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class FullWidthHeader extends Block
 {
     public static array $metadata = [
         'name' => 'Full Width Header',
         'description' => 'A header block that spans across the entire width of the page',
-        'viewName' => 'sitebrew::blocks.full-width-header',
+        'viewName' => 'daugt::blocks.full-width-header',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

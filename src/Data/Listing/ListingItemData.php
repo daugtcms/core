@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Data\Listing;
+namespace Daugt\Data\Listing;
 
 use Livewire\Wireable;
 use Spatie\LaravelData\Concerns\WireableData;

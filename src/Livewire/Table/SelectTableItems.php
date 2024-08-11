@@ -1,18 +1,10 @@
 <?php
 
-namespace Sitebrew\Livewire\Table;
+namespace Daugt\Livewire\Table;
 
-use Livewire\Features\SupportAttributes\AttributeCollection;
-use Sitebrew\Enums\Shop\BillingType;
-use Sitebrew\Livewire\Content\CoursesTable;
-use Sitebrew\Models\Content\Course;
-use Sitebrew\Models\Listing\Navigation;
-use Livewire\Attributes\Rule;
-use Sitebrew\Models\Shop\Product;
-use Sitebrew\Models\User;
-use WireElements\Pro\Components\Modal\Modal;
+use LivewireUI\Modal\ModalComponent;
 
-class SelectTableItems extends Modal
+class SelectTableItems extends ModalComponent
 {
     public string $tableName;
 
@@ -32,22 +24,18 @@ class SelectTableItems extends Modal
     public function render()
     {
 
-        return view('sitebrew::livewire.table.select-table-items', [
+        return view('daugt::livewire.table.select-table-items', [
 
         ]);
     }
 
-    public static function attributes(): array
+    public static function modalMaxWidth(): string
     {
-        return [
-            'size' => 'xl',
-        ];
+        return 'xl';
     }
 
-    public static function behavior(): array
+    public static function destroyOnClose(): bool
     {
-        return [
-            'remove-state-on-close' => true,
-        ];
+        return true;
     }
 }

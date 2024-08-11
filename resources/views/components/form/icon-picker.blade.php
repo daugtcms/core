@@ -26,13 +26,13 @@
                     <p x-text="selectedIcon"
                        class="leading-tight truncate"></p>
                 </div>
-                <x-sitebrew::form.icon-button icon="x" class="mr-0.5"
+                <x-daugt::form.icon-button icon="x" class="mr-0.5"
                                                @click="selectedIcon = ''; $event.stopImmediatePropagation()">
-                </x-sitebrew::form.icon-button>
+                </x-daugt::form.icon-button>
             </div>
         </template>
         <template x-if="!selectedIcon">
-            <p class="text-neutral-500 italic truncate py-1.5">{{__('sitebrew::general.no_icon_selected')}}</p>
+            <p class="text-neutral-500 italic truncate py-1.5">{{__('daugt::general.no_icon_selected')}}</p>
         </template>
     </button>
     <div x-ref="panel" class="absolute bg-white border-neutral-200 border shadow-md rounded-md h-128 w-full"
@@ -48,8 +48,8 @@
          }"
     >
         <div class="p-2">
-            <x-sitebrew::form.input @input="filterItems()" x-ref="input"
-                                     placeholder="{{__('sitebrew::general.search_items')}}"></x-sitebrew::form.input>
+            <x-daugt::form.input @input="filterItems()" x-ref="input"
+                                     placeholder="{{__('daugt::general.search_items')}}"></x-daugt::form.input>
         </div>
         <div class="flex flex-col h-64 overflow-y-auto divide-y-2 divide-neutral-100 text-neutral-800">
             <template x-for="icon in filteredIcons">

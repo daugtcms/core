@@ -1,14 +1,12 @@
 <?php
 
-namespace Sitebrew\Livewire\Shop;
+namespace Daugt\Livewire\Shop;
 
-use Livewire\Attributes\On;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Injectable\StripeClient;
-use Sitebrew\Models\Shop\Order;
-use WireElements\Pro\Components\Modal\Modal;
+use LivewireUI\Modal\ModalComponent;
+use Daugt\Injectable\StripeClient;
+use Daugt\Models\Shop\Order;
 
-class EditOrder extends Modal
+class EditOrder extends ModalComponent
 {
     public int|Order $order;
 
@@ -32,16 +30,14 @@ class EditOrder extends Modal
             $invoice = $stripe->invoices->retrieve($this->order->stripe_invoice_id);
             $invoice = collect($invoice);
         }
-        return view('sitebrew::livewire.shop.edit-order', [
+        return view('daugt::livewire.shop.edit-order', [
             'invoice' => $invoice->only(['hosted_invoice_url', 'number', 'total', 'customer_address', 'customer_name', 'shipping_details'])
         ]);
     }
 
-    public static function attributes(): array
+    public static function modalMaxWidth(): string
     {
-        return [
-            'size' => 'xl',
-        ];
+        return 'xl';
     }
 
     public function updatedStatus() {

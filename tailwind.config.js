@@ -8,17 +8,62 @@ export default {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
-    './vendor/wire-elements/pro/config/wire-elements-pro.php',
-    './vendor/wire-elements/pro/**/*.blade.php',
-    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+    './vendor/laravel/framework/Daugt/Illuminate/Pagination/resources/views/*.blade.php',
+    './vendor/wire-elements/modal/resources/views/*.blade.php',
+    './storage/framework/views/*.php',
+  ],
+  safelist: [
+    {
+      pattern: /max-w-(sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/,
+      variants: ['sm', 'md', 'lg', 'xl', '2xl']
+    }
   ],
   theme: {
     extend: {
       colors: {
-        'primary': colors.amber,
+        'primary': colors.emerald,
         'danger': colors.red,
+        'warning': colors.amber,
         'success': colors.green,
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            maxWidth: '100%',
+            p: {
+              maxWidth: theme('maxWidth.3xl'),
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            },
+            h1: {
+              maxWidth: theme('maxWidth.3xl'),
+              margin: 'auto',
+            },
+            h2: {
+              maxWidth: theme('maxWidth.3xl'),
+              margin: 'auto',
+            },
+            h3: {
+              maxWidth: theme('maxWidth.3xl'),
+              margin: 'auto',
+            },
+            h4: {
+              maxWidth: theme('maxWidth.3xl'),
+              margin: 'auto',
+            },
+            blockquote: {
+              maxWidth: theme('maxWidth.3xl'),
+              margin: 'auto',
+            },
+            a: {
+              color: theme('colors.primary.500'),
+              '&:hover': {
+                color: theme('colors.primary.600'),
+              },
+            },
+          }
+        }
+      }),
     },
     container: {
       // you can configure the container to be centered

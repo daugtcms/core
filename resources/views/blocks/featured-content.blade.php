@@ -31,8 +31,8 @@
                 "text-neutral-600" => $backgroundColor == 'neutral',
                 "text-neutral-200" => $backgroundColor !== 'neutral',
             ])>{{$text ?: 'Et labore velit Lorem reprehenderit reprehenderit reprehenderit fugiat est ea amet nostrud magna minim. Ullamco ex exercitation irure amet irure occaecat ullamco.'}}</p>
-            <x-sitebrew::form.button style="{{$color == 'primary' ? 'primary' : ($color == 'secondary' ? 'secondary' : 'light')}}" :href="$link" class="mt-2"
-                                      target="_blank">{{$linkText}} @svg('arrow-right', 'h-5 w-5')</x-sitebrew::form.button>
+            <x-daugt::form.button style="{{$color == 'primary' ? 'primary' : ($color == 'secondary' ? 'secondary' : 'light')}}" :href="$link" class="mt-2"
+                                      target="_blank">{{$linkText}} @svg('arrow-right', 'h-5 w-5')</x-daugt::form.button>
         </div>
     </div>
 </div>

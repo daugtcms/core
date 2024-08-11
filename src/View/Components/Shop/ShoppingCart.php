@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\View\Components\Shop;
+namespace Daugt\View\Components\Shop;
 
 use Illuminate\View\Component;
-use Sitebrew\Models\Shop\Product;
+use Daugt\Models\Shop\Product;
 
 class ShoppingCart extends Component
 {
@@ -28,7 +28,7 @@ class ShoppingCart extends Component
     {
         $this->setCart();
 
-        return view('sitebrew::components.shop.shopping-cart');
+        return view('daugt::components.shop.shopping-cart');
     }
 
     public function setCart()

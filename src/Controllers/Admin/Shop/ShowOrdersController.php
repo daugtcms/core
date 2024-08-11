@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\Controllers\Admin\Shop;
+namespace Daugt\Controllers\Admin\Shop;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Models\Content\Content;
+use Daugt\Controllers\Controller;
+use Daugt\Models\Content\Content;
 
 class ShowOrdersController extends Controller
 {
     public function __invoke()
     {
-        return view('sitebrew::admin.shop.orders', [
+        return view('daugt::admin.shop.orders', [
         ]);
     }
 }

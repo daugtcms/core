@@ -1,16 +1,12 @@
 <?php
 
-namespace Sitebrew\Livewire\Content;
+namespace Daugt\Livewire\Content;
 
-use Sitebrew\Models\Content\Content;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\On;
+use LivewireUI\Modal\ModalComponent;
+use Daugt\Models\Content\Content;
 use Livewire\Attributes\Rule;
-use Livewire\Attributes\Url;
-use Livewire\Component;
-use WireElements\Pro\Components\Modal\Modal;
 
-class ScheduleContent extends Modal
+class ScheduleContent extends ModalComponent
 {
     public int|Content $content;
 
@@ -28,7 +24,7 @@ class ScheduleContent extends Modal
 
     public function render()
     {
-        return view('sitebrew::livewire.content.schedule-content');
+        return view('daugt::livewire.content.schedule-content');
     }
 
     public function save()
@@ -38,10 +34,8 @@ class ScheduleContent extends Modal
         $this->content->published_at = $this->published_at;
         $this->content->save();
 
-        $this->close(
-            andDispatch: [
-                'refreshComponent',
-            ]
-        );
+        $this->closeModalWithEvents([
+            'refreshComponent',
+        ]);
     }
 }

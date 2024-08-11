@@ -1,12 +1,12 @@
-<x-sitebrew::template-renderer :usage="\Sitebrew\Enums\Blocks\TemplateUsage::AUTH->value">
-    <h2 class="text-2xl text-neutral-700 font-semibold">{{__('sitebrew::auth.verify_email')}}</h2>
+<x-daugt::template-renderer :usage="\Daugt\Enums\Blocks\TemplateUsage::AUTH->value">
+    <h2 class="text-2xl text-neutral-700 font-semibold">{{__('daugt::auth.verify_email')}}</h2>
 
-    <x-sitebrew::form.label class="mb-2 text-sm text-neutral-500">{{ __('sitebrew::auth.verify_email.text') }}
-    </x-sitebrew::form.label>
+    <x-daugt::form.label class="mb-2 text-sm text-neutral-500">{{ __('daugt::auth.verify_email.text') }}
+    </x-daugt::form.label>
 
     @if (session('status') == 'verification-link-sent')
         <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('sitebrew::auth.verify_email.link_sent') }}
+            {{ __('daugt::auth.verify_email.link_sent') }}
         </div>
     @endif
 
@@ -17,9 +17,9 @@
             <x-honeypot />
 
             <div>
-                <x-sitebrew::form.button>
-                    {{ __('sitebrew::auth.verify_email.resend') }}
-                </x-sitebrew::form.button>
+                <x-daugt::form.button>
+                    {{ __('daugt::auth.verify_email.resend') }}
+                </x-daugt::form.button>
             </div>
         </form>
 
@@ -27,8 +27,8 @@
             @csrf
 
             <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                {{ __('sitebrew::auth.logout') }}
+                {{ __('daugt::auth.logout') }}
             </button>
         </form>
     </div>
-</x-sitebrew::template-renderer>
+</x-daugt::template-renderer>

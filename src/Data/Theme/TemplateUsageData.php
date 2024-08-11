@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Data\Theme;
+namespace Daugt\Data\Theme;
 
 use Spatie\LaravelData\Data;
 

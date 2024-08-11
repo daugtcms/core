@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitebrew\Commands;
+namespace Daugt\Commands;
 
-use Sitebrew\Jobs\DownloadIcons;
+use Daugt\Jobs\DownloadIcons;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +13,7 @@ class SyncIcons extends Command
      *
      * @var string
      */
-    protected $signature = 'sitebrew:sync-icons';
+    protected $signature = 'daugt:sync-icons';
 
     /**
      * The console command description.
@@ -27,7 +27,7 @@ class SyncIcons extends Command
      */
     public function handle()
     {
-        $icons = collect(Storage::disk('sitebrew-media')->files('icons/default'));
+        $icons = collect(Storage::disk('daugt-media')->files('icons/default'));
         $icons->chunk(100)->each(function ($icons) {
             DownloadIcons::dispatch($icons);
         });

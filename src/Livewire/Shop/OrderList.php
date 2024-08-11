@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitebrew\Livewire\Shop;
+namespace Daugt\Livewire\Shop;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use Sitebrew\Models\Shop\Order;
-use Sitebrew\Models\User;
+use Daugt\Models\Shop\Order;
+use Daugt\Models\User;
 
 class OrderList extends Component
 {
@@ -24,7 +24,7 @@ class OrderList extends Component
         if($this->user->exists) {
             $query = $query->where('user_id', $this->user->id);
         }
-        return view('sitebrew::livewire.shop.order-list', [
+        return view('daugt::livewire.shop.order-list', [
             'orders' => $query->paginate(50),
         ]);
     }

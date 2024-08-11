@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Data\Theme;
+namespace Daugt\Data\Theme;
 
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
@@ -15,7 +15,7 @@ class ThemeData extends Data
     public Collection $blocks;
 
     /**
-     * @var Collection<string, ThemeBlockData>
+     * @var Collection<string, ThemeTemplateData>
      */
     public Collection $templates;
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Models;
+namespace Daugt\Models;
 
 // use App\Injectable\StripeClient;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
-use Sitebrew\Jobs\Shop\SyncStripeUser;
-use Sitebrew\Models\Shop\Order;
+use Daugt\Jobs\Shop\SyncStripeUser;
+use Daugt\Models\Shop\Order;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\SlugOptions;
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks\Templates;
+namespace Daugt\View\Blocks\Templates;
 
-use Sitebrew\Data\Media\MediaPickerData;
-use Sitebrew\View\Blocks\Block as SitebrewBlock;
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Data\Media\MediaPickerData;
+use Daugt\View\Blocks\Block as DaugtBlock;
+use Daugt\Enums\Blocks\AttributeType;
 
-class FloatingHeaderBlog extends SitebrewBlock
+class FloatingHeaderBlog extends DaugtBlock
 {
     public static array $metadata = [
-        'viewName' => 'sitebrew::blocks.templates.floating-header-blog',
+        'viewName' => 'daugt::blocks.templates.floating-header-blog',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

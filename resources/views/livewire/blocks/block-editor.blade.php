@@ -3,18 +3,18 @@
     <div class="bg-neutral-50 flex-grow flex flex-col">
         <div class="bg-white w-full h-12 flex items-center justify-between pl-2 pr-4 flex-shrink-0">
             <div class="flex items-center gap-x-1.5">
-                <x-sitebrew::form.icon-button icon="x"
-                                              wire:click="$dispatch('modal.close')"></x-sitebrew::form.icon-button>
+                <x-daugt::form.icon-button icon="x"
+                                              wire:click="$dispatch('closeModal')"></x-daugt::form.icon-button>
                 <h1 class="text-lg font-medium">{{$title}}</h1>
             </div>
             <div class="flex gap-x-2">
-                <x-sitebrew::form.icon-button icon="plus"
+                <x-daugt::form.icon-button icon="plus"
                                               @click="sidebarOpen = true"
-                                              wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
-                ></x-sitebrew::form.icon-button>
-                <x-sitebrew::form.icon-button icon="save" style="primary"
+                                              wire:click="setSidebarState('{{\Daugt\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS}}')"
+                ></x-daugt::form.icon-button>
+                <x-daugt::form.icon-button icon="save" style="primary"
                                               wire:click="save()"
-                ></x-sitebrew::form.icon-button>
+                ></x-daugt::form.icon-button>
             </div>
         </div>
         <div class="border-b-2 border-neutral-100"></div>
@@ -33,12 +33,12 @@
          x-transition:leave-end="transform translate-x-full"
     >
         @switch($sidebarState)
-            @case(\Sitebrew\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS)
+            @case(\Daugt\Enums\Blocks\BlockEditorSidebar::AVAILABLE_BLOCKS)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <x-sitebrew::form.icon-button icon="chevron-left"
-                                                      wire:click="setSidebarState('{{\Sitebrew\Enums\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-sitebrew::form.icon-button>
-                        <p>{{__('sitebrew::blocks.available_blocks')}}</p>
+                        <x-daugt::form.icon-button icon="chevron-left"
+                                                      wire:click="setSidebarState('{{\Daugt\Enums\Blocks\BlockEditorSidebar::TEMPLATE}}')"></x-daugt::form.icon-button>
+                        <p>{{__('daugt::blocks.available_blocks')}}</p>
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
                             <div class="absolute w-full h-full bg-black/30 inset-0 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <p class="text-white font-semibold inline-flex items-center gap-x-1">
                                     @svg('plus')
-                                    {{__('sitebrew::general.add')}}
+                                    {{__('daugt::general.add')}}
                                 </p>
                             </div>
                         </div>
@@ -72,52 +72,52 @@
                     })
                 </script>
                 @break
-            @case(\Sitebrew\Enums\Blocks\BlockEditorSidebar::BLOCK)
+            @case(\Daugt\Enums\Blocks\BlockEditorSidebar::BLOCK)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-2 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <x-sitebrew::form.icon-button icon="chevron-left"
-                                                      wire:click="unsetActiveBlock()"></x-sitebrew::form.icon-button>
-                        <p>{{__('sitebrew::blocks.editing_block')}}</p>
+                        <x-daugt::form.icon-button icon="chevron-left"
+                                                      wire:click="unsetActiveBlock()"></x-daugt::form.icon-button>
+                        <p>{{__('daugt::blocks.editing_block')}}</p>
                     </div>
                 </div>
                 <section id="active-block"
                          class="flex flex-col overflow-y-auto gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0">
-                    @foreach(\Sitebrew\Misc\ThemeRegistry::getThemeBlock($activeBlock->name)->attributes as $key => $attribute)
+                    @foreach(\Daugt\Misc\ThemeRegistry::getThemeBlock($activeBlock->name)->attributes as $key => $attribute)
                         <div class="px-2 py-1">
-                        <x-sitebrew::blocks.attribute-input :key="$key"
-                                                            wire:key="{{$activeBlock->uuid . $key}}"
-                                                            :attribute="$attribute"
-                                                            wire:model.live.debounce.250ms="activeBlock.attributes.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                            <x-daugt::blocks.attribute-input :key="$key"
+                                                                wire:key="{{$activeBlock->uuid . $key}}"
+                                                                :attribute="$attribute"
+                                                                wire:model.live.debounce.250ms="activeBlock.attributes.{{$key}}"></x-daugt::blocks.attribute-input>
                         </div>
                     @endforeach
                 </section>
                 <div class="bg-white w-full flex justify-between p-2.5 border-t-2 border-neutral-100">
-                    <x-sitebrew::form.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
-                                             onclick="confirm('{{__('sitebrew::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
+                    <x-daugt::form.button style="danger" wire:click="removeBlock('{{$activeBlock->uuid}}')"
+                                             onclick="confirm('{{__('daugt::blocks.delete_block_confirmation')}}') || event.stopImmediatePropagation()">
                         @svg('trash-2', 'w-5 h-5 mr-1')
-                        {{__('sitebrew::general.delete')}}</x-sitebrew::form.button>
+                        {{__('daugt::general.delete')}}</x-daugt::form.button>
                 </div>
                 @break
-            @case(\Sitebrew\Enums\Blocks\BlockEditorSidebar::TEMPLATE)
+            @case(\Daugt\Enums\Blocks\BlockEditorSidebar::TEMPLATE)
                 <div class="bg-white flex box-content flex-col">
                     <div class="w-full px-3 gap-x-1.5 flex text-lg font-medium h-12 flex items-center flex item-center">
-                        <p>{{__('sitebrew::blocks.manage_template')}}</p>
+                        <p>{{__('daugt::blocks.manage_template')}}</p>
                     </div>
                 </div>
                 <section id="active-block"
                          class="flex flex-col gap-y-2 divide-y divide-neutral-200 flex-grow min-h-0 overflow-y-auto">
                     @php
-                        $templateAttributes = \Sitebrew\Misc\ThemeRegistry::getThemeTemplate($this->templateBlock->name)->attributes;
-                        $contentAttributes = \Sitebrew\Misc\ContentTypeRegistry::getContentType($usage)->attributes;
+                        $templateAttributes = \Daugt\Misc\ThemeRegistry::getThemeTemplate($this->templateBlock->name)->attributes;
+                        $contentAttributes = \Daugt\Misc\ContentTypeRegistry::getContentType($usage)->attributes;
                         $attributes = $templateAttributes->merge($contentAttributes);
                     @endphp
 
                     @foreach($attributes as $key => $attribute)
                         <div class="px-2 py-1">
-                        <x-sitebrew::blocks.attribute-input :key="$key"
-                                                            wire:key="{{$template->id . $key}}"
-                                                            :attribute="$attribute"
-                                                            wire:model.live="templateBlock.attributes.{{$key}}"></x-sitebrew::blocks.attribute-input>
+                            <x-daugt::blocks.attribute-input :key="$key"
+                                                                wire:key="{{$template->id . $key}}"
+                                                                :attribute="$attribute"
+                                                                wire:model.live="templateBlock.attributes.{{$key}}"></x-daugt::blocks.attribute-input>
                         </div>
                     @endforeach
                 </section>

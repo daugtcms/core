@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Data\Blocks;
+namespace Daugt\Data\Blocks;
 
 use Spatie\LaravelData\Data;
 

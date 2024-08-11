@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Livewire\Table;
+namespace Daugt\Livewire\Table;
 
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Layout;
@@ -65,9 +65,9 @@ abstract class Table extends Component
     public function updateSortOrder($data): void {
     }
 
-    #[Layout('sitebrew::components.layouts.admin')]
+    #[Layout('daugt::components.layouts.admin')]
     public function render()
     {
-        return view('sitebrew::livewire.table.table');
+        return view('daugt::livewire.table.table');
     }
 }

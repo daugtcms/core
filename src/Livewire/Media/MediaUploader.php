@@ -1,15 +1,14 @@
 <?php
 
-namespace Sitebrew\Livewire\Media;
+namespace Daugt\Livewire\Media;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Rule;
 use Livewire\WithFileUploads;
-use Sitebrew\Jobs\Media\SaveUploadedFile;
-use WireElements\Pro\Components\Modal\Modal;
+use LivewireUI\Modal\ModalComponent;
+use Daugt\Jobs\Media\SaveUploadedFile;
 
-class MediaUploader extends Modal
+class MediaUploader extends ModalComponent
 {
     use WithFileUploads;
 
@@ -18,49 +17,50 @@ class MediaUploader extends Modal
 
     public Collection $savedFiles;
 
-    public function mount()
+    public function mount(): void
     {
         $this->savedFiles = collect();
     }
 
-    public function updatedFiles($value)
+    public function updatedFiles($value): void
     {
         foreach ($value as $file) {
-            if(!$this->savedFiles->contains($file->getRealPath()))  {
+            if (! $this->savedFiles->contains($file->getRealPath())) {
                 $this->savedFiles->push($file->getRealPath());
                 SaveUploadedFile::dispatch($file->getRealPath(), pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
             }
         }
     }
 
-    public function closeModal() {
-        $this->close(
-            andDispatch: [
-            MediaManager::class => 'refreshComponent'
+    public function close(): void
+    {
+        $this->closeModalWithEvents([
+            MediaManager::class => 'refreshComponent',
         ]);
     }
 
     public function render()
     {
-        return view('sitebrew::livewire.media.media-uploader', [
+        return view('daugt::livewire.media.media-uploader', [
         ]);
     }
 
-    public function save() {
+    public function save()
+    {
     }
 
-    public static function behavior(): array
+    public static function closeModalOnClickAway(): bool
     {
-        return [
-            'close-on-backdrop-click' => false,
-            'close-on-escape' => false,
-        ];
+        return false;
     }
 
-    public static function attributes(): array
+    public static function closeModalOnEscape(): bool
     {
-        return [
-            'size' => 'md'
-        ];
+        return false;
+    }
+
+    public static function modalMaxWidth(): string
+    {
+        return 'md';
     }
 }

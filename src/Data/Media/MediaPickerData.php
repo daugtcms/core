@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Data\Media;
+namespace Daugt\Data\Media;
 
 use Livewire\Wireable;
 use Spatie\LaravelData\Concerns\WireableData;

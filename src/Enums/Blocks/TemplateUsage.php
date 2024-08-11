@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Enums\Blocks;
+namespace Daugt\Enums\Blocks;
 
 /* TODO: remove this enum when migration to new structure is complete */
 enum TemplateUsage: string

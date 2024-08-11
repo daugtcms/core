@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Controllers;
+namespace Daugt\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

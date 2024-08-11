@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Data\Listing;
+namespace Daugt\Data\Listing;
 
 use Illuminate\Support\Collection;
 use Livewire\Wireable;
-use Sitebrew\Data\Theme\AttributeData;
+use Daugt\Data\Theme\AttributeData;
 use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 

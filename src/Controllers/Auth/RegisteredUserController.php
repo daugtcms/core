@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Controllers\Auth;
+namespace Daugt\Controllers\Auth;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Models\User;
-use Sitebrew\SitebrewRouteServiceProvider;
+use Daugt\Controllers\Controller;
+use Daugt\Models\User;
+use Daugt\DaugtRouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(SitebrewRouteServiceProvider::HOME);
+        return redirect(DaugtRouteServiceProvider::HOME);
     }
 
     /**
@@ -52,6 +52,6 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('sitebrew::auth.register');
+        return view('daugt::auth.register');
     }
 }

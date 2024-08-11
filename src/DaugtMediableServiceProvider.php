@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew;
+namespace Daugt;
 
 use Intervention\Image\Facades\Image;
 use Plank\Mediable\Facades\ImageManipulator;
 use Plank\Mediable\ImageManipulation;
 use Illuminate\Support\ServiceProvider;
 
-class SitebrewMediableServiceProvider extends ServiceProvider
+class DaugtMediableServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

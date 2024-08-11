@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Helpers\Media;
+namespace Daugt\Helpers\Media;
 
 use Illuminate\Support\Facades\Storage;
 use Plank\Mediable\Media;
@@ -21,7 +21,7 @@ class MediaHelper
                 return $media->getUrl();
             } else {
                 if ($type == 'thumbnail') {
-                    $url = Storage::disk('sitebrew-media')->url('/default/');
+                    $url = Storage::disk('daugt-media')->url('/default/');
                     switch ($media->aggregate_type) {
                         case Media::TYPE_AUDIO:
                             $url = $url.'audio.svg';
@@ -43,7 +43,7 @@ class MediaHelper
                 }
             }
         } else {
-            return Storage::disk('sitebrew-media')->url('/default/'.$default.'.svg');
+            return Storage::disk('daugt-media')->url('/default/'.$default.'.svg');
         }
     }
 
@@ -67,21 +67,5 @@ class MediaHelper
                 static::deleteMedia($media->id);
             });
         }
-    }
-
-    public static function getTypeName($type): string
-    {
-        return match ($type) {
-            'posting' => 'Postings',
-            'meditation' => 'Meditationen',
-            'seelenkonferenz' => 'Seelenkonferenzen',
-            'inspiration' => 'Inspirationen',
-            'antwort' => 'Antworten',
-            'audiovideo' => 'Audio & Video',
-            'dokument' => 'Dokumente',
-            'shop' => 'Shop-Posts',
-            'blog' => 'Blog',
-            default => '',
-        };
     }
 }

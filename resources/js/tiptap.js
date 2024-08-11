@@ -19,7 +19,8 @@ window.setupEditor = function (content) {
                     this.updatedAt = Date.now()
                 },
                 onUpdate: Alpine.debounce(({ editor }) => {
-                    this.content = editor.getHTML()
+                    this.content = editor.getJSON()
+                    console.log(editor.getJSON())
                     this.updatedAt = Date.now()
                 }, 300),
                 onSelectionUpdate: ({ editor }) => {
@@ -32,7 +33,7 @@ window.setupEditor = function (content) {
 
             this.$watch('content', (content) => {
                 // If the new content matches TipTap's then we just skip.
-                if (content === editor.getHTML()) return
+                if (content === editor.getJSON()) return
 
                 /*
                   Otherwise, it means that a force external to TipTap

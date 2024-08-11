@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class Spacer extends Block
 {
     public static array $metadata = [
         'name' => 'Spacer',
         'description' => 'Add space between blocks',
-        'viewName' => 'sitebrew::blocks.spacer',
+        'viewName' => 'daugt::blocks.spacer',
         'attributes' => [
             'height' => [
                 'type' => AttributeType::NUMBER,

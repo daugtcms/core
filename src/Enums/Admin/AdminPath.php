@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Enums\Admin;
+namespace Daugt\Enums\Admin;
 
 enum AdminPath: string
 {

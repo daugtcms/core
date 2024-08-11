@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitebrew\Controllers\Shop;
+namespace Daugt\Controllers\Shop;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Injectable\StripeClient;
-use Sitebrew\Models\Shop\Product;
+use Daugt\Controllers\Controller;
+use Daugt\Injectable\StripeClient;
+use Daugt\Models\Shop\Product;
 
 class CheckoutController extends Controller
 {
@@ -59,10 +59,10 @@ class CheckoutController extends Controller
                     'allow_promotion_codes' => true,
                 ];
                 if ($isShipping) {
-                    $country = \Locale::getDisplayRegion(config('sitebrew.shop.shipping.locale'), config('sitebrew.shop.shipping.locale'));
+                    $country = \Locale::getDisplayRegion(config('daugt.shop.shipping.locale'), config('daugt.shop.shipping.locale'));
                     if ($within_country) {
                         $payload[] = [
-                            'shipping_address_collection' => ['allowed_countries' => [config('sitebrew.shop.shipping.code')]],
+                            'shipping_address_collection' => ['allowed_countries' => [config('daugt.shop.shipping.code')]],
                             'shipping_options' => [
                                 [
                                     'shipping_rate_data' => [
@@ -79,12 +79,12 @@ class CheckoutController extends Controller
                         ];
                     } else {
                         // convert comma separated string to array
-                        $allowed_countries = collect(explode(',', config('sitebrew.shop.shipping.allowed_countries')))->map(function ($country) {
+                        $allowed_countries = collect(explode(',', config('daugt.shop.shipping.allowed_countries')))->map(function ($country) {
                             return $country;
                         });
 
                         $allowed_countries = $allowed_countries->filter(function ($country) {
-                            return $country !== config('sitebrew.shop.shipping.code');
+                            return $country !== config('daugt.shop.shipping.code');
                         })->values()->toArray();
 
                         $payload[] = [

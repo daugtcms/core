@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Misc;
+namespace Daugt\Misc;
 
 use Illuminate\Support\Collection;
-use Sitebrew\Data\Content\ContentTypeData;
-use Sitebrew\Data\Theme\ThemeData;
+use Daugt\Data\Content\ContentTypeData;
+use Daugt\Data\Theme\ThemeData;
 
 class ContentTypeRegistry
 {

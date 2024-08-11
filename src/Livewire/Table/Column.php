@@ -1,18 +1,18 @@
 <?php
 
-namespace Sitebrew\Livewire\Table;
+namespace Daugt\Livewire\Table;
 
 class Column
 {
-    public string $component = 'sitebrew::table.column';
+    public string $component = 'daugt::table.column';
 
     public string $key;
 
     public string $label;
 
     public static array $modifierColumns = [
-        'sitebrew::table.edit',
-        'sitebrew::table.delete',
+        'daugt::table.edit',
+        'daugt::table.delete',
     ];
 
     public bool $readonly;

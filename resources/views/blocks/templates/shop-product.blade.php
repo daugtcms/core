@@ -1,6 +1,6 @@
-<x-sitebrew::template-renderer :usage="'page'" :within-template="true">
+<x-daugt::template-renderer :usage="'page'" :within-template="true">
     @php
-        $product = \Sitebrew\Models\Shop\Product::findOrFail($product);
+        $product = \Daugt\Models\Shop\Product::findOrFail($product);
         $media = $product->getMedia('media');
     @endphp
 
@@ -39,15 +39,20 @@
                     <div class="lg:flex lg:items-start">
                         <div class="lg:order-2 lg:ml-5">
                             <div class="max-w-xl overflow-hidden rounded-lg">
-                                <img class="h-full w-full max-w-full object-cover" src="{{isset($media[0]) ? \Sitebrew\Helpers\Media\MediaHelper::getMedia($media[0], 'optimized') : ''}}" alt="" />
+                                <img class="h-full w-full max-w-full object-cover"
+                                     src="{{isset($media[0]) ? \Daugt\Helpers\Media\MediaHelper::getMedia($media[0], 'optimized') : ''}}"
+                                     alt=""/>
                             </div>
                         </div>
 
                         <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
                             <div class="flex flex-row items-start lg:flex-col">
                                 @foreach($media as $mediaItem)
-                                    <button type="button" class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-secondary-500 text-center">
-                                        <img class="h-full w-full object-cover" src="{{\Sitebrew\Helpers\Media\MediaHelper::getMedia($mediaItem, 'thumbnail')}}" alt="" />
+                                    <button type="button"
+                                            class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-secondary-500 text-center">
+                                        <img class="h-full w-full object-cover"
+                                             src="{{\Daugt\Helpers\Media\MediaHelper::getMedia($mediaItem, 'thumbnail')}}"
+                                             alt=""/>
                                     </button>
                                 @endforeach
                             </div>
@@ -120,58 +125,62 @@
                             {{--<span class="text-base">/month</span>--}}
                         </div>
 
-                        <x-sitebrew::form.button style="secondary" class="px-4 py-2 gap-x-2" target="{{$product->external_url ? '_blank' : ''}}" :href="$product->external_url ?: route('cart.add',$product)">
+                        <x-daugt::form.button style="secondary" class="px-4 py-2 gap-x-2"
+                                                 target="{{$product->external_url ? '_blank' : ''}}"
+                                                 :href="$product->external_url ?: route('cart.add',$product)">
                             @if(!$product->external_url)
                                 @svg('shopping-basket')
-                                {{__('sitebrew::shop.add_to_cart')}}
+                                {{__('daugt::shop.add_to_cart')}}
                             @else
-                                {{__('sitebrew::shop.navigate_to_external_shop')}}
+                                {{__('daugt::shop.navigate_to_external_shop')}}
                                 @svg('arrow-right')
                             @endif
-                        </x-sitebrew::form.button>
+                        </x-daugt::form.button>
                     </div>
 
                     <ul class="mt-8 space-y-3">
                         @if($product->external_url)
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
                                 @svg('store', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
-                                {{__('sitebrew::shop.selled_by')}}&nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
+                                {{__('daugt::shop.selled_by')}}
+                                &nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
                             </li>
                         @endif
 
                         @if($product->shipping)
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
                                 @svg('truck', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
-                                {{__('sitebrew::shop.shipping_product')}}&nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
+                                {{__('daugt::shop.shipping_product')}}
+                                &nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
                             </li>
                             @php
-                            $other_countries = collect(explode(',', config('sitebrew.shop.shipping.allowed_countries')));
-                            $other_countries = $other_countries->filter(function ($country) {
-                                return $country !== config('sitebrew.shop.shipping.code');
-                            })->implode(', ');
+                                $other_countries = collect(explode(',', config('daugt.shop.shipping.allowed_countries')));
+                                $other_countries = $other_countries->filter(function ($country) {
+                                    return $country !== config('daugt.shop.shipping.code');
+                                })->implode(', ');
                             @endphp
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
                                 @svg('package', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
-                                {{__('sitebrew::shop.shipping_costs', ['country' => Locale::getDisplayRegion(config('sitebrew.shop.shipping.locale'), config('sitebrew.shop.shipping.locale')), 'other_countries' => $other_countries])}}
+                                {{__('daugt::shop.shipping_costs', ['country' => Locale::getDisplayRegion(config('daugt.shop.shipping.locale'), config('daugt.shop.shipping.locale')), 'other_countries' => $other_countries])}}
                             </li>
                         @endif
 
                         @if($product->course_id)
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
                                 @svg('book-marked', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
-                                {{ __('sitebrew::shop.access_to_course') }}&nbsp;<b>{{$product->course->name}}</b>
+                                {{ __('daugt::shop.access_to_course') }}&nbsp;<b>{{$product->course->name}}</b>
                             </li>
                             @if($product->starts_at)
                                 <li class="flex items-center text-left text-sm font-normal text-neutral-600">
                                     @svg('arrow-up-from-dot', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
-                                    {{__('sitebrew::shop.from', ['from' => $product->starts_at->format('d.m.Y')])}}
+                                    {{__('daugt::shop.from', ['from' => $product->starts_at->format('d.m.Y')])}}
                                 </li>
                             @endif
                             @if($product->ends_at)
-                                    <li class="flex items-center text-left text-sm font-normal text-neutral-600">
-                                        @svg('arrow-down-to-dot', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
-                                        {{__('sitebrew::shop.to', ['to' => $product->ends_at->format('d.m.Y')])}}
-                                    </li>
+                                <li class="flex items-center text-left text-sm font-normal text-neutral-600">
+                                    @svg('arrow-down-to-dot', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                    {{__('daugt::shop.to', ['to' => $product->ends_at->format('d.m.Y')])}}
+                                </li>
                             @endif
                         @endif
 
@@ -181,8 +190,9 @@
                 <div class="lg:col-span-3">
                     <div class="border-b border-neutral-300">
                         <nav class="flex gap-4">
-                            <a title="" class="border-b-2 border-primary-500 py-2 text-base font-medium text-neutral-800">
-                                {{__('sitebrew::general.description')}} </a>
+                            <a title=""
+                               class="border-b-2 border-primary-500 py-2 text-base font-medium text-neutral-800">
+                                {{__('daugt::general.description')}} </a>
 
                         </nav>
                     </div>
@@ -195,4 +205,4 @@
         </div>
     </section>
 
-</x-sitebrew::template-renderer>
+</x-daugt::template-renderer>

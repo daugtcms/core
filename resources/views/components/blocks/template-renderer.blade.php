@@ -1,7 +1,7 @@
 @if($withinTemplate)
     {!! $content !!}
 @else
-<x-sitebrew::layouts.base>
+<x-daugt::layouts.base>
     {!! $content !!}
-</x-sitebrew::layouts.base>
+</x-daugt::layouts.base>
 @endif

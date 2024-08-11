@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitebrew\Data\Content;
+namespace Daugt\Data\Content;
 
 use Illuminate\Support\Collection;
-use Sitebrew\Data\Theme\AttributeData;
-use Sitebrew\Enums\Content\ContentGroup;
+use Daugt\Data\Theme\AttributeData;
+use Daugt\Enums\Content\ContentGroup;
 use Spatie\LaravelData\Data;
 
 class ContentTypeData extends Data

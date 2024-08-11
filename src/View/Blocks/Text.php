@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class Text extends Block
 {
     public static array $metadata = [
         'name' => 'Text',
         'description' => 'A section to display formatted text',
-        'viewName' => 'sitebrew::blocks.text',
+        'viewName' => 'daugt::blocks.text',
         'attributes' => [
             'text' => [
                 'type' => AttributeType::RICH_TEXT,

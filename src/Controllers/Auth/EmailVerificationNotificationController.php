@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\Controllers\Auth;
+namespace Daugt\Controllers\Auth;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\SitebrewRouteServiceProvider;
+use Daugt\Controllers\Controller;
+use Daugt\DaugtRouteServiceProvider;
 use Illuminate\Http\Request;
 
 class EmailVerificationNotificationController extends Controller
@@ -16,7 +16,7 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(SitebrewRouteServiceProvider::HOME);
+            return redirect()->intended(DaugtRouteServiceProvider::HOME);
         }
 
         $request->user()->sendEmailVerificationNotification();

@@ -38,7 +38,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden h-full lg:inline-flex">
-                    @foreach(get_listing_items((int)$mainNavigation) as $item)
+                    @foreach($mainNavigation->items as $item)
                         <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
                            target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
                            class="group text-white flex whitespace-nowrap items-center h-full box-border border-b-[3px] border-transparent hover:border-primary-300 text-lg font-medium px-1">
@@ -50,18 +50,18 @@
                 </div>
             </div>
             <div class="inline-flex items-center gap-x-3">
-            <x-sitebrew::shop.shopping-cart>
+            <x-daugt::shop.shopping-cart>
                 <div class="p-2 rounded-md hover:bg-white/10 h-full">
                     @svg('shopping-cart', 'text-white')
                 </div>
-            </x-sitebrew::shop.shopping-cart>
+            </x-daugt::shop.shopping-cart>
 
             <div class="items-center hidden lg:flex">
                 @guest
-                <x-sitebrew::form.button style="secondary" href="{{route('login')}}">Login</x-sitebrew::form.button>
+                <x-daugt::form.button style="secondary" href="{{route('login')}}">Login</x-daugt::form.button>
                 @endguest
                 @auth
-                    <x-sitebrew::user-button></x-sitebrew::user-button>
+                    <x-daugt::user-button></x-daugt::user-button>
                 @endauth
             </div>
             <div class="flex items-center lg:hidden">
@@ -81,7 +81,7 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden bg-white rounded-b-lg border-primary-700 border-2 overflow-hidden">
             <div class="gap-y-1 divide-y-2 divide-neutral-200" x-data>
-                @foreach(get_listing_items((int)$mainNavigation) as $item)
+                @foreach($mainNavigation->items as $item)
                     <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
                        target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
                        class="group text-neutral-800 flex items-center py-2 px-3 h-full box-border border-b-[3px] border-transparent hover:bg-primary-100 text-lg font-medium">
@@ -91,13 +91,13 @@
                     </a>
                 @endforeach
                     @auth
-                        <x-sitebrew::responsive-user-button></x-sitebrew::responsive-user-button>
+                        <x-daugt::responsive-user-button></x-daugt::responsive-user-button>
                     @endauth
                     @guest
                         <a href="{{route('login')}}"
                            class="group text-primary-800 flex items-center bg-primary-50 py-2 px-3 h-full box-border border-b-[3px] border-transparent hover:bg-primary-100 text-lg font-medium">
                             <div class="rounded-md group-hover:bg-white/10">
-                                {{__('sitebrew::auth.login')}}
+                                {{__('daugt::auth.login')}}
                             </div>
                         </a>
                     @endguest

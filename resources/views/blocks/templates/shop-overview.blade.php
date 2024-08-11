@@ -1,4 +1,4 @@
-<x-sitebrew::template-renderer :usage="'page'" :within-template="true" :attributes="['transparentNavigation' => true]">
+<x-daugt::template-renderer :usage="'page'" :within-template="true" :attributes="['transparentNavigation' => true]">
     <div class="relative w-full h-96 sm:h-[36rem]">
         <img class="absolute h-full w-full object-cover"
              src="{{get_single_media($backgroundImage) ?: 'https://images.unsplash.com/photo-1567532900872-f4e906cbf06a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&q=80'}}"
@@ -18,7 +18,7 @@
         </div>
         <div class="absolute bottom-0 w-full bg-white/50 backdrop-blur h-20 flex items-center justify-start px-4 gap-x-4 overflow-x-auto">
             @php
-                $shop_categories = \Sitebrew\Models\Listing\Listing::where('usage', \Sitebrew\Enums\Listing\ListingUsage::SHOP_CATEGORIES)->with('items')->first();
+                $shop_categories = \Daugt\Models\Listing\Listing::where('usage', \Daugt\Enums\Listing\ListingUsage::SHOP_CATEGORIES)->with('items')->first();
             @endphp
 
             @php
@@ -26,7 +26,7 @@
             @endphp
             <a href="{{route('shop.index')}}"
                class="inline-flex items-center justify-center flex-col h-auto whitespace-nowrap text-center px-2 py-1 rounded-md hover:bg-primary-100/50 transition-colors duration-200 {{$active ? 'bg-primary-100/75' : ''}}">
-                <span class="text-lg font-medium {{$active ? 'text-primary-800' : 'text-primary-800'}}">{{__('sitebrew::shop.all_products')}}</span>
+                <span class="text-lg font-medium {{$active ? 'text-primary-800' : 'text-primary-800'}}">{{__('daugt::shop.all_products')}}</span>
             </a>
             @foreach($shop_categories->items as $item)
                 @php
@@ -44,6 +44,6 @@
         </div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 container gap-4 mt-4">
-    {!! $slot !!}
+        {!! $slot !!}
     </div>
-</x-sitebrew::template-renderer>
+</x-daugt::template-renderer>

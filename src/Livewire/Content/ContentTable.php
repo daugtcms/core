@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitebrew\Livewire\Content;
+namespace Daugt\Livewire\Content;
 
 use Carbon\Carbon;
 use Livewire\Attributes\Url;
-use Sitebrew\Enums\Blocks\TemplateUsage;
-use Sitebrew\Livewire\Table\Table;
-use Sitebrew\Livewire\Table\Column;
-use Sitebrew\Models\Blocks\Template;
-use Sitebrew\Models\Content\Content;
+use Daugt\Enums\Blocks\TemplateUsage;
+use Daugt\Livewire\Table\Table;
+use Daugt\Livewire\Table\Column;
+use Daugt\Models\Blocks\Template;
+use Daugt\Models\Content\Content;
 use Illuminate\Database\Eloquent\Builder;
 
 class ContentTable extends Table
@@ -45,7 +45,7 @@ class ContentTable extends Table
 
     public function add(): void
     {
-        $this->dispatch('modal.open', 'sitebrew::block-editor', [
+        $this->dispatch('openModal', 'daugt::block-editor', [
             'usage' => $this->type,
             'data' => [],
         ]);
@@ -53,12 +53,7 @@ class ContentTable extends Table
 
     public function edit($id): void
     {
-        $content = Content::findOrFail($id);
-        $this->dispatch('modal.open', 'sitebrew::block-editor', [
-            'usage' => $content->type,
-            'data' => $content->blocks,
-            'id' => $id
-        ]);
+        redirect()->route('admin.content.edit', ['content' => $id]);
     }
 
     public function toggleEnabled($id): void
@@ -71,16 +66,16 @@ class ContentTable extends Table
     public function columns(): array
     {
         return [
-            Column::make('id', '')->component('sitebrew::table.edit'),
-            Column::make('', __('sitebrew::general.enabled'))->component('sitebrew::table.enabled'),
-            Column::make('title', __('sitebrew::general.title')),
-            Column::make('type', __('sitebrew::general.type')),
-            Column::make('user', __('sitebrew::general.author'))->component('sitebrew::table.user'),
+            Column::make('id', '')->component('daugt::table.edit'),
+            Column::make('', __('daugt::general.enabled'))->component('daugt::table.enabled'),
+            Column::make('title', __('daugt::general.title')),
+            Column::make('type', __('daugt::general.type')),
+            Column::make('user', __('daugt::general.author'))->component('daugt::table.user'),
             // Column::make('slug', 'URL'),
-            Column::make('', __('sitebrew::general.published_at'))->component('sitebrew::table.schedule-content'),
-            Column::make('updated_at', __('sitebrew::general.updated_at'))->component('sitebrew::table.human-diff'),
-            Column::make('created_at', __('sitebrew::general.created_at'))->component('sitebrew::table.human-diff'),
-            Column::make('id', '')->component('sitebrew::table.delete'),
+            Column::make('', __('daugt::general.published_at'))->component('daugt::table.schedule-content'),
+            Column::make('updated_at', __('daugt::general.updated_at'))->component('daugt::table.human-diff'),
+            Column::make('created_at', __('daugt::general.created_at'))->component('daugt::table.human-diff'),
+            Column::make('id', '')->component('daugt::table.delete'),
         ];
     }
 

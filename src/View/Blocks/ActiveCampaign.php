@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitebrew\View\Blocks;
+namespace Daugt\View\Blocks;
 
-use Sitebrew\Enums\Blocks\AttributeType;
+use Daugt\Enums\Blocks\AttributeType;
 
 class ActiveCampaign extends Block
 {
     public static array $metadata = [
         'name' => 'Active Campaign',
         'description' => 'A section containing an Active Campaign newsletter signup form.',
-        'viewName' => 'sitebrew::blocks.active-campaign',
+        'viewName' => 'daugt::blocks.active-campaign',
         'attributes' => [
             'title' => [
                 'type' => AttributeType::TEXT,

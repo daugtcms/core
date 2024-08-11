@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Jobs\Media;
+namespace Daugt\Jobs\Media;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

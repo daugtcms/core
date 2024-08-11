@@ -1,8 +1,8 @@
 <?php
 
-use Sitebrew\Jobs\Shop\StripeWebhooks\CheckoutSessionCompleted;
-use Sitebrew\Jobs\Shop\StripeWebhooks\CustomerUpdated;
-use Sitebrew\Jobs\Shop\StripeWebhooks\InvoiceEvent;
+use Daugt\Jobs\Shop\StripeWebhooks\CheckoutSessionCompleted;
+use Daugt\Jobs\Shop\StripeWebhooks\CustomerUpdated;
+use Daugt\Jobs\Shop\StripeWebhooks\InvoiceEvent;
 
 return [
     /*

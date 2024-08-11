@@ -1,16 +1,14 @@
 <?php
 
-namespace Sitebrew\Livewire\Users;
+namespace Daugt\Livewire\Users;
 
 use Illuminate\Support\Facades\Auth;
-use Sitebrew\Livewire\Listing\NavigationEditor;
-use Sitebrew\Livewire\MemberArea\CoursePosts;
-use Sitebrew\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
-use Sitebrew\Models\User;
-use WireElements\Pro\Components\Modal\Modal;
+use LivewireUI\Modal\ModalComponent;
+use Daugt\Livewire\MemberArea\CoursePosts;
+use Daugt\Models\User;
 
-class EditUser extends Modal
+class EditUser extends ModalComponent
 {
     public int|User $user;
 
@@ -23,9 +21,9 @@ class EditUser extends Modal
     #[Rule('required')]
     public $full_name = '';
 
-    public function mount(User $user = null)
+    public function mount(?User $user = null)
     {
-        if (!$user->exists) {
+        if (! $user->exists) {
             $user = Auth::user();
         }
 
@@ -37,7 +35,7 @@ class EditUser extends Modal
 
     public function save()
     {
-        if($this->user->id != Auth::user()->id) {
+        if ($this->user->id != Auth::user()->id) {
             return;
         }
         $this->validate();
@@ -56,29 +54,31 @@ class EditUser extends Modal
             );
         }
 
-        $this->close(andDispatch: [
-            UserTable::class => 'refreshComponent',
-            CoursePosts::class => 'refreshComponent',
+        $this->closeModalWithEvents([
+            'refreshComponent',
         ]);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         User::destroy($id);
 
-        $this->close(andDispatch: [
-            UserTable::class => 'refreshComponent',
+        $this->closeModalWithEvents([
+            'refreshComponent',
         ]);
     }
 
-    public function impersonate($id) {
+    public function impersonate($id)
+    {
         Auth::user()->impersonate(User::find($id));
+
         return redirect()->route('member-area.index');
     }
 
     public function render()
     {
 
-        return view('sitebrew::livewire.users.edit-user', [
+        return view('daugt::livewire.users.edit-user', [
 
         ]);
     }

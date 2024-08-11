@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitebrew\Helpers\Admin;
+namespace Daugt\Helpers\Admin;
 
-use Sitebrew\Enums\Admin\AdminPath;
+use Daugt\Enums\Admin\AdminPath;
 
 class AdminPathColor
 {
@@ -24,7 +24,7 @@ class AdminPathColor
     public static function getIcon(AdminPath $path): string
     {
         $colors = [
-            AdminPath::ADMIN->value => 'sitebrew',
+            AdminPath::ADMIN->value => 'daugt',
             AdminPath::MEDIA->value => 'image',
             AdminPath::STRUCTURE->value => 'layout-panel-top',
             AdminPath::CONTENT->value => 'text',

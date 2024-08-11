@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitebrew\Misc;
+namespace Daugt\Misc;
 
+use Daugt\Data\Theme\ThemeData;
+use Daugt\Enums\Content\ContentGroup;
 use Illuminate\Support\Collection;
-use Sitebrew\Data\Theme\ThemeData;
 
 class ThemeRegistry
 {
-
     /**
      * @var Collection<string, ThemeData>
      */
@@ -15,7 +15,7 @@ class ThemeRegistry
 
     public static function registerThemes(array $themes): void
     {
-        if(!isset(self::$themes)) {
+        if (! isset(self::$themes)) {
             self::$themes = new Collection();
         }
         foreach ($themes as $key => $theme) {
@@ -37,6 +37,7 @@ class ThemeRegistry
         foreach (self::$themes as $theme) {
             $blocks = array_merge($blocks, $theme->blocks->toArray());
         }
+
         return $blocks;
     }
 
@@ -55,7 +56,21 @@ class ThemeRegistry
         foreach (self::getThemeBlock($templateName)->attributes as $key => $attribute) {
             $attributes[$key] = '';
         }
+
         return $attributes;
+    }
+
+    public static function getThemeBlockByGroup(ContentGroup $group) {
+        $blocks = collect();
+        foreach (self::$themes as $theme) {
+            foreach ($theme->blocks as $key => $block) {
+                if (isset($block->groups) && in_array($group, $block->groups)) {
+                    $blocks->put($key, $block);
+                }
+            }
+        }
+
+        return $blocks;
     }
 
     public static function getThemeTemplates()
@@ -64,6 +79,7 @@ class ThemeRegistry
         foreach (self::$themes as $theme) {
             $templates = array_merge($templates, $theme->templates->toArray());
         }
+
         return $templates;
     }
 
@@ -82,6 +98,21 @@ class ThemeRegistry
         foreach (self::getThemeTemplate($templateName)->attributes as $key => $attribute) {
             $attributes[$key] = '';
         }
+
         return $attributes;
+    }
+
+    public static function getThemeTemplatesByUsage($usage)
+    {
+        $templates = [];
+        foreach (self::$themes as $theme) {
+            foreach ($theme->templates as $key => $template) {
+                if (!isset($template->usages) || in_array($usage, $template->usages)) {
+                    $templates[$key] = $template;
+                }
+            }
+        }
+
+        return $templates;
     }
 }

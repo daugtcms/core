@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitebrew\Livewire\MemberArea;
+namespace Daugt\Livewire\MemberArea;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -8,11 +8,11 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
-use Sitebrew\Helpers\MemberArea\AccessHelper;
-use Sitebrew\Models\Content\Content;
-use Sitebrew\Models\Listing\Listing;
-use Sitebrew\Models\Listing\ListingItem;
-use Sitebrew\Models\User;
+use Daugt\Helpers\MemberArea\AccessHelper;
+use Daugt\Models\Content\Content;
+use Daugt\Models\Listing\Listing;
+use Daugt\Models\Listing\ListingItem;
+use Daugt\Models\User;
 
 class CoursePosts extends Component
 {
@@ -63,7 +63,7 @@ class CoursePosts extends Component
         }
 
         $query->orderBy('published_at', 'desc');
-        return view('sitebrew::livewire.member-area.course-posts', [
+        return view('daugt::livewire.member-area.course-posts', [
             'course_posts' => $query->paginate(25)
         ]);
     }

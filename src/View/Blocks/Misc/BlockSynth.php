@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitebrew\View\Blocks\Misc;
+namespace Daugt\View\Blocks\Misc;
 
-use Sitebrew\View\Blocks\Block;
+use Daugt\View\Blocks\Block;
 use Livewire\Mechanisms\HandleComponents\Synthesizers\Synth;
 
 class BlockSynth extends Synth

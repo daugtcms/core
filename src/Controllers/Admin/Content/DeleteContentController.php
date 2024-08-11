@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitebrew\Controllers\Admin\Content;
+namespace Daugt\Controllers\Admin\Content;
 
-use Sitebrew\Controllers\Controller;
-use Sitebrew\Models\Content\Content;
+use Daugt\Controllers\Controller;
+use Daugt\Models\Content\Content;
 
 class DeleteContentController extends Controller
 {
