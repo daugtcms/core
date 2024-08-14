@@ -7,7 +7,3 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
     Route::get('/', UserTable::class)->name('index');
     // Route::delete('/{page}', DeleteContentController::class);
 });
-
-Route::group(['middleware' => ['web']], function () {
-    Route::impersonate();
-});
