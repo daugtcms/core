@@ -1,9 +1,13 @@
 {
   "name": "daugtcms/core",
-  "description": "",
+  "description": "An easy to understand CMS for sites including course management and a shop.",
+  "version": "0.0.3",
   "keywords": [
-    "felixbeer",
-    "daugt"
+    "daugt",
+    "cms",
+    "course-management",
+    "webshop",
+    "subscriptions"
   ],
   "homepage": "https://github.com/daugtcms/core",
   "license": "MIT",
