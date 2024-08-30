@@ -3,6 +3,10 @@
 @import 'plyr/dist/plyr.css';
 @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
+:root {
+
+}
+
 .tiptap {
     @apply focus:outline-none;
 }
