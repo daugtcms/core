@@ -14,12 +14,12 @@ Route::group(['middleware' => ['web']], function () {
         return redirect()->to('/');
     })->name('admin.homepage.index')->middleware('can:access admin panel');
 
-    require __DIR__.'/Routes/auth.php';
-    require __DIR__.'/Routes/blocks.php';
-    require __DIR__ . '/Routes/listing.php';
-    require __DIR__.'/Routes/media.php';
-    require __DIR__.'/Routes/users.php';
-    require __DIR__.'/Routes/shop.php';
-    require __DIR__.'/Routes/member-area.php';
-    require __DIR__ . '/Routes/content.php';
+    require __DIR__ . '/auth.php';
+    require __DIR__ . '/blocks.php';
+    require __DIR__ . '/listing.php';
+    require __DIR__ . '/media.php';
+    require __DIR__ . '/users.php';
+    require __DIR__ . '/shop.php';
+    require __DIR__ . '/member-area.php';
+    require __DIR__ . '/content.php';
 });
