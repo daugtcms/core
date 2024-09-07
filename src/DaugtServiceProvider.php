@@ -57,7 +57,6 @@ class DaugtServiceProvider extends ServiceProvider
          */
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'daugt');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'daugt');
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         $themes = include __DIR__ . '/../resources/data/themes.php';
         ThemeRegistry::registerThemes($themes);
@@ -123,19 +122,23 @@ class DaugtServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('daugt.php'),
-            ], 'config');
+            ], 'daugt-config');
 
             $this->publishes([
                 __DIR__.'/../public/vendor/daugt' => public_path('vendor/daugt'),
             ], 'daugt-assets');
 
-            $this->publishes([
+            /*$this->publishes([
                 base_path('vendor/laravel/horizon/public') => public_path('vendor/horizon'),
-            ], 'horizon-assets');
+            ], 'horizon-assets');*/
 
             $this->publishes([
                 __DIR__.'/../database/migrations' => database_path('migrations'),
             ], 'daugt-migrations');
+
+            $this->publishes([
+                __DIR__ . '/../routes/daugt.php' => base_path('routes/daugt.php'),
+            ], 'daugt-routes');
 
             // Publish wire-elements-modal views
             /*$this->publishes([
