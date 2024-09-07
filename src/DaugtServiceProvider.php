@@ -137,7 +137,7 @@ class DaugtServiceProvider extends ServiceProvider
             ], 'daugt-migrations');
 
             $this->publishes([
-                __DIR__ . '/../routes/daugt.php' => base_path('routes/daugt.php'),
+                __DIR__ . '/routes.php' => base_path('routes/daugt.php'),
             ], 'daugt-routes');
 
             // Publish wire-elements-modal views
