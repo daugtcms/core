@@ -1,1 +1,5 @@
 @import 'plyr/dist/plyr.css';
+
+[un-cloak] {
+    display: none;
+}
