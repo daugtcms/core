@@ -44,12 +44,15 @@
     ]
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-DWaiLDnF.js",
+    "file": "assets/stripped-BU8o6K8F.js",
     "name": "stripped",
     "src": "resources/js/stripped.js",
     "isEntry": true,
     "imports": [
       "_plyr.min-C-75nfX6.js"
+    ],
+    "css": [
+      "assets/stripped-DXeBf7ui.css"
     ]
   }
 }
