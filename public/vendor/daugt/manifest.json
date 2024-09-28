@@ -44,7 +44,7 @@
     ]
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-BU8o6K8F.js",
+    "file": "assets/stripped-jvAp7aCp.js",
     "name": "stripped",
     "src": "resources/js/stripped.js",
     "isEntry": true,
@@ -52,7 +52,7 @@
       "_plyr.min-C-75nfX6.js"
     ],
     "css": [
-      "assets/stripped-DXeBf7ui.css"
+      "assets/stripped-B4eFsVd0.css"
     ]
   }
 }
