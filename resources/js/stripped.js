@@ -14,4 +14,9 @@ Alpine.start()
 import initUnocssRuntime from '@unocss/runtime'
 import config from './uno.config'
 
-initUnocssRuntime({ defaults: config })
+initUnocssRuntime({
+    defaults: config,
+    inject: (styleElement) => {
+        document.head.appendChild(styleElement)
+    }
+})
