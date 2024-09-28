@@ -15,4 +15,3 @@ import initUnocssRuntime from '@unocss/runtime'
 import config from './uno.config'
 
 initUnocssRuntime({ defaults: config })
-import '@unocss/reset/tailwind.css'

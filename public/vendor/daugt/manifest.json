@@ -19,7 +19,7 @@
     "isEntry": true
   },
   "resources/css/stripped.css": {
-    "file": "assets/stripped-qLhv7aTq.css",
+    "file": "assets/stripped-O3uWchuz.css",
     "src": "resources/css/stripped.css",
     "isEntry": true
   },
@@ -44,15 +44,12 @@
     ]
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-DjNhGm2E.js",
+    "file": "assets/stripped-DXPIYyS2.js",
     "name": "stripped",
     "src": "resources/js/stripped.js",
     "isEntry": true,
     "imports": [
       "_plyr.min-C-75nfX6.js"
-    ],
-    "css": [
-      "assets/stripped-B4eFsVd0.css"
     ]
   }
 }
