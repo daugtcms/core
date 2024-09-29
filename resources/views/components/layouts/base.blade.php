@@ -7,13 +7,17 @@
 
     <title>{{ (!empty($title) ? $title . ' - ' : '') . config('app.name')  }}</title>
 
-    @vite(['resources/css/app.css'])
-
     {{ Vite::useHotFile('vendor/daugt/daugt.hot')
         ->useBuildDirectory("vendor/daugt")
         ->withEntryPoints(['resources/js/stripped.js', 'resources/css/stripped.css']) }}
 
-    @googlefonts
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            window.initializeUnoCSS(
+                @json(config('daugt.style'))
+            );
+        });
+    </script>
 
 </head>
 <body class="w-full h-full" un-cloak>

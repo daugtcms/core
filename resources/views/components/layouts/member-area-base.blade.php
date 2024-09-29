@@ -11,12 +11,18 @@
 
     {{ Vite::useHotFile('vendor/daugt/daugt.hot')
         ->useBuildDirectory("vendor/daugt")
-        ->withEntryPoints(['resources/js/member-area.js', 'resources/css/stripped.css', 'resources/css/member-area.css']) }}
+        ->withEntryPoints(['resources/js/member-area.js', 'resources/css/stripped.css']) }}
 
-    @googlefonts
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            window.initializeUnoCSS(
+                    @json(config('daugt.style'))
+            );
+        });
+    </script>
 
 </head>
-<body class="w-full h-full">
+<body class="w-full h-full" un-cloak>
 {{$slot}}
 
 @livewire('modal-pro')

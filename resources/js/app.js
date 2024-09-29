@@ -34,3 +34,5 @@ Alpine.plugin(Intersect);
 Alpine.plugin(mask);
 
 Livewire.start()
+
+import './unocss.js';

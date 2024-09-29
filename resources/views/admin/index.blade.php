@@ -16,7 +16,7 @@
                     </div>
                     <div class="mt-6">
                         <h3 class="text-base font-semibold leading-6 text-neutral-800">
-                            <a href="{{route("admin.$path->value.index")}}" class="focus:outline-none">
+                            <a href="{{route("daugt.admin.$path->value.index")}}" class="focus:outline-none">
                                 <!-- Extend touch target to entire panel -->
                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                 {{__("daugt::general.$path->value")}}

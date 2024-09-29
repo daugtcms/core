@@ -16,4 +16,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
         'default_tax_code' => env('STRIPE_DEFAULT_TAX_CODE'),
     ],
+    'style' => [
+        'font' => [
+            'sans' => env('STYLE_FONT_SANS'),
+            'serif' => env('STYLE_FONT_SERIF'),
+            'mono' => env('STYLE_FONT_MONO'),
+        ]
+    ]
 ];

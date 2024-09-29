@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Lab404\Impersonate\Models\Impersonate;
 use Daugt\Jobs\Shop\SyncStripeUser;
 use Daugt\Models\Shop\Order;
 use Spatie\Permission\Traits\HasRoles;
@@ -21,7 +20,7 @@ use Spatie\Sluggable\SlugOptions;*/
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasRoles, SoftDeletes, Prunable, Impersonate;
+    use Notifiable, HasRoles, SoftDeletes, Prunable;
 
     //HasApiTokens, HasFactory, HasSlug, Mediable,
 

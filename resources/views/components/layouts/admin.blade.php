@@ -14,10 +14,16 @@
     {{ Vite::useHotFile('vendor/daugt/daugt.hot')
         ->useBuildDirectory("vendor/daugt")
         ->withEntryPoints(['resources/css/app.css', 'resources/js/app.js']) }}
-    @googlefonts
 
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            window.initializeUnoCSS(
+                    @json(config('daugt.style'))
+            );
+        });
+    </script>
 </head>
-<body class="w-full h-full">
+<body class="w-full h-full" un-cloak>
 <div class="flex flex-col h-full">
     @php
 
@@ -113,7 +119,7 @@
                                 @endphp
                                 @foreach($cases as $casePath)
                                     <a class="flex items-center h-full gap-x-2.5 hover:bg-neutral-100 pl-1.5 pr-2.5 py-1.5 cursor-pointer"
-                                       href="{{$casePath == AdminPath::ADMIN ? route("admin.index") : route("admin.$casePath->value.index")}}">
+                                       href="{{$casePath == AdminPath::ADMIN ? route("daugt.admin.index") : route("daugt.admin.$casePath->value.index")}}">
                                         <div class="p-2 rounded-lg text-primary-50 h-10 w-10"
                                              style="color: {{AdminPathColor::getColor($casePath)}}; background-color: {{AdminPathColor::getColor($casePath)}}22">
                                             @svg(AdminPathColor::getIcon($casePath), 'h-full flex-shrink-0 drop-shadow-md')

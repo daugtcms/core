@@ -28,7 +28,6 @@
     "plank/laravel-mediable": "^6.0",
     "spatie/eloquent-sortable": "^4.0",
     "spatie/laravel-data": "^4.1",
-    "spatie/laravel-google-fonts": "^1.0",
     "spatie/laravel-honeypot": "^4.4",
     "spatie/laravel-permission": "^6.1",
     "spatie/laravel-sluggable": "^3.5",

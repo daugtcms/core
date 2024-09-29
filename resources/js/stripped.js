@@ -11,12 +11,4 @@ Alpine.plugin(Intersect);
 
 Alpine.start()
 
-import initUnocssRuntime from '@unocss/runtime'
-import config from './uno.config'
-
-initUnocssRuntime({
-    defaults: config,
-    inject: (styleElement) => {
-        document.head.appendChild(styleElement)
-    }
-})
+import './unocss.js';
