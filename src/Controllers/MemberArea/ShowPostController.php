@@ -22,7 +22,7 @@ class ShowPostController extends Controller
                 'post' => $post,
             ]);
         } else {
-            return redirect()->route('member-area.index');
+            return redirect()->route('daugt.member-area.index');
         }
     }
 }

@@ -47,14 +47,10 @@ class DaugtServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // TODO: structure this into different service providers
         Gate::before(function ($user, $ability) {
             return $user->hasRole('Admin');
         });
 
-        /*
-         * Optional methods to load your package assets
-         */
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'daugt');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'daugt');
 
@@ -133,7 +129,7 @@ class DaugtServiceProvider extends ServiceProvider
             ], 'horizon-assets');*/
 
             $this->publishes([
-                __DIR__.'/../database/migrations' => database_path('migrations'),
+                __DIR__.'/../database/migrations' => database_path('migrations/daugt'),
             ], 'daugt-migrations');
 
             $this->publishes([

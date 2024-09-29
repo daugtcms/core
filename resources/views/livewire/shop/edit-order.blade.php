@@ -61,7 +61,7 @@
                             Lieferadresse
                             {{--<br>
                             <span class="mt-2">Bearbeiten im</span>
-                            <a href="{{route('billing')}}"
+                            <a href="{{route('daugt.billing')}}"
                                 class="inline-flex text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600 py-0.5 px-1.5 rounded-md">
                                 Abrechnungsportal
                                 <x-heroicon-s-arrow-top-right-on-square class="ml-0.5 h-3.5 w-3.5 shrink-0" />
@@ -106,7 +106,7 @@
                             Rechnungsadresse
                             {{--<br>
                             <span class="mt-2">Bearbeiten im</span>
-                            <a href="{{route('billing')}}"
+                            <a href="{{route('daugt.billing')}}"
                                 class="inline-flex text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600 py-0.5 px-1.5 rounded-md">
                                 Abrechnungsportal
                                 <x-heroicon-s-arrow-top-right-on-square class="ml-0.5 h-3.5 w-3.5 shrink-0" />
@@ -131,7 +131,7 @@
                             Lieferadresse
                             {{--<br>
                             <span class="mt-2">Bearbeiten im</span>
-                            <a href="{{route('billing')}}"
+                            <a href="{{route('daugt.billing')}}"
                                 class="inline-flex text-gray-500 bg-gray-100 hover:bg-gray-200 hover:text-gray-600 py-0.5 px-1.5 rounded-md">
                                 Abrechnungsportal
                                 <x-heroicon-s-arrow-top-right-on-square class="ml-0.5 h-3.5 w-3.5 shrink-0" />
@@ -210,7 +210,7 @@
                     <div>
                         <div class="flex justify-between text-sm font-medium text-neutral-900">
                             <h3 class="text-primary-500 text-sm hover:underline hover:text-primary-600">
-                                <a href="{{ route('shop.product.show', $item->product->slug) }}">
+                                <a href="{{ route('daugt.shop.product.show', $item->product->slug) }}">
                                     {{ $item->product->name }}
                                 </a>
                             </h3>
@@ -244,7 +244,7 @@
                     @endif
                     @if($order->status === 'paid' && !empty($item->product->course_id))
                         <div>
-                            <a href="{{route('member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all'])}}"
+                            <a href="{{route('daugt.member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all'])}}"
                                class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
                                 @svg('unlock', 'h-3 w-3 mr-1.5')
                                 Kurs ansehen

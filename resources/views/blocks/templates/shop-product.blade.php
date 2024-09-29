@@ -127,7 +127,7 @@
 
                         <x-daugt::form.button style="secondary" class="px-4 py-2 gap-x-2"
                                                  target="{{$product->external_url ? '_blank' : ''}}"
-                                                 :href="$product->external_url ?: route('cart.add',$product)">
+                                                 :href="$product->external_url ?: route('daugt.cart.add',$product)">
                             @if(!$product->external_url)
                                 @svg('shopping-basket')
                                 {{__('daugt::shop.add_to_cart')}}

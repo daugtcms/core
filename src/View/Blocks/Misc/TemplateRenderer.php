@@ -21,16 +21,21 @@ class TemplateRenderer extends Component
 
     public bool $withinTemplate = false;
 
-    public function __construct(string $template, bool $withinTemplate = true, $attributes = null)
+    public function __construct(string $template = null, string $usage = null, bool $withinTemplate = false, $attributes = null)
     {
+        if(empty($template)) {
+            $this->template = ThemeRegistry::getDefaultTemplate($usage);
+        } else {
+            $this->template = $template;
+        }
+
         $this->withinTemplate = $withinTemplate;
-        $this->template = $template;
         $this->restoreState($attributes);
     }
 
     public function restoreState($attributes): void
     {
-        $template = ThemeRegistry::getThemeTemplate($this->template);
+        // $template = ThemeRegistry::getThemeTemplate($this->template);
         // $this->templateBlock = ThemeRegistry::getThemeTemplate($template->view_name);
         $this->templateBlock = new Block($this->template);
         $this->templateBlock->attributes = $attributes;

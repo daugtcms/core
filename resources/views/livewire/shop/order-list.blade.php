@@ -69,7 +69,7 @@
                             <div>
                                 <div class="flex justify-between text-sm font-medium text-neutral-900">
                                     <h3 class="text-primary-500 text-sm hover:underline hover:text-primary-600">
-                                        <a href="{{ route('shop.product.show', $item->product->slug) }}">
+                                        <a href="{{ route('daugt.shop.product.show', $item->product->slug) }}">
                                             {{ $item->product->name }}
                                         </a>
                                     </h3>
@@ -103,7 +103,7 @@
                             @endif
                             @if($order->status === 'paid' && !empty($item->product->course_id))
                                 <div>
-                                    <a href="{{route('member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all']) }}"
+                                    <a href="{{route('daugt.member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all']) }}"
                                        class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
                                         @svg('unlock', 'h-3 w-3 mr-1.5')
                                         Kurs ansehen
@@ -112,7 +112,7 @@
                             @endif
                             @if($order->status === 'paid' && !empty($item->product->content_id))
                                 <div>
-                                    <a href="{{route('member-area.post.show', \Daugt\Models\Content\Content::where('id', $item->product->content_id)->first()->slug) }}"
+                                    <a href="{{route('daugt.member-area.post.show', \Daugt\Models\Content\Content::where('id', $item->product->content_id)->first()->slug) }}"
                                        class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
                                         @svg('unlock', 'h-3 w-3 mr-1.5')
                                         Inhalt ansehen

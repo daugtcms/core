@@ -112,7 +112,12 @@ class ThemeRegistry
                 }
             }
         }
-
         return $templates;
+    }
+
+    public static function getDefaultTemplate($usage)
+    {
+        $templates = self::getThemeTemplatesByUsage($usage);
+        return array_key_first($templates);
     }
 }

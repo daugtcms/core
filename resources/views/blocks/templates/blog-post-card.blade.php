@@ -1,4 +1,4 @@
-<a href="{{route('content.blog.show', $content->slug)}}"
+<a href="{{route('daugt.content.blog.show', $content->slug)}}"
         class="flex flex-col bg-neutral-100 transition rounded-xl overflow-hidden max-w-full flex-shrink-0 group">
     <div class="block aspect-[16/10] h-full w-full rounded-xl overflow-hidden">
         @php

@@ -25,7 +25,7 @@
          'px-1.5 py-0.5 text-base sm:text-lg hover:text-primary-600 rounded-md hover:bg-primary-50',
                               'bg-primary-100 text-primary-600' => !request()->has('category')
                          ])
-                        href="{{route('content.blog.index', ['category' => null])}}">Alle</a>
+                        href="{{route('daugt.content.blog.index', ['category' => null])}}">Alle</a>
                 @php
                     $categories = \Daugt\Models\Listing\Listing::where('usage', \Daugt\Enums\Listing\ListingUsage::BLOG_CATEGORIES)->with('items')->first()->items;
                 @endphp
@@ -35,7 +35,7 @@
              'px-1.5 py-0.5 text-base sm:text-lg hover:text-primary-600 rounded-md hover:bg-primary-50',
                                   'bg-primary-100 text-primary-600' => request()->query('category') == $item->slug
                              ])
-                            href="{{route('content.blog.index', ['category' => $item->slug])}}">{{$item->name}}</a>
+                            href="{{route('daugt.content.blog.index', ['category' => $item->slug])}}">{{$item->name}}</a>
                 @endforeach
             </div>
         </div>

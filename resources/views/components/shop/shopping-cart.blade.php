@@ -57,7 +57,7 @@
                         <div>
                           <div class="flex justify-between text-base font-medium text-neutral-900">
                             <h3>
-                              <a href="{{ route('shop.product.show', $item->slug) }}">
+                              <a href="{{ route('daugt.shop.product.show', $item->slug) }}">
                                 {{ $item->name }}
                               </a>
                             </h3>
@@ -83,7 +83,7 @@
                             Anzahl: {{ $item->amount }}
                           </p>
 
-                          <form class="flex" action="{{ route('cart.remove', $item->id) }}" method="POST">
+                          <form class="flex" action="{{ route('daugt.cart.remove', $item->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
@@ -166,15 +166,15 @@
                   werden.
                 </x-label>
                 @endif
-                <x-button href="{{route('checkout')}}"
-                  x-bind:href="'{{route('checkout')}}' + (austria ? '?austria' : '')" :style="'primary'"
+                <x-button href="{{route('daugt.checkout')}}"
+                  x-bind:href="'{{route('daugt.checkout')}}' + (austria ? '?austria' : '')" :style="'primary'"
                   :class="$disabled ? 'w-full py-2 text-base opacity-50 pointer-events-none' : 'w-full py-2 text-base'">
                   Jetzt
                   kaufen</x-button>
               </div>
               --}}
-              <x-daugt::form.button href="{{route('checkout')}}"
-                        x-bind:href="'{{route('checkout')}}' + (within_country ? '?within_country' : '')" :style="'primary'"
+              <x-daugt::form.button href="{{route('daugt.checkout')}}"
+                        x-bind:href="'{{route('daugt.checkout')}}' + (within_country ? '?within_country' : '')" :style="'primary'"
                         :class="$disabled ? 'w-full py-2 text-base opacity-50 pointer-events-none mt-2' : 'w-full py-2 text-base mt-2'">
                 Zahlungspflichtig bestellen</x-daugt::form.button>
             </div>

@@ -58,7 +58,7 @@
 
             <div class="items-center hidden lg:flex">
                 @guest
-                <x-daugt::form.button style="secondary" href="{{route('login')}}">Login</x-daugt::form.button>
+                <x-daugt::form.button style="secondary" href="{{route('daugt.login')}}">Login</x-daugt::form.button>
                 @endguest
                 @auth
                     <x-daugt::user-button></x-daugt::user-button>
@@ -94,7 +94,7 @@
                         <x-daugt::responsive-user-button></x-daugt::responsive-user-button>
                     @endauth
                     @guest
-                        <a href="{{route('login')}}"
+                        <a href="{{route('daugt.login')}}"
                            class="group text-primary-800 flex items-center bg-primary-50 py-2 px-3 h-full box-border border-b-[3px] border-transparent hover:bg-primary-100 text-lg font-medium">
                             <div class="rounded-md group-hover:bg-white/10">
                                 {{__('daugt::auth.login')}}

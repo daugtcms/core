@@ -22,7 +22,7 @@
         </div>
     </div>
     <section class="px-0 pt-6 pb-2 flex justify-center">
-        <x-daugt::form.button href="{{route('content.blog.index')}}" style="primary" class="!text-lg gap-x-2.5">Alle
+        <x-daugt::form.button href="{{route('daugt.content.blog.index')}}" style="primary" class="!text-lg gap-x-2.5">Alle
             Posts ansehen @svg('arrow-right')</x-daugt::form.button>
     </section>
 </div>

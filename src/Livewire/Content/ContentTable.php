@@ -53,7 +53,7 @@ class ContentTable extends Table
 
     public function edit($id): void
     {
-        redirect()->route('admin.content.edit', ['content' => $id]);
+        redirect()->route('daugt.admin.content.edit', ['content' => $id]);
     }
 
     public function toggleEnabled($id): void

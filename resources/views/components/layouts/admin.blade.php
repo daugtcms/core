@@ -41,11 +41,11 @@
                 $navigationItems = [
                     [
                         'name' => __('daugt::general.listing'),
-                        'url' => route('admin.structure.listing'),
+                        'url' => route('daugt.admin.structure.listing'),
                     ],
                     [
                         'name' => __('daugt::blocks.block_defaults'),
-                        'url' => route('admin.structure.block-defaults'),
+                        'url' => route('daugt.admin.structure.block-defaults'),
                     ]
                 ];
                 break;
@@ -58,13 +58,13 @@
                 $navigationItems = (collect(\Daugt\Misc\ContentTypeRegistry::getContentTypes())->map(function($contentType, $key){
                     return [
                         'name' => $contentType->name,
-                        'url' => route('admin.content.index', ['type' => $key]),
+                        'url' => route('daugt.admin.content.index', ['type' => $key]),
                     ];
                 }));
 
                 $navigationItems->prepend([
                     'name' => __('daugt::general.all'),
-                    'url' => route('admin.content.index'),
+                    'url' => route('daugt.admin.content.index'),
                 ]);
                 break;
             case AdminPath::SHOP->value:
@@ -72,11 +72,11 @@
                 $navigationItems = [
                     [
                         'name' => __('daugt::general.orders'),
-                        'url' => route('admin.shop.orders.index'),
+                        'url' => route('daugt.admin.shop.orders.index'),
                     ],
                     [
                         'name' => __('daugt::general.products'),
-                        'url' => route('admin.shop.product.index'),
+                        'url' => route('daugt.admin.shop.product.index'),
                     ],
                 ];
                 break;
@@ -165,16 +165,16 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('user.show', Auth::user()->slug)">
+                            <x-dropdown-link :href="route('daugt.user.show', Auth::user()->slug)">
                                 Profil
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('user.order.index', Auth::user())">
+                            <x-dropdown-link :href="route('daugt.user.order.index', Auth::user())">
                                 Käufe & Abos
                             </x-dropdown-link>
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('daugt.logout') }}">
                                 @csrf
 
-                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                                <x-dropdown-link :href="route('daugt.logout')" onclick="event.preventDefault();
                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>

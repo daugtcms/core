@@ -24,7 +24,7 @@
             @php
                 $active = empty(request()->get('category'));
             @endphp
-            <a href="{{route('shop.index')}}"
+            <a href="{{route('daugt.shop.index')}}"
                class="inline-flex items-center justify-center flex-col h-auto whitespace-nowrap text-center px-2 py-1 rounded-md hover:bg-primary-100/50 transition-colors duration-200 {{$active ? 'bg-primary-100/75' : ''}}">
                 <span class="text-lg font-medium {{$active ? 'text-primary-800' : 'text-primary-800'}}">{{__('daugt::shop.all_products')}}</span>
             </a>
@@ -32,7 +32,7 @@
                 @php
                     $active = request()->get('category') === $item->slug;
                 @endphp
-                <a href="{{route('shop.index', ['category' => $item->slug])}}"
+                <a href="{{route('daugt.shop.index', ['category' => $item->slug])}}"
                    class="inline-flex items-center justify-center flex-col h-auto whitespace-nowrap text-center px-2 py-1 rounded-md hover:bg-primary-100/50 transition-colors duration-200 {{$active ? 'bg-primary-100/75' : ''}}">
                     @if($item->icon)
                         @svg($item->icon, 'w-8 h-8 mb-1')

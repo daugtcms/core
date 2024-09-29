@@ -39,7 +39,7 @@ class EditContent extends \Livewire\Component
 
     public function delete() {
         $this->content->delete();
-        return redirect()->route('admin.content.index');
+        return redirect()->route('daugt.admin.content.index');
     }
 
     public function setTab($tab) {
@@ -71,6 +71,6 @@ class EditContent extends \Livewire\Component
             ]);
         }
 
-        return redirect()->route('admin.content.index');
+        return redirect()->route('daugt.admin.content.index');
     }
 }

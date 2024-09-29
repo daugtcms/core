@@ -5,7 +5,7 @@ namespace Daugt;
 use Illuminate\Support\Facades\Route;
 use Daugt\Livewire\Listing\NavigationEditor;
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web'], 'prefix' => 'daugt.'], function () {
     Route::get('/admin', function () {
         return view('daugt::admin.index');
     })->name('admin.index')->middleware('can:access admin panel');

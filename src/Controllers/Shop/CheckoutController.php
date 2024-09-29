@@ -39,7 +39,7 @@ class CheckoutController extends Controller
                 $stripe = StripeClient::init();
 
                 $payload = [
-                    'success_url' => route('member-area.orders.index').'?success',
+                    'success_url' => route('daugt.member-area.orders.index').'?success',
                     'cancel_url' => url()->previous(),
                     'line_items' => $itemArray,
                     'mode' => $isSubscription ? 'subscription' : 'payment',
@@ -109,9 +109,9 @@ class CheckoutController extends Controller
                     $stripe->checkout->sessions->create($payload)->url
                 );
             } else {
-                app('redirect')->setIntendedUrl(route('checkout'));
+                app('redirect')->setIntendedUrl(route('daugt.checkout'));
 
-                return redirect()->route('login');
+                return redirect()->route('daugt.login');
             }
         } else {
             return redirect()->back();

@@ -72,7 +72,7 @@ class EditUser extends ModalComponent
     {
         Auth::user()->impersonate(User::find($id));
 
-        return redirect()->route('member-area.index');
+        return redirect()->route('daugt.member-area.index');
     }
 
     public function render()

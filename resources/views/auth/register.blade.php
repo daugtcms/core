@@ -1,13 +1,13 @@
 <x-daugt::template-renderer :usage="\Daugt\Enums\Blocks\TemplateUsage::AUTH->value">
         <h2 class="text-2xl text-neutral-700 font-semibold">{{__('daugt::auth.register')}}</h2>
         <x-daugt::form.label class="mb-2 text-sm text-neutral-500">{{__('daugt::auth.already_registered')}} <a
-                href="{{route('login') }}"
+                href="{{route('daugt.login') }}"
                 class="underline text-primary-500 hover:text-primary-600">{{__('daugt::auth.login_now')}}</a>
         </x-daugt::form.label>
         <!-- Validation Errors -->
         <x-daugt::auth.auth-validation-errors class="mb-4" :errors="$errors"/>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('daugt.register') }}">
             @csrf
 
             <x-honeypot />

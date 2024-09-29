@@ -8,7 +8,7 @@
                     <div x-data @click="$refs.link.click()"
                          class="cursor-pointer w-full px-4 py-4 drop-shadow-sm hover:bg-white/50 focus:outline-none">
                         <div class="w-full flex flex-col items-between justify-center">
-                            <a href="{{route('member-area.course.show', ['course' => $course->slug, 'section' => 'all'])}}"
+                            <a href="{{route('daugt.member-area.course.show', ['course' => $course->slug, 'section' => 'all'])}}"
                                class="inline-flex text font-medium truncate text-neutral-700" x-ref="link">
                                 {{$course->name}}
                             </a>
@@ -20,7 +20,7 @@
                                     @foreach($course->items as $item)
                                         <div>
                                             <a class="bg-primary-50 text-primary-600 rounded-md px-1.5 py-0.5 text-sm hover:bg-primary-100"
-                                               href="{{route('member-area.course.show', ['course' => $course->slug, 'section' => $item->slug])}}">{{$item->name}}</a>
+                                               href="{{route('daugt.member-area.course.show', ['course' => $course->slug, 'section' => $item->slug])}}">{{$item->name}}</a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -97,7 +97,7 @@
                 @endforelse
             </div>
             <a class="bg-neutral-100/50 w-full px-3 py-1.5 flex items-center focus:outline-none justify-between hover:bg-white/50 border-t border-neutral-200"
-               href="{{route('member-area.orders.index')}}">Alle Bestellungen ansehen @svg('arrow-right', 'w-5 h-5')</a>
+               href="{{route('daugt.member-area.orders.index')}}">Alle Bestellungen ansehen @svg('arrow-right', 'w-5 h-5')</a>
         </div>
         <div class="col-span-2 row-span-1 rounded-lg bg-white/75 backdrop-blur-md shadow">
             <p class="text-neutral-800 font-medium text-xl border-b-2 border-neutral-200 px-3 py-2">Dein Profil</p>

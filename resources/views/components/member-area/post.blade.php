@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <a href="{{route('member-area.post.show', $post->slug) }}"
+    <a href="{{route('daugt.member-area.post.show', $post->slug) }}"
        class="absolute top-0 left-0 z-0 w-full h-full">
     </a>
 </div>
