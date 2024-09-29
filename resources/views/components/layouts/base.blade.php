@@ -16,7 +16,7 @@
     @googlefonts
 
 </head>
-<body class="w-full h-full">
+<body class="w-full h-full" un-cloak>
 {{$slot}}
 </body>
 </html>

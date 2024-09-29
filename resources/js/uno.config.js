@@ -2,9 +2,16 @@ import { defineConfig } from '@unocss/runtime'
 import presetUno from '@unocss/preset-uno'
 import presetTypography from '@unocss/preset-typography'
 import {presetForms} from "@julr/unocss-preset-forms";
+import presetWebFonts from "@unocss/preset-web-fonts";
 
 export default defineConfig({
-    presets: [presetUno(), presetTypography(), presetForms()],
+    presets: [presetUno(), presetTypography(), presetForms(), presetWebFonts({
+        provider: 'bunny',
+        fonts: {
+            sans: 'var(--font-sans)',
+            serif: 'var(--font-serif)',
+        }
+    })],
     theme: {
         colors: {
             primary: {

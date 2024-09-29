@@ -7,6 +7,12 @@
     "file": "assets/tiptap-CYuOyjN9.js",
     "name": "tiptap"
   },
+  "node_modules/ofetch/dist/index.mjs": {
+    "file": "assets/index-CS5tN72I.js",
+    "name": "index",
+    "src": "node_modules/ofetch/dist/index.mjs",
+    "isDynamicEntry": true
+  },
   "resources/css/app.css": {
     "file": "assets/app-Be3456sL.css",
     "src": "resources/css/app.css",
@@ -44,12 +50,17 @@
     ]
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-CTzEPHe-.js",
+    "file": "assets/stripped-BEdK4YUg.js",
     "name": "stripped",
     "src": "resources/js/stripped.js",
     "isEntry": true,
     "imports": [
       "_plyr.min-C-75nfX6.js"
+    ],
+    "dynamicImports": [
+      "node_modules/ofetch/dist/index.mjs",
+      "node_modules/ofetch/dist/index.mjs",
+      "node_modules/ofetch/dist/index.mjs"
     ]
   }
 }
