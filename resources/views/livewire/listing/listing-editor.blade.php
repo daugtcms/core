@@ -14,7 +14,7 @@
                 wire:click="$dispatch('openModal', { component: 'daugt::listing.edit-listing' })"
                 class="flex-shrink-0 ml-2">
             {{__('daugt::general.add')}}
-            @svg('plus', 'w-5 h-5')
+            <div class="i-lucide:plus w-5 h-5"></div>
         </x-daugt::form.button>
     </x-daugt::layouts.dashboard-bar>
     @if($currentListing)
@@ -29,11 +29,11 @@
                 <div class="flex gap-x-2 justify-end">
                     <x-daugt::form.button
                             wire:click="$dispatch('openModal', { component: 'daugt::listing.edit-listing', arguments: { listing: {{$currentListing->id}} } })"
-                    >@svg('pencil', 'w-5 h-5'){{__('daugt::general.edit')}}</x-daugt::form.button>
+                    ><div class="i-lucide:pencil w-5 h-5"></div>{{__('daugt::general.edit')}}</x-daugt::form.button>
                     <x-daugt::form.button
                             style="danger"
                             wire:click="deleteListing({{$currentListing->id}})"
-                            onclick="confirm('{{__('daugt::listing.delete_list_confirmation')}}') || event.stopImmediatePropagation()">@svg('trash-2', 'w-5 h-5'){{__('daugt::general.delete')}}</x-daugt::form.button>
+                            onclick="confirm('{{__('daugt::listing.delete_list_confirmation')}}') || event.stopImmediatePropagation()"><div class="i-lucide:trash-2 w-5 h-5"></div>{{__('daugt::general.delete')}}</x-daugt::form.button>
                 </div>
             </div>
 
@@ -46,12 +46,12 @@
                          wire:sortable.item="{{ $item->uuid }}" wire:key="task-{{ $item->uuid }}">
                         <div class="flex justify-between min-w-0 w-full">
                             <div class="inline-flex items-center gap-x-1 font-medium flex-grow min-w-0">
-                                <x-daugt::form.icon-button icon="grip-vertical"
+                                <x-daugt::form.icon-button icon="lucide:grip-vertical"
                                                               wire:sortable.handle/>
                                 <span class="truncate inline-flex items-center gap-x-2">
                                     @if(!empty($item->icon))
                                         <div class="flex-shrink-0">
-                                            @svg($item->icon)
+                                            <div class="i-{{$item->icon}}"></div>
                                         </div>
                                     @endif
                                     @if(!empty($item->name))
@@ -62,9 +62,9 @@
                                 </span>
                             </div>
                             <div class="flex-shrink-0 inline-flex gap-x-1">
-                                <x-daugt::form.icon-button icon="pencil"
+                                <x-daugt::form.icon-button icon="lucide:pencil"
                                                               wire:click="setCurrentItem('{{$item->uuid}}')"/>
-                                <x-daugt::form.icon-button icon="trash-2" style="danger"
+                                <x-daugt::form.icon-button icon="lucide:trash-2" style="danger"
                                                               wire:click="removeItem('{{$item->uuid}}')"/>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                 <x-daugt::form.button class="w-72 mt-3" style="light" wire:click="addItem()" x-data
                                          x-mousetrap.n="$wire.addItem()"
                                          :disabled="!$errors->isEmpty()">
-                    @svg('plus')
+                    <div class="i-lucide:plus"></div>
                     {{__('daugt::general.add_element')}}
                 </x-daugt::form.button>
                 <x-daugt::form.button class="w-72 mt-3" style="primary" wire:click="saveItems()"

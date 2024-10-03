@@ -188,8 +188,6 @@ class DaugtServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/mediable.php', 'mediable');
 
-        $this->mergeConfigFrom(__DIR__.'/../config/wire-elements-pro.php', 'wire-elements-pro');
-
         $this->mergeConfigFrom(__DIR__.'/../config/permission.php', 'permission');
 
         $this->mergeConfigFrom(__DIR__.'/../config/stripe-webhooks.php', 'stripe-webhooks');

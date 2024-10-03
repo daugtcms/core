@@ -14,7 +14,7 @@
                 <span class="inline-flex items-center rounded-full bg-primary-100/60 px-2 py-1 text-sm mb-2 font-medium text-primary-800 backdrop-blur ring-1 ring-inset ring-primary-700/10">
                     @if($item)
                         @if($item->icon)
-                            @svg($item->icon, 'w-4 h-4 mr-1')
+                            <div class="i-lucide:{{$item->icon}} w-4 h-4 mr-1"></div>
                         @endif
                         {{
                             $item->name

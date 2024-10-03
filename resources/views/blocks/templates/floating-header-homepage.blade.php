@@ -52,7 +52,7 @@
             <div class="inline-flex items-center gap-x-3">
             <x-daugt::shop.shopping-cart>
                 <div class="p-2 rounded-md hover:bg-white/10 h-full">
-                    @svg('shopping-cart', 'text-white')
+                    <div class="i-lucide:shopping-cart text-white"></div>
                 </div>
             </x-daugt::shop.shopping-cart>
 
@@ -68,10 +68,10 @@
                 <button @click="open = ! open"
                         class="inline-flex items-center justify-center p-2 text-primary-50 transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-primary-600 focus:outline-none focus:bg-primary-600 focus:text-white">
                     <span x-show="open">
-                        @svg('x')
+                        <div class="i-lucide:x"></div>
                     </span>
                     <span x-show="! open">
-                        @svg('menu')
+                        <div class="i-lucide:menu"></div>
                     </span>
                 </button>
             </div>
@@ -177,7 +177,7 @@
                         <a href="{{isset($item->data['url']) ? $item->data['url'] : '#'}}"
                            target="{{isset($item->data['target']) ? $item->data['target'] : '_self'}}"
                            class="text-base text-neutral-600 hover:text-primary-500">
-                            @svg($item->icon, 'w-6 h-6')
+                            <div class="i-lucide:{{$item->icon}} w-6 h-6"></div>
                         </a>
                     @endforeach
                 @endif

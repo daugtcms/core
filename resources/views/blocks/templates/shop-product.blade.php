@@ -129,11 +129,11 @@
                                                  target="{{$product->external_url ? '_blank' : ''}}"
                                                  :href="$product->external_url ?: route('daugt.cart.add',$product)">
                             @if(!$product->external_url)
-                                @svg('shopping-basket')
+                                <div class="i-lucide:shopping-basket"></div>
                                 {{__('daugt::shop.add_to_cart')}}
                             @else
                                 {{__('daugt::shop.navigate_to_external_shop')}}
-                                @svg('arrow-right')
+                                <div class="i-lucide:arrow-right"></div>
                             @endif
                         </x-daugt::form.button>
                     </div>
@@ -141,7 +141,7 @@
                     <ul class="mt-8 space-y-3">
                         @if($product->external_url)
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
-                                @svg('store', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                <div class="i-lucide:store mr-2 block h-5 w-5 align-middle text-neutral-500"></div>
                                 {{__('daugt::shop.selled_by')}}
                                 &nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
                             </li>
@@ -149,7 +149,7 @@
 
                         @if($product->shipping)
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
-                                @svg('truck', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                <div class="i-lucide:truck mr-2 block h-5 w-5 align-middle text-neutral-500"></div>
                                 {{__('daugt::shop.shipping_product')}}
                                 &nbsp;<strong>{{str_ireplace('www.', '', parse_url($product->external_url, PHP_URL_HOST))}}</strong>
                             </li>
@@ -160,25 +160,25 @@
                                 })->implode(', ');
                             @endphp
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
-                                @svg('package', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                <div class="i-lucide:package mr-2 block h-5 w-5 align-middle text-neutral-500"></div>
                                 {{__('daugt::shop.shipping_costs', ['country' => Locale::getDisplayRegion(config('daugt.shop.shipping.locale'), config('daugt.shop.shipping.locale')), 'other_countries' => $other_countries])}}
                             </li>
                         @endif
 
                         @if($product->course_id)
                             <li class="flex items-center text-left text-sm font-normal text-neutral-600">
-                                @svg('book-marked', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                <div class="i-lucide:book-marked mr-2 block h-5 w-5 align-middle text-neutral-500"></div>
                                 {{ __('daugt::shop.access_to_course') }}&nbsp;<b>{{$product->course->name}}</b>
                             </li>
                             @if($product->starts_at)
                                 <li class="flex items-center text-left text-sm font-normal text-neutral-600">
-                                    @svg('arrow-up-from-dot', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                    <div class="i-lucide:arrow-up-from-dot mr-2 block h-5 w-5 align-middle text-neutral-500"></div>
                                     {{__('daugt::shop.from', ['from' => $product->starts_at->format('d.m.Y')])}}
                                 </li>
                             @endif
                             @if($product->ends_at)
                                 <li class="flex items-center text-left text-sm font-normal text-neutral-600">
-                                    @svg('arrow-down-to-dot', 'mr-2 block h-5 w-5 align-middle text-neutral-500')
+                                    <div class="i-lucide:arrow-down-to-dot mr-2 block h-5 w-5 align-middle text-neutral-500"></div>
                                     {{__('daugt::shop.to', ['to' => $product->ends_at->format('d.m.Y')])}}
                                 </li>
                             @endif

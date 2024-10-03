@@ -82,21 +82,21 @@
                                         Anzahl: {{ $item->quantity }}
                                     </p>
                                     @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PENDING->value)
-                                        <p class="flex items-center text-yellow-500">
+                                        <p class="flex items-center text-warning-500">
                                             Versand ausstehend
-                                            @svg('truck', 'ml-1.5')
+                                        <div class="i-lucide:truck ml-1.5"></div>
                                         </p>
                                     @endif
                                     @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PROCESSING->value)
                                         <p class="flex items-center text-primary-500">
                                             Bestellung wird verarbeitet
-                                            @svg('clock', 'ml-1.5')
+                                        <div class="i-lucide:clock ml-1.5"></div>
                                         </p>
                                     @endif
                                     @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::SHIPPED->value)
-                                        <p class="flex items-center text-green-500">
+                                        <p class="flex items-center text-success-500">
                                             Bestellung wurde versandt
-                                            @svg('truck', 'ml-1.5')
+                                        <div class="i-lucide:truck ml-1.5"></div>
                                         </p>
                                     @endif
                                 </div>
@@ -105,7 +105,7 @@
                                 <div>
                                     <a href="{{route('daugt.member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all']) }}"
                                        class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
-                                        @svg('unlock', 'h-3 w-3 mr-1.5')
+                                        <div class="i-lucide:unlock h-3 w-3 mr-1.5"></div>
                                         Kurs ansehen
                                     </a>
                                 </div>
@@ -114,7 +114,7 @@
                                 <div>
                                     <a href="{{route('daugt.member-area.post.show', \Daugt\Models\Content\Content::where('id', $item->product->content_id)->first()->slug) }}"
                                        class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
-                                        @svg('unlock', 'h-3 w-3 mr-1.5')
+                                        <div class="i-lucide:unlock h-3 w-3 mr-1.5"></div>
                                         Inhalt ansehen
                                     </a>
                                 </div>

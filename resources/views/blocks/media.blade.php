@@ -14,16 +14,16 @@
                             class="w-full bg-neutral-50 gap-x-2 px-3 py-2.5 truncate text-sm font-medium text-neutral-700 flex items-center">
                         @switch($media->aggregate_type)
                             @case(\Plank\Mediable\Media::TYPE_IMAGE)
-                                @svg('image', 'h-5 w-5 shrink-0 text-primary-600 mr-2')
+                                <div class="i-lucide:image h-5 w-5 shrink-0 text-primary-600 mr-2">
                                 @break
                             @case(\Plank\Mediable\Media::TYPE_VIDEO)
-                                @svg('video', 'h-5 w-5 shrink-0 text-primary-600 mr-2')
+                                <div class="i-lucide:video h-5 w-5 shrink-0 text-primary-600 mr-2">
                                 @break
                             @case(\Plank\Mediable\Media::TYPE_AUDIO)
-                                @svg('volume-2', 'h-5 w-5 shrink-0 text-primary-600 mr-2')
+                                <div class="i-lucide:volume-2 h-5 w-5 shrink-0 text-primary-600 mr-2">
                                 @break
                             @default
-                                @svg('file', 'h-5 w-5 shrink-0 text-primary-600 mr-2')
+                                <div class="i-lucide:file h-5 w-5 shrink-0 text-primary-600 mr-2">
                                 @break
                         @endswitch
                         <span>{{$media->name}}</span>

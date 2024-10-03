@@ -16,7 +16,7 @@
                 $tempCourse = $tempSection->listing;
             @endphp
             <h2 class="text-white/70 text-lg sm:text-xl font-semibold flex items-center -space-x-0.5">
-                <span>{{$tempCourse->name}}</span> @svg('dot') <span>{{$tempSection->name}}</span></h2>
+                <span>{{$tempCourse->name}}</span> <div class="i-lucide:dot"></div> <span>{{$tempSection->name}}</span></h2>
         @endif
         <h2 class="text-white text-2xl sm:text-3xl font-semibold">{{$post->title}}</h2>
         <div class="flex items-center mt-4 gap-x-2.5">

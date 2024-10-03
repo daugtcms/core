@@ -1,5 +1,6 @@
 @props(['options' => '', 'error' => '', 'multi' => false])
-<div x-data="{
+<div wire:key="{{ md5(json_encode($options)) }}"
+        x-data="{
         selectOpen: false,
         selectedItems: [],
         selectableItems: {{$options ?? '[]'}},
@@ -122,7 +123,7 @@
         <span x-text="selectedItems.length > 0 ? selectedItems.map(item => { const i = getItemByValue(item); return i.title ?? i.value}).join(', ') : '{{ __('daugt::general.no_value_available') }}'"
               :class="{ 'truncate pr-7': true, 'text-neutral-500': selectedItems.length === 0 }">{{ __('daugt::general.no_value_available') }}</span>
         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-            @svg('chevrons-left-right', 'w-5 h-5 text-neutral-400 rotate-90')
+            <div class="i-lucide:chevrons-up-down w-5 h-5 text-neutral-400"></div>
         </span>
     </button>
     @if($error)

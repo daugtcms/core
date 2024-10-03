@@ -24,7 +24,6 @@ import '/vendor/wire-elements/modal/resources/js/modal.js';
 
 import './tiptap';
 import './content-editor/index.js';
-import './block-editor'
 import './tooltip'
 
 Alpine.plugin(Mousetrap)

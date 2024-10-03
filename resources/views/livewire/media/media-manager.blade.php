@@ -3,14 +3,14 @@
 ])>
     <x-daugt::layouts.dashboard-bar>
         <div class="inline-flex items-center gap-x-2" x-data @if($isPicker) x-mousetrap.esc="$wire.close()" @endif>
-            @if($isPicker)<x-daugt::form.icon-button icon="chevron-left" class="-ml-2" wire:click="close()"></x-daugt::form.icon-button>@endif
+            @if($isPicker)<x-daugt::form.icon-button icon="lucide:chevron-left" class="-ml-2" wire:click="close()"></x-daugt::form.icon-button>@endif
             <h1 class="text-lg font-medium text-neutral-800">{{__('daugt::media.all_media')}}</h1>
         </div>
         <x-daugt::form.button
                 wire:click="$dispatch('openModal', { component: 'daugt::media.media-uploader' })"
                 class="flex-shrink-0 ml-2">
             {{__('daugt::media.upload')}}
-            @svg('plus', 'w-5 h-5')
+            <div class="i-lucide:plus w-5 h-5"></div>
         </x-daugt::form.button>
     </x-daugt::layouts.dashboard-bar>
 

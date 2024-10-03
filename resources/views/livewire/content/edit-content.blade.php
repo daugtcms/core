@@ -7,10 +7,10 @@
                 wire:click="delete"
                 wire:confirm="{{__('daugt::general.delete_confirmation')}}"
                 class="flex-shrink-0 ml-2"
-                icon="trash"
+                icon="lucide:trash"
                 style="danger">
             {{__('daugt::general.add')}}
-            @svg('plus', 'w-5 h-5')
+            <div class="i-lucide:plus w-5 h-5"></div>
         </x-daugt::form.icon-button>
         <x-daugt::form.button wire:click="save">
             {{__('daugt::general.save')}}
@@ -53,10 +53,11 @@
 
                     $templates = collect($templates)->toJson();
                 @endphp
-                <x-daugt::form.select :options="$templates" wire:model.live="template"></x-daugt::form.select>
+                <x-daugt::form.select :options="$templates"  wire:model.live="template"></x-daugt::form.select>
             </div>
 
 
+            @if(!empty($type) && !empty($template))
             <div class="col-span-1 md:col-span-3 flex flex-col gap-y-3 pt-3">
                 @php
                     $contentAttributes = \Daugt\Misc\ContentTypeRegistry::getContentType($type)->attributes;
@@ -68,7 +69,7 @@
                     <x-daugt::tabs.item :count="$templateAttributes->count()" wire:click="setTab('template_config')" :active="$currentTab == 'template_config'">{{__('daugt::general.template_config')}}</x-daugt::tabs.item>
                 </x-daugt::tabs.tabs>
                 @if($currentTab == 'content')
-                    <livewire:daugt::content.content-editor :group="\Daugt\Misc\ContentTypeRegistry::getContentType($this->content->type)->group" wire:model="blocks"></livewire:daugt::content.content-editor>
+                    <livewire:daugt::content.content-editor :group="\Daugt\Misc\ContentTypeRegistry::getContentType($this->type)->group" wire:model="blocks"></livewire:daugt::content.content-editor>
                     {{--<x-daugt::form.rich-text></x-daugt::form.rich-text>--}}
                 @elseif($currentTab == 'content_config')
                     <div class="max-w-xl mx-auto w-full flex flex-col gap-y-3">
@@ -93,6 +94,9 @@
                     </div>
                 @endif
             </div>
+            @else
+                {{__('daugt::content.select_type_and_template')}}
+            @endif
         </div>
     </div>
 </div>

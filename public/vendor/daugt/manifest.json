@@ -7,20 +7,9 @@
     "file": "assets/tiptap-CYuOyjN9.js",
     "name": "tiptap"
   },
-  "_unocss-C1KOr4ai.js": {
-    "file": "assets/unocss-C1KOr4ai.js",
-    "name": "unocss",
-    "dynamicImports": [
-      "node_modules/ofetch/dist/index.mjs",
-      "node_modules/ofetch/dist/index.mjs",
-      "node_modules/ofetch/dist/index.mjs"
-    ]
-  },
-  "node_modules/ofetch/dist/index.mjs": {
-    "file": "assets/index-CS5tN72I.js",
-    "name": "index",
-    "src": "node_modules/ofetch/dist/index.mjs",
-    "isDynamicEntry": true
+  "_unocss-CEoGP7At.js": {
+    "file": "assets/unocss-CEoGP7At.js",
+    "name": "unocss"
   },
   "resources/css/app.css": {
     "file": "assets/app-dzWYEu2n.css",
@@ -33,14 +22,14 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-ByMZOW_b.js",
+    "file": "assets/app-CPYxGml5.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
       "_tiptap-CYuOyjN9.js",
       "_plyr.min-C-75nfX6.js",
-      "_unocss-C1KOr4ai.js"
+      "_unocss-CEoGP7At.js"
     ]
   },
   "resources/js/member-area.js": {
@@ -54,13 +43,13 @@
     ]
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-DeAOngiq.js",
+    "file": "assets/stripped-DO7NHEyh.js",
     "name": "stripped",
     "src": "resources/js/stripped.js",
     "isEntry": true,
     "imports": [
       "_plyr.min-C-75nfX6.js",
-      "_unocss-C1KOr4ai.js"
+      "_unocss-CEoGP7At.js"
     ]
   }
 }

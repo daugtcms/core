@@ -97,7 +97,7 @@
                 @endforelse
             </div>
             <a class="bg-neutral-100/50 w-full px-3 py-1.5 flex items-center focus:outline-none justify-between hover:bg-white/50 border-t border-neutral-200"
-               href="{{route('daugt.member-area.orders.index')}}">Alle Bestellungen ansehen @svg('arrow-right', 'w-5 h-5')</a>
+               href="{{route('daugt.member-area.orders.index')}}">Alle Bestellungen ansehen <div class="i-lucide:arrow-right w-5 h-5"></div></a>
         </div>
         <div class="col-span-2 row-span-1 rounded-lg bg-white/75 backdrop-blur-md shadow">
             <p class="text-neutral-800 font-medium text-xl border-b-2 border-neutral-200 px-3 py-2">Dein Profil</p>
@@ -109,7 +109,7 @@
                         <p class="text-neutral-500 text-sm">{{Auth::user()->full_name}} - {{Auth::user()->email}}</p>
                     </div>
                 </div>
-                <x-daugt::form.icon-button icon="pencil"
+                <x-daugt::form.icon-button icon="lucide:pencil"
                                               wire:click="$dispatch('openModal', {component: 'daugt::users.edit-user'})"></x-daugt::form.icon-button>
             </div>
         </div>

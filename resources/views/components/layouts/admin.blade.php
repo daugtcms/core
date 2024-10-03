@@ -101,7 +101,7 @@
                                     @click="$refs.panel.toggle">
                                 <div class="p-2 rounded-lg text-primary-50 h-10 w-10"
                                      style="background-color: {{AdminPathColor::getColor(AdminPath::from($path))}}">
-                                    @svg('daugt', 'h-full w-full flex-shrink-0 drop-shadow-md')
+                                    <x-daugt::application-logo class="h-full w-full flex-shrink-0 drop-shadow-md"></x-daugt::application-logo>
                                 </div>
 
                                 <p class="text-lg font-semibold text-neutral-700 pt-0.5">@if($path == AdminPath::ADMIN->value)
@@ -122,7 +122,7 @@
                                        href="{{$casePath == AdminPath::ADMIN ? route("daugt.admin.index") : route("daugt.admin.$casePath->value.index")}}">
                                         <div class="p-2 rounded-lg text-primary-50 h-10 w-10"
                                              style="color: {{AdminPathColor::getColor($casePath)}}; background-color: {{AdminPathColor::getColor($casePath)}}22">
-                                            @svg(AdminPathColor::getIcon($casePath), 'h-full flex-shrink-0 drop-shadow-md')
+                                            <div class="i-lucide:{{AdminPathColor::getIcon($casePath)}} h-full flex-shrink-0 drop-shadow-md"></div>
                                         </div>
 
                                         <p class="text-base font-medium text-neutral-700 pt-0.5">@if($casePath == AdminPath::ADMIN)

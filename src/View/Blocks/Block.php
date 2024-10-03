@@ -9,6 +9,7 @@ use Daugt\Helpers\Media\MediaHelper;
 use Daugt\Models\Listing\Listing;
 use Daugt\Models\Listing\ListingItem;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Nette\NotImplementedException;
@@ -54,13 +55,12 @@ class Block extends Component
     public function render(): View|Closure|string
     {
         $this->propagateAttributes();
-        // get_called_class():: is necessary as self:: returns the Block class instead of the actual child class
-        return view($this->getView(), $this->attributes);
+        return Blade::render($this->getView(), $this->attributes);
     }
 
     public function getView(): string
     {
-        return ThemeRegistry::getThemeBlock($this->name)->viewName ?? ThemeRegistry::getThemeTemplate($this->name)->viewName;
+        return (ThemeRegistry::getThemeBlock($this->name) ?? ThemeRegistry::getThemeTemplate($this->name))->getView();
     }
 
     public function propagateAttributes() {

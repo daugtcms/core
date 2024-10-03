@@ -45,10 +45,7 @@ class ContentTable extends Table
 
     public function add(): void
     {
-        $this->dispatch('openModal', 'daugt::block-editor', [
-            'usage' => $this->type,
-            'data' => [],
-        ]);
+        redirect()->route('daugt.admin.content.create');
     }
 
     public function edit($id): void

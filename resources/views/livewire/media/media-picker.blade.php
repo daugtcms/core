@@ -22,7 +22,7 @@
                 <div class="flex items-center gap-x-2.5 py-2 px-2">
                     <x-daugt::form.icon-button
                             wire:click="removeMedia('{{$media->id}}')"
-                            icon="trash"
+                            icon="lucide:trash"
                             style="danger">
                         {{__('daugt::general.delete')}}
                     </x-daugt::form.icon-button>

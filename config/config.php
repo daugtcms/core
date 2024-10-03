@@ -22,5 +22,6 @@ return [
             'serif' => env('STYLE_FONT_SERIF'),
             'mono' => env('STYLE_FONT_MONO'),
         ]
-    ]
+    ],
+    'themes' => []
 ];

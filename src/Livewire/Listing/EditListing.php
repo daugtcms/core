@@ -48,7 +48,7 @@ class EditListing extends ModalComponent
         }
 
         $this->closeModalWithEvents([
-            Listing::class => 'refreshComponent']);
+            ListingEditor::class => 'refreshComponent']);
     }
 
     public function render()

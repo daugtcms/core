@@ -4,7 +4,7 @@
             <x-daugt::form.input class="opacity-0 pointer-events-none h-[34px] max-w-xs"
                                     placeholder="{{__('daugt::general.search_items')}}"></x-daugt::form.input>
             <x-daugt::form.button type="button" style="light" wire:click="add()"
-                                     class="flex-shrink-0 h-full">@svg('plus', 'w-4 h-4'){{__('daugt::general.add_element')}}</x-daugt::form.button>
+                                  class="flex-shrink-0 h-full"><div class="i-lucide:plus w-4 h-4"></div>{{__('daugt::general.add_element')}}</x-daugt::form.button>
         </div>
     @endif
 

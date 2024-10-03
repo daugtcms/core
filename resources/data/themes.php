@@ -9,7 +9,7 @@ return [
         'templates' => [
             'center-auth' => [
                 'name' => 'Centered Authentication',
-                'viewName' => 'daugt::blocks.templates.center-auth',
+                'viewPath' => __DIR__ . '/../views/blocks/templates/center-auth.blade.php',
                 'attributes' => [
                     'logo' => [
                         'type' => AttributeType::MEDIA,

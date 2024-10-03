@@ -35,11 +35,10 @@
                 <a href="{{route('daugt.shop.index', ['category' => $item->slug])}}"
                    class="inline-flex items-center justify-center flex-col h-auto whitespace-nowrap text-center px-2 py-1 rounded-md hover:bg-primary-100/50 transition-colors duration-200 {{$active ? 'bg-primary-100/75' : ''}}">
                     @if($item->icon)
-                        @svg($item->icon, 'w-8 h-8 mb-1')
+                        <div class="i-lucide:{{$item->icon}} w-8 h-8 mb-1"></div>
                     @endif
                     <span class="text-lg font-medium {{$active ? 'text-primary-800' : 'text-primary-800'}}">{{$item->name}}</span>
                 </a>
-
             @endforeach
         </div>
     </div>

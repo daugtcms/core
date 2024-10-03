@@ -185,7 +185,7 @@ class EditProduct extends ModalComponent
             $data['template']['attributes']['product'] = $this->product->id;
         }
 
-        $this->dispatch('openModal', component: 'daugt::block-editor', arguments: ['usage' => TemplateUsage::SHOP_PRODUCT, 'data' => $data, 'id' => 'product-' . $this->product->id ] );
+        // $this->dispatch('openModal', component: 'daugt::block-editor', arguments: ['usage' => TemplateUsage::SHOP_PRODUCT, 'data' => $data, 'id' => 'product-' . $this->product->id ] );
     }
 
     #[On('saveBlocks')]

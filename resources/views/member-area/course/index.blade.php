@@ -1,7 +1,7 @@
 <x-daugt::layouts.member-area-layout>
     <div class="container">
         <a href="{{route('daugt.member-area.index')}}" class="text-neutral-100 bg-neutral-100/10 hover:bg-neutral-100/25 inline-flex rounded-md items-center font-medium gap-x-1 px-2 py-1 sm:mt-4 mb-4">
-            @svg('arrow-left', 'w-4 h-4')
+            <div class="i-lucide:arrow-left w-4 h-4"></div>
             Zurück
         </a>
         <h1 class="text-white/80 text-3xl sm:text-5xl font-semibold mb-4">{{$course->name}}</h1>

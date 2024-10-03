@@ -6,7 +6,7 @@
         <p class="text-neutral-500 -mt-1.5">{{Auth::user()->email}}</p>
     </div>
     </div>
-    @svg('chevron-down')
+    <div class="i-lucide:chevron-down"></div>
 </button>
 
 <div x-ref="panel" x-cloak class="absolute bg-white rounded-md border-2 font-medium border-neutral-200 text-neutral-800 overflow-hidden divide-y flex flex-col z-30" x-float.placement.bottom-end.offset>

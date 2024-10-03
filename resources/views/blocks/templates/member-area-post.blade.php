@@ -17,7 +17,7 @@
             $section = \Daugt\Models\Listing\ListingItem::with('listing')->find($courseSection);
             $course = $section->listing;
         @endphp
-            <p class="text-neutral-500 mb-0 text-xl font-medium flex items-center -space-x-0.5"><span>{{$course->name}}</span> @svg('dot') <span>{{$section->name}}</span></p>
+            <p class="text-neutral-500 mb-0 text-xl font-medium flex items-center -space-x-0.5"><span>{{$course->name}}</span> <div class="i-lucide:dot"></div> <span>{{$section->name}}</span></p>
     @endif
     <h1 class="">{{$title}}</h1>
     </div>

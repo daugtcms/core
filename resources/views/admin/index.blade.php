@@ -11,7 +11,7 @@
                     <div>
               <span class="inline-flex rounded-lg p-3 ring-4 ring-white"
                     style="color: {{$color}}; background-color: {{$color}}22">
-                @svg(Daugt\Helpers\Admin\AdminPathColor::getIcon($path))
+                <div class="i-{{Daugt\Helpers\Admin\AdminPathColor::getIcon($path)}}"></div>
               </span>
                     </div>
                     <div class="mt-6">
@@ -26,8 +26,8 @@
                     </div>
                     <span class="pointer-events-none absolute right-6 top-6 text-neutral-300 group-hover:text-neutral-400"
                           aria-hidden="true">
-              @svg('move-up-right')
-            </span>
+                        <div class="i-lucide:move-up-right"></div>
+                    </span>
                 </div>
             @endforeach
 

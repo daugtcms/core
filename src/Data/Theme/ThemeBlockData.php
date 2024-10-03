@@ -16,11 +16,17 @@ class ThemeBlockData extends Data implements Wireable
 
     public string $description;
 
-    public string $viewName;
+    public ?string $view;
+    public ?string $viewPath;
 
     /** @var array<ContentGroup> */
     public array $groups;
 
     /** @var Collection<string, AttributeData> */
     public Collection $attributes;
+
+    public function getView(): string {
+        return $this->view ?? $this->view = file_get_contents($this->viewPath);
+    }
+
 }

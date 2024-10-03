@@ -26,7 +26,7 @@
                     <p x-text="selectedIcon"
                        class="leading-tight truncate"></p>
                 </div>
-                <x-daugt::form.icon-button icon="x" class="mr-0.5"
+                <x-daugt::form.icon-button icon="lucide:x" class="mr-0.5"
                                                @click="selectedIcon = ''; $event.stopImmediatePropagation()">
                 </x-daugt::form.icon-button>
             </div>

@@ -19,7 +19,7 @@
                         <x-daugt::form.button style="light" class="flex-grow"
                                                   wire:click="$dispatch('openModal', { component: 'daugt::blocks.edit-block-defaults', arguments: { blockId: '{{$key}}' } })">
                             {{__('daugt::general.edit')}}
-                            @svg('pencil', 'w-4 h-4')
+                            <div class="i-lucide:pencil w-4 h-4"></div>
                         </x-daugt::form.button>
                     </div>
                 </li>

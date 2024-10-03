@@ -21,7 +21,6 @@ use Daugt\Livewire\Table\SelectTableItems;
 use Daugt\Livewire\Users\EditUser;
 use Daugt\Livewire\Users\UserTable;
 use Daugt\View\Blocks\Misc\BlockSynth;
-use Daugt\Livewire\Blocks\BlockEditor;
 use Daugt\Livewire\Blocks\EditBlockDefaults;
 use Daugt\Livewire\Blocks\TemplateEditor;
 use Daugt\Livewire\Listing\EditListing;
@@ -43,9 +42,6 @@ class DaugtBladeServiceProvider extends ServiceProvider
     {
 
         Blade::component('daugt::modal', 'components.modal.index');
-        Blade::directive('svg', function ($expression) {
-            return "<?php echo svg($expression); ?>";
-        });
         Blade::directive('number', function ($number) {
             return "<?php echo number_format($number, 2, ',', '.'); ?>";
         });
@@ -66,7 +62,6 @@ class DaugtBladeServiceProvider extends ServiceProvider
         }
 
         Livewire::propertySynthesizer(BlockSynth::class);
-        Livewire::component('daugt::block-editor', BlockEditor::class);
         Livewire::component('daugt::block-defaults-editor', BlockDefaultsEditor::class);
         Livewire::component('daugt::blocks.edit-block-defaults', EditBlockDefaults::class);
         Livewire::component('daugt::listing.listing-editor', ListingEditor::class);

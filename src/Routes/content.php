@@ -10,6 +10,7 @@ use Daugt\Livewire\Content\ContentTable;
 
 Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'admin/content', 'as' => 'admin.content.'], function () {
     Route::get('/', ContentTable::class)->name('index');
+    Route::get('/create', EditContent::class)->name('create');
     Route::get('/{content:id}', EditContent::class)->name('edit');
     Route::delete('/{page}', DeleteContentController::class);
 });

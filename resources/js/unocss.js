@@ -3,18 +3,27 @@ import presetUno from "@unocss/preset-uno";
 import presetTypography from "@unocss/preset-typography";
 import {presetForms} from "@julr/unocss-preset-forms";
 import presetWebFonts from "@unocss/preset-web-fonts";
+import {presetIcons} from "@unocss/preset-icons/browser";
 
 window.initializeUnoCSS = (initOptions) => {
     initUnocssRuntime({
         defaults: {
-            presets: [presetUno(), presetTypography(), presetForms(), presetWebFonts({
-                provider: 'bunny',
-                fonts: {
-                    sans: initOptions?.font?.sans ?? 'Inter',
-                    serif: initOptions?.font?.serif ?? 'Merriweather',
-                    mono: initOptions?.font?.mono ?? 'Jetbrains Mono',
-                }
-            })],
+            presets: [
+                presetUno(),
+                presetTypography(),
+                presetForms(),
+                presetWebFonts({
+                    provider: 'bunny',
+                    fonts: {
+                        sans: initOptions?.font?.sans ?? 'Inter',
+                        serif: initOptions?.font?.serif ?? 'Merriweather',
+                        mono: initOptions?.font?.mono ?? 'Jetbrains Mono',
+                    }
+                }),
+                presetIcons({
+                    cdn: 'https://esm.sh/'
+                })
+            ],
             theme: {
                 colors: {
                     primary: {
