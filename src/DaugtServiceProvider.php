@@ -19,7 +19,6 @@ use League\Flysystem\Visibility;
 use Plank\Mediable\Facades\ImageManipulator;
 use Plank\Mediable\ImageManipulation;
 use Plank\Mediable\Media;
-use Daugt\Commands\SyncIcons;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
