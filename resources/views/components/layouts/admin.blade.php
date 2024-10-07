@@ -122,7 +122,7 @@
                                        href="{{$casePath == AdminPath::ADMIN ? route("daugt.admin.index") : route("daugt.admin.$casePath->value.index")}}">
                                         <div class="p-2 rounded-lg text-primary-50 h-10 w-10"
                                              style="color: {{AdminPathColor::getColor($casePath)}}; background-color: {{AdminPathColor::getColor($casePath)}}22">
-                                            <div class="i-lucide:{{AdminPathColor::getIcon($casePath)}} h-full flex-shrink-0 drop-shadow-md"></div>
+                                            <div class="i-lucide:{{AdminPathColor::getIcon($casePath)}} h-full w-full flex-shrink-0 drop-shadow-md"></div>
                                         </div>
 
                                         <p class="text-base font-medium text-neutral-700 pt-0.5">@if($casePath == AdminPath::ADMIN)

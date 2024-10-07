@@ -39,7 +39,7 @@
             <x-daugt::form.icon-button icon="lucide:link"
                                        @click="toggleLink()"
                                        x-bind:class="{ 'text-primary-500' : isActive('link', updatedAt) }"></x-daugt::form.icon-button>
-            <x-daugt::form.icon-button icon=lucide:rows"
+            <x-daugt::form.icon-button icon="lucide:rows"
                                        @click="setHorizontalRule()"
             ></x-daugt::form.icon-button>
         </div>

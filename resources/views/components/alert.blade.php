@@ -1,9 +1,9 @@
-@props(['title', 'message', 'icon' => 'shield-alert', 'actions' => []])
+@props(['title', 'message', 'icon' => 'lucide:shield-alert', 'actions' => []])
 
 <div class="rounded-md bg-warning-50 p-4">
     <div class="flex">
         <div class="flex-shrink-0">
-            <div class="i-{{$icon}} text-warning-400">
+            <div class="i-{{$icon}} text-warning-400"></div>
         </div>
         <div class="ml-3">
             <h3 class="text-sm font-medium text-warning-800">{{$title}}</h3>

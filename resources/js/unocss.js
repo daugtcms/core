@@ -21,7 +21,9 @@ window.initializeUnoCSS = (initOptions) => {
                     }
                 }),
                 presetIcons({
-                    cdn: 'https://esm.sh/'
+                    collections: {
+                        lucide: () => import('@iconify-json/lucide/icons.json').then(i => i.default),
+                    }
                 })
             ],
             theme: {

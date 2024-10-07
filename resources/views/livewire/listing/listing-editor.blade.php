@@ -49,15 +49,10 @@
                                 <x-daugt::form.icon-button icon="lucide:grip-vertical"
                                                               wire:sortable.handle/>
                                 <span class="truncate inline-flex items-center gap-x-2">
-                                    @if(!empty($item->icon))
-                                        <div class="flex-shrink-0">
-                                            <div class="i-{{$item->icon}}"></div>
-                                        </div>
-                                    @endif
                                     @if(!empty($item->name))
                                         {{$item->name}}
                                     @else
-                                        <span class="text-neutral-500 italic truncate">{{__('daugt::general.no_value_available')}}wadawdawd awdadwaw</span>
+                                        <span class="text-neutral-500 italic truncate">{{__('daugt::general.no_value_available')}}</span>
                                     @endisset
                                 </span>
                             </div>

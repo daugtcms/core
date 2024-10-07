@@ -158,7 +158,6 @@ class DaugtServiceProvider extends ServiceProvider
 
             // Registering package commands.
             $this->commands([
-                SyncIcons::class,
                 SyncStripeTaxCodes::class
             ]);
         }

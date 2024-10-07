@@ -18,6 +18,6 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', ShowPageController::class)->name('content.pages.index');
     Route::get('/blog', BlogIndexController::class)->name('content.blog.index');
-    Route::get('/{slug}', ShowPageController::class)->name('content.pages.index');
+    Route::get('/{slug}', ShowPageController::class)->name('content.pages.show');
     Route::get('/blog/{slug}', ShowBlogController::class)->name('content.blog.show');
 });
