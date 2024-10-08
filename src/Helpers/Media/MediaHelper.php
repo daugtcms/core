@@ -16,12 +16,12 @@ class MediaHelper
         $default = $isAvatar ? 'avatar' : 'image';
         if ($media) {
             if ($media->aggregate_type == Media::TYPE_IMAGE) {
-                return $media->findVariant($type) ? $media->findVariant($type)->getUrl() : '/assets/default/' . $default . '.svg?' . random_int(1000, 9999);
+                return $media->findVariant($type) ? $media->findVariant($type)->getTemporaryUrl(now()->addHour()) : '/assets/default/' . $default . '.svg?' . random_int(1000, 9999);
             } else if($media->aggregate_type == Media::TYPE_IMAGE_VECTOR) {
-                return $media->getUrl();
+                return $media->getTemporaryUrl(now()->addHour());
             } else {
                 if ($type == 'thumbnail') {
-                    $url = Storage::disk('daugt-media')->url('/default/');
+                    $url = '/vendor/daugt/icons/default/';
                     switch ($media->aggregate_type) {
                         case Media::TYPE_AUDIO:
                             $url = $url.'audio.svg';
@@ -43,7 +43,7 @@ class MediaHelper
                 }
             }
         } else {
-            return Storage::disk('daugt-media')->url('/default/'.$default.'.svg');
+            return '/vendor/daugt/icons/default/' . $default.'.svg';
         }
     }
 

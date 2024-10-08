@@ -82,10 +82,10 @@ class Block extends Component
                     if(isset($this->attributes[$key]) && isset($this->attributes[$key]->id)) {
                         if(isset($value->options) && $value->options['multiple']) {
                             $this->attributes[$key] = $this->attributes[$key]->map(function($media) {
-                                return MediaHelper::getMediaById($media['id'], $media['variant']);
+                                return ['url' => MediaHelper::getMediaById($media['id'], $media['variant'])];
                             });
                         } else {
-                            $this->attributes[$key] = MediaHelper::getMediaById($this->attributes[$key][0]['id'], $this->attributes[$key][0]['variant']);
+                            $this->attributes[$key] = ['url' => MediaHelper::getMediaById($this->attributes[$key][0]['id'], $this->attributes[$key][0]['variant'])];
                         }
                     } else {
                         $this->attributes[$key] = null;

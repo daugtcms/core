@@ -19,12 +19,11 @@
     @can('access admin panel')
         <a href="{{route('daugt.admin.index')}}" class="px-3 py-2 hover:bg-neutral-100 cursor-pointer block">Admin</a>
     @endcan
-    @if(app('impersonate')->isImpersonating())
+    {{--@if(app('impersonate')->isImpersonating())
         <a href="{{ route('daugt.impersonate.leave') }}" class="px-3 py-2 text-danger-500 hover:bg-danger-50 cursor-pointer block">{{__('daugt::users.end_impersonation')}}</a>
-    @else
-        <form method="POST" action="{{ route('daugt.logout') }}">
-            @csrf
-            <button class="px-3 py-2 w-full text-danger-500 hover:bg-danger-50 text-left">Abmelden</button>
-        </form>
-    @endif
+    @else--}}
+    <form method="POST" action="{{ route('daugt.logout') }}">
+        @csrf
+        <button class="px-3 py-2 w-full text-danger-500 hover:bg-danger-50 text-left">Abmelden</button>
+    </form>
 </div>

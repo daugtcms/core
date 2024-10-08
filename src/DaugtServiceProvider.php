@@ -26,7 +26,6 @@ use Laravel\Horizon\HorizonServiceProvider;
 use Daugt\Commands\SyncStripeTaxCodes;
 use Daugt\Extensions\CloudflareR2Adapter;
 use Daugt\Helpers\Media\MediaHelper;
-use Daugt\Livewire\Shop\ProductTable;
 use Daugt\Misc\ContentTypeRegistry;
 use Daugt\Misc\ListingTypeRegistry;
 use Daugt\Misc\TemplateUsageRegistry;
@@ -70,20 +69,14 @@ class DaugtServiceProvider extends ServiceProvider
         ImageManipulator::defineVariant(
             'thumbnail',
             ImageManipulation::make(function (Image $image) {
-                $image->resize(400, 400, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                $image->scaleDown(400, 400);
             })->outputWebpFormat()->setOutputQuality(50)
         );
 
         ImageManipulator::defineVariant(
             'optimized',
             ImageManipulation::make(function (Image $image) {
-                $image->resize(1920, 1920, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
+                $image->scaleDown(1920, 1920);
             })->outputWebpFormat()->setOutputQuality(50)
         );
 
@@ -122,6 +115,10 @@ class DaugtServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../public/vendor/daugt' => public_path('vendor/daugt'),
             ], 'daugt-assets');
+
+            $this->publishes([
+                __DIR__.'/../public/icons' => public_path('vendor/daugt/icons'),
+            ], 'daugt-icons');
 
             /*$this->publishes([
                 base_path('vendor/laravel/horizon/public') => public_path('vendor/horizon'),
@@ -182,8 +179,6 @@ class DaugtServiceProvider extends ServiceProvider
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'daugt');
 
-        $this->mergeConfigFrom(__DIR__.'/../config/horizon.php', 'horizon');
-
         $this->mergeConfigFrom(__DIR__.'/../config/mediable.php', 'mediable');
 
         $this->mergeConfigFrom(__DIR__.'/../config/permission.php', 'permission');
@@ -199,21 +194,6 @@ class DaugtServiceProvider extends ServiceProvider
         $this->app->singleton('daugt', function () {
             return new Daugt;
         });
-
-        $newConfig = config('filesystems.disks');
-        $newConfig['daugt-media'] = [
-            'driver' => 's3',
-            'key' => env('SITEBREW_MEDIA_ACCESS_KEY_ID'),
-            'secret' => env('SITEBREW_MEDIA_SECRET_ACCESS_KEY'),
-            'region' => env('SITEBREW_MEDIA_DEFAULT_REGION'),
-            'bucket' => env('SITEBREW_MEDIA_BUCKET'),
-            'url' => env('SITEBREW_MEDIA_URL'),
-            'endpoint' => env('SITEBREW_MEDIA_ENDPOINT'),
-            'use_path_style_endpoint' => true,
-            'visibility' => 'private',
-            'throw' => false,
-        ];
-        config(['filesystems.disks' => $newConfig]);
 
         $this->app->register(HorizonServiceProvider::class);
         $this->app->register(HorizonApplicationServiceProvider::class);

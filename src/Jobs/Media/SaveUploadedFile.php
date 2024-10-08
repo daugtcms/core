@@ -37,7 +37,7 @@ class SaveUploadedFile implements ShouldQueue
         // dump(config('filesystems.disks.storage'));
 
         // move file out of livewire-tmp and give random 64 character filename
-        Storage::disk('storage')->move($path, $newPath);
+        Storage::disk('s3')->move($path, $newPath);
 
         /*$media = MediaUploader::fromSource($path)
             ->useFilename(Str::random(64))
@@ -46,7 +46,7 @@ class SaveUploadedFile implements ShouldQueue
                 $model->name = $filename;
                 $model->user_id = Auth::id();
             })->upload();*/
-        $media = MediaUploader::importPath('storage', $newPath);
+        $media = MediaUploader::importPath('s3', $newPath);
 
         $media->name = $filename;
         $media->user_id = Auth::id();
