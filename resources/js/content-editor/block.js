@@ -132,6 +132,7 @@ export const Block = Node.create({
                 ? JSON.stringify(node.attrs.data)
                 : node.attrs.data
 
+            // TODO: ADD JS WITH INIT SNIPPET INSTEAD OF STYLESHEET
             let preview = "<link rel=\"stylesheet\" href=\"" + node.attrs.styleUrl + "\">"
 
             // replace all new lines

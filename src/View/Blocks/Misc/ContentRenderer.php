@@ -4,6 +4,7 @@ namespace Daugt\View\Blocks\Misc;
 
 use Daugt\Data\Blocks\TemplateData;
 use Daugt\Injectable\TiptapEditor;
+use Daugt\Models\Blocks\BlockDefaults;
 use Daugt\Models\Blocks\Template;
 use Daugt\Models\Content\Content;
 use Daugt\View\Blocks\Block;
@@ -66,11 +67,11 @@ class ContentRenderer extends Component
 
     public function render(): View|Closure|string
     {
-        $slot = '';
         $editor = TiptapEditor::init();
         $editor->setContent($this->content->blocks);
+
         // render blade component templaterenderer
-        return Blade::render('<x-daugt::template-renderer :template="$template" :attributes="$attributes"><div class="prose">' . $editor->getHTML() . '</div></x-daugt::template-renderer>', [
+        return Blade::render('<x-daugt::template-renderer :template="$template" :attributes="$attributes"><div class="prose max-w-full">' . $editor->getHTML() . '</div></x-daugt::template-renderer>', [
             'template' => $this->content->template,
             'attributes' => $this->content->attributes,
         ]);

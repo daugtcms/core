@@ -6,6 +6,7 @@ use Closure;
 use Daugt\Data\Blocks\BlockData;
 use Daugt\Enums\Blocks\AttributeType;
 use Daugt\Helpers\Media\MediaHelper;
+use Daugt\Models\Blocks\BlockDefaults;
 use Daugt\Models\Listing\Listing;
 use Daugt\Models\Listing\ListingItem;
 use Illuminate\Contracts\View\View;
@@ -64,6 +65,11 @@ class Block extends Component
     }
 
     public function propagateAttributes() {
+        $blockDefaults = BlockDefaults::where('name', $this->name)->first();
+        if($blockDefaults) {
+            // use array_filter to remove empty arrays/strings
+            $this->attributes = array_merge($blockDefaults->attributes, array_filter($this->attributes));
+        }
         foreach ((ThemeRegistry::getThemeBlock($this->name) ?? ThemeRegistry::getThemeTemplate($this->name))->attributes as $key => $value) {
             switch($value->type) {
                 case AttributeType::LISTING:
@@ -79,7 +85,7 @@ class Block extends Component
                     }
                     break;
                 case AttributeType::MEDIA:
-                    if(isset($this->attributes[$key]) && isset($this->attributes[$key]->id)) {
+                    if(isset($this->attributes[$key]) && isset($this->attributes[$key][0]) && isset($this->attributes[$key][0]['id'])) {
                         if(isset($value->options) && $value->options['multiple']) {
                             $this->attributes[$key] = $this->attributes[$key]->map(function($media) {
                                 return ['url' => MediaHelper::getMediaById($media['id'], $media['variant'])];

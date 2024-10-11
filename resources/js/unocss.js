@@ -10,7 +10,21 @@ window.initializeUnoCSS = (initOptions) => {
         defaults: {
             presets: [
                 presetUno(),
-                presetTypography(),
+                presetTypography({
+                    cssExtend: {
+                        'p, h1, h2, h3, h4, blockquote': {
+                            'max-width': '768px', // equivalent to 'maxWidth.3xl' in Tailwind
+                            'margin-left': 'auto',
+                            'margin-right': 'auto',
+                        },
+                        'a': {
+                            'color': 'var(--primary-500)', // equivalent to theme('colors.primary.500')
+                            '&:hover': {
+                                'color': 'var(--primary-600)', // equivalent to theme('colors.primary.600')
+                            },
+                        },
+                    },
+                }),
                 presetForms(),
                 presetWebFonts({
                     provider: 'bunny',
@@ -27,6 +41,9 @@ window.initializeUnoCSS = (initOptions) => {
                 })
             ],
             theme: {
+                container: {
+                    center: true
+                },
                 colors: {
                     primary: {
                         50: 'rgb(var(--color-primary-50) / <alpha-value>)',

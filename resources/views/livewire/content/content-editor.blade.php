@@ -44,7 +44,7 @@
             ></x-daugt::form.icon-button>
         </div>
     </template>
-    <div x-ref="editor" class="prose mx-auto px-2 py-1 w-full"></div>
+    <div x-ref="editor" class="prose max-w-full mx-auto px-2 py-1 w-full"></div>
 </div>
 <x-daugt::content-editor.floating-menu-blocks :blocks="$availableBlocks">
 </x-daugt::content-editor.floating-menu-blocks>

@@ -39,7 +39,7 @@ class MediaHelper
 
                     return $url.'?'.random_int(1000, 9999);
                 } elseif (empty($type) || $type == 'optimized') {
-                    return $media->getUrl();
+                    return $media->getTemporaryUrl(now()->addHour());
                 }
             }
         } else {

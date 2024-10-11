@@ -70,14 +70,14 @@ class DaugtServiceProvider extends ServiceProvider
             'thumbnail',
             ImageManipulation::make(function (Image $image) {
                 $image->scaleDown(400, 400);
-            })->outputWebpFormat()->setOutputQuality(50)
+            })->outputJpegFormat()->setOutputQuality(60)
         );
 
         ImageManipulator::defineVariant(
             'optimized',
             ImageManipulation::make(function (Image $image) {
                 $image->scaleDown(1920, 1920);
-            })->outputWebpFormat()->setOutputQuality(50)
+            })->outputJpegFormat()->setOutputQuality(60)
         );
 
         $loader = AliasLoader::getInstance();
