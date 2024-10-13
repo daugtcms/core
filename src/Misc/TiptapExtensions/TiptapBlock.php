@@ -1,9 +1,8 @@
 <?php
 
-namespace Daugt\Misc;
+namespace Daugt\Misc\TiptapExtensions;
 
 use Daugt\View\Blocks\Block;
-use Illuminate\Support\Facades\Blade;
 use Tiptap\Core\Node;
 
 class TiptapBlock extends Node

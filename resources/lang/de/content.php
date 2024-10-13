@@ -10,5 +10,7 @@ return [
     'users_can_post_anonymously' => 'Benutzer können anonym Beiträge verfassen',
     'schedule_content' => 'Veröffentlichungsdatum festlegen',
     'published_at_description' => 'Wenn ein Datum in der Zukunft ausgewählt wird, wird der Inhalt erst an diesem Datum veröffentlicht.',
-    'select_type_and_template' => 'Wählen Sie einen Typ und ein Template um fortzufahren.'
+    'select_type_and_template' => 'Wählen Sie einen Typ und ein Template um fortzufahren.',
+    'link_url' => 'Link URL',
+    'display_text' => 'Anzeigetext'
 ];

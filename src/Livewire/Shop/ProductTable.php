@@ -34,15 +34,12 @@ class ProductTable extends Table
 
     public function add(): void
     {
-        $this->dispatch('openModal', 'daugt::shop.edit-product', [
-        ]);
+        redirect()->route('daugt.admin.shop.product.create');
     }
 
     public function edit($id): void
     {
-        $this->dispatch('openModal', 'daugt::shop.edit-product', [
-            'product' => $id
-        ]);
+        redirect()->route('daugt.admin.shop.product.edit', ['product' => $id]);
     }
 
     public function toggleEnabled($id): void

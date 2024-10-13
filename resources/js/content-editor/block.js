@@ -26,7 +26,7 @@ export const Block = Node.create({
                     }
                 }
             },
-            styleUrl: {
+            scriptsAndStyles: {
                 default: null,
                 /*parseHTML: element => {
                     return null
@@ -35,15 +35,15 @@ export const Block = Node.create({
                     return null
                 }*/
                 parseHTML: element => {
-                    return element.getAttribute('data-style-url')
+                    return element.getAttribute('data-scripts-and-styles')
                 },
                 renderHTML: attributes => {
-                    if (! attributes.styleUrl) {
+                    if (! attributes.scriptsAndStyles) {
                         return null
                     }
 
                     return {
-                        'data-style-url': attributes.styleUrl
+                        'data-scripts-and-styles': attributes.scriptsAndStyles
                     }
                 }
             },
@@ -125,15 +125,11 @@ export const Block = Node.create({
             dom.contentEditable = 'false'
             dom.classList.add('tiptap-block-wrapper');
 
-
-            console.log(node.attrs);
-
             let data = typeof node.attrs.data === 'object'
                 ? JSON.stringify(node.attrs.data)
                 : node.attrs.data
 
-            // TODO: ADD JS WITH INIT SNIPPET INSTEAD OF STYLESHEET
-            let preview = "<link rel=\"stylesheet\" href=\"" + node.attrs.styleUrl + "\">"
+            let preview = node.attrs.scriptsAndStyles
 
             // replace all new lines
             preview += node.attrs.preview.replace(/(\r\n|\n|\r)/gm, "");
@@ -158,20 +154,39 @@ export const Block = Node.create({
                         },
                         init() {
                             let preview = \`${preview}\`
-                            // decode the preview
+                            // Decode the preview
                             preview = decodeURIComponent(preview);
+                        
+                            const iframeDocument = $refs.iframe.contentWindow.document;
+                            iframeDocument.open(); // Open the iframe document for writing
+                            iframeDocument.write(preview); // Write the decoded preview content
+                            iframeDocument.close(); // Close to complete the content write
+                        
+                            // Function to add classes after the body is available
+                            const addClassesToIframe = () => {
+                                if (iframeDocument.readyState === 'complete' || iframeDocument.body) {
+                                    // Add 'font-sans' class to <html> tag
+                                    iframeDocument.documentElement.classList.add('font-sans');
+                                    // Add 'font-sans' class to <body> tag
+                                    iframeDocument.body.classList.add('font-sans');
                             
-                            $refs.iframe.contentWindow.document.body.innerHTML = preview
+                                    const resizeIframe = () => {
+                                        const iframeBody = iframeDocument.body;
+                                        if (iframeBody) {
+                                            this.$refs.iframe.style.height = iframeBody.scrollHeight + 'px';
+                                        }
+                                    };
                             
-                            const resizeIframe = () => {
-                                const iframeBody = $refs.iframe.contentWindow.document.body;
-                                $refs.iframe.style.height = iframeBody.scrollHeight + 'px';
-                                console.log(iframeBody.scrollHeight);
+                                    this.intervalId = setInterval(resizeIframe, 500);
+                                    resizeIframe();
+                                } else {
+                                    // Wait and try again after a brief delay
+                                    setTimeout(addClassesToIframe, 0);
+                                }
                             };
-    
-                            this.intervalId = setInterval(resizeIframe, 500);
                             
-                            resizeIframe();
+                            // Start the function
+                            addClassesToIframe();
                         },
                         destroy() {
                             clearInterval(this.intervalId)
@@ -214,6 +229,7 @@ export const Block = Node.create({
                 const { $from, $to } = selection
 
                 const range = $from.blockRange($to)
+                console.log(attributes, range, $from, $to);
 
                 if (!range) {
                     if ($to.parentOffset === 0) {
@@ -237,25 +253,56 @@ export const Block = Node.create({
                     return currentChain.setTextSelection(range.end)
                 }
             },
-            updateBlock: (attributes) => ({ chain, state }) => {
-                const { selection } = state
-                const { $from, $to } = selection
-                const range = $from.blockRange($to)
-                const currentChain = chain()
-                console.log(attributes.coordinates);
-                if (!range) {
-                    if (attributes.coordinates) {
-                        currentChain.insertContentAt({ from: attributes.coordinates , to: attributes.coordinates + 1 }, { type: this.name, attrs: attributes })
-                        return false
+            updateBlock: (attributes) => ({ state, commands }) => {
+                const { selection } = state;
+                const { $from } = selection;
+
+                // HINT: Code generated by GPT o1-preview <3
+                // maybe needs some revision but works for now
+
+                // Check if the selection is a node selection and the selected node is our Block node
+                if (selection.node && selection.node.type.name === this.name) {
+                    // Update the attributes of the selected node directly
+                    return commands.updateAttributes(this.name, attributes);
+                } else {
+                    // Try to find the Block node at the current cursor position
+                    let pos = $from.pos;
+                    let node = state.doc.nodeAt(pos);
+
+                    // If not found, check the node before the current position
+                    if (!node || node.type.name !== this.name) {
+                        pos = $from.before();
+                        node = state.doc.nodeAt(pos);
                     }
 
-                    currentChain.insertContentAt({ from: $from.pos, to: $from.pos + 1 }, { type: this.name, attrs: attributes })
-                    return false
+                    if (node && node.type.name === this.name) {
+                        // Update attributes at the found position
+                        return commands.command(({ tr }) => {
+                            tr.setNodeMarkup(pos, undefined, {
+                                ...node.attrs,
+                                ...attributes,
+                            });
+                            return true;
+                        });
+                    } else if (attributes.coordinates !== undefined) {
+                        // If a specific position is provided, use it
+                        const nodePos = attributes.coordinates;
+                        const nodeAtPos = state.doc.nodeAt(nodePos);
+
+                        if (nodeAtPos && nodeAtPos.type.name === this.name) {
+                            return commands.command(({ tr }) => {
+                                tr.setNodeMarkup(nodePos, undefined, {
+                                    ...nodeAtPos.attrs,
+                                    ...attributes,
+                                });
+                                return true;
+                            });
+                        }
+                    }
+
+                    // Could not find the Block node to update
+                    return false;
                 }
-
-                currentChain.insertContentAt({ from: range.start, to: range.end }, { type: this.name, attrs: attributes })
-
-                return currentChain.focus(range.end + 1)
             },
             removeBlock: () => ({ commands }) => {
                 return commands.deleteSelection()

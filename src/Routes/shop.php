@@ -1,5 +1,7 @@
 <?php
 
+use Daugt\Controllers\Admin\Shop\ShowOrdersController;
+use Daugt\Livewire\Shop\EditProduct;
 use Illuminate\Support\Facades\Route;
 use Daugt\Controllers\Shop\CartController;
 use Daugt\Controllers\Shop\CheckoutController;
@@ -14,7 +16,10 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
 
     Route::get('/product', ProductTable::class)->name('product.index');
 
-    Route::get('/order', \Daugt\Controllers\Admin\Shop\ShowOrdersController::class)->name('orders.index');
+    Route::get('/product/create', EditProduct::class)->name('product.create');
+    Route::get('/product/{product}', EditProduct::class)->name('product.edit');
+
+    Route::get('/order', ShowOrdersController::class)->name('orders.index');
 
 });
 

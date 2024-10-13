@@ -1,1 +1,0 @@
-<div class="w-full" style="height: {{$height}}px"></div>

@@ -3,6 +3,9 @@ import StarterKit from '@tiptap/starter-kit'
 import FloatingMenu from '@tiptap/extension-floating-menu'
 import {Block} from "./block.js";
 import {Link} from "@tiptap/extension-link";
+import {TextAlign} from "@tiptap/extension-text-align";
+import {Color} from "./color.js";
+import {FontFamily} from "./font-family.js";
 
 Livewire.on('insertBlock', (event) => {
     console.log(event);
@@ -37,6 +40,13 @@ window.setupContentEditor = function (content) {
                         openOnClick: false,
                         autolink: true,
                     }),
+                    TextAlign.configure({
+                        types: ['heading', 'paragraph'],
+                        defaultAlignment: 'justify',
+                    }),
+                    Color,
+                    FontFamily,
+                    // custom block element for daugt
                     Block
                 ],
                 content: this.content,
@@ -100,6 +110,15 @@ window.setupContentEditor = function (content) {
         setHorizontalRule() {
             editor.chain().setHorizontalRule().focus().run()
         },
+        setTextAlign(opts) {
+            editor.chain().setTextAlign(opts).focus().run()
+        },
+        setColor(opts) {
+            editor.chain().setColor(opts).focus().run()
+        },
+        setFontFamily(opts) {
+            editor.chain().setFontFamily(opts).focus().run()
+        },
         toggleLink() {
             const previousUrl = editor.getAttributes('link').href
             const url = window.prompt('Set URL of this link. Leave empty to delete this link.', previousUrl)
@@ -125,7 +144,7 @@ window.setupContentEditor = function (content) {
                 label: event.detail.label,
                 uuid: event.detail.uuid,
                 preview: event.detail.preview,
-                styleUrl: event.detail.styleUrl,
+                scriptsAndStyles: event.detail.scriptsAndStyles,
                 block: event.detail.block,
                 coordinates: event.detail.coordinates,
                 data: event.detail.data
@@ -140,7 +159,7 @@ window.setupContentEditor = function (content) {
                 label: event.detail.label,
                 uuid: event.detail.uuid,
                 preview: event.detail.preview,
-                styleUrl: event.detail.styleUrl,
+                scriptsAndStyles: event.detail.scriptsAndStyles,
                 block: event.detail.block,
                 coordinates: event.detail.coordinates,
                 data: event.detail.data

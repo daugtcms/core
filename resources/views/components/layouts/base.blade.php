@@ -20,7 +20,7 @@
     </script>
 
 </head>
-<body class="w-full h-full" un-cloak>
+<body class="w-full h-full font-sans" un-cloak>
 {{$slot}}
 </body>
 </html>

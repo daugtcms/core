@@ -16,7 +16,9 @@ enum AttributeType: string
 
     case DATE = 'date';
 
-    case ICON = '';
+    case ICON = 'icon';
+
+    case LINK = 'link';
 
     case LISTING = 'listing';
 

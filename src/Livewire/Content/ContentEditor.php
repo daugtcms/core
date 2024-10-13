@@ -6,15 +6,10 @@ use Daugt\Data\Blocks\BlockData;
 use Daugt\Enums\Content\ContentGroup;
 use Daugt\Injectable\TiptapEditor;
 use Daugt\Misc\ThemeRegistry;
-use Daugt\Misc\TiptapBlock;
-use Daugt\Models\Content\Content;
 use Daugt\View\Blocks\Block;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Vite;
 use Livewire\Attributes\Modelable;
-use Tiptap\Editor;
-use Tiptap\Extensions\StarterKit;
 
 class ContentEditor extends \Livewire\Component
 {
@@ -42,13 +37,32 @@ class ContentEditor extends \Livewire\Component
                     $block = new Block($node->attrs->block);
                     $block->uuid = $node->attrs->uuid;
                     $block->attributes = json_decode(json_encode($node->attrs->data), true);
-                    $node->attrs->preview = Blade::render($block->getView(), $block->attributes);
-                    $node->attrs->styleUrl = Vite::asset('resources/css/app.css');
+                    $node->attrs->preview = $block->render();
+                    $node->attrs->scriptsAndStyles = $this->getScriptsAndStyles();
                     $node->attrs->label = ThemeRegistry::getThemeBlock($node->attrs->block)->name;
                 }
             });
             $this->processedContent = $editor->getDocument();
         }
+    }
+
+    private function getScriptsAndStyles(): string {
+        $string = Vite::useHotFile('vendor/daugt/daugt.hot')
+            ->useBuildDirectory("vendor/daugt")
+            ->withEntryPoints(['resources/css/stripped.css', 'resources/js/stripped.js'])->toHtml();
+
+        // Append the script block using heredoc syntax
+        $jsonStyle = json_encode(config('daugt.style'));
+
+        $string .= <<<HTML
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                window.initializeUnoCSS($jsonStyle);
+            });
+        </script>
+        HTML;
+
+        return $string;
     }
 
     public function render()
@@ -67,7 +81,7 @@ class ContentEditor extends \Livewire\Component
             $editor->descendants(function (&$node) {
                 if ($node->type == 'Block') {
                     unset($node->attrs->preview);
-                    unset($node->attrs->styleUrl);
+                    unset($node->attrs->scriptsAndStyles);
                     unset($node->attrs->label);
                 }
             });
@@ -86,8 +100,8 @@ class ContentEditor extends \Livewire\Component
             block: $key,
             label: $themeBlock->name,
             data: $block->attributes,
-            preview: Blade::render($block->getView(), $block->attributes),
-            styleUrl: Vite::asset('resources/css/app.css'),
+            preview: $block->render(),
+            scriptsAndStyles: $this->getScriptsAndStyles()
         );
     }
 
@@ -112,8 +126,8 @@ class ContentEditor extends \Livewire\Component
                         label: $themeBlock->name,
                         coordinates: $block->coordinates,
                         data: $block->attributes,
-                        preview: Blade::render($realBlock->getView(), $block->attributes),
-                        styleUrl: Vite::asset('resources/css/app.css'),
+                        preview: $realBlock->render(),
+                        scriptsAndStyles: $this->getScriptsAndStyles()
                     );
                 }
             }

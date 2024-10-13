@@ -23,6 +23,12 @@ return [
                 'description' => 'Whether to open the link in a new tab.',
                 'type' => AttributeType::BOOLEAN,
             ],
-        ]
+        ],
+        'multi' => true
     ],
+    'shop_categories' => [
+        'name' => 'Shop Categories',
+        'listAttributes' => [],
+        'itemAttributes' => []
+    ]
 ];

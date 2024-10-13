@@ -25,4 +25,6 @@ class ListingTypeData extends Data implements Wireable
      * @var Collection<string, AttributeData>
      */
     public Collection $itemAttributes;
+
+    public bool $multi = false;
 }

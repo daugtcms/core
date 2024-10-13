@@ -1,5 +1,6 @@
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
+import {TextAlign} from "@tiptap/extension-text-align";
 
 window.setupEditor = function (content) {
     let editor
@@ -13,6 +14,10 @@ window.setupEditor = function (content) {
                 element: element,
                 extensions: [
                     StarterKit,
+                    TextAlign.configure({
+                        types: ['heading', 'paragraph'],
+                        defaultAlignment: 'justify',
+                    })
                 ],
                 content: this.content,
                 onCreate: ({ editor }) => {
@@ -76,6 +81,9 @@ window.setupEditor = function (content) {
         },
         setHorizontalRule() {
             editor.chain().setHorizontalRule().focus().run()
-        }
+        },
+        setTextAlign(opts) {
+            editor.chain().setTextAlign(opts).focus().run()
+        },
     }
 }

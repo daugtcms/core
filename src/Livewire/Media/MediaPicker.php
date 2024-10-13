@@ -56,7 +56,7 @@ class MediaPicker extends Component
         });
 
         $this->fetchedMedia = Media::whereIn('id', $this->selectedMedia->pluck('id'))->get();
-        $this->dispatch('picker-updated', $media, $this->id);
+        $this->dispatch('picker-updated', $this->selectedMedia->values(), $this->id);
     }
 
     public function removeMedia($mediaId) {
@@ -64,6 +64,6 @@ class MediaPicker extends Component
             return $item->id != $mediaId;
         });
         $this->fetchedMedia = Media::whereIn('id', $this->selectedMedia->pluck('id'))->get();
-        $this->dispatch('picker-updated', $this->selectedMedia, $this->id);
+        $this->dispatch('picker-updated', $this->selectedMedia->values(), $this->id);
     }
 }

@@ -3,7 +3,9 @@
 namespace Daugt\Livewire\Shop;
 
 use Illuminate\Support\Arr;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 use Daugt\Data\Blocks\TemplateData;
 use Daugt\Enums\Blocks\TemplateUsage;
@@ -17,9 +19,9 @@ use Daugt\Models\Listing\Navigation;
 use Livewire\Attributes\Rule;
 use Daugt\Models\Shop\Product;
 
-class EditProduct extends ModalComponent
+class EditProduct extends Component
 {
-    public int|Product $product;
+    public Product $product;
 
     #[Rule('required')]
     public $name = '';
@@ -56,7 +58,7 @@ class EditProduct extends ModalComponent
 
     public bool $isCourse = false;
 
-    public function mount(Product $product = null)
+    public function mount($product = null)
     {
         if (isset($product->id)) {
             $this->name = $product->name;
@@ -124,10 +126,6 @@ class EditProduct extends ModalComponent
         });
 
         $this->product->categories()->sync($this->categories);
-
-        $this->closeModalWithEvents([
-            ProductTable::class => 'refreshComponent',
-        ]);
     }
 
     #[On('updateContent')]
@@ -136,17 +134,13 @@ class EditProduct extends ModalComponent
         if(!is_numeric($value)) { $this->content_id = null; } else { $this->content_id = (int) $value; };
     }
 
+    #[Layout('daugt::components.layouts.admin')]
     public function render()
     {
 
         return view('daugt::livewire.shop.edit-product', [
-            'courses' => Listing::where('usage', ListingUsage::COURSE)->get(),
+            // 'courses' => Listing::where('usage', ListingUsage::COURSE)->get(),
         ]);
-    }
-
-    public static function modalMaxWidth(): string
-    {
-        return 'xl';
     }
 
     public function setIsExternal(bool $value)

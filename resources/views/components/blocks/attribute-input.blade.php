@@ -17,7 +17,7 @@
                 </x-daugt::form.input>
                 @break
             @case(AttributeType::NUMBER->value)
-                <x-daugt::form.input class="w-full mt-1" type="number" required
+                <x-daugt::form.input class="w-full mt-1" type="number"
                                         placeholder="{{Str::ucfirst($attribute->type->value)}}" {{ $attributes }}>
                 </x-daugt::form.input>
                 @break
@@ -72,6 +72,11 @@
             @case(AttributeType::ICON->value)
                 <x-daugt::form.icon-picker
                         {{ $attributes }}></x-daugt::form.icon-picker>
+                @break
+            @case(AttributeType::LINK->value)
+                <x-daugt::form.link-input
+                        {{  $attributes }}></x-daugt::form.link-input>
+                @break
         @endswitch
     @endif
 </div>

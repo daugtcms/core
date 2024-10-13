@@ -13,7 +13,7 @@
 
     {{ Vite::useHotFile('vendor/daugt/daugt.hot')
         ->useBuildDirectory("vendor/daugt")
-        ->withEntryPoints(['resources/css/app.css', 'resources/js/app.js']) }}
+        ->withEntryPoints(['resources/css/app.css', 'resources/js/app.js'])}}
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {

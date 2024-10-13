@@ -15,6 +15,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Nette\NotImplementedException;
 use Daugt\Misc\ThemeRegistry;
+use Plank\Mediable\Media;
 
 class Block extends Component
 {
@@ -69,6 +70,8 @@ class Block extends Component
         if($blockDefaults) {
             // use array_filter to remove empty arrays/strings
             $this->attributes = array_merge($blockDefaults->attributes, array_filter($this->attributes));
+        } else {
+            $this->attributes = array_filter($this->attributes);
         }
         foreach ((ThemeRegistry::getThemeBlock($this->name) ?? ThemeRegistry::getThemeTemplate($this->name))->attributes as $key => $value) {
             switch($value->type) {
@@ -86,20 +89,41 @@ class Block extends Component
                     break;
                 case AttributeType::MEDIA:
                     if(isset($this->attributes[$key]) && isset($this->attributes[$key][0]) && isset($this->attributes[$key][0]['id'])) {
-                        if(isset($value->options) && $value->options['multiple']) {
-                            $this->attributes[$key] = $this->attributes[$key]->map(function($media) {
-                                return ['url' => MediaHelper::getMediaById($media['id'], $media['variant'])];
-                            });
-                        } else {
-                            $this->attributes[$key] = ['url' => MediaHelper::getMediaById($this->attributes[$key][0]['id'], $this->attributes[$key][0]['variant'])];
+                        $mediaVariants = collect($this->attributes[$key])->mapWithKeys(function($media) {
+                            return [$media['id'] => $media['variant']];
+                        });
+                        $mediaList = Media::whereIn('id', collect($this->attributes[$key])->map(function($media) {
+                            return $media['id'];
+                        }))->get();
+                        $this->attributes[$key] = $mediaList->map(function($media) use($value, $mediaVariants) {
+                            $variant = $mediaVariants[$media->id] ?? null;
+
+                            $result = ['url' => MediaHelper::getMedia($media,$variant)];
+
+                            if (isset($value->options['withMetadata']) && $value->options['withMetadata']) {
+                                $result = array_merge($media->toArray(), $result);
+                            }
+
+                            return $result;
+                        });
+
+                        if(!isset($value->options['multi']) || !$value->options['multi']) {
+                            $this->attributes[$key] = $this->attributes[$key][0];
                         }
                     } else {
                         $this->attributes[$key] = null;
                     }
                     break;
+                /*case AttributeType::LINK:
+                    if(isset($this->attributes[$key])) {
+                        $this->attributes[$key] = json_decode
+                    } else {
+                        $this->attributes[$key] = null;
+                    }
+                    break;*/
                 default:
                     if(!isset($this->attributes[$key])) {
-                        $this->attributes[$key] = "";
+                        $this->attributes[$key] = null;
                     }
                     break;
             }
