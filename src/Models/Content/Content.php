@@ -2,6 +2,7 @@
 
 namespace Daugt\Models\Content;
 
+use Daugt\Misc\ContentTypeRegistry;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,4 +43,18 @@ class Content extends Model
     {
         return 'slug';
     }
+
+    public function getUrl() {
+        $type = ContentTypeRegistry::getContentType($this->type);
+        if(!empty($type->path)) {
+            return route('daugt.content.show', ['first' => $type->path, 'second' => $this->slug]);
+        } else {
+            return route('daugt.content.show', ['first' => $this->slug]);
+        }
+    }
+
+    // All fields that get exposed to the template renderer
+    public static array $fieldsForTemplateUsage = [
+        'id', 'title', 'user', 'slug', 'published_at', 'created_at', 'updated_at'
+    ];
 }

@@ -25,4 +25,13 @@ class ListingItem extends Model
     {
         return $this->belongsTo(Listing::class);
     }
+
+    protected static function booted()
+    {
+        static::creating(function ($listingItem) {
+            if ($listingItem->listing_id && !$listingItem->listing_type) {
+                $listingItem->listing_type = Listing::find($listingItem->listing_id)->type;
+            }
+        });
+    }
 }

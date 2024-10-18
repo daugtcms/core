@@ -2,6 +2,7 @@
 
 namespace Daugt\Jobs\Shop;
 
+use Daugt\Jobs\BaseJob;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -10,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Daugt\Injectable\StripeClient;
 use Daugt\Models\User;
 
-class SyncStripeUser implements ShouldQueue
+class SyncStripeUser extends BaseJob
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -29,14 +30,14 @@ class SyncStripeUser implements ShouldQueue
                 'name' => $this->user->full_name,
                 'email' => $this->user->email,
                 'preferred_locales' => ['de-DE'],
-            ]);
+            ], StripeClient::getStripeOptions());
             $this->user->stripe_id = $customer->id;
             $this->user->saveQuietly();
         } else {
             $stripe->customers->update($this->user->stripe_id, [
                 'name' => $this->user->full_name,
                 'email' => $this->user->email,
-            ]);
+            ], StripeClient::getStripeOptions());
         }
     }
 }

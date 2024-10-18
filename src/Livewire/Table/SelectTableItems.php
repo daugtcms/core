@@ -12,6 +12,10 @@ class SelectTableItems extends ModalComponent
 
     public array $selected;
 
+    public bool $multiSelect;
+
+    public array $filters;
+
     protected $listeners = [
         'updateSelectedItems' => 'updateSelectedItems',
     ];

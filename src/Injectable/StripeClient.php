@@ -11,4 +11,16 @@ class StripeClient
             'stripe_version' => '2023-10-16',
         ]);
     }
+
+    public static function getStripeOptions()
+    {
+        $options = [];
+        $stripeAccountId = config('daugt.stripe.connect_account_id');
+
+        if (!empty($stripeAccountId)) {
+            $options['stripe_account'] = $stripeAccountId;
+        }
+
+        return $options;
+    }
 }

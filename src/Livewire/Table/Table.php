@@ -24,24 +24,39 @@ abstract class Table extends Component
 
     public array $ids = [];
 
+    public array $filters = [];
+
     abstract public function columns(): array;
 
     public function data()
     {
-        return $this
-            ->query()
-            ->get();
-    }
-
-    public function updatedSelected($value): void {
-        if(!$this->multiSelect) {
-            $this->selected = [$value];
-        }
-
-        $this->dispatch('updateSelectedItems', $this->multiSelect ? $this->selected : $value);
+        $query = $this->filter($this->query(), $this->filters);
+        return $query->get();
     }
 
     abstract public function query(): Builder;
+
+    private function filter(Builder $query, $filters): Builder
+    {
+        foreach ($filters as $field => $filter) {
+            // Check if the filter is an array with an operator
+            if (is_array($filter) && count($filter) === 2) {
+                [$operator, $value] = $filter;
+            } else {
+                // Default to '=' if no operator is specified
+                $operator = '=';
+                $value = $filter;
+            }
+
+            // Apply the filter to the query
+            $query->where($field, $operator, $value);
+        }
+        return $query;
+    }
+
+    public function updatedSelected($key, $value): void {
+        $this->dispatch('updateSelectedItems', array_keys($this->selected));
+    }
 
     abstract public function add(): void;
 

@@ -7,6 +7,7 @@ use Daugt\Livewire\Blocks\EditBlockData;
 use Daugt\Livewire\Content\EditContent;
 use Daugt\Livewire\Content\ScheduleContent;
 use Daugt\Livewire\Listing\ListingEditor;
+use Daugt\Livewire\Listing\ListingTable;
 use Daugt\Livewire\Media\EditMedia;
 use Daugt\Livewire\Media\MediaManager;
 use Daugt\Livewire\Media\MediaPicker;
@@ -20,6 +21,7 @@ use Daugt\Livewire\Shop\ProductTable;
 use Daugt\Livewire\Table\SelectTableItems;
 use Daugt\Livewire\Users\EditUser;
 use Daugt\Livewire\Users\UserTable;
+use Daugt\View\Blocks\Misc\BlocksRenderer;
 use Daugt\View\Blocks\Misc\BlockSynth;
 use Daugt\Livewire\Blocks\EditBlockDefaults;
 use Daugt\Livewire\Blocks\TemplateEditor;
@@ -48,6 +50,7 @@ class DaugtBladeServiceProvider extends ServiceProvider
 
         Blade::component('daugt::shop.shopping-cart', ShoppingCart::class);
         Blade::component('daugt::content-renderer', ContentRenderer::class);
+        Blade::component('daugt::blocks-renderer', BlocksRenderer::class);
         Blade::component('daugt::template-renderer', TemplateRenderer::class);
 
         Blade::componentNamespace('Daugt\\View\\Blocks\\', 'Blocks');
@@ -67,6 +70,7 @@ class DaugtBladeServiceProvider extends ServiceProvider
         Livewire::component('daugt::listing.listing-editor', ListingEditor::class);
         Livewire::component('daugt::listing.edit-listing', EditListing::class);
         Livewire::component('daugt::content.content-table', ContentTable::class);
+        Livewire::component('daugt::listing.listing-table', ListingTable::class);
         Livewire::component('daugt::media.media-manager', MediaManager::class);
         Livewire::component('daugt::media.media-uploader', MediaUploader::class);
         Livewire::component('daugt::media.media-picker', MediaPicker::class);

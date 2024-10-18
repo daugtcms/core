@@ -57,7 +57,7 @@
                 @break
             @case(AttributeType::LISTING_ITEM->value)
                 @php
-                    \Daugt\Models\Listing\Listing::where('type', $attribute->options['type'])->with('items')->get()->each(function(\Daugt\Models\Listing\Listing $listing) use (&$items){
+                    \Daugt\Models\Listing\Listing::where('type', $attribute->options['listingType'])->with('items')->get()->each(function(\Daugt\Models\Listing\Listing $listing) use (&$items){
                         $listing->items->each(function(\Daugt\Models\Listing\ListingItem $item) use (&$items, $listing){
                             $items[] = [
                                 'value' => $item->id,
@@ -67,7 +67,7 @@
                     });
                     $items = collect($items)->toJson()
                 @endphp
-                <x-daugt::form.select :options="$items" {{ $attributes }}></x-daugt::form.select>
+                <x-daugt::form.multi-select :multi="$attribute->options['multi']" :options="$items" {{ $attributes }}></x-daugt::form.multi-select>
                 @break
             @case(AttributeType::ICON->value)
                 <x-daugt::form.icon-picker

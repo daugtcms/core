@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Daugt\Controllers\Controller;
 use Daugt\Injectable\StripeClient;
 use Daugt\Models\Shop\Product;
+use Illuminate\Support\Str;
 
 class CheckoutController extends Controller
 {
@@ -106,7 +107,7 @@ class CheckoutController extends Controller
                     }
                 }
                 return redirect(
-                    $stripe->checkout->sessions->create($payload)->url
+                    $stripe->checkout->sessions->create($payload, StripeClient::getStripeOptions())->url
                 );
             } else {
                 app('redirect')->setIntendedUrl(route('daugt.checkout'));

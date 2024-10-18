@@ -13,14 +13,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ContentTable extends Table
 {
-    protected $listeners = [
-        'saveBlocks' => 'saveBlocks',
-        'refreshComponent' => '$refresh',
-    ];
-
     #[Url]
     public $type = '';
-
 
     public function mount() {
         if(empty($this->type)) {
@@ -81,26 +75,6 @@ class ContentTable extends Table
         $title = '';
         if (isset($data['template']) && isset($data['template']['attributes']) && isset($data['template']['attributes']['title'])) {
             $title = $data['template']['attributes']['title'];
-        }
-        if ($id == 0) {
-            $content = Content::create([
-                'title' => $title,
-                'blocks' => $data,
-                'type' => $this->type,
-                'user_id' => auth()->user()->id,
-                'published_at' => Carbon::now(),
-            ]);
-        } else {
-            $content = Content::findOrFail($id);
-            $content->title = $title;
-            if(empty($content->title)) {
-                $content->slug = null;
-            }
-            $content->blocks = $data;
-            if(empty($content->published_at)) {
-                $content->published_at = $content->created_at;
-            }
-            $content->save();
         }
     }
 }

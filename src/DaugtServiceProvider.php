@@ -161,7 +161,6 @@ class DaugtServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'product' => Product::class,
             'content' => Content::class,
-            'template' => Template::class,
             'listing' => Listing::class,
             'listing-item' => ListingItem::class,
             'user' => User::class,

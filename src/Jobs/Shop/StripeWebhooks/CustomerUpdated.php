@@ -2,6 +2,7 @@
 
 namespace Daugt\Jobs\Shop\StripeWebhooks;
 
+use Daugt\Jobs\BaseJob;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -10,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Daugt\Models\User;
 use Spatie\WebhookClient\Models\WebhookCall;
 
-class CustomerUpdated implements ShouldQueue
+class CustomerUpdated extends BaseJob
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

@@ -37,8 +37,8 @@
                     @if($selectable)
                         <td>
                             <div class="py-2 px-3 flex items-center">
-                                <x-daugt::form.checkbox name="selected-{{$row['id']}}" value="{{$row['id']}}"
-                                                           wire:model.live="selected"></x-daugt::form.checkbox>
+                                <x-daugt::form.checkbox name="selected-{{$row['id']}}"
+                                                           wire:model.live="selected.{{ $row['id'] }}"></x-daugt::form.checkbox>
                             </div>
                         </td>
                     @endif

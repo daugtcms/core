@@ -38,22 +38,6 @@
                 @endforeach
             </div>
         @endif
-        @if($type === 'course')
-            <div>
-                <x-daugt::form.label for="starts_at">{{__('daugt::general.starts_at')}}
-                    <x-slot name="additional">{{__('daugt::content.leave_empty_for_continuous_course')}}</x-slot>
-                </x-daugt::form.label>
-                <x-daugt::form.input id="starts_at" wire:model.blur="data.starts_at" type="date"
-                                        :error="$errors->first('data.starts_at')"/>
-            </div>
-            <div>
-                <x-daugt::form.label for="ends_at">{{__('daugt::general.ends_at')}}
-                    <x-slot name="additional">{{__('daugt::content.leave_empty_for_continuous_course')}}</x-slot>
-                </x-daugt::form.label>
-                <x-daugt::form.input id="ends_at" wire:model.blur="data.ends_at" type="date"
-                                        :error="$errors->first('data.ends_at')"/>
-            </div>
-        @endif
     </div>
     <x-daugt::modal.footer class="justify-end">
         <x-daugt::form.button style="primary">{{__('daugt::general.save')}}</x-daugt::form.button>

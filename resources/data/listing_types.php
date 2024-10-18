@@ -30,5 +30,14 @@ return [
         'name' => 'Shop Categories',
         'listAttributes' => [],
         'itemAttributes' => []
+    ],
+    'course' => [
+        'name' => 'Kurs',
+        'listAttributes' => [
+            'keep_unlocked' => [
+                'name' => 'Inhalt nach Ablauf des Zugriffs für Kunden weiterhin verfügbar machen.',
+                'type' => AttributeType::BOOLEAN
+            ]
+        ]
     ]
 ];

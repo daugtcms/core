@@ -3,6 +3,7 @@
 namespace Daugt\Jobs\Shop\StripeWebhooks;
 
 use Carbon\Carbon;
+use Daugt\Jobs\BaseJob;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,7 +20,7 @@ use Daugt\Models\User;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Stripe\Exception\ApiErrorException;
 
-class CheckoutSessionCompleted implements ShouldQueue
+class CheckoutSessionCompleted extends BaseJob
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

@@ -44,11 +44,11 @@ return [
                 'attributes' => [
                     'logo' => [
                         'type' => AttributeType::MEDIA,
-                        'title' => 'Logo',
+                        'name' => 'Logo',
                     ],
                     'background' => [
                         'type' => AttributeType::MEDIA,
-                        'title' => 'Background',
+                        'name' => 'Background',
                     ]
                 ],
                 'usages' => [
@@ -57,4 +57,36 @@ return [
             ]
         ]
     ],
+    'shop' => [
+        'name' => 'Shop',
+        'blocks' => [],
+        'templates' => [
+            'shop-product' => [
+                'name' => 'Shop Product',
+                'viewPath' => __DIR__ . '/../views/blocks/templates/shop-product.blade.php',
+                'attributes' => [
+                    'product' => [
+                        'type' => AttributeType::PRODUCT,
+                        'name' => 'Product',
+                    ]
+                ],
+                'usages' => [
+                    'shop_product'
+                ]
+            ],
+            'shop-product-card' => [
+                'name' => 'Shop Product Card',
+                'viewPath' => __DIR__ . '/../views/blocks/templates/shop-product-card.blade.php',
+                'attributes' => [
+                    'product' => [
+                        'type' => AttributeType::PRODUCT,
+                        'name' => 'Product',
+                    ]
+                ],
+                'usages' => [
+                    'shop_product_card'
+                ]
+            ]
+        ]
+    ]
 ];

@@ -20,7 +20,7 @@ class ShopIndexController extends Controller
           });
         }
 
-        $products = $query->orderBy('updated_at', 'DESC')->get();
+        $products = $query->orderBy('updated_at', 'DESC')->paginate(24);
 
         return view('daugt::shop.index', compact('products'));
     }

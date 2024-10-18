@@ -9,16 +9,13 @@ use Daugt\Models\Shop\Product;
 
 class ShowProductController extends Controller
 {
-    public function __invoke($slug = null)
+    public function __invoke($slug)
     {
 
         $query = Product::where('enabled', true);
 
-        if ($slug) {
-            $query->where('slug', $slug);
-        } else {
-            $query->whereNull('slug')->orWhere('slug', '');
-        }
+        $query->where('slug', $slug);
+
         $product = $query->firstOrFail();
         return view('daugt::shop.product.show', compact('product'));
     }

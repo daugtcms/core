@@ -2,6 +2,7 @@
 
 namespace Daugt\Jobs\Media;
 
+use Daugt\Jobs\BaseJob;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 use Plank\Mediable\Facades\ImageManipulator;
 use Plank\Mediable\Facades\MediaUploader;
 
-class SaveUploadedFile implements ShouldQueue
+class SaveUploadedFile extends BaseJob
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

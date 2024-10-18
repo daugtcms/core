@@ -14,6 +14,7 @@ return [
     'stripe' => [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
+        'connect_account_id' => env('STRIPE_CONNECT_ACCOUNT_ID'),
         'default_tax_code' => env('STRIPE_DEFAULT_TAX_CODE'),
     ],
     'style' => [

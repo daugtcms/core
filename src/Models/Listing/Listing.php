@@ -26,4 +26,14 @@ class Listing extends Model
     {
         return $this->hasMany(ListingItem::class);
     }
+
+    protected static function booted()
+    {
+        static::updated(function ($listing) {
+            if ($listing->isDirty('type')) {
+                // Update the 'type' of all associated listing_items
+                $listing->listingItems()->update(['listing_type' => $listing->type]);
+            }
+        });
+    }
 }

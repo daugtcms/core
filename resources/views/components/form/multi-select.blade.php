@@ -3,6 +3,9 @@
         x-data="{
         selectOpen: false,
         selectedItems: [],
+        getSelectedItems() {
+            return this.selectedItems ?? [];
+        },
         selectableItems: {{$options ?? '[]'}},
         selectableItemActive: null,
         selectId: $id('select'),
@@ -34,10 +37,10 @@
         },
         toggleItem(item) {
             if (this.isMultiSelect) {
-                if (this.selectedItems.includes(item.value)) {
-                    this.selectedItems = this.selectedItems.filter(selectedItem => selectedItem !== item.value);
+                if (this.getSelectedItems().includes(item.value)) {
+                    this.selectedItems = this.getSelectedItems().filter(selectedItem => selectedItem !== item.value);
                 } else {
-                    this.selectedItems = [...this.selectedItems, item.value];
+                    this.selectedItems = [...this.getSelectedItems(), item.value];
                 }
             } else {
                 this.selectedItems = [item.value];
@@ -89,19 +92,15 @@
     }"
      x-init="
         $watch('selectOpen', function(){
-            if(!selectedItems.length){
+            if(!getSelectedItems().length){
                 selectableItemActive=selectableItems[0];
             } else {
-                selectableItemActive=selectedItems[0];
+                selectableItemActive=getSelectedItems()[0];
             }
             setTimeout(function(){
                 selectScrollToActiveItem();
             }, 10);
         });
-        selectedValue = $wire.get('{{ $attributes->wire('model')->value() }}')
-        if(selectedValue){
-            // selectedItem = selectableItems.find(item => item.value == selectedValue);
-        }
 "
      @keydown.escape="if(selectOpen){ selectOpen=false; }"
      @keydown.down="if(selectOpen){ selectableItemActiveNext(); } else { selectOpen=true; } event.preventDefault();"
@@ -120,8 +119,8 @@
 
     <button type="button" x-modelable="selectedItems" x-ref="selectButton"
             @click="$refs.panel.toggle; selectOpen=true;" {{$attributes->merge(['class' => $classList])}}>
-        <span x-text="selectedItems.length > 0 ? selectedItems.map(item => { const i = getItemByValue(item); return i.title ?? i.value}).join(', ') : '{{ __('daugt::general.no_value_available') }}'"
-              :class="{ 'truncate pr-7': true, 'text-neutral-500': selectedItems.length === 0 }">{{ __('daugt::general.no_value_available') }}</span>
+        <span x-text="getSelectedItems().length > 0 ? getSelectedItems().map(item => { const i = getItemByValue(item); return i.title ?? i.value}).join(', ') : '{{ __('daugt::general.no_value_available') }}'"
+              :class="{ 'truncate pr-7': true, 'text-neutral-500': getSelectedItems().length === 0 }">{{ __('daugt::general.no_value_available') }}</span>
         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <div class="i-lucide:chevrons-up-down w-5 h-5 text-neutral-400"></div>
         </span>
@@ -157,7 +156,7 @@
                     :class="{ 'bg-neutral-100 text-gray-900' : selectableItemIsActive(item), '' : !selectableItemIsActive(item) }"
                     @mousemove="selectableItemActive=item"
                     class="relative flex items-center h-full py-2 pl-8 text-gray-700 cursor-default select-none data-[disabled=true]:opacity-50  data-[disabled=true]:pointer-events-none">
-                <svg x-show="selectedItems.includes(item.value)"
+                <svg x-show="getSelectedItems().includes(item.value)"
                      class="absolute left-0 w-4 h-4 ml-2 stroke-current text-neutral-400"
                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

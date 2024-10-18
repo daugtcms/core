@@ -24,6 +24,9 @@ class ContentTypeRegistry
         }
     }
 
+    /**
+     * @return Collection<string, ContentTypeData>
+     */
     public static function getContentTypes()
     {
         return self::$contentTypes;

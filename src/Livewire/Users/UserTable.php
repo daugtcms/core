@@ -51,9 +51,4 @@ class UserTable extends Table
             // Column::make('id', '')->component('daugt::table.delete'),
         ];
     }
-
-    public function saveBlocks($data, $id)
-    {
-
-    }
 }

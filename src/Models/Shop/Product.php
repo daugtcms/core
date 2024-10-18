@@ -40,11 +40,22 @@ class Product extends Model
 
     public function categories(): MorphToMany
     {
-        return $this->morphToMany(ListingItem::class, 'model', 'model_has_listing_items', 'model_id', 'listing_item_id');
+        return $this->morphToMany(ListingItem::class, 'model', 'model_has_listing_items', 'model_id', 'listing_item_id')
+            ->where('listing_items.listing_type', 'shop_categories');
     }
 
-    public function course() {
-        return $this->belongsTo(Listing::class, 'course_id');
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(Content::class, 'access', 'product_has_access', 'product_id', 'access_id')
+            ->where('contents.type', 'post')
+            ->withPivot('type', 'start_date', 'end_date', 'duration', 'duration_unit');
+    }
+
+    public function courses(): MorphToMany
+    {
+        return $this->morphedByMany(Listing::class, 'access', 'product_has_access', 'product_id', 'access_id')
+            ->where('listings.type', 'course')
+            ->withPivot('type', 'start_date', 'end_date', 'duration', 'duration_unit');
     }
 
     protected static function boot(): void

@@ -2,6 +2,7 @@
 
 namespace Daugt\Data\Content;
 
+use Daugt\Models\Content\Content;
 use Illuminate\Support\Collection;
 use Daugt\Data\Theme\AttributeData;
 use Daugt\Enums\Content\ContentGroup;
@@ -10,6 +11,8 @@ use Spatie\LaravelData\Data;
 class ContentTypeData extends Data
 {
     public string $name;
+
+    public string $path;
 
     public ContentGroup $group;
 
@@ -21,4 +24,26 @@ class ContentTypeData extends Data
      * @var Collection<string, AttributeData>
      */
     public Collection $attributes;
+
+    /**
+     * @var bool|Closure
+     */
+    public $accessible;
+
+    /**
+     * Check if the content type is accessible for a given user and content.
+     *
+     * @param Content $content
+     * @return bool
+     */
+    public function isAccessible(Content $content): bool
+    {
+        // Check if 'accessible' is a callable function, if yes, call it with the $user and $content arguments
+        if (is_callable($this->accessible)) {
+            return call_user_func($this->accessible, $content);
+        }
+
+        // Otherwise, it's a boolean, so just return its value
+        return (bool) $this->accessible;
+    }
 }

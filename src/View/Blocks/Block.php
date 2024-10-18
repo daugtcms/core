@@ -9,6 +9,7 @@ use Daugt\Helpers\Media\MediaHelper;
 use Daugt\Models\Blocks\BlockDefaults;
 use Daugt\Models\Listing\Listing;
 use Daugt\Models\Listing\ListingItem;
+use Daugt\Models\Shop\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -87,6 +88,23 @@ class Block extends Component
                         $this->attributes[$key] = $listing;
                     }
                     break;
+                case AttributeType::LISTING_ITEM:
+                    if(isset($this->attributes[$key])) {
+                        $query = ListingItem::query();
+                        if(is_array($this->attributes[$key])) {
+                            $query = $query->whereIn('id', collect($this->attributes[$key]));
+                        } else {
+                            $query = $query->where('id', $this->attributes[$key]);
+                        }
+                        if(isset($value->options['listingType'])) {
+                            $query->where('listing_type', $value->options['listingType']);
+                        }
+                        $this->attributes[$key] = $query->get();
+                        if(!isset($value->options['multi']) || !$value->options['multi']) {
+                            $this->attributes[$key] = $this->attributes[$key][0];
+                        }
+                    }
+                    break;
                 case AttributeType::MEDIA:
                     if(isset($this->attributes[$key]) && isset($this->attributes[$key][0]) && isset($this->attributes[$key][0]['id'])) {
                         $mediaVariants = collect($this->attributes[$key])->mapWithKeys(function($media) {
@@ -113,6 +131,13 @@ class Block extends Component
                     } else {
                         $this->attributes[$key] = null;
                     }
+                    break;
+                case AttributeType::PRODUCT:
+                    if($this->attributes[$key] instanceof Product) {
+                        break;
+                    }
+                    $product = Product::where('id', $this->attributes[$key])->withMedia(['media'])->firstOrFail();
+                    $this->attributes[$key] = $product;
                     break;
                 /*case AttributeType::LINK:
                     if(isset($this->attributes[$key])) {
