@@ -84,42 +84,70 @@
                                     @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PENDING->value)
                                         <p class="flex items-center text-warning-500">
                                             Versand ausstehend
-                                        <div class="i-lucide:truck ml-1.5"></div>
+                                            <span class="i-lucide:truck ml-1.5"></span>
                                         </p>
                                     @endif
                                     @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PROCESSING->value)
                                         <p class="flex items-center text-primary-500">
                                             Bestellung wird verarbeitet
-                                        <div class="i-lucide:clock ml-1.5"></div>
+                                        <span class="i-lucide:clock ml-1.5"></span>
                                         </p>
                                     @endif
                                     @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::SHIPPED->value)
                                         <p class="flex items-center text-success-500">
                                             Bestellung wurde versandt
-                                        <div class="i-lucide:truck ml-1.5"></div>
+                                        <span class="i-lucide:truck ml-1.5"></span>
                                         </p>
                                     @endif
                                 </div>
                             @endif
-                            @if($order->status === 'paid' && !empty($item->product->course_id))
-                                <div>
-                                    <a href="{{route('daugt.member-area.course.show', ['course' => \Daugt\Models\Listing\Listing::findOrFail($item->product->course_id)->slug, 'section' => 'all']) }}"
-                                       class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
-                                        <div class="i-lucide:unlock h-3 w-3 mr-1.5"></div>
-                                        Kurs ansehen
-                                    </a>
-                                </div>
+                            <table class="text-neutral-700 border-separate border-spacing-y-2">
+                            @if($order->status === 'paid' && !empty($item->product->courses))
+                                @foreach($item->product->courses as $course)
+                                    <tr class="bg-white rounded-md">
+                                        <td class="px-2 py-1.5">
+                                            <a href="{{route('daugt.member-area.course.show', ['course' => $course->slug, 'section' => 'all']) }}" class="inline-flex gap-x-1 items-center">
+                                                {{$course->name}}
+                                                <div class="i-lucide:square-arrow-out-up-right h-3 w-3 mr-1.5"></div>
+                                            </a>
+                                        </td>
+                                        <td class="px-2 py-1.5">
+                                            @php
+                                                $timestamps = $item->getAccessTimestamps($course);
+                                            @endphp
+                                            @if($timestamps['starts_at'] && $timestamps['ends_at'])
+                                            {{$timestamps['starts_at']->format('d.m.Y')}} - {{$timestamps['ends_at']->format('d.m.Y')}}
+                                            @else
+                                            <div class="i-lucide:unlock h-3 w-3 mr-1.5"></div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endif
-                            @if($order->status === 'paid' && !empty($item->product->content_id))
-                                <div>
-                                    <a href="{{route('daugt.member-area.post.show', \Daugt\Models\Content\Content::where('id', $item->product->content_id)->first()->slug) }}"
-                                       class="inline-flex items-center justify-start px-1.5 text-sm rounded-md bg-gradient-to-bl from-green-400 to-green-600 text-green-50 cursor-pointer hover:text-white hover:to-green-500">
-                                        <div class="i-lucide:unlock h-3 w-3 mr-1.5"></div>
-                                        Inhalt ansehen
-                                    </a>
-                                </div>
+                            @if($order->status === 'paid' && !empty($item->product->posts))
+                                @foreach($item->product->posts as $post)
+                                    <tr class="bg-white rounded-md">
+                                        <td class="px-2 py-1.5">
+                                            <a href="{{route('daugt.content.show', ['post', $post->slug]) }}" class="inline-flex gap-x-1 items-center">
+                                                {{$post->title}}
+                                                <div class="i-lucide:square-arrow-out-up-right h-3 w-3 mr-1.5"></div>
+                                            </a>
+                                        </td>
+                                        <td class="px-2 py-1.5">
+                                            @php
+                                                $timestamps = $item->getAccessTimestamps($post);
+                                            @endphp
+                                            @if($timestamps['starts_at'] && $timestamps['ends_at'])
+                                                {{$timestamps['starts_at']->format('d.m.Y')}} - {{$timestamps['ends_at']->format('d.m.Y')}}
+                                            @else
+                                                <div class="i-lucide:unlock h-3 w-3 mr-1.5"></div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @endif
-                            @if($order->status !== 'paid' && ($item->product->course_id || $item->product->content_id))
+                            </table>
+                            @if($order->status !== 'paid' && ($item->product->courses() || $item->product->posts()))
                                 <span class="text-neutral-600 text-sm">Medien werden erst nach erfolgreicher Bezahlung freigeschalten.</span>
                             @endif
                         </div>
@@ -128,7 +156,7 @@
             </ul>
         </li>
     @empty
-        <p class="my-2 bg-neutral-100/75 rounded-lg px-4 py-2">Keine Bestellungen vorhanden</p>
+        <p class="my-2 bg-white shadow-md rounded-lg px-4 py-4">Keine Bestellungen vorhanden</p>
     @endforelse
 
     <div class="mt-4 w-full">

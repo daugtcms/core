@@ -58,6 +58,7 @@ class ContentTable extends Table
     {
         return [
             Column::make('id', '')->component('daugt::table.edit'),
+            Column::make('', __('daugt::general.show'))->component('daugt::table.show-content'),
             Column::make('', __('daugt::general.enabled'))->component('daugt::table.enabled'),
             Column::make('title', __('daugt::general.title')),
             Column::make('type', __('daugt::general.type')),

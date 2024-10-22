@@ -42,7 +42,14 @@ window.initializeUnoCSS = (initOptions) => {
             ],
             theme: {
                 container: {
-                    center: true
+                    center: true,
+                    padding: '1rem',
+                    maxWidth: {
+                        sm: '600px',
+                        md: '728px',
+                        lg: '984px',
+                        xl: '1240px',
+                    },
                 },
                 colors: {
                     primary: {

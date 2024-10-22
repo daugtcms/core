@@ -43,10 +43,10 @@ class CoursePosts extends Component
         } else {
             $query = $query->where('type', 'post')->with('user');
             if($this->section instanceof ListingItem) {
-                $query = $query->where('blocks->template->attributes->courseSection', $this->section->id);
+                $query = $query->whereJsonContains('attributes->courseSections', $this->section->id);
             } else {
                 $items = $this->course->items()->get()->pluck('id');
-                $query = $query->whereIn('blocks->template->attributes->courseSection', $items);
+                $query = $query->whereJsonContains('attributes->courseSections', $items);
             }
             $query = $query->where('published_at', '<=', now());
             if($timeslots instanceof Collection) {

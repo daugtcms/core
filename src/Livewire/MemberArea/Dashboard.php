@@ -26,9 +26,17 @@ class Dashboard extends Component
 
         $courses = collect();
         if(Auth::user()->can('edit contents')) {
-            $courses = Listing::with('items')->where('usage', ListingUsage::COURSE)->get();
+            $courses = Listing::with('items')->where('type', 'course')->get();
         } else {
-            $course_ids = $query->with('items.product')->get()->pluck('items')->flatten()->pluck('product')->filter(fn ($product) => $product->course_id)->unique()->map(fn ($product) => $product->course_id);
+            $course_ids = $query->with('items.product')->get()
+                ->pluck('items')
+                ->flatten()
+                ->pluck('product')
+                ->filter(fn ($product) => $product->courses()->exists())
+                ->unique()
+                ->map(fn ($product) => $product->courses()->pluck('listings.id')->toArray())
+                ->flatten()
+                ->unique();
             $courses = Listing::whereIn('id', $course_ids)->with('items')->get();
         }
         return view('daugt::livewire.member-area.dashboard', [

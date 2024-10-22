@@ -10,7 +10,7 @@
      style="background-image: url('{{$backgroundImage}}')">
     <div class="absolute inset-0 bg-gradient-to-bl from-primary-300/25 to-primary-600/90"></div>
     <div class="relative z-10 pointer-events-none">
-        @if(isset($post->blocks['template']['attributes']['courseSection']))
+        @if(isset($post->blocks['attributes']['courseSections']))
             @php
                 $tempSection = \Daugt\Models\Listing\ListingItem::with('listing')->find($post->blocks['template']['attributes']['courseSection']);
                 $tempCourse = $tempSection->listing;

@@ -44,15 +44,23 @@ return [
         'categorized' => false,
         'listable' => true,
         'attributes' => [
-            'courseSection' => [
+            'courseSections' => [
                 'type' => AttributeType::LISTING_ITEM,
-                'name' => 'Kurskategorie'
+                'name' => 'Kurskategorie',
+                'options' => [
+                    'listingType' => 'course',
+                    'multi' => true
+                ]
+            ],
+            'image' => [
+                'type' => AttributeType::MEDIA,
+                'name' => 'Image'
             ],
             'freeForAll' => [
                 'type' => AttributeType::BOOLEAN,
                 'name' => 'Freigeschaltet für jeden Kursteilnehmer (unabhängig von der Produktlaufzeit)'
             ]
         ],
-        'accessible' => [AccessHelper::class, 'canAccessPost']
+        'accessible' => [AccessHelper::class, 'canViewPost']
     ]
 ];

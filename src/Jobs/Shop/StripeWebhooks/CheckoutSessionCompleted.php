@@ -2,14 +2,7 @@
 
 namespace Daugt\Jobs\Shop\StripeWebhooks;
 
-use Carbon\Carbon;
-use Daugt\Jobs\BaseJob;
 use Exception;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Daugt\Enums\Shop\PaymentStatus;
 use Daugt\Enums\Shop\ShippingStatus;
 use Daugt\Injectable\StripeClient;
@@ -17,19 +10,10 @@ use Daugt\Models\Shop\Order;
 use Daugt\Models\Shop\OrderItem;
 use Daugt\Models\Shop\Product;
 use Daugt\Models\User;
-use Spatie\WebhookClient\Models\WebhookCall;
 use Stripe\Exception\ApiErrorException;
 
-class CheckoutSessionCompleted extends BaseJob
+class CheckoutSessionCompleted extends StripeWebhookJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    public WebhookCall $webhookCall;
-
-    public function __construct(WebhookCall $webhookCall)
-    {
-        $this->webhookCall = $webhookCall;
-    }
 
     /**
      * @throws ApiErrorException
@@ -47,7 +31,8 @@ class CheckoutSessionCompleted extends BaseJob
 
         $line_items = $stripe->checkout->sessions->allLineItems(
             $payload['data']['object']['id'],
-            ['limit' => 100]
+            ['limit' => 100],
+            StripeClient::getStripeOptions()
         )['data'];
 
         $status = $payload['data']['object']['payment_status'] == PaymentStatus::PAID->value ? PaymentStatus::PAID->value : ($payload['type'] === 'checkout.session.async_payment_failed' ? PaymentStatus::FAILED->value : PaymentStatus::PENDING->value);
@@ -55,6 +40,7 @@ class CheckoutSessionCompleted extends BaseJob
             ['stripe_checkout_session_id' => $checkout_session, 'user_id' => $user->id],
             [
                 'status' => $status,
+                'payment_succeeded_at' => $status === PaymentStatus::PAID->value ? now() : null,
                 'stripe_payment_intent_id' => $payload['data']['object']['payment_intent'],
             ]
         );

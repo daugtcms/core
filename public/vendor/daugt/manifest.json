@@ -1,14 +1,10 @@
 {
-  "_plyr.min-C-75nfX6.js": {
-    "file": "assets/plyr.min-C-75nfX6.js",
-    "name": "plyr.min"
-  },
   "_tiptap-C5sHkbfq.js": {
     "file": "assets/tiptap-C5sHkbfq.js",
     "name": "tiptap"
   },
-  "_unocss-IYQu-lpy.js": {
-    "file": "assets/unocss-IYQu-lpy.js",
+  "_unocss-DHrNjAGJ.js": {
+    "file": "assets/unocss-DHrNjAGJ.js",
     "name": "unocss",
     "dynamicImports": [
       "node_modules/@iconify-json/lucide/icons.json"
@@ -31,34 +27,32 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-D0aMuPfa.js",
+    "file": "assets/app-DBnYc-8j.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
       "_tiptap-C5sHkbfq.js",
-      "_plyr.min-C-75nfX6.js",
-      "_unocss-IYQu-lpy.js"
+      "_unocss-DHrNjAGJ.js"
     ]
   },
   "resources/js/member-area.js": {
-    "file": "assets/member-area-BM0Hjphu.js",
+    "file": "assets/member-area-B4u5RSAY.js",
     "name": "member-area",
     "src": "resources/js/member-area.js",
     "isEntry": true,
     "imports": [
       "_tiptap-C5sHkbfq.js",
-      "_plyr.min-C-75nfX6.js"
+      "_unocss-DHrNjAGJ.js"
     ]
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-D0uTXw0f.js",
+    "file": "assets/stripped-Bj2R2FWT.js",
     "name": "stripped",
     "src": "resources/js/stripped.js",
     "isEntry": true,
     "imports": [
-      "_plyr.min-C-75nfX6.js",
-      "_unocss-IYQu-lpy.js"
+      "_unocss-DHrNjAGJ.js"
     ]
   }
 }

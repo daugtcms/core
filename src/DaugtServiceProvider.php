@@ -124,9 +124,17 @@ class DaugtServiceProvider extends ServiceProvider
                 base_path('vendor/laravel/horizon/public') => public_path('vendor/horizon'),
             ], 'horizon-assets');*/
 
-            $this->publishes([
-                __DIR__.'/../database/migrations' => database_path('migrations/daugt'),
-            ], 'daugt-migrations');
+            if(config('daugt.multitenancy')) {
+                $this->publishes([
+                    __DIR__.'/../database/migrations/tenant' => database_path('migrations/daugt'),
+                    __DIR__.'/../database/migrations/central' => database_path('migrations'),
+                ], 'daugt-migrations');
+            } else {
+                $this->publishes([
+                    __DIR__.'/../database/migrations/tenant' => database_path('migrations/daugt'),
+                    __DIR__.'/../database/migrations/central' => database_path('migrations/daugt'),
+                ], 'daugt-migrations');
+            }
 
             $this->publishes([
                 __DIR__ . '/Routes' => base_path('routes/daugt'),

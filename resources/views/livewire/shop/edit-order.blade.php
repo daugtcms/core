@@ -225,19 +225,19 @@
                             @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PENDING->value)
                                 <p class="flex items-center text-warning-500">
                                     Versand ausstehend
-                                    <div class="i-lucide:truck ml-1.5"></div>
+                                    <span class="i-lucide:truck ml-1.5"></span>
                                 </p>
                             @endif
                             @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::PROCESSING->value)
                                 <p class="flex items-center text-primary-500">
                                     Bestellung wird verarbeitet
-                                    <div class="i-lucide:clock ml-1.5"></div>
+                                    <span class="i-lucide:clock ml-1.5"></span>
                                 </p>
                             @endif
                             @if($item->shipping_status===\Daugt\Enums\Shop\ShippingStatus::SHIPPED->value)
                                 <p class="flex items-center text-success-500">
                                     Bestellung wurde versandt
-                                    <div class="i-lucide:truck ml-1.5"></div>
+                                    <span class="i-lucide:truck ml-1.5"></span>
                                 </p>
                             @endif
                         </div>

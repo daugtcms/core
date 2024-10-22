@@ -23,7 +23,15 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
 
 });
 
-Route::stripeWebhooks('/shop/stripe/webhook');
+if(function_exists('tenancy')) {
+    Route::stripeWebhooks('/shop/stripe/webhook')->name('shop.stripe.webhook')->withoutMiddleware([
+        'web',
+        Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+        Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class
+    ]);
+} else {
+    Route::stripeWebhooks('/shop/stripe/webhook')->name('shop.stripe.webhook');
+}
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/shop', ShopIndexController::class)->name('shop.index');
@@ -32,5 +40,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('cart/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::delete('cart/{product}', [CartController::class, 'remove'])->name('cart.remove');
 
-    Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware(['auth', 'verified']);
+    Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware(['auth:tenant', 'verified']);
 });

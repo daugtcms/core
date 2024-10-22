@@ -2,27 +2,10 @@
 
 namespace Daugt\Jobs\Shop\StripeWebhooks;
 
-use Daugt\Jobs\BaseJob;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Daugt\Models\User;
-use Spatie\WebhookClient\Models\WebhookCall;
 
-class CustomerUpdated extends BaseJob
+class CustomerUpdated extends StripeWebhookJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    /** @var WebhookCall */
-    public $webhookCall;
-
-    public function __construct(WebhookCall $webhookCall)
-    {
-        $this->webhookCall = $webhookCall;
-    }
-
     public function handle()
     {
         $payload = $this->webhookCall->payload;

@@ -27,7 +27,7 @@ class EditOrder extends ModalComponent
         $invoice = collect();
         if($this->order->stripe_invoice_id){
             $stripe = StripeClient::init();
-            $invoice = $stripe->invoices->retrieve($this->order->stripe_invoice_id);
+            $invoice = $stripe->invoices->retrieve($this->order->stripe_invoice_id, [], StripeClient::getStripeOptions());
             $invoice = collect($invoice);
         }
         return view('daugt::livewire.shop.edit-order', [

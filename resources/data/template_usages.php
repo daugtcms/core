@@ -5,6 +5,10 @@ return [
         'name' => 'Authentication',
         'description' => 'The authentication pages for the site.',
     ],
+    'member_area' => [
+        'name' => 'Member Area',
+        'description' => 'The member area page template for the site.',
+    ],
     'shop_overview' => [
         'name' => 'Shop Overview',
         'description' => 'The overview page for the shop.',

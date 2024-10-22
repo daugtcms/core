@@ -7,8 +7,6 @@
 
     <title>{{ $title ?? 'Pages Title' }}</title>
 
-    @vite(['resources/css/app.css'])
-
     {{ Vite::useHotFile('vendor/daugt/daugt.hot')
         ->useBuildDirectory("vendor/daugt")
         ->withEntryPoints(['resources/js/member-area.js', 'resources/css/stripped.css']) }}
@@ -22,11 +20,9 @@
     </script>
 
 </head>
-<body class="w-full h-full" un-cloak>
+<body class="w-full h-full font-sans" un-cloak>
 {{$slot}}
-
-@livewire('modal-pro')
-
+@livewire('wire-elements-modal')
 @livewireScriptConfig
 </body>
 </html>

@@ -9,6 +9,7 @@ return [
     'delete' => 'Löschen',
     'edit' => 'Bearbeiten',
     'confirm' => 'Bestätigen',
+    'show' => 'Anzeigen',
     'add_element' => 'Element hinzufügen',
     'all' => 'Alle',
 

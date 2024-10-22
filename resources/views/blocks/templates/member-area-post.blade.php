@@ -1,25 +1,18 @@
-<x-daugt::template-renderer :usage="\Daugt\Enums\Blocks\TemplateUsage::MEMBER_AREA->value" :within-template="true">
+<x-daugt::template-renderer :usage="'member_area'" :within-template="true">
 <div class="pb-7">
     <div class="container bg-white rounded-lg">
-    @if(!empty($featuredImage[0]))
+    @isset($image['url'])
     <div class="pt-4 max-h-96 flex">
-        <img src="{{MediaHelper::getMediaById($featuredImage[0]['id'], $featuredImage[0]['variant'])}}" alt="" class="rounded-lg object-cover">
+        <img src="{{$image['url']}}" alt="" class="rounded-lg object-cover">
     </div>
-    @endif
+    @endisset
     <div
     @class([
-        'prose mx-auto',
-        'pt-4' => !empty($featuredImage[0]),
-        'pt-8' => empty($featuredImage[0])
+        'prose max-w-full mx-auto',
+        'pt-4' => !empty($image['url']),
+        'pt-8' => empty($image['url'])
     ])>
-    @if($courseSection)
-        @php
-            $section = \Daugt\Models\Listing\ListingItem::with('listing')->find($courseSection);
-            $course = $section->listing;
-        @endphp
-            <p class="text-neutral-500 mb-0 text-xl font-medium flex items-center -space-x-0.5"><span>{{$course->name}}</span> <div class="i-lucide:dot"></div> <span>{{$section->name}}</span></p>
-    @endif
-    <h1 class="">{{$title}}</h1>
+    <h1 class="">{{$content['title']}}</h1>
     </div>
     {!! $slot !!}
 </div>

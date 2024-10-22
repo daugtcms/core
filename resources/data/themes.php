@@ -86,6 +86,57 @@ return [
                 'usages' => [
                     'shop_product_card'
                 ]
+            ],
+            'member-area' => [
+                'name' => 'Member Area',
+                'viewPath' => __DIR__ . '/../views/blocks/templates/member-area.blade.php',
+                'attributes' => [
+                    'logo' => [
+                        'type' => AttributeType::MEDIA,
+                        'name' => 'Logo',
+                    ],
+                    'background' => [
+                        'type' => AttributeType::MEDIA,
+                        'name' => 'Background',
+                    ]
+                ],
+                'usages' => [
+                    'member_area'
+                ]
+            ],
+            'member-area-post' => [
+                'name' => 'Member Area Post',
+                'viewPath' => __DIR__ . '/../views/blocks/templates/member-area-post.blade.php',
+                'attributes' => [
+                    'content' => [
+                        'type' => AttributeType::CONTENT,
+                        'name' => 'Post',
+                    ],
+                    'image' => [
+                        'type' => AttributeType::MEDIA,
+                        'name' => 'Image'
+                    ]
+                ],
+                'usages' => [
+                    'post'
+                ]
+            ],
+            'member-area-post-card' => [
+                'name' => 'Member Area Post Card',
+                'viewPath' => __DIR__ . '/../views/blocks/templates/member-area-post-card.blade.php',
+                'attributes' => [
+                    'content' => [
+                        'type' => AttributeType::CONTENT,
+                        'name' => 'Post',
+                    ],
+                    'image' => [
+                        'type' => AttributeType::MEDIA,
+                        'name' => 'Image'
+                    ]
+                ],
+                'usages' => [
+                    'post_card'
+                ]
             ]
         ]
     ]
