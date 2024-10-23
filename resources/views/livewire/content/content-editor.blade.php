@@ -59,7 +59,7 @@
                                            :style="'secondary'"
                                             class="inline-flex">
                 <x-daugt::form.dropdown-button-item @click="setFontFamily('sans')">
-                    <span class="font-sans">Sans</span>
+                    <span class="font-main">Sans</span>
                 </x-daugt::form.dropdown-button-item>
                 <x-daugt::form.dropdown-button-item @click="setFontFamily('serif')">
                     <span class="font-serif">Serif</span>
@@ -89,7 +89,7 @@
             </x-daugt::form.dropdown-button>
         </div>
     </template>
-    <div x-ref="editor" class="prose max-w-full mx-auto w-full font-sans"></div>
+    <div x-ref="editor" class="prose max-w-full mx-auto w-full font-main"></div>
 </div>
 <x-daugt::content-editor.floating-menu-blocks :blocks="$availableBlocks">
 </x-daugt::content-editor.floating-menu-blocks>

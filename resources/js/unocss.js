@@ -29,9 +29,8 @@ window.initializeUnoCSS = (initOptions) => {
                 presetWebFonts({
                     provider: 'bunny',
                     fonts: {
-                        sans: initOptions?.font?.sans ?? 'Inter',
-                        serif: initOptions?.font?.serif ?? 'Merriweather',
-                        mono: initOptions?.font?.mono ?? 'Jetbrains Mono',
+                        main: initOptions?.font?.main ?? 'Satoshi',
+                        accent: initOptions?.font?.accent ?? 'Cabinet Grotesk',
                     }
                 }),
                 presetIcons({

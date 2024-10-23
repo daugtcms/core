@@ -20,7 +20,7 @@
     </script>
 
 </head>
-<body class="w-full h-full font-sans" un-cloak>
+<body class="w-full h-full font-main" un-cloak>
 {{$slot}}
 @livewire('wire-elements-modal')
 @livewireScriptConfig

@@ -8,7 +8,7 @@ export default defineConfig({
     presets: [presetUno(), presetTypography(), presetForms(), presetWebFonts({
         provider: 'bunny',
         fonts: {
-            sans: 'var(--font-sans)',
+            sans: 'var(--font-main)',
             serif: 'var(--font-serif)',
         }
     })],

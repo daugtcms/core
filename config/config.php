@@ -20,9 +20,8 @@ return [
     ],
     'style' => [
         'font' => [
-            'sans' => env('STYLE_FONT_SANS'),
-            'serif' => env('STYLE_FONT_SERIF'),
-            'mono' => env('STYLE_FONT_MONO'),
+            'main' => env('STYLE_FONT_MAIN'),
+            'accent' => env('STYLE_FONT_ACCENT'),
         ]
     ],
     'themes' => []

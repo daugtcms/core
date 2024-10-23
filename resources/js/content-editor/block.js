@@ -165,10 +165,10 @@ export const Block = Node.create({
                             // Function to add classes after the body is available
                             const addClassesToIframe = () => {
                                 if (iframeDocument.readyState === 'complete' || iframeDocument.body) {
-                                    // Add 'font-sans' class to <html> tag
-                                    iframeDocument.documentElement.classList.add('font-sans');
-                                    // Add 'font-sans' class to <body> tag
-                                    iframeDocument.body.classList.add('font-sans');
+                                    // Add 'font-main' class to <html> tag
+                                    iframeDocument.documentElement.classList.add('font-main');
+                                    // Add 'font-main' class to <body> tag
+                                    iframeDocument.body.classList.add('font-main');
                             
                                     const resizeIframe = () => {
                                         const iframeBody = iframeDocument.body;
