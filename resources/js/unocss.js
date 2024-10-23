@@ -27,6 +27,7 @@ window.initializeUnoCSS = (initOptions) => {
                 }),
                 presetForms(),
                 presetWebFonts({
+                    customFetch: (url) => fetch(url).then((it) => it.data),
                     provider: 'fontshare',
                     fonts: {
                         main: initOptions?.font?.main ?? 'Satoshi',
