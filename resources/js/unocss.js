@@ -27,7 +27,7 @@ window.initializeUnoCSS = (initOptions) => {
                 }),
                 presetForms(),
                 presetWebFonts({
-                    provider: 'bunny',
+                    provider: 'fontshare',
                     fonts: {
                         main: initOptions?.font?.main ?? 'Satoshi',
                         accent: initOptions?.font?.accent ?? 'Cabinet Grotesk',
