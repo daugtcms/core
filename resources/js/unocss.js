@@ -27,7 +27,6 @@ window.initializeUnoCSS = (initOptions) => {
                 }),
                 presetForms(),
                 presetWebFonts({
-                    customFetch: (url) => fetch(url).then((it) => it.data),
                     provider: 'bunny',
                     fonts: {
                         main: initOptions?.font?.main ?? 'Inter',
