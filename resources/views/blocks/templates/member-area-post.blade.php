@@ -12,7 +12,7 @@
         'pt-4' => !empty($image['url']),
         'pt-8' => empty($image['url'])
     ])>
-    <h1 class="">{{$content['title']}}</h1>
+    <h1 class="font-accent">{{$content['title']}}</h1>
     </div>
     {!! $slot !!}
 </div>

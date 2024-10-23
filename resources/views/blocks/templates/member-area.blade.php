@@ -14,7 +14,7 @@
         </div>
         <div class="">
             <div class="container">
-                <h1 class="text-white text-3xl sm:text-5xl font-semibold mt-3 sm:mt-6 drop-shadow-xl mb-11">@stack('title')</h1>
+                <h1 class="text-white text-3xl sm:text-5xl font-semibold mt-3 sm:mt-6 drop-shadow-xl mb-11 font-accent">@stack('title')</h1>
             </div>
             {!! $slot !!}
         </div>
