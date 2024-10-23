@@ -58,14 +58,11 @@
                                            :icon="'lucide:type'"
                                            :style="'secondary'"
                                             class="inline-flex">
-                <x-daugt::form.dropdown-button-item @click="setFontFamily('sans')">
-                    <span class="font-main">Sans</span>
+                <x-daugt::form.dropdown-button-item @click="setFontFamily('main')">
+                    <span class="font-main">Main</span>
                 </x-daugt::form.dropdown-button-item>
-                <x-daugt::form.dropdown-button-item @click="setFontFamily('serif')">
-                    <span class="font-serif">Serif</span>
-                </x-daugt::form.dropdown-button-item>
-                <x-daugt::form.dropdown-button-item @click="setFontFamily('mono')">
-                    <span class="font-mono">Mono</span>
+                <x-daugt::form.dropdown-button-item @click="setFontFamily('accent')">
+                    <span class="font-accent">Accent</span>
                 </x-daugt::form.dropdown-button-item>
             </x-daugt::form.dropdown-button>
             <x-daugt::form.dropdown-button :icon-button="true"
