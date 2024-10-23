@@ -28,10 +28,10 @@ window.initializeUnoCSS = (initOptions) => {
                 presetForms(),
                 presetWebFonts({
                     customFetch: (url) => fetch(url).then((it) => it.data),
-                    provider: 'fontshare',
+                    provider: 'bunny',
                     fonts: {
-                        main: initOptions?.font?.main ?? 'Satoshi',
-                        accent: initOptions?.font?.accent ?? 'Cabinet Grotesk',
+                        main: initOptions?.font?.main ?? 'Inter',
+                        accent: initOptions?.font?.accent ?? 'Josefin Sans',
                     }
                 }),
                 presetIcons({
