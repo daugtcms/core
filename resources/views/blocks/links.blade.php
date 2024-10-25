@@ -1,4 +1,4 @@
-<div class="rounded-md container relative bg-cover bg-center" @isset($backgroundImage)style="background-image: url('{{($backgroundImage['url'])}}')"@endisset>
+<div class="rounded-md container relative bg-cover bg-center mx-4 px-0" @isset($backgroundImage)style="background-image: url('{{($backgroundImage['url'])}}')"@endisset>
     @isset($backgroundImage)
         <div class="absolute inset-0 bg-primary-500/35 pointer-events-none"></div>
     @endisset
