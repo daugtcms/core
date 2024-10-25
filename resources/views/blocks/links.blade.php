@@ -1,7 +1,11 @@
-<div class="rounded-md container relative">
+<div class="md:rounded-md container relative">
     @isset($backgroundImage)
-        <div class="absolute h-full w-full bg-cover bg-center" style="background-image: url('{{($backgroundImage['url'])}}')"></div>
-        <div class="absolute h-full w-full bg-primary-500/35 pointer-events-none"></div>
+        <div class="absolute inset-0">
+            <img class="h-full w-full object-cover"
+                 src="{{$backgroundImage['url']}}" alt="">
+            <div class="absolute inset-0 bg-primary-500/35">
+            </div>
+        </div>
     @endisset
     <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
         @isset($text)
