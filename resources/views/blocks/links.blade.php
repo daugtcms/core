@@ -1,6 +1,6 @@
 <div class="rounded-md container relative bg-cover bg-center" @isset($backgroundImage)style="background-image: url('{{($backgroundImage['url'])}}')"@endisset>
     @isset($backgroundImage)
-        <div class="absolute inset-0 bg-primary-500/50"></div>
+        <div class="absolute inset-0 bg-primary-500/35 pointer-events-none"></div>
     @endisset
     <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8 z-10">
         @isset($text)
