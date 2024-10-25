@@ -1,8 +1,18 @@
-<div class="rounded-md bg-primary-500/50 container">
+<div class="rounded-md container relative" @isset($backgroundImage)style="background-image: url('{{($backgroundImage['url'])}}')"@endisset>
+    @isset($backgroundImage)
+        <div class="absolute inset-0 bg-primary-500/50"></div>
+    @endisset
     <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        @isset($text)
+        <h2 class=""
+            @class([
+            'text-3xl font-extrabold sm:text-4xl mb-4 font-accent drop-shadow-lg',
+            'text-white' => isset($backgroundImage),
+            'text-primary-600' => !isset($backgroundImage),
+            ])>
             <span class="block">{{$text}}</span>
         </h2>
+        @endisset
 
         <div class="flex justify-center gap-x-4 flex-wrap">
 
@@ -10,10 +20,10 @@
                 <x-daugt::form.button style="primary" :href="$link1['url']">{{$link1['text']}}</x-daugt::form.button>
             @endif
             @if($link2)
-                <x-daugt::form.button style="light" :href="$link2['url']">{{$link2['text']}}</x-daugt::form.button>
+                <x-daugt::form.button style="dark" :href="$link2['url']">{{$link2['text']}}</x-daugt::form.button>
             @endif
             @if($link3)
-                <x-daugt::form.button style="dark" :href="$link3['url']">{{$link3['text']}}</x-daugt::form.button>
+                <x-daugt::form.button style="light" :href="$link3['url']">{{$link3['text']}}</x-daugt::form.button>
             @endif
         </div>
     </div>
