@@ -46,7 +46,12 @@ class DaugtServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::before(function ($user, $ability) {
-            return $user->hasRole('Admin');
+            // Only do check within the daugt context
+            if($user instanceof User) {
+                if ($user->hasRole('Admin')) {
+                    return true;
+                }
+            }
         });
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'daugt');
