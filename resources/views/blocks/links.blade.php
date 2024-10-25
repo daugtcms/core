@@ -4,7 +4,7 @@
     @endisset
     <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
         @isset($text)
-        <h2 class=""
+        <h2
             @class([
             'text-3xl font-extrabold sm:text-4xl mb-4 font-accent drop-shadow-lg',
             'text-white' => isset($backgroundImage),

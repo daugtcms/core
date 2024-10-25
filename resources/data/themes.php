@@ -57,6 +57,10 @@ return [
                         'type' => AttributeType::LINK,
                         'name' => 'Link 3',
                     ],
+                    'backgroundImage' => [
+                        'type' => AttributeType::MEDIA,
+                        'name' => 'Background Image',
+                    ]
                 ],
                 'groups' => [
                     ContentGroup::MARKETING,
