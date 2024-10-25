@@ -21,7 +21,9 @@ class TemplateRenderer extends Component
 
     public bool $withinTemplate = false;
 
-    public function __construct(string $template = null, string $usage = null, bool $withinTemplate = false, $attributes = null)
+    public ?string $title;
+
+    public function __construct(string $template = null, string $usage = null, bool $withinTemplate = false, $attributes = null, string $title = null)
     {
         if(empty($template)) {
             $this->template = ThemeRegistry::getDefaultTemplate($usage);
@@ -31,6 +33,8 @@ class TemplateRenderer extends Component
 
         $this->withinTemplate = $withinTemplate;
         $this->restoreState($attributes);
+
+        $this->title = $title;
     }
 
     public function restoreState($attributes): void
@@ -47,7 +51,7 @@ class TemplateRenderer extends Component
             $slot = $data['slot'];
             //return view('daugt::components.blocks.template-renderer', ['content' => Blade::render($this->templateBlock->getView(), $this->templateBlock->attributes + ['slot' => $slot])]);
             $this->templateBlock->attributes['slot'] = $slot;
-            return view('daugt::components.blocks.template-renderer', ['content' => $this->templateBlock->render()]);
+            return view('daugt::components.blocks.template-renderer', ['content' => $this->templateBlock->render(), 'title' => $this->title]);
         };
     }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Pages Title' }}</title>
+    <title>{{ (!empty($title) ? $title . ' - ' : '') . config('app.name') }}</title>
 
     {{ Vite::useHotFile('vendor/daugt/daugt.hot')
         ->useBuildDirectory("vendor/daugt")

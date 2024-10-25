@@ -35,6 +35,33 @@ return [
                     ContentGroup::MARKETING,
                     ContentGroup::CONTENT
                 ]
+            ],
+            'links' => [
+                'name' => 'Links',
+                'description' => 'Up to 3 links with optional text',
+                'viewPath' => __DIR__ . '/../views/blocks/links.blade.php',
+                'attributes' => [
+                    'text' => [
+                        'type' => AttributeType::TEXT,
+                        'name' => 'Text',
+                    ],
+                    'link1' => [
+                        'type' => AttributeType::LINK,
+                        'name' => 'Link 1',
+                    ],
+                    'link2' => [
+                        'type' => AttributeType::LINK,
+                        'name' => 'Link 2',
+                    ],
+                    'link3' => [
+                        'type' => AttributeType::LINK,
+                        'name' => 'Link 3',
+                    ],
+                ],
+                'groups' => [
+                    ContentGroup::MARKETING,
+                    ContentGroup::CONTENT
+                ]
             ]
         ],
         'templates' => [
@@ -57,6 +84,7 @@ return [
             ]
         ]
     ],
+
     'shop' => [
         'name' => 'Shop',
         'blocks' => [],
