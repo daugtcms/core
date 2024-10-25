@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="relative md:rounded-md">
+    <div class="relative md:rounded-md overflow-hidden">
         @isset($backgroundImage)
             <div class="absolute inset-0">
                 <img class="h-full w-full object-cover"
