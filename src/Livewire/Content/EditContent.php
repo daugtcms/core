@@ -50,7 +50,7 @@ class EditContent extends \Livewire\Component
 
     public function save() {
         $this->validate([
-            'title' => 'optional',
+            'title' => 'nullable',
             'type' => 'required',
             'template' => 'required'
         ]);
