@@ -8,7 +8,7 @@ class StripeClient
     {
         return new \Stripe\StripeClient([
             'api_key' => config('daugt.stripe.secret'),
-            'stripe_version' => '2023-10-16',
+            'stripe_version' => '2024-09-30.acacia',
         ]);
     }
 

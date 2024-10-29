@@ -2,6 +2,7 @@
 
 namespace Daugt\Helpers\Media;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Plank\Mediable\Media;
 
@@ -15,33 +16,35 @@ class MediaHelper
     {
         $default = $isAvatar ? 'avatar' : 'image';
         if ($media) {
-            if ($media->aggregate_type == Media::TYPE_IMAGE) {
-                return $media->findVariant($type) ? $media->findVariant($type)->getTemporaryUrl(now()->addHour()) : '/assets/default/' . $default . '.svg?' . random_int(1000, 9999);
-            } else if($media->aggregate_type == Media::TYPE_IMAGE_VECTOR) {
-                return $media->getTemporaryUrl(now()->addHour());
-            } else {
-                if ($type == 'thumbnail') {
-                    $url = '/vendor/daugt/icons/default/';
-                    switch ($media->aggregate_type) {
-                        case Media::TYPE_AUDIO:
-                            $url = $url.'audio.svg';
-                            break;
-                        case Media::TYPE_VIDEO:
-                            $url = $url.'video.svg';
-                            break;
-                        case Media::TYPE_DOCUMENT:
-                            $url = $url.'document.svg';
-                            break;
-                        default:
-                            $url = $url.'image.svg';
-                            break;
-                    }
+            return Cache::flexible("media_{$media->id}_{$type}", [60*60, 120*60], function () use ($media, $type, $default) {
+                if ($media->aggregate_type == Media::TYPE_IMAGE) {
+                    return $media->findVariant($type) ? $media->findVariant($type)->getTemporaryUrl(now()->addHours(12)) : '/assets/default/' . $default . '.svg?' . random_int(1000, 9999);
+                } else if($media->aggregate_type == Media::TYPE_IMAGE_VECTOR) {
+                    return $media->getTemporaryUrl(now()->addHours(12));
+                } else {
+                    if ($type == 'thumbnail') {
+                        $url = '/vendor/daugt/icons/default/';
+                        switch ($media->aggregate_type) {
+                            case Media::TYPE_AUDIO:
+                                $url = $url.'audio.svg';
+                                break;
+                            case Media::TYPE_VIDEO:
+                                $url = $url.'video.svg';
+                                break;
+                            case Media::TYPE_DOCUMENT:
+                                $url = $url.'document.svg';
+                                break;
+                            default:
+                                $url = $url.'image.svg';
+                                break;
+                        }
 
-                    return $url.'?'.random_int(1000, 9999);
-                } elseif (empty($type) || $type == 'optimized') {
-                    return $media->getTemporaryUrl(now()->addHour());
+                        return $url.'?'.random_int(1000, 9999);
+                    } elseif (empty($type) || $type == 'optimized') {
+                        return $media->getTemporaryUrl(now()->addHours(12));
+                    }
                 }
-            }
+            });
         } else {
             return '/vendor/daugt/icons/default/' . $default.'.svg';
         }
