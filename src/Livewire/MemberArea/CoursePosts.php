@@ -46,8 +46,11 @@ class CoursePosts extends Component
                 $query = $query->whereJsonContains('attributes->courseSections', $this->section->id);
             } else {
                 $items = $this->course->items()->get()->pluck('id');
-                $query = $query->whereJsonContains('attributes->courseSections', $items);
-                dd($items, $query);
+                $query = $query->where(function ($q) use ($items) {
+                    foreach ($items as $item) {
+                        $q->orWhereJsonContains('attributes->courseSections', $item);
+                    }
+                });
             }
             $query = $query->where('published_at', '<=', now());
             if($timeslots instanceof Collection) {
