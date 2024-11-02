@@ -61,6 +61,7 @@ class EditContent extends \Livewire\Component
                 'type' => $this->type,
                 'template' => $this->template,
                 'attributes' => $this->contentAttributes,
+                'user_id' => Auth::id(),
                 'blocks' => $this->blocks,
             ]);
         } else {
@@ -71,6 +72,7 @@ class EditContent extends \Livewire\Component
                 'attributes' => $this->contentAttributes,
                 'blocks' => $this->blocks,
                 'user_id' => Auth::id(),
+                'published_at' => now(),
             ]);
         }
 
