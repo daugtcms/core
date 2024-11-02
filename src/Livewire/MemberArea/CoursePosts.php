@@ -31,6 +31,7 @@ class CoursePosts extends Component
         $this->course = $course;
         if($section) {
             $this->section = ListingItem::where('slug', $section)->first();
+            dd($section, $this->section);
         }
     }
 

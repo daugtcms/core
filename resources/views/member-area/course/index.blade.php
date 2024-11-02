@@ -11,7 +11,7 @@
             @foreach($course->items as $item)
                     <a
                        @class([
-        'px-1.5 py-0.5 text-base sm:text-lg hover:text-primary-600 rounded-md hover:bg-primary-50',
+        'px-1.5 py-0.5 text-base sm:text-lg hover:text-primary-600 rounded-md hover:bg-primary-50 whitespace-nowrap',
                              'bg-primary-100 text-primary-600' => isset($section) && $section->slug === $item->slug
                         ])
                        href="{{route('daugt.member-area.course.show', ['course' => $course->slug, 'section' => $item->slug])}}">{{$item->name}}</a>

@@ -13,7 +13,7 @@ class ShowCourseController extends Controller
 {
     public function __invoke($course = null, $section = null)
     {
-        $course = Listing::where('slug', $course)->first();
+        $course = Listing::where('slug', $course)->with('items')->first();
         $timeslots = AccessHelper::canAccessCourse($course);
         if(!$timeslots) {
             return redirect()->route('daugt.member-area.index');

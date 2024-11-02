@@ -26,6 +26,12 @@ class ListingItem extends Model
         return $this->belongsTo(Listing::class);
     }
 
+    protected static function boot() {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('order');
+        });
+    }
     protected static function booted()
     {
         static::creating(function ($listingItem) {
