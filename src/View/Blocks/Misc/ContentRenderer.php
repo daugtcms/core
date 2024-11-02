@@ -27,7 +27,7 @@ class ContentRenderer extends Component
     public function render(): View|Closure|string
     {
         $content = '';
-        if (isset($this->content->blocks)) {
+        if (!empty($this->content->blocks)) {
             $editor = TiptapEditor::init();
             $editor->setContent($this->content->blocks);
             $content = $editor->getHTML();
