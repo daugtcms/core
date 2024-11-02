@@ -24,7 +24,7 @@ class Listing extends Model
     protected $primaryKey = 'id';
     public function items()
     {
-        return $this->hasMany(ListingItem::class);
+        return $this->hasMany(ListingItem::class)->orderBy('order');
     }
 
     protected static function booted()
