@@ -29,7 +29,7 @@ class ContentRenderer extends Component
         $editor = TiptapEditor::init();
         $editor->setContent($this->content->blocks);
         // render blade component templaterenderer
-        return Blade::render('<x-daugt::template-renderer :template="$template" :attributes="$attributes" :title="$title"><div class="prose max-w-full">' . $editor->getHTML() . '</div></x-daugt::template-renderer>', [
+        return Blade::render('<x-daugt::template-renderer :template="$template" :attributes="$attributes" :title="$title"><div class="prose max-w-full">' . (isset($this->content->blocks) ? $editor->getHTML() : '') . '</div></x-daugt::template-renderer>', [
             'template' => $this->content->template,
             'attributes' => [...$this->content->attributes, 'content' => $this->content->only(Content::$fieldsForTemplateUsage)],
             'title' => $this->content->title,
