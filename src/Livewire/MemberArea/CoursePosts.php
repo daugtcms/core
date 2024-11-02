@@ -31,7 +31,6 @@ class CoursePosts extends Component
         $this->course = $course;
         if($section) {
             $this->section = ListingItem::where('slug', $section)->first();
-            dd($section, $this->section);
         }
     }
 
@@ -43,11 +42,12 @@ class CoursePosts extends Component
             $query->limit(0);
         } else {
             $query = $query->where('type', 'post')->with('user');
-            if($this->section instanceof ListingItem) {
+            if(isset($this->section) && $this->section instanceof ListingItem) {
                 $query = $query->whereJsonContains('attributes->courseSections', $this->section->id);
             } else {
                 $items = $this->course->items()->get()->pluck('id');
                 $query = $query->whereJsonContains('attributes->courseSections', $items);
+                dd($items, $query);
             }
             $query = $query->where('published_at', '<=', now());
             if($timeslots instanceof Collection) {
