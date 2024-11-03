@@ -72,7 +72,7 @@
                                             :grid="true"
                                             :grid-cols="11">
                 @php
-                    $colors = ['primary', 'neutral', 'success', 'danger', 'warning'];
+                    $colors = ['primary', 'secondary', 'neutral', 'success', 'danger', 'warning'];
                     $variants = [50,100,200,300,400,500,600,700,800,900,950];
                 @endphp
 
