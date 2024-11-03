@@ -22,7 +22,8 @@ return [
         'font' => [
             'main' => env('STYLE_FONT_MAIN'),
             'accent' => env('STYLE_FONT_ACCENT'),
-        ]
+        ],
+        'colors' => []
     ],
     'themes' => []
 ];
