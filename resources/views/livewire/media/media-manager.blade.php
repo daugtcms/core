@@ -14,7 +14,8 @@
         </x-daugt::form.button>
     </x-daugt::layouts.dashboard-bar>
 
-    <div class="max-w-7xl mx-auto p-3 flex h-full">
+    <div class="max-w-7xl mx-auto p-3 flex flex-col h-full">
+        <x-daugt::form.input wire:model.live.debounce.500ms="search" class="flex-grow mb-3" placeholder="{{__('daugt::general.search_items')}}"/>
         <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
             @foreach($files as $file)
                 @php($isSelected = $selectedMedia->contains('id', $file->id))
@@ -40,5 +41,9 @@
                 </li>
             @endforeach
         </ul>
+
+        <div class="mt-4">
+            {{$files->links()}}
+        </div>
     </div>
 </div>

@@ -16,6 +16,8 @@ class UserTable extends Table
         'refreshComponent' => '$refresh',
     ];
 
+    public array $searchableFields = ['name', 'email', 'full_name'];
+
     public bool $allowCreate = false;
 
     public function query(): Builder

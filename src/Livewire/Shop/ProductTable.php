@@ -13,6 +13,8 @@ use Daugt\Models\User;
 class ProductTable extends Table
 {
 
+    public array $searchableFields = ['name', 'description'];
+
     protected $listeners = [
         'refreshComponent' => '$refresh',
     ];

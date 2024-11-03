@@ -58,12 +58,32 @@
                                            :icon="'lucide:type'"
                                            :style="'secondary'"
                                             class="inline-flex">
-                <x-daugt::form.dropdown-button-item @click="setFontFamily('main')">
-                    <span class="font-main">Main</span>
-                </x-daugt::form.dropdown-button-item>
-                <x-daugt::form.dropdown-button-item @click="setFontFamily('accent')">
-                    <span class="font-accent">Accent</span>
-                </x-daugt::form.dropdown-button-item>
+                @php
+                    $fontArray = [
+                        'main' => 'Main',
+                        'accent' => 'Accent',
+                        'systemui' => 'System UI',
+                        'transitional' => 'Transitional',
+                        'oldstyle' => 'Old Style',
+                        'humanist' => 'Humanist',
+                        'geohumanist' => 'Geometric Humanist',
+                        'classhuman' => 'Classical Humanist',
+                        'neogrote' => 'Neo-Grotesque',
+                        'monoslab' => 'Monospace Slab Serif',
+                        'monocode' => 'Monospace Code',
+                        'industrial' => 'Industrial',
+                        'roundsans' => 'Rounded Sans',
+                        'slabserif' => 'Slab Serif',
+                        'antique' => 'Antique',
+                        'didone' => 'Didone',
+                        'handwritten' => 'Handwritten',
+                    ]
+                @endphp
+                @foreach($fontArray as $key => $font)
+                    <x-daugt::form.dropdown-button-item @click="setFontFamily('{{$key}}')">
+                        <span class="font-{{$key}}">{{$font}}</span>
+                    </x-daugt::form.dropdown-button-item>
+                @endforeach
             </x-daugt::form.dropdown-button>
             <x-daugt::form.dropdown-button :icon-button="true"
                                            :icon="'lucide:palette'"

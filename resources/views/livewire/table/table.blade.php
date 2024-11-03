@@ -1,12 +1,17 @@
 <div class="@if($fullWidth) w-full @else mx-auto max-w-7xl sm:px-4 py-4 @endif">
-    @if($allowCreate && !$readonly)
-        <div class="w-full flex justify-between items-center py-2.5">
-            <x-daugt::form.input class="opacity-0 pointer-events-none h-[34px] max-w-xs"
+
+        <div class="w-full flex justify-between items-center py-2.5 gap-x-3 px-2 sm:px-0">
+            <x-daugt::form.input wire:model.live.debounce.500ms="search" class="h-[34px] max-w-full"
                                     placeholder="{{__('daugt::general.search_items')}}"></x-daugt::form.input>
+            @if($allowCreate && !$readonly)
             <x-daugt::form.button type="button" style="light" wire:click="add()"
                                   class="flex-shrink-0 h-full"><div class="i-lucide:plus w-4 h-4"></div>{{__('daugt::general.add_element')}}</x-daugt::form.button>
+            @endif
         </div>
-    @endif
+
+    @php
+        $data = $this->data();
+    @endphp
 
     <div class="relative overflow-x-auto sm:rounded-lg">
         <table class="w-full text-sm text-left text-neutral-700">
@@ -29,7 +34,7 @@
             </thead>
             <tbody class="divide-y-2 divide-neutral-100" @if($sortable) wire:sortable="updateSortOrder"
                    wire:sortable.options="{ animation: 100 }" @endif>
-            @foreach($this->data() as $row)
+            @foreach($data as $row)
                 <tr @class([
                         'bg-neutral-50/50 hover:bg-neutral-50',
                         'bg-primary-50/50 hover:bg-primary-50' => in_array($row['id'],$selected) ])
@@ -61,5 +66,8 @@
             @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="mt-3 px-2 sm:px-0">
+        {{$data->links()}}
     </div>
 </div>

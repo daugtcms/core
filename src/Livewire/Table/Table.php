@@ -4,10 +4,14 @@ namespace Daugt\Livewire\Table;
 
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 abstract class Table extends Component
 {
+    use WithPagination;
+
     public bool $allowCreate = true;
 
     public bool $sortable = false;
@@ -26,15 +30,41 @@ abstract class Table extends Component
 
     public array $filters = [];
 
+    #[Url]
+    public string $search = '';
+
+    public array $searchableFields = [];
+
     abstract public function columns(): array;
 
     public function data()
     {
         $query = $this->filter($this->query(), $this->filters);
-        return $query->get();
+        if (!empty($this->search)) {
+            $query->where(function ($query) {
+                foreach ($this->searchableFields as $field) {
+                    if (str_contains($field, '.')) {
+                        // Handle relationship search (e.g., user.name)
+                        [$relation, $relatedField] = explode('.', $field);
+                        $query->orWhereHas($relation, function ($query) use ($relatedField) {
+                            $query->where($relatedField, 'ILIKE', '%' . $this->search . '%');
+                        });
+                    } else {
+                        // Handle regular field search
+                        $query->orWhere($field, 'ILIKE', '%' . $this->search . '%');
+                    }
+                }
+            });
+        }
+        return $query->paginate(25);
     }
 
     abstract public function query(): Builder;
+
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
 
     private function filter(Builder $query, $filters): Builder
     {

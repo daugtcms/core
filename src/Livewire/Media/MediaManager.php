@@ -4,6 +4,7 @@ namespace Daugt\Livewire\Media;
 
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use LivewireUI\Modal\ModalComponent;
 use Plank\Mediable\Media;
@@ -21,6 +22,9 @@ class MediaManager extends ModalComponent
     public Collection $selectedMedia;
 
     public array $selectedMediaArray = [];
+
+    #[Url]
+    public string $search = '';
 
     /*#[Rule([
         'currentItem' => ['nullable'],
@@ -48,10 +52,19 @@ class MediaManager extends ModalComponent
         }
     }
 
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
     #[Layout('daugt::components.layouts.admin')]
     public function render()
     {
-        $media = Media::whereNull('original_media_id')->orderBy('created_at', 'desc')->with('variants')->get();
+        $query = Media::whereNull('original_media_id')->orderBy('created_at', 'desc')->with('variants');
+        if (! empty($this->search)) {
+            $query->where('name', 'ILIKE', '%' . $this->search . '%');
+        }
+        $media = $query->paginate(48);
 
         return view('daugt::livewire.media.media-manager', [
             'files' => $media,

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ListingTable extends Table
 {
+    public array $searchableFields = ['name', 'description', 'type'];
 
     protected $listeners = [
         'refreshComponent' => '$refresh',
