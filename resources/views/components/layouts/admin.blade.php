@@ -17,9 +17,7 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            window.initializeUnoCSS(
-                    @json(config('daugt.style'))
-            );
+            window.initializeUnoCSS();
         });
     </script>
 </head>
