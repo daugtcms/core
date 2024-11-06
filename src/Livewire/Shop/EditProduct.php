@@ -14,7 +14,6 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 use Daugt\Data\Blocks\TemplateData;
-use Daugt\Enums\Blocks\TemplateUsage;
 use Daugt\Enums\Listing\ListingUsage;
 use Daugt\Enums\Shop\BillingDurationUnit;
 use Daugt\Livewire\Content\CoursesTable;

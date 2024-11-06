@@ -31,4 +31,6 @@ enum AttributeType: string
     case CUSTOM_SELECT = 'custom-select';
 
     case CONTENT = 'content';
+
+    case CONTENT_LIST = 'content-list';
 }

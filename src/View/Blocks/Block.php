@@ -7,6 +7,7 @@ use Daugt\Data\Blocks\BlockData;
 use Daugt\Enums\Blocks\AttributeType;
 use Daugt\Helpers\Media\MediaHelper;
 use Daugt\Models\Blocks\BlockDefaults;
+use Daugt\Models\Content\Content;
 use Daugt\Models\Listing\Listing;
 use Daugt\Models\Listing\ListingItem;
 use Daugt\Models\Shop\Product;
@@ -138,6 +139,21 @@ class Block extends Component
                     }
                     $product = Product::where('id', $this->attributes[$key])->withMedia(['media'])->firstOrFail();
                     $this->attributes[$key] = $product;
+                    break;
+                case AttributeType::CONTENT_LIST:
+                    if(empty($this->attributes[$key])) {
+                        $this->attributes[$key] = [];
+                        return;
+                    }
+                    $list = collect();
+                    if($this->attributes[$key]['type']) {
+                        $list = Content::where('type', $this->attributes[$key]['type'])->orderBy('published_at', 'desc')->limit(3)->get();
+                    }
+                    $attributes = [
+                        'items' => $list,
+                        'type' => $this->attributes[$key]['type']
+                    ];
+                    $this->attributes[$key] = $attributes;
                     break;
                 /*case AttributeType::LINK:
                     if(isset($this->attributes[$key])) {

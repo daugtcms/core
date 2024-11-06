@@ -1,4 +1,4 @@
-<x-daugt::template-renderer :usage="\Daugt\Enums\Blocks\TemplateUsage::AUTH->value">
+<x-daugt::template-renderer :usage="'auth'">
     <h2 class="text-2xl text-neutral-700 font-semibold mb-2">{{__('daugt::auth.reset_password')}}</h2>
 
 

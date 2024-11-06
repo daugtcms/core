@@ -4,7 +4,6 @@ namespace Daugt\Livewire\Content;
 
 use Carbon\Carbon;
 use Livewire\Attributes\Url;
-use Daugt\Enums\Blocks\TemplateUsage;
 use Daugt\Livewire\Table\Table;
 use Daugt\Livewire\Table\Column;
 use Daugt\Models\Blocks\Template;

@@ -3,7 +3,6 @@
 namespace Daugt\Controllers\Content;
 
 use Daugt\Controllers\Controller;
-use Daugt\Enums\Blocks\TemplateUsage;
 use Daugt\Misc\ContentTypeRegistry;
 use Daugt\Models\Content\Content;
 

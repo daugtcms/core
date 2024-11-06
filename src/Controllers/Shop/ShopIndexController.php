@@ -3,7 +3,6 @@
 namespace Daugt\Controllers\Shop;
 
 use Daugt\Controllers\Controller;
-use Daugt\Enums\Blocks\TemplateUsage;
 use Daugt\Models\Content\Content;
 use Daugt\Models\Shop\Product;
 

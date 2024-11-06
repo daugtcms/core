@@ -34,7 +34,7 @@
                 @break
             @case(AttributeType::CUSTOM_SELECT->value)
                 @php
-                    $options = collect($attribute->options)->map(function($value, $key) use (&$options){
+                    $options = collect($attribute->options['items'])->map(function($value, $key) use (&$options){
                         return [
                             'value' => $key,
                             'title' => $value
@@ -76,6 +76,10 @@
             @case(AttributeType::LINK->value)
                 <x-daugt::form.link-input
                         {{  $attributes }}></x-daugt::form.link-input>
+                @break
+            @case(AttributeType::CONTENT_LIST->value)
+                <x-daugt::form.content-list-input
+                        {{  $attributes }}></x-daugt::form.content-list-input>
                 @break
         @endswitch
     @endif

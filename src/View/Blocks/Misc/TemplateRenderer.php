@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Daugt\Data\Blocks\TemplateData;
-use Daugt\Enums\Blocks\TemplateUsage;
 use Daugt\Models\Blocks\Template;
 use Daugt\View\Blocks\Block;
 

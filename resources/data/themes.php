@@ -66,7 +66,21 @@ return [
                     ContentGroup::MARKETING,
                     ContentGroup::CONTENT
                 ]
-            ]
+            ],
+            'featured-content-list' => [
+                'name' => 'Featured Content List',
+                'description' => 'List of featured content items',
+                'viewPath' => __DIR__ . '/../views/blocks/featured-content-list.blade.php',
+                'attributes' => [
+                    'contentList' => [
+                        'type' => AttributeType::CONTENT_LIST,
+                        'name' => 'Content List',
+                    ]
+                ],
+                'groups' => [
+                    ContentGroup::MARKETING,
+                ]
+            ],
         ],
         'templates' => [
             'center-auth' => [
