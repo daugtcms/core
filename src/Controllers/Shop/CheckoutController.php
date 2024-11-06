@@ -13,6 +13,10 @@ class CheckoutController extends Controller
 {
     public function checkout(Request $request)
     {
+        if(!config('daugt.shop.enabled')) {
+            abort(404);
+        }
+
         $within_country = $request->exists('within_country');
 
         $cart = collect(request()->session()->get('cart', []));

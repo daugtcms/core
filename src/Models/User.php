@@ -61,10 +61,14 @@ class User extends Authenticatable implements MustVerifyEmail
         parent::boot();
         // sync stripe user on creation syncronously and on update asyncronously
         static::created(function ($user) {
-            SyncStripeUser::dispatchSync($user);
+            if(config('daugt.shop.enabled')) {
+                SyncStripeUser::dispatchSync($user);
+            }
         });
         static::updated(function ($user) {
-            SyncStripeUser::dispatch($user);
+            if(config('daugt.shop.enabled')) {
+                SyncStripeUser::dispatch($user);
+            }
         });
     }
 

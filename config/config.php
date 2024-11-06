@@ -11,6 +11,7 @@ return [
             'code' => env('SHOP_SHIPPING_CODE'),
             'allowed_countries' => env('SHOP_SHIPPING_ALLOWED_COUNTRIES'),
         ],
+        'enabled' => env('SHOP_ENABLED'),
     ],
     'stripe' => [
         'key' => env('STRIPE_KEY'),
