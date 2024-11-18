@@ -1,10 +1,26 @@
 {
-  "_tiptap-DqfrMRWr.js": {
-    "file": "assets/tiptap-DqfrMRWr.js",
+  "__vite-browser-external": {
+    "file": "assets/__vite-browser-external-BIHI7g3E.js",
+    "name": "__vite-browser-external",
+    "src": "__vite-browser-external",
+    "isDynamicEntry": true
+  },
+  "_pdf-TWaREukU.js": {
+    "file": "assets/pdf-TWaREukU.js",
+    "name": "pdf",
+    "imports": [
+      "_unocss-B5OAh2yV.js"
+    ],
+    "dynamicImports": [
+      "node_modules/pdfjs-dist/build/pdf.mjs"
+    ]
+  },
+  "_tiptap-CBqkXO4f.js": {
+    "file": "assets/tiptap-CBqkXO4f.js",
     "name": "tiptap"
   },
-  "_unocss-DwqsgzIm.js": {
-    "file": "assets/unocss-DwqsgzIm.js",
+  "_unocss-B5OAh2yV.js": {
+    "file": "assets/unocss-B5OAh2yV.js",
     "name": "unocss",
     "dynamicImports": [
       "node_modules/@iconify-json/lucide/icons.json"
@@ -16,43 +32,60 @@
     "src": "node_modules/@iconify-json/lucide/icons.json",
     "isDynamicEntry": true
   },
+  "node_modules/pdfjs-dist/build/pdf.mjs": {
+    "file": "assets/pdf-B2dff5Va.js",
+    "name": "pdf",
+    "src": "node_modules/pdfjs-dist/build/pdf.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "_unocss-B5OAh2yV.js"
+    ],
+    "dynamicImports": [
+      "__vite-browser-external",
+      "__vite-browser-external",
+      "__vite-browser-external",
+      "__vite-browser-external"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-DgYerlex.css",
+    "file": "assets/app-B72VyCJJ.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/stripped.css": {
-    "file": "assets/stripped-6H6fx4V8.css",
+    "file": "assets/stripped-DQdQC3Od.css",
     "src": "resources/css/stripped.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BN-idco4.js",
+    "file": "assets/app-AOWgeWdM.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_tiptap-DqfrMRWr.js",
-      "_unocss-DwqsgzIm.js"
+      "_tiptap-CBqkXO4f.js",
+      "_unocss-B5OAh2yV.js",
+      "_pdf-TWaREukU.js"
     ]
   },
   "resources/js/member-area.js": {
-    "file": "assets/member-area-DiSEU6LP.js",
+    "file": "assets/member-area-DR9GFID0.js",
     "name": "member-area",
     "src": "resources/js/member-area.js",
     "isEntry": true,
     "imports": [
-      "_tiptap-DqfrMRWr.js",
-      "_unocss-DwqsgzIm.js"
+      "_tiptap-CBqkXO4f.js",
+      "_unocss-B5OAh2yV.js"
     ]
   },
   "resources/js/stripped.js": {
-    "file": "assets/stripped-BByxEFhc.js",
+    "file": "assets/stripped-Cs1TDAe8.js",
     "name": "stripped",
     "src": "resources/js/stripped.js",
     "isEntry": true,
     "imports": [
-      "_unocss-DwqsgzIm.js"
+      "_unocss-B5OAh2yV.js",
+      "_pdf-TWaREukU.js"
     ]
   }
 }

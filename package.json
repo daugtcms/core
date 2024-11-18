@@ -2,8 +2,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "copy-assets": "cp ./node_modules/pdfjs-dist/build/pdf.worker.min.mjs ./public/vendor/daugt/assets/pdf.worker.min.js",
+    "dev": "vite && npm run copy-assets",
+    "build": "vite build && npm run copy-assets"
   },
   "devDependencies": {
     "@alpinejs/focus": "^3.13.0",
@@ -11,11 +12,13 @@
     "@alpinejs/mask": "^3.13.2",
     "@awcodes/alpine-floating-ui": "^3.5.0",
     "@danharrin/alpine-mousetrap": "^0.1.5",
+    "@iconify-json/lucide": "^1.2.7",
     "@julr/unocss-preset-forms": "^0.1.0",
     "@nextapps-be/livewire-sortablejs": "^0.3.1",
     "@tiptap/core": "^2.1.10",
     "@tiptap/extension-floating-menu": "^2.4.0",
     "@tiptap/extension-link": "^2.5.6",
+    "@tiptap/extension-text-align": "^2.8.0",
     "@tiptap/extension-youtube": "^2.1.10",
     "@tiptap/pm": "^2.1.10",
     "@tiptap/starter-kit": "^2.1.10",
@@ -29,9 +32,8 @@
     "filepond-plugin-image-exif-orientation": "^1.0.11",
     "filepond-plugin-image-preview": "^4.6.11",
     "laravel-vite-plugin": "^1.0",
+    "pdfjs-dist": "^4.8.69",
     "plyr": "^3.7.8",
-    "vite": "5.4.8",
-    "@iconify-json/lucide": "^1.2.7",
-    "@tiptap/extension-text-align": "^2.8.0"
+    "vite": "5.4.8"
   }
 }

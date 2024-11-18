@@ -12,6 +12,8 @@
     case 'danger':
     $classes .= 'text-danger-600 bg-transparent hover:bg-danger-200 active:bg-danger-100 focus:border-danger-200 ring-danger-300';
     break;
+    case 'dark':
+    $classes .= 'text-white bg-black/25 hover:bg-black/50 active:bg-black/30 focus:border-black/50 ring-black/25';
     }
 @endphp
 
