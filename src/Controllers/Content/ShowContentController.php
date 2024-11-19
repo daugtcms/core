@@ -4,6 +4,7 @@ namespace Daugt\Controllers\Content;
 
 use Daugt\Controllers\Controller;
 use Daugt\Misc\ContentTypeRegistry;
+use Daugt\Models\AnalyticsEvent;
 use Daugt\Models\Content\Content;
 
 class ShowContentController extends Controller
@@ -56,6 +57,11 @@ class ShowContentController extends Controller
         $content = $query->firstOrFail();
 
         if(!$contentType->isAccessible($content)) abort(404);
+
+
+        defer(function () use ($content) {
+            AnalyticsEvent::logModelEvent($content);
+        });
 
         return view('daugt::content.show', compact('content'));
 
