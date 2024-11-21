@@ -12,6 +12,8 @@ enum AdminPath: string
 
     case SHOP = 'shop';
 
+    case ANALYTICS = 'analytics';
+
     case USERS = 'users';
 
     case STRUCTURE = 'structure';

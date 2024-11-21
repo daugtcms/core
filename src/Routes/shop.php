@@ -27,7 +27,8 @@ if(function_exists('tenancy')) {
     Route::stripeWebhooks('/shop/stripe/webhook')->name('shop.stripe.webhook')->withoutMiddleware([
         'web',
         Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
-        Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class
+        Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+        Stancl\Tenancy\Middleware\ScopeSessions::class
     ]);
 } else {
     Route::stripeWebhooks('/shop/stripe/webhook')->name('shop.stripe.webhook');

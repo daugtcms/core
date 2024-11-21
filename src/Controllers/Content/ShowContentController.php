@@ -58,10 +58,7 @@ class ShowContentController extends Controller
 
         if(!$contentType->isAccessible($content)) abort(404);
 
-
-        defer(function () use ($content) {
-            AnalyticsEvent::logModelEvent($content);
-        });
+        defer(fn () => AnalyticsEvent::logModelEvent($content));
 
         return view('daugt::content.show', compact('content'));
 

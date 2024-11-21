@@ -61,4 +61,6 @@ return [
     'orders' => 'Bestellungen',
     'homepage' => 'Homepage',
     'homepage.description' => 'Zurück zur Homepage',
+    'analytics' => 'Analytics',
+    'analytics.description' => 'Analysieren Sie hier die Besucherzahlen Ihrer Website.',
 ];

@@ -1,0 +1,1 @@
+import{j as l,k as e,L as i}from"./tiptap-CBqkXO4f.js";import{P as u,m as a,a as p,b as d}from"./unocss-BlUgE9tm.js";window.Plyr=u;Alpine.plugin(l);Alpine.plugin(a);Alpine.plugin(p);Alpine.plugin(d);Alpine.plugin(e);i.start();

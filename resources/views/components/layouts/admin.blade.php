@@ -23,7 +23,7 @@
         });
     </script>
 </head>
-<body class="w-full h-full" un-cloak>
+<body class="w-full h-full font-systemui" un-cloak>
 <div class="flex flex-col h-full">
     @php
 

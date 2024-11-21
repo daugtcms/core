@@ -2,6 +2,7 @@
 
 namespace Daugt;
 
+use Daugt\Livewire\Analytics\VisitorAnalytics;
 use Daugt\Livewire\Blocks\BlockDefaultsEditor;
 use Daugt\Livewire\Blocks\EditBlockData;
 use Daugt\Livewire\Content\EditContent;
@@ -88,6 +89,7 @@ class DaugtBladeServiceProvider extends ServiceProvider
         Livewire::component('daugt::content.edit-content', EditContent::class);
         Livewire::component('daugt::content.content-editor', ContentEditor::class);
         Livewire::component('daugt::blocks.edit-block-data', EditBlockData::class);
+        Livewire::component('daugt::analytics.visitor-analytics', VisitorAnalytics::class);
     }
 
     /**

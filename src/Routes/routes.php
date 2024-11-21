@@ -21,5 +21,8 @@ Route::group(['middleware' => ['web'], 'as' => 'daugt.'], function () {
     require __DIR__ . '/users.php';
     require __DIR__ . '/shop.php';
     require __DIR__ . '/member-area.php';
+    require __DIR__ . '/analytics.php';
+
+    // !!! always leave this at the end, because it has a catch-all route for content
     require __DIR__ . '/content.php';
 });

@@ -26,6 +26,7 @@ import './tiptap';
 import './content-editor/index.js';
 import './tooltip'
 import './pdf'
+import './apexcharts'
 
 Alpine.plugin(Mousetrap)
 Alpine.plugin(Focus);

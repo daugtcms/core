@@ -50,5 +50,5 @@ return [
         'week' => 'Woche',
         'month' => 'Monat',
         'year' => 'Jahr',
-    ]
+    ],
 ];
