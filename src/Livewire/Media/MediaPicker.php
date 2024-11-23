@@ -47,16 +47,24 @@ class MediaPicker extends Component
     }
 
     public function mediaSelected($media, $key = '') {
-        if(!empty($key) && $key != $this->id) {
+        if (!empty($key) && $key != $this->id) {
             return;
         }
-        $this->selectedMedia = collect($media);
-        $this->selectedMedia = $this->selectedMedia->map(function($item) {
+
+        $this->selectedMedia = collect($media)->map(function($item) {
             return MediaPickerData::from($item);
         });
 
-        $this->fetchedMedia = Media::whereIn('id', $this->selectedMedia->pluck('id'))->get();
+        $mediaIds = $this->selectedMedia->pluck('id');
+
+        $fetchedMediaList = Media::whereIn('id', $mediaIds)->get()->keyBy('id');
+
+        $this->fetchedMedia = $mediaIds->map(function($id) use ($fetchedMediaList) {
+            return $fetchedMediaList[$id];
+        });
+
         $this->dispatch('picker-updated', $this->selectedMedia->values(), $this->id);
+
     }
 
     public function removeMedia($mediaId) {
@@ -64,6 +72,23 @@ class MediaPicker extends Component
             return $item->id != $mediaId;
         });
         $this->fetchedMedia = Media::whereIn('id', $this->selectedMedia->pluck('id'))->get();
+        $this->dispatch('picker-updated', $this->selectedMedia->values(), $this->id);
+    }
+
+    public function updateMediaOrder($items): void
+    {
+        $orderItems = collect($items)->map(function ($item) {
+            return $item['value'];
+        })->toArray();
+
+        $this->fetchedMedia = $this->fetchedMedia->sortBy(function ($item) use ($orderItems) {
+            return array_search($item->id, $orderItems);
+        })->values();
+
+        $this->selectedMedia = $this->selectedMedia->sortBy(function ($item) use ($orderItems) {
+            return array_search($item->id, $orderItems);
+        })->values();
+
         $this->dispatch('picker-updated', $this->selectedMedia->values(), $this->id);
     }
 }

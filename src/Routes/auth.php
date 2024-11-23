@@ -43,25 +43,25 @@ Route::group(['middleware' => ['web', ProtectAgainstSpam::class]], function () {
         ->name('password.update');
 
     Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])
-        ->middleware('auth')
+        ->middleware(config('daugt.multitenancy') ? 'auth:tenant' : 'auth')
         ->name('verification.notice');
 
     Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-        ->middleware(['auth', 'signed', 'throttle:6,1'])
+        ->middleware([config('daugt.multitenancy') ? 'auth:tenant' : 'auth', config('daugt.multitenancy') ? 'signed:relative' : 'signed', 'throttle:6,1'])
         ->name('verification.verify');
 
     Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-        ->middleware(['auth', 'throttle:6,1'])
+        ->middleware([config('daugt.multitenancy') ? 'auth:tenant' : 'auth', 'throttle:6,1'])
         ->name('verification.send');
 
     Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
-        ->middleware('auth')
+        ->middleware(config('daugt.multitenancy') ? 'auth:tenant' : 'auth')
         ->name('password.confirm');
 
     Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store'])
-        ->middleware('auth');
+        ->middleware(config('daugt.multitenancy') ? 'auth:tenant' : 'auth');
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->middleware('auth')
+        ->middleware(config('daugt.multitenancy') ? 'auth:tenant' : 'auth')
         ->name('logout');
 });

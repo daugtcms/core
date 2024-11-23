@@ -111,13 +111,16 @@ class Block extends Component
                         $mediaVariants = collect($this->attributes[$key])->mapWithKeys(function($media) {
                             return [$media['id'] => $media['variant']];
                         });
-                        $mediaList = Media::whereIn('id', collect($this->attributes[$key])->map(function($media) {
-                            return $media['id'];
-                        }))->get();
-                        $this->attributes[$key] = $mediaList->map(function($media) use($value, $mediaVariants) {
-                            $variant = $mediaVariants[$media->id] ?? null;
 
-                            $result = ['url' => MediaHelper::getMedia($media,$variant)];
+                        $mediaIds = collect($this->attributes[$key])->pluck('id');
+
+                        $mediaList = Media::whereIn('id', $mediaIds)->get()->keyBy('id');
+
+                        $this->attributes[$key] = $mediaIds->map(function($id) use($value, $mediaList, $mediaVariants) {
+                            $media = $mediaList[$id];
+                            $variant = $mediaVariants[$id] ?? null;
+
+                            $result = ['url' => MediaHelper::getMedia($media, $variant)];
 
                             if (isset($value->options['withMetadata']) && $value->options['withMetadata']) {
                                 $result = array_merge($media->toArray(), $result);
@@ -126,7 +129,7 @@ class Block extends Component
                             return $result;
                         });
 
-                        if(!isset($value->options['multi']) || !$value->options['multi']) {
+                        if (!isset($value->options['multi']) || !$value->options['multi']) {
                             $this->attributes[$key] = $this->attributes[$key][0];
                         }
                     } else {

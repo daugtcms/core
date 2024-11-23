@@ -3,6 +3,8 @@
 namespace Daugt\Models;
 
 // use App\Injectable\StripeClient;
+use Daugt\Notifications\Auth\ResetPassword;
+use Daugt\Notifications\Auth\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -105,4 +107,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Subscription::class);
     }*/
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new VerifyEmail);
+    }
+
+    public function sendPasswordResetNotification(#[\SensitiveParameter] $token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
 }

@@ -2,12 +2,6 @@
 
 declare(strict_types=1);
 
-use Daugt\Data\Media\MediaPickerData;
-use Daugt\Helpers\Media\MediaHelper;
-use Daugt\Models\Listing\Listing;
-use Daugt\Models\Listing\ListingItem;
-use Daugt\Models\Listing\Navigation;
-
 if (! function_exists('collection_compare')) {
     function collection_compare($firstCollection, $secondCollection)
     {
@@ -33,35 +27,5 @@ if (! function_exists('collection_compare')) {
         }
 
         return true;
-    }
-}
-
-if (! function_exists('get_listing_items')) {
-    function get_listing_items($id)
-    {
-        return Listing::where('id', $id)->firstOrFail()->items()->orderBy('order')->get();
-    }
-}
-
-if (! function_exists('get_listing_item')) {
-    function get_listing_item($id)
-    {
-        if(!empty($id)) {
-            return ListingItem::findOrFail($id);
-        } else {
-            return new ListingItem();
-        }
-    }
-}
-
-if (!function_exists('get_single_media')) {
-    function get_single_media($mediaArray)
-    {
-        if(!is_array($mediaArray) || !count($mediaArray)) {
-            return null;
-        }
-
-        $data = MediaPickerData::from(reset($mediaArray));
-        return MediaHelper::getMediaById($data->id, $data->variant);
     }
 }

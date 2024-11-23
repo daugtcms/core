@@ -4,7 +4,7 @@
  * You can place your custom package configuration in here.
  */
 return [
-    'multitenancy' => false,
+    'multitenancy' => env('DAUGT_MULTITENANCY') ?? false,
     'shop' => [
         'shipping' => [
             'locale' => env('SHOP_SHIPPING_LOCALE'),
