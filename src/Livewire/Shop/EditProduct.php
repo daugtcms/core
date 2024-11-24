@@ -155,6 +155,8 @@ class EditProduct extends Component
                 'duration_unit' => $course->durationUnit,
             ]);
         });
+
+        $this->redirect(route('daugt.admin.shop.product.index'));
     }
 
     private function initAccess(): void
