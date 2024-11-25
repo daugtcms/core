@@ -41,5 +41,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('cart/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::delete('cart/{product}', [CartController::class, 'remove'])->name('cart.remove');
 
-    Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware(['auth:tenant', 'verified']);
+    Route::get('checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware(['daugt.multitenancy' ? 'auth:tenant' : 'auth', 'verified:daugt.verification.notice']);
 });

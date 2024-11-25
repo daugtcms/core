@@ -9,7 +9,7 @@
                         {{-- TODO: Make this dynamic based on given type --}}
                         <x-daugt::template-renderer :usage="'blog_card'"
                                                        :within-template="true"
-                                                       :attributes="['content' => $item]"></x-daugt::template-renderer>
+                                                       :attributes="['content' => $item, ...$item->attributes]"></x-daugt::template-renderer>
                     </div>
                 @endforeach
             </div>
