@@ -13,9 +13,9 @@
 {{--$attributes->merge([
     '@click' => '$refs.panel.toggle'
 ])--}}
-<div x-ref="panel" x-float.placement.bottom.flip.offset class="absolute z-50">
+<div x-ref="panel" x-float.placement.bottom.shift.flip.offset class="absolute z-50">
     <ul @class([
-            'overflow-hidden bg-white border-2 border-neutral-100 rounded-md max-h-64 overflow-y-auto',
+            'overflow-hidden bg-white border-2 border-neutral-100 rounded-md max-h-64 overflow-y-auto z-50',
             "grid grid-cols-$gridCols" => $grid
             ])>
         {{$slot}}

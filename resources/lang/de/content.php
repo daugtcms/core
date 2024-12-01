@@ -12,5 +12,8 @@ return [
     'published_at_description' => 'Wenn ein Datum in der Zukunft ausgewählt wird, wird der Inhalt erst an diesem Datum veröffentlicht.',
     'select_type_and_template' => 'Wählen Sie einen Typ und ein Template um fortzufahren.',
     'link_url' => 'Link URL',
-    'display_text' => 'Anzeigetext'
+    'display_text' => 'Anzeigetext',
+    'comment_deleted' => 'Nutzerkommentar gelöscht',
+    'comment_deleted_text' => 'Der Inhalt dieses Kommentars wurde gelöscht.',
+    'comments' => ':count Kommentar|:count Kommentare'
 ];

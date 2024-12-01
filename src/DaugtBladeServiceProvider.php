@@ -31,6 +31,7 @@ use Daugt\Livewire\Content\ContentEditor;
 use Daugt\Livewire\Content\ContentTable;
 use Daugt\View\Blocks\Misc\ContentRenderer;
 use Daugt\View\Blocks\Misc\TemplateRenderer;
+use Daugt\View\Components\Content\Comments;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -53,6 +54,7 @@ class DaugtBladeServiceProvider extends ServiceProvider
         Blade::component('daugt::content-renderer', ContentRenderer::class);
         Blade::component('daugt::blocks-renderer', BlocksRenderer::class);
         Blade::component('daugt::template-renderer', TemplateRenderer::class);
+        Blade::component('daugt::content.comments', Comments::class);
 
         Blade::componentNamespace('Daugt\\View\\Blocks\\', 'Blocks');
         Blade::componentNamespace('Daugt\\View\\Blocks\\Templates\\', 'Templates');

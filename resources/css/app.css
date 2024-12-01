@@ -3,6 +3,10 @@
 @import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 @import '@unocss/reset/tailwind.css';
 
+.ProseMirror:focus {
+    outline: none;
+}
+
 [un-cloak] {
     display: none;
 }

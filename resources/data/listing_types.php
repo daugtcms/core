@@ -37,7 +37,15 @@ return [
             'keep_unlocked' => [
                 'name' => 'Inhalt nach Ablauf des Zugriffs für Kunden weiterhin verfügbar machen.',
                 'type' => AttributeType::BOOLEAN
-            ]
+            ],
+            'allow_member_comments' => [
+                'name' => 'Mitglieder-Kommentare erlauben',
+                'type' => AttributeType::BOOLEAN
+            ],
+            'allow_member_reactions' => [
+                'name' => 'Mitglieder-Reaktionen erlauben',
+                'type' => AttributeType::BOOLEAN
+            ],
         ]
     ]
 ];

@@ -63,12 +63,15 @@ class CoursePosts extends Component
                         }
                     });
                 });
+                $query->orWhereJsonContains('attributes->freeForAll', true);
             }
         }
 
         $query->orderBy('published_at', 'desc');
         return view('daugt::livewire.member-area.course-posts', [
-            'course_posts' => $query->paginate(25)
+            'course_posts' => $query->with(['comments','reactions'])->paginate(25),
+            'allow_member_comments' => $this->course->data['allow_member_comments'] ?? false,
+            'allow_member_reactions' => $this->course->data['allow_member_reactions'] ?? false,
         ]);
     }
 }

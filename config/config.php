@@ -26,5 +26,10 @@ return [
         ],
         'colors' => []
     ],
+    'user' => [
+        'allowed_reactions' => [
+            '❤️', '😂', '🤩', '🥹', '🥰'
+        ]
+    ],
     'themes' => []
 ];

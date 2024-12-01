@@ -1,6 +1,10 @@
 @import 'plyr/dist/plyr.css';
 @import '@unocss/reset/tailwind.css';
 
+.ProseMirror:focus {
+    outline: none;
+}
+
 [un-cloak] {
     display: none;
 }

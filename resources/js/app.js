@@ -34,6 +34,8 @@ Alpine.plugin(AlpineFloatingUI);
 Alpine.plugin(Intersect);
 Alpine.plugin(mask);
 
+window.Alpine = Alpine;
+
 Livewire.start()
 
 import './unocss.js';

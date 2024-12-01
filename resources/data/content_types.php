@@ -61,6 +61,8 @@ return [
                 'name' => 'Freigeschaltet für jeden Kursteilnehmer (unabhängig von der Produktlaufzeit)'
             ]
         ],
-        'accessible' => [AccessHelper::class, 'canViewPost']
+        'accessible' => [AccessHelper::class, 'canViewPost'],
+        'commentable' => [AccessHelper::class, 'canCommentPost'],
+        'reactable' => [AccessHelper::class, 'canReactPost']
     ]
 ];

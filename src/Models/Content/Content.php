@@ -2,7 +2,10 @@
 
 namespace Daugt\Models\Content;
 
+use Daugt\Enums\User\MarkType;
 use Daugt\Misc\ContentTypeRegistry;
+use Daugt\Models\User\Comment;
+use Daugt\Models\User\Mark;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,6 +40,15 @@ class Content extends Model
     public function prunable()
     {
         return static::where('created_at', '<=', now()->subYear());
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->orderBy('created_at', 'DESC');
+    }
+
+    public function reactions() {
+        return $this->morphMany(Mark::class, 'markable')->where('type', MarkType::REACTION);
     }
 
     public function getRouteKeyName()

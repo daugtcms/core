@@ -27,6 +27,9 @@ class AccessHelper
                     foreach ($courseSections as $courseSection) {
                         $course = $courseSection->listing;
                         $timeslots = self::canAccessCourse($course);
+                        if(isset($post->attributes['freeForAll']) && $post->attributes['freeForAll']) {
+                            return 'interact';
+                        }
                         if ($timeslots instanceof Collection) {
                             foreach ($timeslots as $slot) {
                                 if ($post->published_at->between($slot['starts_at'], $slot['ends_at'])) {
@@ -57,7 +60,7 @@ class AccessHelper
     }
 
     public static function canAccessCourse(Listing $course) {
-        if (Auth::user()->can('edit contents')) {
+        if (!Auth::user()->can('edit contents')) {
             return true;
         } else {
             $products = Product::whereHas('courses', function ($query) use ($course) {
@@ -81,6 +84,9 @@ class AccessHelper
                         } else if(!isset($timestamps['starts_at'])) {
                             $timestamps['starts_at'] = Carbon::create(1999,0,0,0,0,0);
                         }
+                        if(isset($course->data['keep_unlocked']) && !$course->data['keep_unlocked'] && $timestamps['ends_at'] < now()) {
+                            continue;
+                        }
                         $timeslots->push($timestamps);
                     }
                 }
@@ -88,5 +94,42 @@ class AccessHelper
             }
             return false;
         }
+    }
+
+    public static function canCommentPost(Content $post)
+    {
+       if(!self::canViewPost($post)) {
+           return false;
+       }
+
+       $courseSections = $post->attributes['courseSections'];
+
+       $courseSections = ListingItem::with('listing')->whereIn('id', $courseSections)->get();
+       foreach ($courseSections as $courseSection) {
+           $course = $courseSection->listing;
+           if(isset($course->data['allow_member_comments']) && $course->data['allow_member_comments']) {
+               return true;
+           }
+       }
+
+      return false;
+    }
+
+    public static function canReactPost(Content $post) {
+        if(!self::canViewPost($post)) {
+            return false;
+        }
+
+        $courseSections = $post->attributes['courseSections'];
+
+        $courseSections = ListingItem::with('listing')->whereIn('id', $courseSections)->get();
+        foreach ($courseSections as $courseSection) {
+            $course = $courseSection->listing;
+            if(isset($course->data['allow_member_reactions']) && $course->data['allow_member_reactions']) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

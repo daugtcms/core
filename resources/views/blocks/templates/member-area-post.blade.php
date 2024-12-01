@@ -13,6 +13,14 @@
         'pt-8' => empty($image['url'])
     ])>
     <h1 class="font-accent">{{$content['title']}}</h1>
+    <div class="max-w-3xl mx-auto -mt-2.5 mb-2">
+        <x-daugt::user.reactions :reactions="$content->reactions"
+                                 style="secondary"
+                                 :comments="$content->comments"
+                                 :reactions-enabled="\Daugt\Helpers\MemberArea\AccessHelper::canReactPost($content)"
+                                 :comments-enabled="\Daugt\Helpers\MemberArea\AccessHelper::canCommentPost($content)"
+        ></x-daugt::user.reactions>
+    </div>
     </div>
     {!! $slot !!}
 </div>

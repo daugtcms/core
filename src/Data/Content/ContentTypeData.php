@@ -31,6 +31,16 @@ class ContentTypeData extends Data
     public $accessible;
 
     /**
+     * @var bool|Closure
+     */
+    public $commentable;
+
+    /**
+     * @var bool|Closure
+     */
+    public $reactable;
+
+    /**
      * Check if the content type is accessible for a given user and content.
      *
      * @param Content $content
@@ -45,5 +55,40 @@ class ContentTypeData extends Data
 
         // Otherwise, it's a boolean, so just return its value
         return (bool) $this->accessible;
+    }
+
+    /**
+     * Check if the content type is commentable for a given user and content.
+     *
+     * @param Content $content
+     * @return bool
+     */
+    public function isCommentable(Content $content): bool
+    {
+        // Check if 'commentable' is a callable function, if yes, call it with the $user and $content arguments
+        if (is_callable($this->commentable)) {
+            return call_user_func($this->commentable, $content);
+        }
+
+        // Otherwise, it's a boolean, so just return its value
+        return (bool) $this->commentable;
+    }
+
+    /**
+     * Check if the content type is reactable for a given user and content.
+     *
+     * @param Content $content
+     * @return bool
+     */
+
+    public function isReactable(Content $content): bool
+    {
+        // Check if 'reactable' is a callable function, if yes, call it with the $user and $content arguments
+        if (is_callable($this->reactable)) {
+            return call_user_func($this->reactable, $content);
+        }
+
+        // Otherwise, it's a boolean, so just return its value
+        return (bool) $this->reactable;
     }
 }
