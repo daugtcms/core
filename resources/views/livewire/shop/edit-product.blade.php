@@ -9,8 +9,6 @@
                     class="flex-shrink-0 ml-2"
                     icon="lucide:trash"
                     style="danger">
-                {{__('daugt::general.add')}}
-                <div class="i-lucide:plus w-5 h-5"></div>
             </x-daugt::form.icon-button>
             <x-daugt::form.button wire:click="save">
                 {{__('daugt::general.save')}}

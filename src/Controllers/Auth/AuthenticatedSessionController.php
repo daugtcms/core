@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('daugt::auth.login');
+        return view('daugt::auth.login-password');
     }
 
     /**

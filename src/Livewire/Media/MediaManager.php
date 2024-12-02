@@ -60,7 +60,7 @@ class MediaManager extends ModalComponent
     #[Layout('daugt::components.layouts.admin')]
     public function render()
     {
-        $query = Media::whereNull('original_media_id')->orderBy('created_at', 'desc')->with('variants');
+        $query = Media::whereNull('original_media_id')->where('user_upload', false)->orderBy('created_at', 'desc')->with('variants');
         if (! empty($this->search)) {
             $query->where('name', 'ILIKE', '%' . $this->search . '%');
         }

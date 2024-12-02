@@ -60,7 +60,7 @@ class AccessHelper
     }
 
     public static function canAccessCourse(Listing $course) {
-        if (!Auth::user()->can('edit contents')) {
+        if (Auth::user()->can('edit contents')) {
             return true;
         } else {
             $products = Product::whereHas('courses', function ($query) use ($course) {

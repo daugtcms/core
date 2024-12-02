@@ -20,7 +20,7 @@
         @endif
         <h2 class="text-white text-2xl sm:text-3xl font-semibold">{{$post->title}}</h2>
         <div class="flex items-center mt-4 gap-x-2.5">
-            <x-daugt::avatar class="h-12 w-12"></x-daugt::avatar>
+            <x-daugt::avatar class="h-12 w-12" :user="$post->user"></x-daugt::avatar>
             <div>
                 <p class="text-primary-50 text-lg sm:text-xl font-medium">{{$post->user->name}}</p>
                 <p class="text-primary-100 -mt-1.5 text-base sm:text-lg text-base">{{$post->published_at->diffForHumans()}}</p>

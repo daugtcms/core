@@ -27,7 +27,6 @@ class SyncStripeUser extends BaseJob
         $stripe = StripeClient::init();
         if (! $this->user->stripe_id) {
             $customer = $stripe->customers->create([
-                'name' => $this->user->full_name,
                 'email' => $this->user->email,
                 'preferred_locales' => ['de-DE'],
             ], StripeClient::getStripeOptions());
@@ -35,7 +34,6 @@ class SyncStripeUser extends BaseJob
             $this->user->saveQuietly();
         } else {
             $stripe->customers->update($this->user->stripe_id, [
-                'name' => $this->user->full_name,
                 'email' => $this->user->email,
             ], StripeClient::getStripeOptions());
         }

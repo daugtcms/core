@@ -1,5 +1,7 @@
 <?php
 
+use Daugt\Controllers\Auth\LoginController;
+use Daugt\Controllers\Auth\OTPController;
 use Illuminate\Support\Facades\Route;
 use Daugt\Controllers\Auth\AuthenticatedSessionController;
 use Daugt\Controllers\Auth\ConfirmablePasswordController;
@@ -12,6 +14,8 @@ use Daugt\Controllers\Auth\VerifyEmailController;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::group(['middleware' => ['web', ProtectAgainstSpam::class]], function () {
+
+
     Route::get('/register', [RegisteredUserController::class, 'create'])
         ->middleware('guest')
         ->name('register');
@@ -19,11 +23,27 @@ Route::group(['middleware' => ['web', ProtectAgainstSpam::class]], function () {
     Route::post('/register', [RegisteredUserController::class, 'store'])
         ->middleware('guest');
 
-    Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-        ->middleware('guest')
-        ->name('login');
+    Route::get('/login', function () {
+        return view('daugt::auth.login');
+    })->name('login');
 
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+    Route::post('/login', LoginController::class)
+        ->middleware('guest');
+
+    Route::get('/login/otp', [OTPController::class, 'view'])->name('login.otp')
+        ->middleware('guest');
+
+    Route::post('/login/otp', [OTPController::class, 'check'])->name('login.otp.verify')
+        ->middleware('guest');
+
+    Route::get('/login/otp/link', [OTPController::class, 'checkLink'])->name('login.otp.verify.link')
+        ->middleware('guest', config('daugt.multitenancy') ? 'signed:relative' : 'signed');
+
+    Route::get('/login/password', [AuthenticatedSessionController::class, 'create'])
+        ->middleware('guest')
+        ->name('login.password');
+
+    Route::post('/login/password', [AuthenticatedSessionController::class, 'store'])
         ->middleware('guest');
 
     Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])

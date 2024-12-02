@@ -4,6 +4,19 @@
     @endphp
     <x-daugt::modal.header>{{__($isOwnProfile ? 'daugt::users.edit_profile' : 'daugt::users.manage_user')}}</x-daugt::modal.header>
     <div class="flex flex-col gap-y-2">
+        <div x-data="">
+            <x-daugt::form.label for="photo">{{__('daugt::general.profile_picture')}}</x-daugt::form.label>
+            <div class="flex items-center gap-x-3 py-2 relative">
+                <x-daugt::loading.dots class="absolute h-16 w-16 top-2 fill-white rounded-full bg-black/25 z-10 p-1 left-0 opacity-0" x-on:click="photo.click()"     wire:loading.class="opacity-100" wire:target="photo"></x-daugt::loading.dots>
+                @if ($photo)
+                    <img class="object-cover h-16 w-16 rounded-full" src="{{ $photo->temporaryUrl() }}">
+                @else
+                <x-daugt::avatar :user="$this->user" class="w-16 h-16"></x-daugt::avatar>
+                @endif
+                <x-daugt::form.button wire:loading.attr="disabled" wire:target="photo" type="button" x-on:click="photo.click()" style="light">{{__('daugt::general.change')}}</x-daugt::form.button>
+                <input type="file" x-ref="photo" id="photo" name="photo" class="hidden" wire:model="photo"/>
+            </div>
+        </div>
         <div>
             <x-daugt::form.label for="name">{{__('daugt::general.username')}}</x-daugt::form.label>
             <x-daugt::form.input id="name" wire:model.blur="name" :error="$errors->first('name')"/>

@@ -12,6 +12,7 @@ return [
     'show' => 'Anzeigen',
     'add_element' => 'Element hinzufügen',
     'all' => 'Alle',
+    'change' => 'Ändern',
 
     'id' => 'ID',
     'title' => 'Titel',
@@ -63,4 +64,6 @@ return [
     'homepage.description' => 'Zurück zur Homepage',
     'analytics' => 'Analytics',
     'analytics.description' => 'Analysieren Sie hier die Besucherzahlen Ihrer Website.',
+
+    'profile_picture' => 'Profilbild',
 ];

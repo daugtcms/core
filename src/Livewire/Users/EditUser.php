@@ -2,20 +2,29 @@
 
 namespace Daugt\Livewire\Users;
 
+use Daugt\Helpers\Media\MediaHelper;
+use Daugt\Jobs\Media\SaveUploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Validate;
+use Livewire\WithFileUploads;
 use LivewireUI\Modal\ModalComponent;
 use Daugt\Livewire\MemberArea\CoursePosts;
 use Daugt\Models\User;
 
 class EditUser extends ModalComponent
 {
+    use WithFileUploads;
+
     public int|User $user;
+
+    #[Validate('nullable', 'image|max:10240')]
+    public $photo;
 
     #[Rule('required')]
     public $name = '';
 
-    #[Rule('required')]
+    #[Rule('required', 'unique:users')]
     public $email = '';
 
     #[Rule('required')]
@@ -23,7 +32,7 @@ class EditUser extends ModalComponent
 
     public function mount(?User $user = null)
     {
-        if (! $user->exists) {
+        if (! $user->exists || !Auth::user()->can('edit users')) {
             $user = Auth::user();
         }
 
@@ -35,11 +44,11 @@ class EditUser extends ModalComponent
 
     public function save()
     {
-        if ($this->user->id != Auth::user()->id) {
+        if ($this->user->id != Auth::user()->id && !Auth::user()->can('edit users')) {
             return;
         }
-        $this->validate();
 
+        $this->validate();
         if (isset($this->user->id)) {
             if ($this->user->email != $this->email) {
                 $this->user->email_verified_at = null;
@@ -52,6 +61,17 @@ class EditUser extends ModalComponent
             User::create(
                 $this->only(['name', 'email', 'full_name'])
             );
+        }
+
+        if (isset($this->photo)) {
+            // remove current avatar
+            if ($this->user->avatar()) {
+                $this->user->avatar()->getAllVariants()->each(function ($variant) {
+                    $variant->delete();
+                });
+                $this->user->avatar()->delete();
+            }
+            SaveUploadedFile::dispatch($this->photo->getRealPath(), pathinfo($this->photo->getClientOriginalName(), PATHINFO_FILENAME), true, $this->user, 'avatar');
         }
 
         $this->closeModalWithEvents([
@@ -81,5 +101,15 @@ class EditUser extends ModalComponent
         return view('daugt::livewire.users.edit-user', [
 
         ]);
+    }
+
+    public static function closeModalOnEscape(): bool
+    {
+        return false;
+    }
+
+    public static function closeModalOnClickAway(): bool
+    {
+        return false;
     }
 }

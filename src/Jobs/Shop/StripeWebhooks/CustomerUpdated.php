@@ -14,6 +14,10 @@ class CustomerUpdated extends StripeWebhookJob
             'shipping' => $payload['data']['object']['shipping'],
             'billing' => $payload['data']['object']['address'],
         ];
-        $user->save();
+
+        if(!$user->full_name) {
+            $user->full_name = $payload['data']['object']['name'];
+        }
+        $user->saveQuietly();
     }
 }

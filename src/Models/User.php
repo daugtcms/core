@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Daugt\Jobs\Shop\SyncStripeUser;
 use Daugt\Models\Shop\Order;
+use Plank\Mediable\Mediable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\SlugOptions;
 
@@ -22,7 +23,7 @@ use Spatie\Sluggable\SlugOptions;*/
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasRoles, SoftDeletes, Prunable;
+    use Notifiable, HasRoles, SoftDeletes, Prunable, Mediable;
 
     //HasApiTokens, HasFactory, HasSlug, Mediable,
 
@@ -86,6 +87,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function canBeImpersonated()
     {
         return !$this->canImpersonate();
+    }
+
+    public function avatar() {
+        return $this->firstMedia('avatar');
     }
 
     /*public function posts()

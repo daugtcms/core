@@ -5,6 +5,7 @@ namespace Daugt\Jobs\Media;
 use Daugt\Jobs\BaseJob;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -22,10 +23,22 @@ class SaveUploadedFile extends BaseJob
 
     public string $filename;
 
-    public function __construct($path, $filename = '')
+    public int $user_id;
+
+    public bool $user_upload;
+
+    public Model $attach_to;
+
+    public string $attach_tag;
+
+    public function __construct($path, $filename = '', bool $user_upload = false, Model $attach_to = null, string $attach_tag = 'media')
     {
         $this->path = $path;
         $this->filename = $filename;
+        $this->user_id = Auth::id();
+        $this->user_upload = $user_upload;
+        $this->attach_to = $attach_to;
+        $this->attach_tag = $attach_tag;
     }
 
     public function handle()
@@ -34,7 +47,8 @@ class SaveUploadedFile extends BaseJob
         $filename = $this->filename;
 
         $extension = pathinfo($path, PATHINFO_EXTENSION);
-        $newPath = '/media/' . Str::random(64) . '.' . $extension;
+        $pathPrefix = !empty($this->user_upload) ? 'user-uploads' : 'media';
+        $newPath = '/' . $pathPrefix . '/' . Str::random(64) . '.' . $extension;
         // dump(config('filesystems.disks.storage'));
 
         // move file out of livewire-tmp and give random 64 character filename
@@ -50,9 +64,14 @@ class SaveUploadedFile extends BaseJob
         $media = MediaUploader::importPath('s3', $newPath);
 
         $media->name = $filename;
-        $media->user_id = Auth::id();
+        $media->user_id = $this->user_id;
+        $media->user_upload = $this->user_upload;
 
         $media->save();
+
+        if(!empty($this->attach_to)) {
+            $this->attach_to->attachMedia($media->id, $this->attach_tag);
+        }
 
         if ($media->aggregate_type === 'image') {
             ImageManipulator::createImageVariant($media, 'thumbnail');

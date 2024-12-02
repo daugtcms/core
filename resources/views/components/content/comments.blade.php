@@ -42,8 +42,8 @@
             <div class="py-3">
             <div class="flex items-center justify-between p-2">
                 <div class="flex items-center gap-x-3">
-                    <x-daugt::avatar class="w-10 h-10"></x-daugt::avatar>
                     @isset($comment->user)
+                    <x-daugt::avatar class="w-10 h-10" :user="$comment->user"></x-daugt::avatar>
                     <div>
                         <p class="font-medium text-neutral-800">{{$comment->user->name}}</p>
                         <p class="text-neutral-500 text-sm -mt-1" title="{{$comment->created_at}}">{{$comment->created_at->diffForHumans()}}</p>

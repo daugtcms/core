@@ -39,6 +39,7 @@ class Dashboard extends Component
                 ->unique();
             $courses = Listing::whereIn('id', $course_ids)->with('items')->get();
         }
+
         return view('daugt::livewire.member-area.dashboard', [
             'orders' => $query->limit(5)->orderBy('created_at', 'desc')->get(),
             'courses' => $courses

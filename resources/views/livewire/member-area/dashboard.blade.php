@@ -103,7 +103,11 @@
         </div>
         <div class="col-span-2 row-span-1 rounded-lg bg-white shadow">
             <p class="text-neutral-800 font-medium text-xl border-b-2 border-neutral-200 px-3 py-2">Dein Profil</p>
-            <div class="flex items-center justify-between py-3 gap-x-3 px-3">
+            <div class="flex items-center justify-between py-3 gap-x-3 px-3" x-data=""
+                 @if(empty(Auth::user()->name))
+                    x-init="$nextTick(() => $refs.editProfile.click())"
+                 @endif
+            >
                 <div class="flex items-center gap-x-3">
                     <x-daugt::avatar class="h-12 w-12"></x-daugt::avatar>
                     <div>
@@ -111,7 +115,7 @@
                         <p class="text-neutral-500 text-sm">{{Auth::user()->full_name}} - {{Auth::user()->email}}</p>
                     </div>
                 </div>
-                <x-daugt::form.icon-button icon="lucide:pencil"
+                <x-daugt::form.icon-button x-ref="editProfile" icon="lucide:pencil"
                                               wire:click="$dispatch('openModal', {component: 'daugt::users.edit-user'})"></x-daugt::form.icon-button>
             </div>
         </div>

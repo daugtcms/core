@@ -42,6 +42,7 @@ class CheckoutSessionCompleted extends StripeWebhookJob
                 'status' => $status,
                 'payment_succeeded_at' => $status === PaymentStatus::PAID->value ? now() : null,
                 'stripe_payment_intent_id' => $payload['data']['object']['payment_intent'],
+                'stripe_invoice_id' => $payload['data']['object']['invoice'] ?? null,
             ]
         );
 

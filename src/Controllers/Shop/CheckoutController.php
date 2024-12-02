@@ -52,6 +52,7 @@ class CheckoutController extends Controller
                     'customer_update' => [
                         'shipping' => 'auto',
                         'address' => 'auto',
+                        'name' => 'auto',
                     ],
                     'automatic_tax' => [
                         // automatic
