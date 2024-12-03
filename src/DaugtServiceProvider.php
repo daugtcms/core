@@ -85,6 +85,21 @@ class DaugtServiceProvider extends ServiceProvider
             })->outputJpegFormat()->setOutputQuality(60)
         );
 
+
+        ImageManipulator::defineVariant(
+            'favicon',
+            ImageManipulation::make(function (Image $image) {
+                $image->scaleDown(256, 256);
+            })->outputPngFormat()
+        );
+
+        ImageManipulator::defineVariant(
+            'favicon_apple_touch_icon',
+            ImageManipulation::make(function (Image $image) {
+                $image->scaleDown(180, 180);
+            })->outputPngFormat()
+        );
+
         $loader = AliasLoader::getInstance();
         $loader->alias('MediaHelper', MediaHelper::class);
 

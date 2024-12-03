@@ -24,12 +24,16 @@ return [
             'main' => env('STYLE_FONT_MAIN'),
             'accent' => env('STYLE_FONT_ACCENT'),
         ],
-        'colors' => []
+        'colors' => [],
+        'favicons' => [
+            // recommended: 256x256 png
+            'default' => env('STYLE_FAVICON_DEFAULT'),
+        ]
     ],
     'user' => [
         'allowed_reactions' => [
             '❤️', '😂', '🤩', '🥹', '🥰'
         ]
     ],
-    'themes' => []
+    'themes' => [],
 ];

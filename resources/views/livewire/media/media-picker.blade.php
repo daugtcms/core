@@ -26,7 +26,6 @@
                             wire:click="removeMedia('{{$media->id}}')"
                             icon="lucide:trash"
                             style="danger">
-                        {{__('daugt::general.delete')}}
                     </x-daugt::form.icon-button>
                 </div>
             </div>
