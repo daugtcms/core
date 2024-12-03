@@ -25,10 +25,6 @@ return [
             'accent' => env('STYLE_FONT_ACCENT'),
         ],
         'colors' => [],
-        'favicons' => [
-            // recommended: 256x256 png
-            'default' => env('STYLE_FAVICON_DEFAULT'),
-        ]
     ],
     'user' => [
         'allowed_reactions' => [
@@ -36,4 +32,8 @@ return [
         ]
     ],
     'themes' => [],
+    'favicons' => [
+        // recommended: 256x256 png
+        'default' => env('STYLE_FAVICON_DEFAULT'),
+    ]
 ];

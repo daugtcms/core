@@ -7,8 +7,8 @@
 
     <title>{{ (!empty($title) ? $title . ' - ' : '') . config('app.name')  }}</title>
 
-    <link rel="icon" href="{{config('daugt.style.favicons.default')}}" type="image/png">
-    <link rel="apple-touch-icon" href="{{config('daugt.style.favicons.default')}}">
+    <link rel="icon" href="{{config('daugt.favicons.default')}}" type="image/png">
+    <link rel="apple-touch-icon" href="{{config('daugt.favicons.default')}}">
 
     {{ Vite::useHotFile('vendor/daugt/daugt.hot')
         ->useBuildDirectory("vendor/daugt")
