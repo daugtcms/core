@@ -27,11 +27,11 @@ class SaveUploadedFile extends BaseJob
 
     public bool $user_upload;
 
-    public Model $attach_to;
+    public ?Model $attach_to;
 
     public string $attach_tag;
 
-    public function __construct($path, $filename = '', bool $user_upload = false, Model $attach_to = null, string $attach_tag = 'media')
+    public function __construct($path, $filename = '', bool $user_upload = false, ?Model $attach_to = null, string $attach_tag = 'media')
     {
         $this->path = $path;
         $this->filename = $filename;

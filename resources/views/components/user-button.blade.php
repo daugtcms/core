@@ -5,7 +5,7 @@
 </button>
 
 <div x-ref="panel" x-cloak class="absolute bg-white rounded-md border-2 font-medium border-neutral-200 text-neutral-800 overflow-hidden divide-y flex flex-col z-30" x-float.placement.bottom-end.offset>
-    @if(!request()->routeIs('member-area.*'))
+    @if(!request()->routeIs('daugt.member-area.*'))
     <a href="{{route('daugt.member-area.index')}}" class="px-3 py-2 hover:bg-neutral-100 cursor-pointer block">Mitgliederbereich</a>
     @else
     <a href="{{url('/')}}" class="px-3 py-2 hover:bg-neutral-100 cursor-pointer block">Zur Homepage</a>
