@@ -3,9 +3,11 @@
 namespace Daugt\Data\Content;
 
 use Daugt\Models\Content\Content;
+use Daugt\Models\User;
 use Illuminate\Support\Collection;
 use Daugt\Data\Theme\AttributeData;
 use Daugt\Enums\Content\ContentGroup;
+use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Data;
 
 class ContentTypeData extends Data
@@ -46,11 +48,11 @@ class ContentTypeData extends Data
      * @param Content $content
      * @return bool
      */
-    public function isAccessible(Content $content): bool
+    public function isAccessible(Content $content, ?User $user = null): bool
     {
         // Check if 'accessible' is a callable function, if yes, call it with the $user and $content arguments
         if (is_callable($this->accessible)) {
-            return call_user_func($this->accessible, $content);
+            return call_user_func($this->accessible, $content, $user);
         }
 
         // Otherwise, it's a boolean, so just return its value

@@ -65,5 +65,9 @@ return [
     'analytics' => 'Analytics',
     'analytics.description' => 'Analysieren Sie hier die Besucherzahlen Ihrer Website.',
 
+    'notifications' => 'Benachrichtigungen',
+
     'profile_picture' => 'Profilbild',
+
+    'save_first' => 'Bitte erst speichern, um fortzufahren.',
 ];

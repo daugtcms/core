@@ -150,7 +150,7 @@ class Block extends Component
                     }
                     $list = collect();
                     if($this->attributes[$key]['type']) {
-                        $list = Content::where('type', $this->attributes[$key]['type'])->orderBy('published_at', 'desc')->limit(3)->get();
+                        $list = Content::where('type', $this->attributes[$key]['type'])->where('enabled', true)->orderBy('published_at', 'desc')->limit(3)->get();
                     }
                     $attributes = [
                         'items' => $list,

@@ -3,6 +3,7 @@
 namespace Daugt\Helpers\MemberArea;
 
 use Carbon\Carbon;
+use Daugt\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -15,9 +16,12 @@ use Daugt\Models\Shop\Product;
 
 class AccessHelper
 {
-    public static function canViewPost(Content $post)
+    public static function canViewPost(Content $post, ?User $user = null)
     {
-        if (Auth::user()->can('edit contents')) {
+        if(!isset($user)) {
+            $user = Auth::user();
+        }
+        if ($user->can('edit contents')) {
             return 'interact';
         } else {
             if($post->published_at <= now()) {
@@ -45,7 +49,7 @@ class AccessHelper
                 $products = Product::whereHas('posts', function ($query) use ($post) {
                     return $query->where('posts.id', $post->id);
                 })->get()->pluck('id');
-                $items = OrderItem::where('user_id', Auth::id())->whereHas('order', function ($query) {
+                $items = OrderItem::where('user_id', $user->id)->whereHas('order', function ($query) {
                     return $query->where('status', PaymentStatus::PAID);
                 })->whereHas('product', function ($query) use ($products) {
                     return $query->whereIn('product.id', $products);
@@ -59,14 +63,18 @@ class AccessHelper
         }
     }
 
-    public static function canAccessCourse(Listing $course) {
-        if (Auth::user()->can('edit contents')) {
+    public static function canAccessCourse(Listing $course, ?User $user = null) {
+        if(!isset($user)) {
+            $user = Auth::user();
+        }
+
+        if ($user->can('edit contents')) {
             return true;
         } else {
             $products = Product::whereHas('courses', function ($query) use ($course) {
                 return $query->where('listings.id', $course->id);
             })->get()->pluck('id');
-            $subscriptions = OrderItem::where('user_id', Auth::id())->whereHas('order', function($query) { return $query->where('status', PaymentStatus::PAID); })->whereHas('product', function ($query) use ($products) {
+            $subscriptions = OrderItem::where('user_id', $user->id)->whereHas('order', function($query) { return $query->where('status', PaymentStatus::PAID); })->whereHas('product', function ($query) use ($products) {
                 return $query->whereIn('products.id', $products);
             })->with('product.courses')->get();
 

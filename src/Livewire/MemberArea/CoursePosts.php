@@ -26,12 +26,16 @@ class CoursePosts extends Component
 
     public string|ListingItem $section;
 
+    public bool $emailNotifications = false;
+
     public function mount(Listing $course, string $section = null)
     {
         $this->course = $course;
         if($section) {
             $this->section = ListingItem::where('slug', $section)->first();
         }
+
+        $this->emailNotifications = Auth::user()->notificationSettings()->where('notifiable_type', $this->course->getMorphClass())->where('notifiable_id', $course->id)->exists();
     }
 
     public function render()
@@ -73,5 +77,17 @@ class CoursePosts extends Component
             'allow_member_comments' => $this->course->data['allow_member_comments'] ?? false,
             'allow_member_reactions' => $this->course->data['allow_member_reactions'] ?? false,
         ]);
+    }
+
+    public function updatedEmailNotifications($value)
+    {
+        if($value) {
+            Auth::user()->notificationSettings()->updateOrCreate([
+                'notifiable_type' => $this->course->getMorphClass(),
+                'notifiable_id' => $this->course->id,
+            ]);
+        } else {
+            Auth::user()->notificationSettings()->where('notifiable_type', $this->course->getMorphClass())->where('notifiable_id', $this->course->id)->delete();
+        }
     }
 }

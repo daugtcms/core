@@ -65,6 +65,7 @@
                     <x-daugt::tabs.item wire:click="setTab('content')" :active="$currentTab == 'content'">{{__('daugt::general.content')}}</x-daugt::tabs.item>
                     <x-daugt::tabs.item :count="$contentAttributes->count()" wire:click="setTab('content_config')" :active="$currentTab == 'content_config'">{{__('daugt::general.content_config')}}</x-daugt::tabs.item>
                     <x-daugt::tabs.item :count="$templateAttributes->count()" wire:click="setTab('template_config')" :active="$currentTab == 'template_config'">{{__('daugt::general.template_config')}}</x-daugt::tabs.item>
+                    <x-daugt::tabs.item wire:click="setTab('notifications')" :active="$currentTab == 'notifications'">{{__('daugt::general.notifications')}}</x-daugt::tabs.item>
                 </x-daugt::tabs.tabs>
                 @if($currentTab == 'content')
                     <livewire:daugt::content.content-editor :group="\Daugt\Misc\ContentTypeRegistry::getContentType($this->type)->group" wire:model="blocks"></livewire:daugt::content.content-editor>
@@ -73,7 +74,7 @@
                     <div class="max-w-xl mx-auto w-full flex flex-col gap-y-3">
                         @foreach($contentAttributes as $key => $attribute)
                         <div class="w-full">
-                            <x-daugt::blocks.attribute-input :key="$key" :attribute="$attribute" wire:model="contentAttributes.{{$key}}" wire:key="attributes.{{$attribute->name}}"></x-daugt::blocks.attribute-input>
+                            <x-daugt::blocks.attribute-input :key="'content_' . $key" :attribute="$attribute" wire:model="contentAttributes.{{$key}}" wire:key="contentAttributes.{{$attribute->name}}"></x-daugt::blocks.attribute-input>
                         </div>
                         @endforeach
                     </div>
@@ -86,10 +87,18 @@
                         </x-daugt::alert>
                         @foreach($templateAttributes as $key => $attribute)
                             <div class="w-full">
-                                <x-daugt::blocks.attribute-input :key="$key" :attribute="$attribute" wire:model="contentAttributes.{{$key}}" wire:key="attributes.{{$attribute->name}}"></x-daugt::blocks.attribute-input>
+                                <x-daugt::blocks.attribute-input :key="'template_' . $key" :attribute="$attribute" wire:model="contentAttributes.{{$key}}" wire:key="templateAttributes.{{$attribute->name}}"></x-daugt::blocks.attribute-input>
                             </div>
                         @endforeach
                     </div>
+                @elseif($currentTab == 'notifications')
+                    @if(isset($content) && $content->exists())
+                    <x-daugt::form.button wire:click="sendNotification">
+                        {{__('daugt::content.notification.send')}}
+                    </x-daugt::form.button>
+                    @else
+                        {{__('daugt::general.save_first')}}
+                    @endif
                 @endif
             </div>
             @else

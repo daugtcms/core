@@ -15,5 +15,17 @@ return [
     'display_text' => 'Anzeigetext',
     'comment_deleted' => 'Nutzerkommentar gelöscht',
     'comment_deleted_text' => 'Der Inhalt dieses Kommentars wurde gelöscht.',
-    'comments' => ':count Kommentar|:count Kommentare'
+    'comments' => ':count Kommentar|:count Kommentare',
+    'receipients_count' => 'Anzahl Empfänger',
+
+    'notification' => [
+        'send' => 'Benachrichtigung senden',
+        'toggle' => 'E-Mail Benachrichtigungen',
+        'email' => [
+            'greeting' => 'Hallo :name!',
+            'new_post' => 'Ein neuer Post wurde veröffentlicht:',
+            'updated_post' => 'Ein Post wurde aktualisiert:',
+            'view_post' => 'Post ansehen',
+        ]
+    ]
 ];

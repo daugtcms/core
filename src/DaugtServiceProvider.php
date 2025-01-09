@@ -160,6 +160,11 @@ class DaugtServiceProvider extends ServiceProvider
                 __DIR__ . '/Routes' => base_path('routes/daugt'),
             ], 'daugt-routes');
 
+            // Publish email base template
+            $this->publishes([
+                __DIR__.'/../resources/views/vendor/mail' => base_path('resources/views/vendor/mail'),
+            ], 'daugt-mail-template');
+
             // Publish wire-elements-modal views
             /*$this->publishes([
                 __DIR__.'/../resources/views/vendor/wire-elements-modal' => base_path('resources/views/vendor/wire-elements-modal'),
