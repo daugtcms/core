@@ -21,6 +21,7 @@ use Daugt\Livewire\Shop\OrderList;
 use Daugt\Livewire\Shop\ProductTable;
 use Daugt\Livewire\Table\SelectTableItems;
 use Daugt\Livewire\Users\EditUser;
+use Daugt\Livewire\Users\NotificationTable;
 use Daugt\Livewire\Users\UserTable;
 use Daugt\View\Blocks\Misc\BlocksRenderer;
 use Daugt\View\Blocks\Misc\BlockSynth;
@@ -92,6 +93,7 @@ class DaugtBladeServiceProvider extends ServiceProvider
         Livewire::component('daugt::content.content-editor', ContentEditor::class);
         Livewire::component('daugt::blocks.edit-block-data', EditBlockData::class);
         Livewire::component('daugt::analytics.visitor-analytics', VisitorAnalytics::class);
+        Livewire::component('daugt::content.notification-table', NotificationTable::class);
     }
 
     /**

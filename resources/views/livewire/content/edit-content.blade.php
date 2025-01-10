@@ -96,6 +96,7 @@
                     <x-daugt::form.button wire:click="sendNotification">
                         {{__('daugt::content.notification.send')}}
                     </x-daugt::form.button>
+                    <livewire:daugt::content.notification-table :filters="['notifiable_id' => $content->id, 'notifiable_type' => $content->getMorphClass()]"></livewire:daugt::content.notification-table>
                     @else
                         {{__('daugt::general.save_first')}}
                     @endif
