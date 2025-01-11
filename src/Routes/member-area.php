@@ -1,7 +1,6 @@
 <?php
 
 use Daugt\Controllers\MemberArea\CreateCourseCommentController;
-use Daugt\Controllers\MemberArea\DeleteCourseCommentController;
 use Illuminate\Support\Facades\Route;
 use Daugt\Controllers\MemberArea\ShowCourseController;
 use Daugt\Controllers\MemberArea\ShowOrdersController;
