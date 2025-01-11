@@ -6,6 +6,8 @@ use Daugt\Livewire\Analytics\VisitorAnalytics;
 use Daugt\Livewire\Blocks\BlockDefaultsEditor;
 use Daugt\Livewire\Blocks\EditBlockData;
 use Daugt\Livewire\Content\EditContent;
+use Daugt\Livewire\Content\Notifications\NotificationTable;
+use Daugt\Livewire\Content\Notifications\ViewNotificationContent;
 use Daugt\Livewire\Content\ScheduleContent;
 use Daugt\Livewire\Listing\ListingEditor;
 use Daugt\Livewire\Listing\ListingTable;
@@ -21,7 +23,6 @@ use Daugt\Livewire\Shop\OrderList;
 use Daugt\Livewire\Shop\ProductTable;
 use Daugt\Livewire\Table\SelectTableItems;
 use Daugt\Livewire\Users\EditUser;
-use Daugt\Livewire\Users\NotificationTable;
 use Daugt\Livewire\Users\UserTable;
 use Daugt\View\Blocks\Misc\BlocksRenderer;
 use Daugt\View\Blocks\Misc\BlockSynth;
@@ -94,6 +95,7 @@ class DaugtBladeServiceProvider extends ServiceProvider
         Livewire::component('daugt::blocks.edit-block-data', EditBlockData::class);
         Livewire::component('daugt::analytics.visitor-analytics', VisitorAnalytics::class);
         Livewire::component('daugt::content.notification-table', NotificationTable::class);
+        Livewire::component('daugt::content.view-notification-content', ViewNotificationContent::class);
     }
 
     /**

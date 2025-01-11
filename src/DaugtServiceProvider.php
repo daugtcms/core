@@ -199,7 +199,8 @@ class DaugtServiceProvider extends ServiceProvider
             'user' => User::class,
             'media' => Media::class,
             'order' => Order::class,
-            'order-item' => OrderItem::class
+            'order-item' => OrderItem::class,
+            'comment' => User\Comment::class,
         ]);
     }
 

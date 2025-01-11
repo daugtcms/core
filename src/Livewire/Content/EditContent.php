@@ -106,7 +106,7 @@ class EditContent extends \Livewire\Component
             $contentType = ContentTypeRegistry::getContentType($this->type);
             $users = $users->filter(fn ($user) => $contentType->isAccessible($this->content, $user));
 
-            $image = MediaHelper::getMediaById($this->contentAttributes['image'][0]['id'], $this->contentAttributes['image'][0]['variant']) ?? null;
+            $image = MediaHelper::getMediaById($this->contentAttributes['image'][0]['id'], $this->contentAttributes['image'][0]['variant'], false, 168) ?? null;
 
             $title = 'Posting - ' . $this->content->title;
 

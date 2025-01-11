@@ -46,6 +46,12 @@ return [
                 'name' => 'Mitglieder-Reaktionen erlauben',
                 'type' => AttributeType::BOOLEAN
             ],
+        ],
+        'itemAttributes' => [
+            'allow_member_posts' => [
+                'name' => 'Mitglieder-Beiträge erlauben',
+                'type' => AttributeType::BOOLEAN
+            ]
         ]
     ]
 ];

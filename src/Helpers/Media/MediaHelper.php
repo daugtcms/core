@@ -8,11 +8,20 @@ use Plank\Mediable\Media;
 
 class MediaHelper
 {
-    public static function getMediaById(int $mediaId, $type, $isAvatar = false) {
+    public static function getMediaById(int $mediaId, $type, $isAvatar = false, $ttl = 12) {
         $media = Media::find($mediaId);
-        return static::getMedia($media, $type, $isAvatar);
+        return static::getMedia($media, $type, $isAvatar, $ttl);
     }
-    public static function getMedia(?Media $media, $type, $isAvatar = false)
+    /**
+     * Get a media URL, with caching.
+     *
+     * @param Media|null $media
+     * @param string $type
+     * @param bool $isAvatar
+     * @param int $ttl (in hours)
+     * @return string
+     */
+    public static function getMedia(?Media $media, $type, $isAvatar = false, $ttl = 12)
     {
         // Decide which default SVG to use
         $default = $isAvatar ? 'avatar' : 'image';
@@ -44,14 +53,14 @@ class MediaHelper
                 }
 
                 // We have a real variant URL. Let's cache it, so we skip DB next time.
-                $url = $variant->getTemporaryUrl(now()->addHours(12));
+                $url = $variant->getTemporaryUrl(now()->addHours($ttl));
                 Cache::put($cacheKey, $url, 3600); // 1 hour, or whatever TTL you prefer
                 return $url;
 
             // ----- SVG / VECTORS -----
             case Media::TYPE_IMAGE_VECTOR:
                 // We do want to cache vectors
-                $url = $media->getTemporaryUrl(now()->addHours(12));
+                $url = $media->getTemporaryUrl(now()->addHours($ttl));
                 Cache::put($cacheKey, $url, 3600);
                 return $url;
 
@@ -80,7 +89,7 @@ class MediaHelper
 
                 // If type is "optimized" or empty, let’s cache the direct file URL
                 if (empty($type) || $type == 'optimized') {
-                    $url = $media->getTemporaryUrl(now()->addHours(12));
+                    $url = $media->getTemporaryUrl(now()->addHours($ttl));
                     Cache::put($cacheKey, $url, 3600);
                     return $url;
                 }

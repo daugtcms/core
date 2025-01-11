@@ -58,14 +58,17 @@
             @if(!empty($type) && !empty($template))
             <div class="col-span-1 md:col-span-3 flex flex-col gap-y-3 pt-3">
                 @php
-                    $contentAttributes = \Daugt\Misc\ContentTypeRegistry::getContentType($type)->attributes;
+                    $contentType = \Daugt\Misc\ContentTypeRegistry::getContentType($type);
+                    $contentAttributes = $contentType->attributes;
                     $templateAttributes = \Daugt\Misc\ThemeRegistry::getThemeTemplate($template)->attributes;
                 @endphp
                 <x-daugt::tabs.tabs class="w-full bg-neutral-50 p-2 rounded-md border-2 border-neutral-100">
                     <x-daugt::tabs.item wire:click="setTab('content')" :active="$currentTab == 'content'">{{__('daugt::general.content')}}</x-daugt::tabs.item>
                     <x-daugt::tabs.item :count="$contentAttributes->count()" wire:click="setTab('content_config')" :active="$currentTab == 'content_config'">{{__('daugt::general.content_config')}}</x-daugt::tabs.item>
                     <x-daugt::tabs.item :count="$templateAttributes->count()" wire:click="setTab('template_config')" :active="$currentTab == 'template_config'">{{__('daugt::general.template_config')}}</x-daugt::tabs.item>
-                    <x-daugt::tabs.item wire:click="setTab('notifications')" :active="$currentTab == 'notifications'">{{__('daugt::general.notifications')}}</x-daugt::tabs.item>
+                    @if($contentType->group != \Daugt\Enums\Content\ContentGroup::MARKETING)
+                        <x-daugt::tabs.item wire:click="setTab('notifications')" :active="$currentTab == 'notifications'">{{__('daugt::general.notifications')}}</x-daugt::tabs.item>
+                    @endif
                 </x-daugt::tabs.tabs>
                 @if($currentTab == 'content')
                     <livewire:daugt::content.content-editor :group="\Daugt\Misc\ContentTypeRegistry::getContentType($this->type)->group" wire:model="blocks"></livewire:daugt::content.content-editor>
@@ -93,10 +96,13 @@
                     </div>
                 @elseif($currentTab == 'notifications')
                     @if(isset($content) && $content->exists())
-                    <x-daugt::form.button wire:click="sendNotification">
+                        <div class="max-w-2xl mx-auto mt-2.5">
+                    <x-daugt::form.button wire:click="sendNotification" class="w-full" style="primary" wire:loading.attr="disabled">
+                        <div class="i-lucide:plus w-5 h-5"></div>
                         {{__('daugt::content.notification.send')}}
                     </x-daugt::form.button>
-                    <livewire:daugt::content.notification-table :filters="['notifiable_id' => $content->id, 'notifiable_type' => $content->getMorphClass()]"></livewire:daugt::content.notification-table>
+                    <livewire:daugt::content.notification-table :full-width="true" :filters="['notifiable_id' => $content->id, 'notifiable_type' => $content->getMorphClass()]"></livewire:daugt::content.notification-table>
+                        </div>
                     @else
                         {{__('daugt::general.save_first')}}
                     @endif

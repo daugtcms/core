@@ -1,6 +1,7 @@
 <?php
 
 use Daugt\Controllers\Admin\Content\DeleteContentController;
+use Daugt\Controllers\Content\AddCommentReactionController;
 use Daugt\Controllers\Content\AddContentReactionController;
 use Daugt\Controllers\Content\BlogIndexController;
 use Daugt\Controllers\Content\CreateContentCommentController;
@@ -19,6 +20,8 @@ Route::group(['middleware' => ['web', 'can:access admin panel'], 'prefix' => 'ad
 });
 
 Route::group(['middleware' => ['web']], function () {
+    Route::post('/comments/{comment}/reactions/{reaction}', AddCommentReactionController::class)->name('comments.reactions.add');
+
     Route::get('/{first?}/{second?}', ShowContentController::class)->name('content.show');
 
     Route::post('/{type}/{slug}/comments/create', CreateContentCommentController::class)->name('content.comments.create');

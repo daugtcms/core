@@ -1,12 +1,11 @@
 <?php
 
-namespace Daugt\Livewire\Users;
+namespace Daugt\Livewire\Content\Notifications;
 
 use Daugt\Models\Content\Notification;
 use Livewire\Attributes\Url;
 use Daugt\Livewire\Table\Table;
 use Daugt\Livewire\Table\Column;
-use Daugt\Models\Content\Content;
 use Illuminate\Database\Eloquent\Builder;
 
 class NotificationTable extends Table
@@ -22,7 +21,7 @@ class NotificationTable extends Table
 
     public function query(): Builder
     {
-        $query = Notification::query();
+        $query = Notification::query()->orderBy('created_at', 'desc');
 
         return $query;
     }
@@ -30,9 +29,9 @@ class NotificationTable extends Table
     public function columns(): array
     {
         return [
-            Column::make('id', '')->component('daugt::table.view-notification-content'),
-            Column::make('id', __('daugt::general.title')),
-            Column::make('recipients_count', __('daugt::general.receipients_count')),
+            Column::make('preview', __('daugt::content.notification.preview'))->component('daugt::table.view-notification-content'),
+            Column::make('title', __('daugt::general.title')),
+            Column::make('recipients_count', __('daugt::content.recipients_count')),
             Column::make('created_at', __('daugt::general.created_at'))->component('daugt::table.human-diff'),
         ];
     }

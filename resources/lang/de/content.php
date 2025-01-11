@@ -16,9 +16,10 @@ return [
     'comment_deleted' => 'Nutzerkommentar gelöscht',
     'comment_deleted_text' => 'Der Inhalt dieses Kommentars wurde gelöscht.',
     'comments' => ':count Kommentar|:count Kommentare',
-    'receipients_count' => 'Anzahl Empfänger',
+    'recipients_count' => 'Anzahl Empfänger',
 
     'notification' => [
+        'preview' => 'Vorschau',
         'send' => 'Benachrichtigung senden',
         'toggle' => 'E-Mail Benachrichtigungen',
         'email' => [

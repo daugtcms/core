@@ -1,11 +1,11 @@
-<div class="py-8 max-w-3xl mx-auto" id="comments">
-    <h2 class="text-xl text-neutral-800 mb-2">{{trans_choice(__('daugt::content.comments', ['count' => $comments->count()]), $comments->count())}}</h2>
-    <form method="POST" action="{{route('daugt.content.comments.create', ['type' => $type, 'slug' => $slug])}}">
+<div class="py-1 w-full mx-auto flex items-start gap-x-3" id="comments">
+    <x-daugt::avatar :user="auth()->user()" class="w-13 h-13 mt-1.5 ml-1.5 flex-shrink-0"></x-daugt::avatar>
+    <form method="POST" action="{{route('daugt.member-area.course.comments.create', ['course' => $course, 'section' => $section])}}" class="flex-1">
         @csrf
         <div x-data="setupEditor()"
              x-init="() => init($refs.editor)"
              wire:ignore
-                {{ $attributes->merge(['class' => 'bg-white rounded-lg border-2 border-neutral-100']) }}>
+                {{ $attributes->merge(['class' => 'bg-white rounded-lg shadow overflow-hidden border-2 border-neutral-100']) }}>
 
             <template x-if="isLoaded()">
                 <div class="flex justify-between p-1 border-b-2 border-neutral-100 bg-neutral-50">
@@ -37,9 +37,4 @@
             <input type="hidden" name="text" x-bind:value="JSON.stringify(content)">
         </div>
     </form>
-    <div class="flex flex-col divide-y-2 divide-neutral-100 mt-1">
-        @foreach($comments as $comment)
-            <x-daugt::content.comment-card :comment="$comment" :delete-url="route('daugt.content.comments.delete', ['type' => $type, 'slug' => $slug, 'comment' => $comment])"  ></x-daugt::content.comment-card>
-        @endforeach
-    </div>
 </div>
