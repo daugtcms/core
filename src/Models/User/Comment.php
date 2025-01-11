@@ -5,9 +5,12 @@ namespace Daugt\Models\User;
 use Daugt\Enums\User\MarkType;
 use Daugt\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Plank\Mediable\Mediable;
 
 class Comment extends Model
 {
+
+    use Mediable;
 
     public function commentable()
     {

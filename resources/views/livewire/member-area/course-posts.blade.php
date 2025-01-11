@@ -13,7 +13,7 @@
                 </div>
                     @else
                 <div class="bg-white rounded-lg shadow-md px-3" wire:key="comment-{{$feedItem->id}}">
-                    <x-daugt::content.comment-card :comment="$feedItem" :delete-url="route('daugt.member-area.course.comments.delete', ['course' => $course, 'section' => $section ?: 'all', 'comment' => $feedItem])"></x-daugt::content.comment-card>
+                    <x-daugt::content.comment-card :comment="$feedItem"></x-daugt::content.comment-card>
                 </div>
             @endif
     @endforeach

@@ -219,7 +219,7 @@ class CoursePosts extends Component
         // For posts: we might load 'comments', 'reactions', etc.
         // For comments: we might load 'reactions', 'comments' (subcomments), etc.
         $posts = Content::whereIn('id', $postIds)
-            ->with(['comments', 'reactions'])
+            ->with(['comments.comments', 'reactions'])
             ->get()
             ->keyBy('id'); // so we can find them quickly by ID
 
@@ -228,11 +228,15 @@ class CoursePosts extends Component
         // has something like `public function comments() { ... }` for subcomments
         $comments = Comment::whereIn('id', $commentIds)
             ->with(['comments', 'reactions'])
+            ->withMediaAndVariants('media')
             ->get()
             ->keyBy('id');
 
         $comments->each(function ($comment) {
             $comment->text = !empty($comment->text) ? TiptapEditor::init(comment: true)->setContent($comment->text)->getHTML() : null;
+            $comment->comments->each(function ($subcomment) {
+                $subcomment->text = !empty($subcomment->text) ? TiptapEditor::init(comment: true)->setContent($subcomment->text)->getHTML() : null;
+            });
         });
 
         // 3) Merge the two collections so we can easily look them up by (type, id)

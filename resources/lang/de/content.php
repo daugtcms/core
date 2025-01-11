@@ -16,6 +16,10 @@ return [
     'comment_deleted' => 'Nutzerkommentar gelöscht',
     'comment_deleted_text' => 'Der Inhalt dieses Kommentars wurde gelöscht.',
     'comments' => ':count Kommentar|:count Kommentare',
+    'reply' => 'Antworten',
+    'post_anonymously' => 'Anonym posten',
+    'anonymous' => 'Anonym',
+    'add_images' => 'Bilder hinzufügen',
     'recipients_count' => 'Anzahl Empfänger',
 
     'notification' => [

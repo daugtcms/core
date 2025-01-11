@@ -23,8 +23,12 @@
     </script>
 
 </head>
-<body class="w-full h-full font-main" un-cloak>
+<body class="w-full h-full font-main" un-cloak x-data="{previewUrl: ''}">
 {{$slot}}
+<div class="fixed top-0 left-0 z-20 flex items-center justify-center w-full h-full p-4 bg-black sm:p-8 bg-opacity-60 overscroll-none"
+     x-show="previewUrl" x-cloak>
+    <img :src="previewUrl" class="max-w-full max-h-full rounded-md" @click.away="previewUrl = ''">
+</div>
 @livewire('wire-elements-modal')
 @livewireScriptConfig
 </body>
