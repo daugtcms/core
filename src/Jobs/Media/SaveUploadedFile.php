@@ -54,7 +54,7 @@ class SaveUploadedFile extends BaseJob
 
         if(Storage::disk('s3')->exists($path)) {
             Storage::disk('s3')->move($path, $newPath . $newFilename);
-            $media = MediaUploader::importPath('s3', $newPath);
+            $media = MediaUploader::importPath('s3', $newPath . $newFilename);
         } else {
             $media = MediaUploader::fromSource($path)->useFilename($newFilename)->setAllowedAggregateTypes([Media::TYPE_IMAGE, Media::TYPE_AUDIO, Media::TYPE_IMAGE_VECTOR, Media::TYPE_VIDEO, Media::TYPE_PDF, Media::TYPE_ARCHIVE])->toDestination('s3', $newPath)->upload();
         }
