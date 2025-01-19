@@ -9,7 +9,7 @@
     @foreach($feed as $feedItem)
             @if($feedItem instanceof \Daugt\Models\Content\Content)
                 <div wire:key="content-{{$feedItem->id}}">
-            <x-daugt::template-renderer :usage="'post_card'" :attributes="['content' => $feedItem, ...$feedItem->attributes, 'allow_member_comments' => $allow_member_comments, 'allow_member_reactions' => $allow_member_reactions]"></x-daugt::template-renderer>
+            <x-daugt::template-renderer :usage="'post_card'" :within-template="true" :attributes="['content' => $feedItem, ...$feedItem->attributes, 'allow_member_comments' => $allow_member_comments, 'allow_member_reactions' => $allow_member_reactions]"></x-daugt::template-renderer>
                 </div>
                     @else
                 <div class="bg-white rounded-lg shadow-md px-3" wire:key="comment-{{$feedItem->id}}">

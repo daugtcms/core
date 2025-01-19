@@ -32,7 +32,7 @@ class Listing extends Model
         static::updated(function ($listing) {
             if ($listing->isDirty('type')) {
                 // Update the 'type' of all associated listing_items
-                $listing->listingItems()->update(['listing_type' => $listing->type]);
+                $listing->items()->update(['listing_type' => $listing->type]);
             }
         });
     }
